@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f4; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #2e7d32, #43a047); padding: 32px 24px; text-align: center; }
+    .header h1 { color: #fff; margin: 0; font-size: 24px; }
+    .body { padding: 32px 24px; color: #333; line-height: 1.6; }
+    .body h2 { color: #2e7d32; margin-top: 0; }
+    .success-box { background: #e8f5e9; border: 2px solid #4caf50; padding: 24px; border-radius: 8px; text-align: center; margin: 20px 0; }
+    .success-box .icon { font-size: 48px; }
+    .highlight { background: #f1f8e9; padding: 16px; border-radius: 8px; margin: 16px 0; }
+    .footer { background: #f5f5f5; padding: 20px 24px; text-align: center; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🌿 Green Basket — Merchant</h1>
+    </div>
+    <div class="body">
+      <h2>Congratulations, {{merchantName}}! 🎉</h2>
+      <div class="success-box">
+        <p class="icon">✅</p>
+        <p style="font-size:18px;font-weight:700;color:#2e7d32;">Your account has been approved!</p>
+      </div>
+      <p>Your business <strong>{{businessName}}</strong> is now live on Green Basket. You can start listing your products and receiving orders right away.</p>
+      <div class="highlight">
+        <strong>Next steps:</strong>
+        <ul>
+          <li>Add your products and set pricing</li>
+          <li>Configure your operating hours</li>
+          <li>Set delivery radius and charges</li>
+          <li>Start accepting orders!</li>
+        </ul>
+      </div>
+      <p>We're excited to have you on board. Happy selling! 🚀</p>
+    </div>
+    <div class="footer">
+      <p>© {{year}} Green Basket. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

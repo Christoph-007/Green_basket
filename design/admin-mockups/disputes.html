@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Green Basket – Disputes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --green-700:#2D6A4F;--green-800:#1B4332;--green-50:#EAF4EC;
+      --white:#FFFFFF;--gray-50:#F4F5F4;--gray-100:#EDEEED;--gray-200:#D9DBD9;
+      --gray-400:#9CA09C;--gray-500:#787C78;--gray-900:#1A1A1A;
+      --orange-500:#E08A3C;--orange-50:#FFF5EB;
+      --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    }
+    html,body{height:100%;font-family:var(--font);-webkit-font-smoothing:antialiased}
+    body{background:#DDDEDD;display:flex;justify-content:center;align-items:flex-start}
+
+    .phone{width:100%;max-width:393px;min-height:100vh;background:var(--gray-50);position:relative;display:flex;flex-direction:column;overflow:hidden}
+    .scroll-area{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:84px}
+    .scroll-area::-webkit-scrollbar{display:none}.scroll-area{scrollbar-width:none}
+
+    .status-bar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 0;height:46px;flex-shrink:0;background:var(--green-800);z-index:10}
+    .status-time{font-size:15px;font-weight:600;letter-spacing:.3px;color:var(--white)}
+    .status-right{display:flex;align-items:center;gap:5px}
+    .status-right i{font-size:12px;color:var(--white)}
+
+    .header-green{background:var(--green-800);padding:14px 20px 28px;border-radius:0 0 24px 24px}
+    .header-row{display:flex;align-items:center;justify-content:space-between}
+    .header-title{font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.3px}
+    .header-crumb{font-size:13px;font-weight:400;color:rgba(255,255,255,.5);margin-top:4px}
+    .avatar-circle{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--white);flex-shrink:0;border:2px solid rgba(255,255,255,.25);cursor:pointer}
+
+    /* Filter Pills */
+    .filters{display:flex;gap:8px;padding:20px 20px 14px}
+    .pill{
+      padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;
+      font-family:var(--font);border:1.5px solid var(--gray-200);
+      background:var(--white);color:var(--gray-500);cursor:pointer;
+      transition:all .2s;-webkit-tap-highlight-color:transparent;
+    }
+    .pill:active{transform:scale(.95)}
+    .pill.on{background:var(--green-800);color:var(--white);border-color:var(--green-800)}
+
+    /* Stat Cards */
+    .stat-row{display:flex;gap:10px;padding:6px 20px 16px}
+    .stat-card{
+      flex:1;border-radius:14px;padding:16px;
+    }
+    .stat-card.open-card{background:#FFF9E6}
+    .stat-card.resolved-card{background:var(--green-50)}
+    .stat-number{font-size:28px;font-weight:800;margin-bottom:2px}
+    .stat-card.open-card .stat-number{color:var(--green-700)}
+    .stat-card.resolved-card .stat-number{color:var(--green-700)}
+    .stat-label{font-size:12px;font-weight:500;color:var(--gray-500)}
+
+    /* Dispute Cards */
+    .dispute-list{display:flex;flex-direction:column;gap:10px;padding:0 20px}
+
+    .dispute-card{
+      background:var(--white);border-radius:14px;padding:16px 16px 14px;
+      transition:transform .12s;
+    }
+
+    .dispute-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+    .dispute-id{font-size:16px;font-weight:700;color:var(--gray-900)}
+    .dispute-badge{
+      font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;
+    }
+    .dispute-badge.open{background:var(--green-50);color:var(--green-700)}
+    .dispute-badge.resolved{background:var(--gray-100);color:var(--gray-500)}
+
+    .dispute-parties{font-size:13px;font-weight:500;color:var(--gray-900);margin-bottom:3px}
+    .dispute-desc{font-size:12.5px;font-weight:400;color:var(--gray-400);margin-bottom:12px}
+
+    .resolve-btn{
+      padding:11px 22px;border-radius:10px;border:none;
+      background:var(--green-800);color:var(--white);
+      font-size:13.5px;font-weight:600;font-family:var(--font);
+      cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+      transition:transform .12s;-webkit-tap-highlight-color:transparent;
+    }
+    .resolve-btn:active{transform:scale(.94)}
+    .resolve-btn i{font-size:12px}
+
+    .dispute-bottom{display:flex;justify-content:flex-end}
+
+    /* Alternating button alignment for visual variety like screenshot */
+    .dispute-card:nth-child(odd) .dispute-bottom{justify-content:flex-start}
+    .dispute-card:nth-child(even) .dispute-bottom{justify-content:flex-end}
+
+    /* Bottom Nav */
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:393px;background:var(--white);display:flex;justify-content:space-around;align-items:center;padding:6px 0 20px;z-index:100;border-top:1px solid var(--gray-100)}
+    .tab{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 10px 0;-webkit-tap-highlight-color:transparent;font-family:var(--font)}
+    .tab i{font-size:19px;color:var(--gray-400);transition:color .2s}
+    .tab span{font-size:10px;font-weight:600;color:var(--gray-400);transition:color .2s}
+    .tab.on .tab-pill{width:48px;height:32px;border-radius:16px;background:var(--green-800);display:flex;align-items:center;justify-content:center}
+    .tab.on .tab-pill i{font-size:16px;color:var(--white)}
+    .tab.on span{color:var(--gray-900);font-weight:700}
+    .tab:not(.on) .tab-pill{display:flex;align-items:center;justify-content:center;height:32px}
+
+    .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(50px);background:var(--green-800);color:var(--white);font-size:13px;font-weight:600;font-family:var(--font);padding:12px 24px;border-radius:28px;box-shadow:0 8px 28px rgba(27,67,50,.32);z-index:300;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+    .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .anim{animation:fadeUp .4s ease both}
+    .d1{animation-delay:.04s}.d2{animation-delay:.08s}.d3{animation-delay:.12s}
+    .d4{animation-delay:.16s}.d5{animation-delay:.22s}.d6{animation-delay:.28s}
+    .d7{animation-delay:.34s}
+
+    @media(min-width:500px){body{align-items:center;min-height:100vh;padding:24px}.phone{min-height:852px;max-height:92vh;border-radius:44px;box-shadow:0 0 0 1px rgba(0,0,0,.05),0 28px 80px rgba(0,0,0,.12)}.scroll-area{border-radius:0 0 44px 44px}.bottom-nav{border-radius:0 0 44px 44px}}
+    @media(max-width:393px){.phone{max-width:100%}.bottom-nav{max-width:100%}}
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-right">
+      <i class="fa-solid fa-play" style="font-size:10px"></i>
+      <i class="fa-solid fa-circle" style="font-size:10px"></i>
+      <i class="fa-solid fa-battery-full"></i>
+    </div>
+  </div>
+
+  <div class="scroll-area">
+
+    <div class="header-green anim d1">
+      <div class="header-row">
+        <div>
+          <h1 class="header-title">Disputes</h1>
+          <p class="header-crumb">Admin › Disputes</p>
+        </div>
+        <div class="avatar-circle" id="btnAvatar">SA</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters anim d2" id="filters">
+      <button class="pill on" data-filter="all">Open</button>
+      <button class="pill" data-filter="resolved">Resolved</button>
+      <button class="pill" data-filter="pending">Pending</button>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stat-row anim d3">
+      <div class="stat-card open-card">
+        <p class="stat-number">47</p>
+        <p class="stat-label">Open</p>
+      </div>
+      <div class="stat-card resolved-card">
+        <p class="stat-number">312</p>
+        <p class="stat-label">Resolved</p>
+      </div>
+    </div>
+
+    <!-- Dispute List -->
+    <div class="dispute-list">
+
+      <div class="dispute-card anim d4" data-status="open">
+        <div class="dispute-top">
+          <span class="dispute-id">DS-5042</span>
+          <span class="dispute-badge open">Open</span>
+        </div>
+        <p class="dispute-parties">Arjun Kumar vs FreshFarms</p>
+        <p class="dispute-desc">Wrong item delivered · 3 days open</p>
+        <div class="dispute-bottom">
+          <button class="resolve-btn" data-id="DS-5042">Resolve <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="dispute-card anim d5" data-status="open">
+        <div class="dispute-top">
+          <span class="dispute-id">DS-5041</span>
+          <span class="dispute-badge open">Open</span>
+        </div>
+        <p class="dispute-parties">Priya Gupta vs OrganicOasis</p>
+        <p class="dispute-desc">Damaged product · 1 day open</p>
+        <div class="dispute-bottom">
+          <button class="resolve-btn" data-id="DS-5041">Resolve <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="dispute-card anim d6" data-status="open">
+        <div class="dispute-top">
+          <span class="dispute-id">DS-5040</span>
+          <span class="dispute-badge open">Open</span>
+        </div>
+        <p class="dispute-parties">Rahul Verma vs NatureBox</p>
+        <p class="dispute-desc">Refund not received · 5 days open</p>
+        <div class="dispute-bottom">
+          <button class="resolve-btn" data-id="DS-5040">Resolve <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="tab" data-t="dashboard"><div class="tab-pill"><i class="fa-solid fa-house"></i></div><span>Dashboard</span></button>
+    <button class="tab" data-t="users"><div class="tab-pill"><i class="fa-solid fa-user"></i></div><span>Users</span></button>
+    <button class="tab" data-t="orders"><div class="tab-pill"><i class="fa-solid fa-receipt"></i></div><span>Orders</span></button>
+    <button class="tab" data-t="finance"><div class="tab-pill"><i class="fa-solid fa-sack-dollar"></i></div><span>Finance</span></button>
+    <button class="tab on" data-t="more"><div class="tab-pill"><i class="fa-solid fa-grip"></i></div><span>More</span></button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+(()=>{
+  'use strict';
+  const q=s=>document.querySelector(s),qa=s=>document.querySelectorAll(s);
+  const toast=q('#toast');let tt=null;
+  function flash(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2200)}
+
+  qa('.resolve-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>flash('Resolving '+btn.dataset.id+'…'));
+  });
+
+  qa('.tab').forEach(t=>{t.addEventListener('click',()=>{
+    const tab=t.dataset.t;
+    if(tab==='dashboard')window.location.href='admin.html';
+    else if(tab==='users')window.location.href='users.html';
+    else if(tab==='orders')window.location.href='orders.html';
+    else{qa('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');flash(tab.charAt(0).toUpperCase()+tab.slice(1))}
+  })});
+
+  q('#btnAvatar').addEventListener('click',()=>flash('Super Admin'));
+})();
+</script>
+</body>
+</html>

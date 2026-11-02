@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f4; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #2e7d32, #43a047); padding: 32px 24px; text-align: center; }
+    .header h1 { color: #fff; margin: 0; font-size: 24px; }
+    .body { padding: 32px 24px; color: #333; line-height: 1.6; }
+    .body h2 { color: #2e7d32; margin-top: 0; }
+    .status-badge { display: inline-block; padding: 8px 20px; border-radius: 20px; font-weight: 700; font-size: 16px; margin: 12px 0; }
+    .status-confirmed { background: #e3f2fd; color: #1565c0; }
+    .status-ready { background: #fff3e0; color: #e65100; }
+    .status-out-for-delivery { background: #f3e5f5; color: #7b1fa2; }
+    .status-delivered { background: #e8f5e9; color: #2e7d32; }
+    .status-cancelled { background: #ffebee; color: #c62828; }
+    .info-box { background: #f5f5f5; padding: 16px; border-radius: 8px; margin: 16px 0; }
+    .footer { background: #f5f5f5; padding: 20px 24px; text-align: center; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📦 Order Update</h1>
+    </div>
+    <div class="body">
+      <h2>Hi {{customerName}},</h2>
+      <p>Your order <strong>{{orderId}}</strong> has been updated:</p>
+      <p><span class="status-badge status-{{statusClass}}">{{statusEmoji}} {{statusLabel}}</span></p>
+      <div class="info-box">
+        <p><strong>Order ID:</strong> {{orderId}}</p>
+        <p><strong>Status:</strong> {{statusLabel}}</p>
+        {{#if note}}<p><strong>Note:</strong> {{note}}</p>{{/if}}
+      </div>
+      <p>{{statusMessage}}</p>
+    </div>
+    <div class="footer">
+      <p>© {{year}} Green Basket. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

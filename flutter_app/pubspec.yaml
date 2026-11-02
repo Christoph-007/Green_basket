@@ -1,0 +1,85 @@
+name: greenbasket_app
+description: "GreenBasket - Fresh organic produce marketplace"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State management & routing
+  get: ^4.6.6
+
+  # Networking
+  dio: ^5.8.0
+  socket_io_client: ^3.0.2
+
+  # Local storage
+  get_storage: ^2.1.1
+
+  # JSON serialization
+  json_annotation: ^4.9.0
+
+  # Image handling
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.0.17
+
+  # Loading states
+  shimmer: ^3.0.0
+
+  # OTP input
+  pinput: ^3.0.1
+
+  # Internationalization
+  intl: ^0.20.2
+
+  # Location
+  geolocator: ^13.0.2
+  geocoding: ^3.0.0
+
+  # Maps
+  google_maps_flutter: ^2.10.0
+
+  # Firebase
+  firebase_core: ^3.13.0
+  firebase_messaging: ^15.2.5
+
+  # UI utilities
+  flutter_rating_bar: ^4.0.1
+  dots_indicator: ^3.0.0
+  badges: ^3.1.2
+  url_launcher: ^6.2.5
+  razorpay_flutter: ^1.4.1
+  file_picker: ^13.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  json_serializable: ^6.9.4
+  build_runner: ^2.4.15
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
+
+#  fonts:
+#    - family: Poppins
+#      fonts:
+#        - asset: assets/fonts/Poppins-Regular.ttf
+#        - asset: assets/fonts/Poppins-Medium.ttf
+#          weight: 500
+#        - asset: assets/fonts/Poppins-SemiBold.ttf
+#          weight: 600
+#        - asset: assets/fonts/Poppins-Bold.ttf
+#          weight: 700

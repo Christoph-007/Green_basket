@@ -1,0 +1,366 @@
+const Return = require('../models/Return');
+const Order = require('../models/Order');
+const Wallet = require('../models/Wallet');
+const { creditWallet } = require('../utils/walletHelpers');
+
+/**
+ * @desc    Request return/exchange
+ * @route   POST /api/returns
+ * @access  Private (User)
+ */
+exports.requestReturn = async (req, res) => {
+    try {
+        const { orderId, type, reason, items, images, refundMethod, exchangeItems } = req.body;
+
+        if (!orderId || !type || !reason || !items || items.length === 0) {
+            return res.status(400).json({
+                success: false,
+                error: 'orderId, type, reason, and items are required'
+            });
+        }
+
+        if (!['return', 'exchange'].includes(type)) {
+            return res.status(400).json({
+                success: false,
+                error: 'type must be return or exchange'
+            });
+        }
+
+        const order = await Order.findOne({ orderId, customer: req.user._id });
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                error: 'Order not found'
+            });
+        }
+
+        if (order.status !== 'delivered') {
+            return res.status(400).json({
+                success: false,
+                error: 'Returns can only be requested for delivered orders'
+            });
+        }
+
+        // Check 7-day return window
+        const deliveredAt = order.deliveredAt || order.updatedAt;
+        const daysSinceDelivery = (Date.now() - deliveredAt) / (24 * 60 * 60 * 1000);
+
+        if (daysSinceDelivery > 7) {
+            return res.status(400).json({
+                success: false,
+                error: 'Return window (7 days) has expired'
+            });
+        }
+
+        // Check for existing active return
+        const existingReturn = await Return.findOne({
+            order: order._id,
+            status: { $nin: ['refunded', 'rejected'] }
+        });
+
+        if (existingReturn) {
+            return res.status(400).json({
+                success: false,
+                error: 'A return/exchange request already exists for this order',
+                returnId: existingReturn.returnId
+            });
+        }
+
+        // Map items
+        const returnItems = items.map(item => ({
+            product: item.productId,
+            quantity: item.quantity,
+            reason: item.reason,
+            condition: item.condition
+        }));
+
+        // Calculate refund amount based on items
+        let refundAmount = 0;
+        for (const item of items) {
+            const orderItem = order.items.find(
+                oi => oi.product.toString() === item.productId
+            );
+            if (orderItem) {
+                refundAmount += orderItem.price * item.quantity;
+            }
+        }
+
+        const returnRequest = await Return.create({
+            order: order._id,
+            user: req.user._id,
+            type,
+            reason,
+            items: returnItems,
+            images: images || [],
+            exchangeItems: exchangeItems || [],
+            refundAmount,
+            refundMethod: refundMethod || 'wallet',
+            status: 'requested'
+        });
+
+        // Notify user
+        try {
+            const notificationService = require('../services/notification');
+            await notificationService.send(
+                req.user._id,
+                'User',
+                {
+                    type: 'order_placed',
+                    title: `${type === 'return' ? 'Return' : 'Exchange'} Request Submitted`,
+                    message: `Your ${type} request ${returnRequest.returnId} has been submitted and will be reviewed within 24 hours`,
+                    channels: ['push', 'email']
+                }
+            );
+        } catch (notifError) {
+            console.error('Notification error:', notifError);
+        }
+
+        res.status(201).json({
+            success: true,
+            message: `${type === 'return' ? 'Return' : 'Exchange'} request submitted successfully`,
+            data: {
+                returnId: returnRequest.returnId,
+                _id: returnRequest._id,
+                status: returnRequest.status,
+                type: returnRequest.type,
+                refundAmount
+            }
+        });
+    } catch (error) {
+        console.error('Request return error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to submit return request',
+            details: error.message
+        });
+    }
+};
+
+/**
+ * @desc    Get my returns
+ * @route   GET /api/returns/my-returns
+ * @access  Private (User)
+ */
+exports.getMyReturns = async (req, res) => {
+    try {
+        const { page = 1, limit = 10 } = req.query;
+        const skip = (page - 1) * limit;
+
+        const [returns, total] = await Promise.all([
+            Return.find({ user: req.user._id })
+                .populate('order', 'orderId totalAmount createdAt')
+                .populate('items.product', 'name primaryImage price')
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(parseInt(limit)),
+            Return.countDocuments({ user: req.user._id })
+        ]);
+
+        res.json({
+            success: true,
+            data: {
+                returns,
+                pagination: {
+                    page: parseInt(page),
+                    limit: parseInt(limit),
+                    total,
+                    pages: Math.ceil(total / limit)
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Get my returns error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch returns',
+            details: error.message
+        });
+    }
+};
+
+/**
+ * @desc    Get return by ID
+ * @route   GET /api/returns/:id
+ * @access  Private (User/Admin)
+ */
+exports.getReturnById = async (req, res) => {
+    try {
+        const returnRequest = await Return.findById(req.params.id)
+            .populate('order', 'orderId totalAmount items')
+            .populate('user', 'name email')
+            .populate('items.product', 'name primaryImage price')
+            .populate('processedBy', 'name');
+
+        if (!returnRequest) {
+            return res.status(404).json({ success: false, error: 'Return request not found' });
+        }
+
+        const isOwner = returnRequest.user._id.toString() === req.user._id.toString();
+        const isAdmin = req.user.userType === 'admin';
+
+        if (!isOwner && !isAdmin) {
+            return res.status(403).json({ success: false, error: 'Access denied' });
+        }
+
+        res.json({ success: true, data: { return: returnRequest } });
+    } catch (error) {
+        console.error('Get return by ID error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+/**
+ * @desc    Process return (Admin)
+ * @route   PUT /api/returns/admin/:id/process
+ * @access  Private (Admin)
+ */
+exports.processReturn = async (req, res) => {
+    try {
+        const { action, refundAmount, refundMethod, adminNotes, rejectionReason } = req.body;
+
+        if (!action || !['approve', 'reject'].includes(action)) {
+            return res.status(400).json({ success: false, error: 'action must be approve or reject' });
+        }
+
+        const returnRequest = await Return.findById(req.params.id)
+            .populate('order')
+            .populate('user', 'name email');
+
+        if (!returnRequest) {
+            return res.status(404).json({ success: false, error: 'Return request not found' });
+        }
+
+        if (returnRequest.status !== 'requested') {
+            return res.status(400).json({ success: false, error: 'Return request has already been processed' });
+        }
+
+        if (action === 'approve') {
+            returnRequest.status = 'approved';
+            returnRequest.refundAmount = refundAmount || returnRequest.refundAmount;
+            returnRequest.refundMethod = refundMethod || returnRequest.refundMethod;
+            returnRequest.adminNotes = adminNotes;
+            returnRequest.processedBy = req.user._id;
+            returnRequest.processedAt = new Date();
+
+            // Never refund more than the order was worth
+            const orderTotal = returnRequest.order && returnRequest.order.totalAmount;
+            if (orderTotal !== undefined && returnRequest.refundAmount > orderTotal) {
+                return res.status(400).json({ success: false, error: `Refund amount cannot exceed the order total (${orderTotal})` });
+            }
+
+            // Claim the request atomically so two admins can't both refund it
+            const claimed = await Return.findOneAndUpdate(
+                { _id: returnRequest._id, status: 'requested' },
+                { $set: { status: 'approved', processedAt: new Date() } }
+            );
+            if (!claimed) {
+                return res.status(400).json({ success: false, error: 'Return request has already been processed' });
+            }
+
+            // Process refund (atomic wallet credit)
+            if (returnRequest.refundMethod === 'wallet') {
+                await creditWallet(returnRequest.user._id, returnRequest.refundAmount, {
+                    source: 'refund',
+                    description: `Refund for return ${returnRequest.returnId}`,
+                    orderId: returnRequest.order._id
+                });
+                returnRequest.status = 'refunded';
+            }
+        } else {
+            returnRequest.status = 'rejected';
+            returnRequest.rejectionReason = rejectionReason || 'Return request rejected';
+            returnRequest.processedBy = req.user._id;
+            returnRequest.processedAt = new Date();
+        }
+
+        await returnRequest.save();
+
+        // Notify user
+        try {
+            const notificationService = require('../services/notification');
+            await notificationService.send(
+                returnRequest.user._id,
+                'User',
+                {
+                    type: 'refund_processed',
+                    title: action === 'approve' ? 'Return Approved' : 'Return Rejected',
+                    message: action === 'approve'
+                        ? `Your return ${returnRequest.returnId} has been approved. ₹${returnRequest.refundAmount} refunded to your wallet.`
+                        : `Your return ${returnRequest.returnId} has been rejected. Reason: ${rejectionReason}`,
+                    channels: ['push', 'email']
+                }
+            );
+        } catch (notifError) {
+            console.error('Notification error:', notifError);
+        }
+
+        res.json({ success: true, message: `Return ${action}d successfully`, data: { return: returnRequest } });
+    } catch (error) {
+        console.error('Process return error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+/**
+ * @desc    Get all returns (Admin)
+ * @route   GET /api/returns/admin/all
+ * @access  Private (Admin)
+ */
+exports.getAllReturns = async (req, res) => {
+    try {
+        const { status, type, page = 1, limit = 20 } = req.query;
+        const query = {};
+        if (status) query.status = status;
+        if (type) query.type = type;
+        const skip = (page - 1) * limit;
+        const [returns, total] = await Promise.all([
+            Return.find(query)
+                .populate('user', 'name email')
+                .populate('order', 'orderId totalAmount')
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(parseInt(limit)),
+            Return.countDocuments(query)
+        ]);
+        res.json({
+            success: true,
+            data: {
+                returns,
+                pagination: {
+                    page: parseInt(page),
+                    limit: parseInt(limit),
+                    total,
+                    pages: Math.ceil(total / limit)
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Get all returns error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+/**
+ * @desc    Cancel return request
+ * @route   DELETE /api/returns/:id
+ * @access  Private (User)
+ */
+exports.cancelReturn = async (req, res) => {
+    try {
+        const returnRequest = await Return.findOneAndUpdate(
+            { _id: req.params.id, user: req.user._id, status: 'requested' },
+            { status: 'rejected', rejectionReason: 'Cancelled by user' },
+            { new: true }
+        );
+        if (!returnRequest) {
+            return res.status(404).json({ success: false, error: 'Return request not found or cannot be cancelled' });
+        }
+        res.json({ success: true, message: 'Return request cancelled' });
+    } catch (error) {
+        console.error('Cancel return error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+module.exports = exports;

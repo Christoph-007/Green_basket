@@ -1,0 +1,239 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:greenbasket_app/config/theme.dart';
+import '../admin_controller.dart';
+import 'user_detail_screen.dart';
+import '../widgets/admin_drawer.dart';
+
+class AdminUsersScreen extends StatefulWidget {
+  const AdminUsersScreen({super.key});
+
+  @override
+  State<AdminUsersScreen> createState() => _AdminUsersScreenState();
+}
+
+class _AdminUsersScreenState extends State<AdminUsersScreen> {
+  final controller = Get.find<AdminController>();
+  String _selectedFilter = 'All';
+  String _searchQuery = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F4F1),
+      drawer: const AdminDrawer(),
+      body: Column(
+        children: [
+          _buildAdminHeader(context),
+          Expanded(
+            child: Obx(() {
+              final filteredUsers = controller.users.where((u) {
+                final user = u as Map<String, dynamic>;
+                final isBlocked = user['isBlocked'] ?? false;
+                final status = isBlocked ? 'Blocked' : 'Active';
+                bool matchesFilter = _selectedFilter == 'All' || status == _selectedFilter;
+                bool matchesSearch = user['name'].toString().toLowerCase().contains(_searchQuery.toLowerCase()) || 
+                                     user['email'].toString().toLowerCase().contains(_searchQuery.toLowerCase());
+                return matchesFilter && matchesSearch;
+              }).toList();
+
+              return ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                children: [
+                  _buildSearchBar(),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      _buildPill('All'),
+                      const SizedBox(width: 8),
+                      _buildPill('Active'),
+                      const SizedBox(width: 8),
+                      _buildPill('Blocked'),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  if (filteredUsers.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.all(32.0),
+                      child: Center(
+                        child: Text('No users found', style: TextStyle(color: AppColors.textHint)),
+                      ),
+                    )
+                  else
+                    ...filteredUsers.map((user) => Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: _buildUserCard(user as Map<String, dynamic>),
+                    )),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdminHeader(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top + 20,
+        left: 20,
+        right: 20,
+        bottom: 28,
+      ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF1A4D2E), Color(0xFF2D7A4A)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(32),
+          bottomRight: Radius.circular(32),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Builder(builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.menu, color: Colors.white),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    );
+                  }),
+                  const SizedBox(width: 8),
+                  const Text('All Users',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'Inter')),
+                ],
+              ),
+              Container(
+                height: 36,
+                width: 36,
+                decoration: BoxDecoration(color: Colors.white.withOpacity(0.1), borderRadius: BorderRadius.circular(18)),
+                child: const Icon(Icons.person, color: Colors.white, size: 20),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text('Admin › Users',
+              style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13, fontFamily: 'Inter')),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Container(
+      height: 48,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE8E8E8)),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          const Icon(Icons.search, color: Color(0xFF9C9B99), size: 18),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              onChanged: (val) => setState(() => _searchQuery = val),
+              decoration: const InputDecoration(
+                hintText: 'Search users...',
+                hintStyle: TextStyle(color: Color(0xFF9C9B99), fontSize: 14),
+                border: InputBorder.none,
+                isDense: true,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPill(String title) {
+    bool isActive = _selectedFilter == title;
+    return GestureDetector(
+      onTap: () => setState(() => _selectedFilter = title),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isActive ? AppColors.primary : Colors.white,
+          borderRadius: BorderRadius.circular(999),
+          border: isActive ? null : Border.all(color: const Color(0xFFE8E8E8)),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isActive ? Colors.white : AppColors.textPrimary,
+            fontSize: 13,
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserCard(Map<String, dynamic> user) {
+    final name = user['name'] ?? 'Unknown';
+    final email = user['email'] ?? 'No email';
+    final isBlocked = user['isBlocked'] ?? false;
+    final color = isBlocked ? const Color(0xFFFEE2E2) : const Color(0xFFE8F2EC);
+    final statusColor = isBlocked ? const Color(0xFFDC2626) : const Color(0xFF1F5C35);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => Get.to(() => UserDetailScreen(user: user)),
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [BoxShadow(color: Color(0x201F5C35), blurRadius: 18, offset: Offset(0, 6))],
+          ),
+          child: Row(
+            children: [
+              Container(
+                height: 44,
+                width: 44,
+                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(22)),
+                alignment: Alignment.center,
+                child: Text(name.isNotEmpty ? name[0] : 'U',
+                    style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 18)),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                    const SizedBox(height: 2),
+                    Text(email, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                  ],
+                ),
+              ),
+              PopupMenuButton(
+                icon: Icon(Icons.more_vert, color: AppColors.textSecondary),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: () => controller.toggleUserBlock(user['_id'] ?? user['id']),
+                    child: Text(isBlocked ? 'Unblock User' : 'Block User'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f4; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #2e7d32, #43a047); padding: 32px 24px; text-align: center; }
+    .header h1 { color: #fff; margin: 0; font-size: 24px; }
+    .body { padding: 32px 24px; color: #333; line-height: 1.6; }
+    .body h2 { color: #2e7d32; margin-top: 0; }
+    .highlight { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 16px; border-radius: 4px; margin: 20px 0; }
+    .footer { background: #f5f5f5; padding: 20px 24px; text-align: center; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🌿 Welcome, Merchant!</h1>
+    </div>
+    <div class="body">
+      <h2>Hi {{merchantName}},</h2>
+      <p>Thank you for registering <strong>{{businessName}}</strong> on Green Basket!</p>
+      <div class="highlight">
+        <p>Your application is now <strong>pending review</strong>. Our team will verify your details and you'll be notified once approved.</p>
+      </div>
+      <p><strong>What happens next:</strong></p>
+      <ul>
+        <li>Our admin team reviews your application</li>
+        <li>You receive an email & SMS once approved</li>
+        <li>You can then start adding products and accepting orders</li>
+      </ul>
+      <p>This usually takes 1–2 business days. Thank you for your patience!</p>
+    </div>
+    <div class="footer">
+      <p>© {{year}} Green Basket. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
