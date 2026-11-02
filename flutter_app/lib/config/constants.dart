@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 class AppConstants {
   // ── API ────────────────────────────────────────────────────────────
   // ── Connection config ──────────────────────────────────────────────
@@ -5,11 +8,14 @@ class AppConstants {
   //   flutter run --dart-define=API_URL=http://10.0.2.2:5002/api        (Android emulator)
   //   flutter run --dart-define=API_URL=http://localhost:5002/api       (iOS simulator)
   //   flutter run --dart-define=API_URL=http://192.168.1.20:5002/api    (real device, your PC's LAN IP)
-  // Without API_URL the previous LAN address is used.
-  static const String baseUrl = String.fromEnvironment(
-    'API_URL',
-    defaultValue: 'http://10.126.242.57:5002/api',
-  );
+  // If not explicitly set via API_URL, detects platform automatically:
+  static String get baseUrl {
+    const explicit = String.fromEnvironment('API_URL');
+    if (explicit.isNotEmpty) return explicit;
+    if (kIsWeb) return 'http://localhost:5002/api';
+    if (Platform.isAndroid) return 'http://10.0.2.2:5002/api';
+    return 'http://localhost:5002/api';
+  }
 
   /// Socket.IO server = the API URL without the trailing "/api"
   static String get socketUrl {
