@@ -91,7 +91,7 @@ class AddressesScreen extends StatelessWidget {
         );
       }),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Get.toNamed('${Routes.addresses}/add')?.then((_) => ctrl.fetchAddresses()),
+        onPressed: () => Get.toNamed(Routes.addAddress)?.then((_) => ctrl.fetchAddresses()),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add_location_alt_rounded),

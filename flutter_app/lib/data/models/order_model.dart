@@ -233,11 +233,14 @@ class AddressModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'label': label,
+        'label': label.toLowerCase() == 'work' ? 'office' : label.toLowerCase(),
+        'addressLine1': line1,
         'line1': line1,
+        'addressLine2': line2,
         'line2': line2,
+        'landmark': line2,
         'city': city,
-        'state': state,
+        'state': state.isNotEmpty ? state : 'Kerala',
         'pincode': pincode,
         'isDefault': isDefault,
       };

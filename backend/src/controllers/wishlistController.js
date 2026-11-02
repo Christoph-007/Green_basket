@@ -88,9 +88,13 @@ exports.addToWishlist = async (req, res) => {
         );
 
         if (existingItem) {
-            return res.status(400).json({
-                success: false,
-                error: 'Product already in wishlist'
+            return res.status(200).json({
+                success: true,
+                message: 'Product already in wishlist',
+                data: {
+                    itemId: existingItem._id,
+                    product: existingItem.product
+                }
             });
         }
 

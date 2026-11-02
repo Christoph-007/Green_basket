@@ -90,15 +90,38 @@ const geocodingService = require('../services/geocodingService');
 
 exports.addAddress = async (req, res) => {
     try {
-        const { location, ...addressData } = req.body;
+        let label = (req.body.label || 'home').toLowerCase();
+        if (label === 'work') label = 'office';
+        if (!['home', 'office', 'other'].includes(label)) label = 'other';
+
+        const addressLine1 = req.body.addressLine1 || req.body.line1 || req.body.address;
+        const addressLine2 = req.body.addressLine2 || req.body.line2 || req.body.landmark;
+        const state = req.body.state || 'Kerala';
+
+        if (!addressLine1 || !req.body.city || !req.body.pincode) {
+            return res.status(400).json({
+                success: false,
+                message: 'Address line, city, and pincode are required'
+            });
+        }
+
+        const normalizedBody = {
+            ...req.body,
+            label,
+            addressLine1,
+            addressLine2,
+            state
+        };
+
+        const { location } = normalizedBody;
 
         // Auto-geocode if location is missing
         if (!location || !location.coordinates || location.coordinates.length !== 2) {
-            const addressString = geocodingService.constructAddressString(req.body);
+            const addressString = geocodingService.constructAddressString(normalizedBody);
             try {
                 const coords = await geocodingService.getCoordinates(addressString);
                 if (coords) {
-                    req.body.location = {
+                    normalizedBody.location = {
                         type: 'Point',
                         coordinates: [coords.lng, coords.lat]
                     };
@@ -110,7 +133,7 @@ exports.addAddress = async (req, res) => {
         }
 
         // If setting as default, unset other defaults
-        if (req.body.isDefault) {
+        if (normalizedBody.isDefault) {
             await Address.updateMany(
                 { user: req.user.id },
                 { isDefault: false }
@@ -118,7 +141,7 @@ exports.addAddress = async (req, res) => {
         }
 
         const address = await Address.create({
-            ...req.body,
+            ...normalizedBody,
             user: req.user.id
         });
 

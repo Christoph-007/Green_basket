@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import 'package:greenbasket_app/data/models/order_model.dart';
+import 'package:greenbasket_app/data/repositories/order_repository.dart';
 
 class AddAddressScreen extends StatefulWidget {
   const AddAddressScreen({super.key});
@@ -12,6 +14,7 @@ class AddAddressScreen extends StatefulWidget {
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _repo = OrderRepository();
   final _addressCtrl = TextEditingController();
   final _landmarkCtrl = TextEditingController();
   final _cityCtrl = TextEditingController();
@@ -52,14 +55,31 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isSaving = true);
-    // TODO: Call address save API
-    await Future.delayed(const Duration(milliseconds: 800));
-    setState(() => _isSaving = false);
-    Get.back(result: true);
-    Get.snackbar('Address Saved', 'New address has been added',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.success,
-        colorText: Colors.white);
+    try {
+      final address = AddressModel(
+        id: '',
+        label: _selectedLabel.toLowerCase() == 'work' ? 'office' : _selectedLabel.toLowerCase(),
+        line1: _addressCtrl.text.trim(),
+        line2: _landmarkCtrl.text.trim().isNotEmpty ? _landmarkCtrl.text.trim() : null,
+        city: _cityCtrl.text.trim(),
+        state: 'Kerala',
+        pincode: _pincodeCtrl.text.trim(),
+        isDefault: true,
+      );
+      await _repo.addAddress(address);
+      if (mounted) setState(() => _isSaving = false);
+      Get.back(result: true);
+      Get.snackbar('Address Saved', 'New address has been added',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.success,
+          colorText: Colors.white);
+    } catch (e) {
+      if (mounted) setState(() => _isSaving = false);
+      Get.snackbar('Error', 'Failed to save address. Please try again.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.error,
+          colorText: Colors.white);
+    }
   }
 
   @override

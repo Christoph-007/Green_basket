@@ -114,8 +114,17 @@ class ProductRepository {
   Future<List<ProductModel>> getWishlist() async {
     final response = await _api.get('/wishlist');
     final data = response.data as Map<String, dynamic>;
-    final items = data['data'] as List<dynamic>? ?? [];
-    return items.map((e) => ProductModel.fromJson(e['product'])).toList();
+    final raw = data['data'];
+    List<dynamic> items = [];
+    if (raw is List) {
+      items = raw;
+    } else if (raw is Map && raw['items'] is List) {
+      items = raw['items'] as List<dynamic>;
+    }
+    return items
+        .where((e) => e != null && e is Map && e['product'] != null && e['product'] is Map)
+        .map((e) => ProductModel.fromJson(Map<String, dynamic>.from(e['product'] as Map)))
+        .toList();
   }
 
   Future<List<Map<String, dynamic>>> getAvailableOffers({String? merchantId}) async {
