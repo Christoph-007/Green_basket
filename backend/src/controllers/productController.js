@@ -6,6 +6,17 @@ const uploadService = require('../services/uploadService');
 const { haversineKm, computeScore } = require('../utils/haversine');
 
 // Get All Products
+// Regex-escape user input used in queries (e.g. a search for "(" crashed the query)
+const escapeRegex = (str) => String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// Category filter by id or exact name (case-insensitive).
+// Returns an ObjectId, or null when given but not found (caller returns no products).
+const resolveCategoryId = async (category) => {
+    if (mongoose.Types.ObjectId.isValid(category)) return new mongoose.Types.ObjectId(category);
+    const cat = await Category.findOne({ name: new RegExp(`^${escapeRegex(category)}$`, 'i') });
+    return cat ? cat._id : null;
+};
+
 exports.getAllProducts = async (req, res) => {
     try {
         const { page = 1, limit = 12, category, merchant, search, sort = '-createdAt', isFeatured } = req.query;
@@ -13,16 +24,11 @@ exports.getAllProducts = async (req, res) => {
         const query = {};
 
         if (category) {
-            if (mongoose.Types.ObjectId.isValid(category)) {
-                query.category = new mongoose.Types.ObjectId(category);
-            } else {
-                const cat = await Category.findOne({ name: new RegExp(`^${category}$`, 'i') });
-                if (cat) {
-                    query.category = cat._id;
-                } else {
-                    return res.json({ success: true, data: { products: [], pagination: { page: 1, limit, total: 0, pages: 0 } } });
-                }
+            const categoryId = await resolveCategoryId(category);
+            if (!categoryId) {
+                return res.json({ success: true, data: { products: [], pagination: { page: 1, limit: parseInt(limit), total: 0, pages: 0 } } });
             }
+            query.category = categoryId;
         }
 
         if (!isAdmin) {
@@ -33,7 +39,7 @@ exports.getAllProducts = async (req, res) => {
         if (merchant) query.merchant = merchant;
         if (isFeatured === 'true') query.isFeatured = true;
         if (search) {
-            const searchRegex = new RegExp(search, 'i');
+            const searchRegex = new RegExp(escapeRegex(search), 'i');
             query.$or = [
                 { name: searchRegex },
                 { description: searchRegex },
@@ -167,7 +173,7 @@ exports.createProduct = async (req, res) => {
 
         // Handle category name to ID resolution if needed
         if (productData.category && !mongoose.Types.ObjectId.isValid(productData.category)) {
-            const cat = await Category.findOne({ name: new RegExp(`^${productData.category}$`, 'i') });
+            const cat = await Category.findOne({ name: new RegExp(`^${escapeRegex(productData.category)}$`, 'i') });
             if (cat) {
                 productData.category = cat._id;
             } else {
@@ -253,7 +259,7 @@ exports.updateProduct = async (req, res) => {
 
         // Handle category name to ID resolution if needed
         if (updates.category && !mongoose.Types.ObjectId.isValid(updates.category)) {
-            const cat = await Category.findOne({ name: new RegExp(`^${updates.category}$`, 'i') });
+            const cat = await Category.findOne({ name: new RegExp(`^${escapeRegex(updates.category)}$`, 'i') });
             if (cat) {
                 updates.category = cat._id;
             } else {
@@ -445,7 +451,7 @@ exports.searchProducts = async (req, res) => {
             });
         }
 
-        const searchRegex = new RegExp(q, 'i');
+        const searchRegex = new RegExp(escapeRegex(q), 'i');
         const products = await Product.find({
             $or: [
                 { name: searchRegex },
@@ -484,12 +490,13 @@ exports.getNearbyProductsInternal = async ({ lat, lng, radius, category, search,
     if (all === true || all === 'true') {
         const productQuery = { status: 'active', isActive: { $ne: false }, stock: { $gt: 0 } };
         if (category) {
-            if (mongoose.Types.ObjectId.isValid(category)) {
-                productQuery.category = new mongoose.Types.ObjectId(category);
-            }
+            // A category name used to be ignored here, returning every category
+            const categoryId = await resolveCategoryId(category);
+            if (!categoryId) return { products: [], total: 0, search_radius_km: null, actual_radius_km: null };
+            productQuery.category = categoryId;
         }
         if (search) {
-            const searchRegex = new RegExp(search, 'i');
+            const searchRegex = new RegExp(escapeRegex(search), 'i');
             productQuery.$or = [{ name: searchRegex }, { description: searchRegex }, { tags: searchRegex }];
         }
         const total = await Product.countDocuments(productQuery);
@@ -509,8 +516,9 @@ exports.getNearbyProductsInternal = async ({ lat, lng, radius, category, search,
     const merchantMatch = { isActive: true, isBlocked: { $ne: true } };
 
     let categoryId = null;
-    if (category && mongoose.Types.ObjectId.isValid(category)) {
-        categoryId = new mongoose.Types.ObjectId(category);
+    if (category) {
+        categoryId = await resolveCategoryId(category);
+        if (!categoryId) return { products: [], total: 0, search_radius_km: radiusKm, actual_radius_km: radiusKm };
     }
 
     const pipeline = [
@@ -540,9 +548,9 @@ exports.getNearbyProductsInternal = async ({ lat, lng, radius, category, search,
                 ...(categoryId ? { 'products.category': categoryId } : {}),
                 ...(search ? {
                     $or: [
-                        { 'products.name': { $regex: search, $options: 'i' } },
-                        { 'products.description': { $regex: search, $options: 'i' } },
-                        { 'products.tags': { $regex: search, $options: 'i' } }
+                        { 'products.name': { $regex: escapeRegex(search), $options: 'i' } },
+                        { 'products.description': { $regex: escapeRegex(search), $options: 'i' } },
+                        { 'products.tags': { $regex: escapeRegex(search), $options: 'i' } }
                     ]
                 } : {})
             }

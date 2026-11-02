@@ -1,3 +1,4 @@
+import '../nav_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class CartScreen extends StatelessWidget {
             title: 'Your cart is empty',
             message: 'Add items to start shopping',
             actionLabel: 'Browse Products',
-            onAction: () => Get.toNamed(Routes.categories),
+            onAction: () => NavController.to.openCategories(),
           );
         }
         if (responsive.isTablet) {

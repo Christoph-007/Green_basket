@@ -489,8 +489,7 @@ class ProductDetailScreen extends StatelessWidget {
                                     children: [
                                       Text('Similar Products', style: AppTextStyles.titleLarge),
                                       TextButton(
-                                        onPressed: () => Get.toNamed(Routes.categories, 
-                                            arguments: {'categoryId': product.categoryId}),
+                                        onPressed: () => NavController.to.openCategories(categoryId: product.categoryId),
                                         child: const Text('See All'),
                                       ),
                                     ],

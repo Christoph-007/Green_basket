@@ -1,7 +1,7 @@
+import '../nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
-import '../../../config/routes.dart';
 import '../../../data/models/product_model.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../../widgets/cards/product_card.dart';
@@ -76,7 +76,7 @@ class _WishlistGridState extends State<_WishlistGrid> {
           title: 'Your wishlist is empty',
           message: 'Save items you love to your wishlist',
           actionLabel: 'Browse Products',
-          onAction: () => Get.toNamed(Routes.categories),
+          onAction: () => NavController.to.openCategories(),
         );
       }
       

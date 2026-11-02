@@ -1,3 +1,4 @@
+import '../nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -151,7 +152,7 @@ class _OrdersList extends StatelessWidget {
                 ? 'Your active orders will appear here'
                 : 'Your order history will appear here',
             actionLabel: isActive ? 'Start Shopping' : null,
-            onAction: isActive ? () => Get.toNamed(Routes.categories) : null,
+            onAction: isActive ? () => NavController.to.openCategories() : null,
           ),
         ),
       );

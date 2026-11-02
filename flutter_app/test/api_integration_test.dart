@@ -53,6 +53,19 @@ void main() {
       final tomato = products.firstWhere((p) => p.name == 'E2E Tomato');
       productId = tomato.id;
 
+      // Category filtering, as the Categories tab uses it
+      final categories = await ProductRepository().getCategories();
+      final veg = categories.firstWhere((c) => c.name == 'Vegetables');
+      final inVeg = await ProductRepository().getProducts(categoryId: veg.id);
+      expect(inVeg.map((p) => p.id), contains(productId));
+      expect(inVeg.every((p) => p.categoryId == veg.id), isTrue);
+      final nearbyVeg = await ProductRepository()
+          .getNearbyProducts(lat: 13.09, lng: 80.27, radius: 10, categoryId: veg.id);
+      expect((nearbyVeg['products'] as List).isNotEmpty, isTrue);
+      final allVeg = await ProductRepository()
+          .getNearbyProducts(lat: 0, lng: 0, categoryId: veg.id, allProducts: true);
+      expect((allVeg['products'] as List).isNotEmpty, isTrue);
+
       await orderRepo.clearCart();
       await orderRepo.addToCart(productId: productId, quantity: 2, preparationOption: 'chopped');
       final cart = await orderRepo.getCartModel();

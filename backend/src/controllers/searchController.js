@@ -7,6 +7,9 @@ const Order = require('../models/Order');
  * @route   GET /api/search/products
  * @access  Public
  */
+// Regex-escape user input (a search for "(" used to crash the query)
+const escapeRegex = (str) => String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 exports.advancedSearch = async (req, res) => {
     try {
         const {
@@ -22,9 +25,9 @@ exports.advancedSearch = async (req, res) => {
         // Text search
         if (q && q.trim()) {
             query.$or = [
-                { name: { $regex: q.trim(), $options: 'i' } },
-                { description: { $regex: q.trim(), $options: 'i' } },
-                { tags: { $in: [new RegExp(q.trim(), 'i')] } }
+                { name: { $regex: escapeRegex(q.trim()), $options: 'i' } },
+                { description: { $regex: escapeRegex(q.trim()), $options: 'i' } },
+                { tags: { $in: [new RegExp(escapeRegex(q.trim()), 'i')] } }
             ];
             appliedFilters.query = q.trim();
         }
@@ -126,7 +129,7 @@ exports.getSearchSuggestions = async (req, res) => {
             });
         }
 
-        const searchRegex = new RegExp(q.trim(), 'i');
+        const searchRegex = new RegExp(escapeRegex(q.trim()), 'i');
 
         const [products, categories] = await Promise.all([
             Product.find({

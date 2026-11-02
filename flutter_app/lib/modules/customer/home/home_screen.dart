@@ -1,3 +1,4 @@
+import '../nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -183,7 +184,7 @@ class HomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: _SectionHeader(
                   title: 'Shop by Category',
-                  onSeeAll: () => Get.toNamed(Routes.categories),
+                  onSeeAll: () => NavController.to.openCategories(),
                 ),
               ),
               SliverToBoxAdapter(
@@ -196,7 +197,7 @@ class HomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: _SectionHeader(
                   title: 'Featured Products',
-                  onSeeAll: () => Get.toNamed(Routes.categories),
+                  onSeeAll: () => NavController.to.openCategories(),
                 ),
               ),
               Obx(() => ctrl.isLoading.value
@@ -642,7 +643,7 @@ class _CategoriesRow extends StatelessWidget {
           final cat = categories[i];
           return GestureDetector(
             onTap: () =>
-                Get.toNamed(Routes.categories, arguments: {'categoryId': cat.id}),
+                NavController.to.openCategories(categoryId: cat.id),
             child: Column(
               children: [
                 Container(
