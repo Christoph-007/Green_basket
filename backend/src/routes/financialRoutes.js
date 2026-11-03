@@ -19,6 +19,7 @@ router.post('/admin/payouts/generate', isAdmin, financialController.generatePayo
 router.post('/admin/payouts/:id/process', isAdmin, financialController.processPayout);
 router.patch('/admin/payouts/:id/hold', isAdmin, financialController.holdReleasePayout);
 router.get('/admin/reports/financial', isAdmin, financialController.getFinancialReports);
+router.get('/admin/reports/statement', isAdmin, financialController.getMonthlyFinancials);
 router.get('/admin/reports/gst', isAdmin, financialController.getGSTReport);
 router.get('/admin/reports/revenue-orders', isAdmin, financialController.getRevenueOrders);
 router.get('/admin/settings/commission', isAdmin, financialController.getCommissionSettings);

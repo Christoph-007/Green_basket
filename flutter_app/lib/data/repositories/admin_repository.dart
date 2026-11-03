@@ -134,6 +134,13 @@ class AdminRepository {
     return _extractList(data, ['payouts']);
   }
 
+  // Backend: GET /api/financial/admin/payouts?status=completed
+  Future<List<dynamic>> getCompletedPayouts({int limit = 5}) async {
+    final response = await _api.get('/financial/admin/payouts', params: {'status': 'completed', 'limit': limit});
+    final data = response.data as Map<String, dynamic>;
+    return _extractList(data, ['payouts']);
+  }
+
   // Backend: POST /api/financial/admin/payouts/:id/process
   Future<void> processPayout(String id) async {
     await _api.post('/financial/admin/payouts/$id/process');
@@ -172,9 +179,18 @@ class AdminRepository {
     return data['data'] as Map<String, dynamic>? ?? {};
   }
 
+  // Backend: GET /api/financial/admin/reports/statement
+  Future<Map<String, dynamic>> getFinancialStatement({String basis = 'calendar', int? year}) async {
+    final params = <String, dynamic>{'basis': basis};
+    if (year != null) params['year'] = year;
+    final response = await _api.get('/financial/admin/reports/statement', params: params);
+    final data = response.data as Map<String, dynamic>;
+    return data['data'] as Map<String, dynamic>? ?? {};
+  }
+
   // Backend: GET /api/financial/admin/reports/revenue-orders
-  Future<List<dynamic>> getRevenueOrders() async {
-    final response = await _api.get('/financial/admin/reports/revenue-orders');
+  Future<List<dynamic>> getRevenueOrders({String period = 'all'}) async {
+    final response = await _api.get('/financial/admin/reports/revenue-orders', params: {'period': period});
     final data = response.data as Map<String, dynamic>;
     final inner = data['data'] as Map<String, dynamic>? ?? data;
     return inner['orders'] as List<dynamic>? ?? [];

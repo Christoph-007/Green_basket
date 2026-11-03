@@ -636,12 +636,19 @@ exports.getFinancialReports = async (req, res) => {
             const y = year ? parseInt(year) : now.getFullYear();
             startDate = new Date(y, 0, 1);
             endDate = new Date(y, 11, 31, 23, 59, 59, 999);
+        } else {
+            // 'all' (or anything unknown): every fulfilled order so far
+            startDate = new Date(0);
+            endDate = new Date();
         }
 
-        // Get all delivered orders in period
+        // Get all delivered / completed orders in period
         const orders = await Order.find({
             status: { $in: FULFILLED_STATUSES },
-            deliveredAt: { $gte: startDate, $lte: endDate }
+            $or: [
+                { deliveredAt: { $gte: startDate, $lte: endDate } },
+                { deliveredAt: { $exists: false }, updatedAt: { $gte: startDate, $lte: endDate } }
+            ]
         }).populate('merchant', 'businessName');
 
         const totalGrossRevenue = orders.reduce((sum, o) => sum + o.totalAmount, 0);
@@ -670,6 +677,7 @@ exports.getFinancialReports = async (req, res) => {
         // Top merchants
         const merchantRevenue = {};
         orders.forEach(order => {
+            if (!order.merchant) return; // merchant record was deleted
             const mId = order.merchant._id.toString();
             if (!merchantRevenue[mId]) {
                 merchantRevenue[mId] = {
@@ -746,7 +754,10 @@ exports.getRevenueOrders = async (req, res) => {
 
         const orders = await Order.find({
             status: { $in: FULFILLED_STATUSES },
-            deliveredAt: { $gte: startDate, $lte: endDate }
+            $or: [
+                { deliveredAt: { $gte: startDate, $lte: endDate } },
+                { deliveredAt: { $exists: false }, updatedAt: { $gte: startDate, $lte: endDate } }
+            ]
         })
         .populate('merchant', 'businessName')
         .sort({ deliveredAt: -1 });
@@ -763,6 +774,165 @@ exports.getRevenueOrders = async (req, res) => {
         res.status(500).json({
             success: false,
             error: 'Failed to fetch revenue orders',
+            details: error.message
+        });
+    }
+};
+
+/**
+ * @desc    Month-by-month and year-by-year financial statement (Admin)
+ * @route   GET /api/financial/admin/reports/statement?basis=calendar|fy&year=2026
+ * @access  Private (Admin)
+ *
+ * basis=calendar -> Jan..Dec of `year`
+ * basis=fy       -> Indian financial year, Apr of `year` .. Mar of `year + 1`
+ * Revenue is counted by the day an order was delivered / completed (IST).
+ */
+exports.getMonthlyFinancials = async (req, res) => {
+    try {
+        const TZ = 'Asia/Kolkata';
+        const basis = req.query.basis === 'fy' ? 'fy' : 'calendar';
+        const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+            'September', 'October', 'November', 'December'];
+        const r2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100;
+
+        const settings = await PlatformSettings.findOne();
+        const rate = settings?.commission?.defaultRate ?? 5;
+
+        // All fulfilled orders grouped by month (cheap: one row per month)
+        const orderRows = await Order.aggregate([
+            { $match: { status: { $in: FULFILLED_STATUSES } } },
+            { $addFields: { effDate: { $ifNull: ['$deliveredAt', '$updatedAt'] } } },
+            {
+                $group: {
+                    _id: {
+                        y: { $year: { date: '$effDate', timezone: TZ } },
+                        m: { $month: { date: '$effDate', timezone: TZ } }
+                    },
+                    orders: { $sum: 1 },
+                    gross: { $sum: '$totalAmount' },
+                    refunds: {
+                        $sum: {
+                            $cond: [{ $eq: ['$refund.status', 'completed'] }, { $ifNull: ['$refund.amount', 0] }, 0]
+                        }
+                    }
+                }
+            }
+        ]);
+
+        const payoutRows = await Payout.aggregate([
+            { $match: { status: { $in: ['completed', 'pending'] } } },
+            {
+                $group: {
+                    _id: {
+                        y: { $year: { date: '$period.endDate', timezone: TZ } },
+                        m: { $month: { date: '$period.endDate', timezone: TZ } },
+                        status: '$status'
+                    },
+                    amount: { $sum: '$netAmount' }
+                }
+            }
+        ]);
+
+        // month key -> figures
+        const byMonth = {};
+        const cell = (y, m) => {
+            const k = `${y}-${m}`;
+            if (!byMonth[k]) byMonth[k] = { orders: 0, gross: 0, refunds: 0, paid: 0, pending: 0 };
+            return byMonth[k];
+        };
+        orderRows.forEach(o => {
+            const c = cell(o._id.y, o._id.m);
+            c.orders += o.orders; c.gross += o.gross; c.refunds += o.refunds;
+        });
+        payoutRows.forEach(p => {
+            if (!p._id.y) return;
+            const c = cell(p._id.y, p._id.m);
+            if (p._id.status === 'completed') c.paid += p.amount; else c.pending += p.amount;
+        });
+
+        const figures = (c) => {
+            const gross = c.gross, refunds = c.refunds;
+            const netRevenue = gross - refunds;
+            const commission = (gross * rate) / 100;
+            return {
+                orders: c.orders,
+                grossRevenue: r2(gross),
+                refunds: r2(refunds),
+                netRevenue: r2(netRevenue),
+                commission: r2(commission),
+                merchantPayable: r2(netRevenue - commission),
+                payoutsPaid: r2(c.paid),
+                payoutsPending: r2(c.pending)
+            };
+        };
+        const sum = (list) => {
+            const t = { orders: 0, gross: 0, refunds: 0, paid: 0, pending: 0 };
+            list.forEach(c => { t.orders += c.orders; t.gross += c.gross; t.refunds += c.refunds; t.paid += c.paid; t.pending += c.pending; });
+            return t;
+        };
+
+        // Which period does a month belong to?  calendar: its year.  fy: year the FY started.
+        const periodOf = (y, m) => (basis === 'fy' ? (m >= 4 ? y : y - 1) : y);
+        const labelOf = (p) => (basis === 'fy' ? `FY ${p}-${String((p + 1) % 100).padStart(2, '0')}` : String(p));
+
+        const now = new Date();
+        const nowParts = new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: 'numeric' })
+            .formatToParts(now).reduce((a, x) => { a[x.type] = parseInt(x.value, 10); return a; }, {});
+        const currentPeriod = periodOf(nowParts.year, nowParts.month);
+
+        // year-wise summary across all history
+        const periodTotals = {};
+        Object.entries(byMonth).forEach(([k, c]) => {
+            const [y, m] = k.split('-').map(Number);
+            const p = periodOf(y, m);
+            (periodTotals[p] = periodTotals[p] || []).push(c);
+        });
+        if (!periodTotals[currentPeriod]) periodTotals[currentPeriod] = [];
+        const years = Object.keys(periodTotals).map(Number).sort((a, b) => b - a).map(p => ({
+            year: p,
+            label: labelOf(p),
+            ...figures(sum(periodTotals[p]))
+        }));
+
+        // selected period, month by month
+        const selected = req.query.year ? parseInt(req.query.year, 10) : currentPeriod;
+        const startMonth = basis === 'fy' ? 4 : 1;
+        const months = [];
+        for (let i = 0; i < 12; i++) {
+            const m = ((startMonth - 1 + i) % 12) + 1;
+            const y = basis === 'fy' ? (m >= 4 ? selected : selected + 1) : selected;
+            const isFuture = y > nowParts.year || (y === nowParts.year && m > nowParts.month);
+            months.push({
+                year: y,
+                month: m,
+                label: `${MON[m - 1]} ${y}`,
+                name: `${FULL[m - 1]} ${y}`,
+                isFuture,
+                ...figures(byMonth[`${y}-${m}`] || { orders: 0, gross: 0, refunds: 0, paid: 0, pending: 0 })
+            });
+        }
+        const totals = figures(sum(months.filter(x => !x.isFuture).map(x => byMonth[`${x.year}-${x.month}`] || { orders: 0, gross: 0, refunds: 0, paid: 0, pending: 0 })));
+
+        res.json({
+            success: true,
+            data: {
+                basis,
+                year: selected,
+                label: labelOf(selected),
+                commissionRate: rate,
+                timezone: TZ,
+                months,
+                totals,
+                years
+            }
+        });
+    } catch (error) {
+        console.error('Get monthly financials error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch financial statement',
             details: error.message
         });
     }

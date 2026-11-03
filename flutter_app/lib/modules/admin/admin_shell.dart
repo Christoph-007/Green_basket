@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'admin_controller.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'dashboard/admin_dashboard_screen.dart';
 import 'users/admin_users_screen.dart';
@@ -38,7 +40,13 @@ class _AdminShellState extends State<AdminShell> {
         ),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
-          onTap: (i) => setState(() => _currentIndex = i),
+          onTap: (i) {
+            setState(() => _currentIndex = i);
+            if (i == 4 && Get.isRegistered<AdminController>()) {
+              Get.find<AdminController>().fetchFinancialReport();
+              Get.find<AdminController>().fetchStatement();
+            }
+          },
           selectedItemColor: AppColors.primary,
           unselectedItemColor: AppColors.textHint,
           showSelectedLabels: true,

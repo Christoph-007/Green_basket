@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../data/repositories/admin_repository.dart';
@@ -24,6 +25,17 @@ class AdminController extends GetxController {
   final categories = <dynamic>[].obs;
   final recipes = <dynamic>[].obs;
   final financialReport = <String, dynamic>{}.obs;
+  final financialPeriod = 'all'.obs; // all | month | quarter | year
+  final financialError = ''.obs;
+  final isFinanceLoading = false.obs;
+  final recentPayouts = <dynamic>[].obs;
+
+  // Month-by-month / year-by-year statement
+  final statement = <String, dynamic>{}.obs;
+  final statementBasis = 'calendar'.obs; // calendar | fy
+  final statementYear = RxnInt();
+  final statementError = ''.obs;
+  final isStatementLoading = false.obs;
 
   @override
   void onInit() {
@@ -42,21 +54,60 @@ class AdminController extends GetxController {
       fetchCategories(),
       fetchRecipes(),
       fetchFinancialReport(),
+      fetchStatement(),
     ]);
   }
 
-  Future<void> fetchFinancialReport() async {
+  Future<void> fetchFinancialReport({String? period}) async {
+    if (period != null) financialPeriod.value = period;
+    isFinanceLoading.value = true;
     try {
-      final data = await _repo.getFinancialReports();
+      final data = await _repo.getFinancialReports(period: financialPeriod.value);
       financialReport.value = data;
+      financialError.value = '';
     } catch (e) {
       debugPrint('fetchFinancialReport error: $e');
+      financialError.value = _errorMessage(e);
     }
+    try {
+      recentPayouts.assignAll(await _repo.getCompletedPayouts());
+    } catch (e) {
+      debugPrint('fetchRecentPayouts error: $e');
+    }
+    isFinanceLoading.value = false;
+  }
+
+  Future<void> fetchStatement({String? basis, int? year}) async {
+    if (basis != null && basis != statementBasis.value) {
+      statementBasis.value = basis;
+      statementYear.value = null; // year meaning differs between calendar / FY
+    }
+    if (year != null) statementYear.value = year;
+    isStatementLoading.value = true;
+    try {
+      statement.value = await _repo.getFinancialStatement(
+          basis: statementBasis.value, year: statementYear.value);
+      statementError.value = '';
+    } catch (e) {
+      debugPrint('fetchStatement error: $e');
+      statementError.value = _errorMessage(e);
+    }
+    isStatementLoading.value = false;
+  }
+
+  String _errorMessage(Object e) {
+    if (e is DioException) {
+      final d = e.response?.data;
+      if (d is Map && d['error'] != null) return d['error'].toString();
+      if (d is Map && d['message'] != null) return d['message'].toString();
+      return e.message ?? 'Network error';
+    }
+    return e.toString();
   }
 
   Future<List<dynamic>> getRevenueOrders() async {
     try {
-      return await _repo.getRevenueOrders();
+      return await _repo.getRevenueOrders(period: financialPeriod.value);
     } catch (e) {
       debugPrint('getRevenueOrders error: $e');
       return [];

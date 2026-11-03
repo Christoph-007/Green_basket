@@ -5,6 +5,7 @@ import 'admin_payouts_screen.dart';
 import '../widgets/admin_drawer.dart';
 import '../admin_controller.dart';
 import 'admin_finance_orders_detail.dart';
+import 'admin_statement_section.dart';
 
 class AdminFinanceScreen extends StatelessWidget {
   const AdminFinanceScreen({super.key});
@@ -88,8 +89,11 @@ class AdminFinanceScreen extends StatelessWidget {
           
           Expanded(
             child: Obx(() {
-              if (controller.isLoading.value && (controller.financialReport.isEmpty)) {
+              if (controller.isFinanceLoading.value && controller.financialReport.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
+              }
+              if (controller.financialError.value.isNotEmpty && controller.financialReport.isEmpty) {
+                return _buildError(controller);
               }
 
               final report = controller.financialReport;
@@ -101,9 +105,17 @@ class AdminFinanceScreen extends StatelessWidget {
               // Total Commission earned is effectively the platform's profit before operating costs
               final netProfit = (summary['totalCommissionEarned'] ?? 0).toString();
 
-              return ListView(
+              return RefreshIndicator(
+                onRefresh: () => Future.wait([
+                  controller.fetchFinancialReport(),
+                  controller.fetchStatement(),
+                ]),
+                child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 children: [
+                  _buildPeriodChips(controller),
+                  const SizedBox(height: 16),
                   // KPI Cards
                   Row(
                     children: [
@@ -166,6 +178,8 @@ class AdminFinanceScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
+                  AdminStatementSection(controller: controller),
+                  const SizedBox(height: 24),
                   // Transaction History
                   const Text(
                     'Recent Payout History',
@@ -179,6 +193,7 @@ class AdminFinanceScreen extends StatelessWidget {
                   _buildPayoutHistory(controller),
                   const SizedBox(height: 48),
                 ],
+                ),
               );
             }),
           ),
@@ -187,8 +202,64 @@ class AdminFinanceScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildPeriodChips(AdminController controller) {
+    const periods = {
+      'all': 'All time',
+      'month': 'This month',
+      'quarter': 'This quarter',
+      'year': 'This year',
+    };
+    final selected = controller.financialPeriod.value;
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: periods.entries.map((e) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ChoiceChip(
+              label: Text(e.value),
+              selected: selected == e.key,
+              selectedColor: AppColors.primary.withOpacity(0.15),
+              labelStyle: TextStyle(
+                color: selected == e.key ? AppColors.primary : AppColors.textSecondary,
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+              ),
+              onSelected: (_) => controller.fetchFinancialReport(period: e.key),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildError(AdminController controller) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
+            const SizedBox(height: 12),
+            const Text('Could not load financial data',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 8),
+            Text(controller.financialError.value,
+                textAlign: TextAlign.center, style: AppTextStyles.bodySmall),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => controller.fetchFinancialReport(),
+              child: const Text('Retry'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildPayoutHistory(AdminController controller) {
-    final completedPayouts = controller.payouts.where((p) => p['status'] == 'Completed').take(5).toList();
+    final completedPayouts = controller.recentPayouts.take(5).toList();
     
     if (completedPayouts.isEmpty) {
       return Container(
@@ -219,8 +290,8 @@ class AdminFinanceScreen extends StatelessWidget {
       ),
       child: Column(
         children: completedPayouts.map((p) {
-          final name = p['merchant']?['name'] ?? p['agent']?['name'] ?? 'Unknown';
-          final amount = p['amount']?.toString() ?? '0';
+          final name = p['merchant']?['businessName'] ?? p['merchant']?['name'] ?? p['agent']?['name'] ?? 'Unknown';
+          final amount = (p['netAmount'] ?? p['amount'] ?? 0).toString();
           final date = p['updatedAt']?.toString().split('T')[0] ?? 'N/A';
           return Column(
             children: [
