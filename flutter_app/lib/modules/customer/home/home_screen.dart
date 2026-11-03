@@ -328,6 +328,17 @@ class HomeScreen extends StatelessWidget {
 
 
 class _Header extends StatelessWidget {
+  String get _greeting {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good morning! 👋';
+    } else if (hour < 17) {
+      return 'Good afternoon! 👋';
+    } else {
+      return 'Good evening! 👋';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -335,13 +346,13 @@ class _Header extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
       child: Row(
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Good morning! 👋',
+              Text(_greeting,
                   style: AppTextStyles.bodySmall),
-              SizedBox(height: 2),
-              Text('What are you looking for?',
+              const SizedBox(height: 2),
+              const Text('What are you looking for?',
                   style: AppTextStyles.headlineMedium),
             ],
           ),
@@ -792,6 +803,27 @@ class _HomeRecipeCard extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
+                        if (recipe.displayMealType.isNotEmpty) ...[
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withOpacity(0.1),
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.full),
+                            ),
+                            child: Text(
+                              recipe.displayMealType.toUpperCase(),
+                              style: const TextStyle(
+                                fontFamily: AppTextStyles.fontFamily,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                        ],
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 2),

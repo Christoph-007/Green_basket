@@ -21,7 +21,6 @@ class Routes {
   static const String orderList = '/customer/orders';
   static const String orderDetail = '/customer/order-detail';
   static const String orderTracking = '/customer/orders/track';
-  static const String reviewOrder = '/customer/review';
   static const String profile = '/customer/profile';
   static const String editProfile = '/customer/profile/edit';
   static const String wallet = '/customer/wallet';

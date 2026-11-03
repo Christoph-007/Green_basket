@@ -18,14 +18,8 @@ class LoyaltyRepository {
   }
 
   // POST /api/loyalty/redeem
-  Future<Map<String, dynamic>> redeemPoints({
-    required int points,
-    String? orderId,
-  }) async {
-    final res = await _api.post('/loyalty/redeem', data: {
-      'points': points,
-      if (orderId != null) 'orderId': orderId,
-    });
+  Future<Map<String, dynamic>> redeemPoints({required int points}) async {
+    final res = await _api.post('/loyalty/redeem', data: {'points': points});
     return res.data;
   }
 }

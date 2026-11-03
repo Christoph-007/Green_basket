@@ -97,8 +97,8 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
           backgroundColor: AppColors.warning, colorText: Colors.white);
       return;
     }
-    // TODO: Open date/time picker and schedule via API
-    Get.snackbar('Scheduled', 'Notification scheduling coming soon.',
+    // Scheduling is not implemented on the backend yet; be clear that nothing was scheduled.
+    Get.snackbar('Not available yet', 'Scheduling is coming soon. Nothing was scheduled; use "Send now" to send it immediately.',
         backgroundColor: AppColors.info, colorText: Colors.white);
   }
 

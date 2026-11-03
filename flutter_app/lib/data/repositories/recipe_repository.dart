@@ -9,6 +9,8 @@ class RecipeRepository {
     int page = 1,
     int limit = 20,
     String? search,
+    // 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'dessert' (any case); null or 'All' means every meal
+    String? mealType,
     double? lat,
     double? lng,
     double? radius,
@@ -17,6 +19,8 @@ class RecipeRepository {
       'page': page,
       'limit': limit,
       if (search != null) 'search': search,
+      if (mealType != null && mealType.toLowerCase() != 'all')
+        'mealType': mealType.toLowerCase(),
       if (lat != null) 'lat': lat,
       if (lng != null) 'lng': lng,
       if (radius != null) 'radius': radius,

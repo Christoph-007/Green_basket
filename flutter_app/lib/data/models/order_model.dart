@@ -243,6 +243,12 @@ class AddressModel {
         'state': state.isNotEmpty ? state : 'Kerala',
         'pincode': pincode,
         'isDefault': isDefault,
+        // GeoJSON is [longitude, latitude]; lets the server skip geocoding and check delivery zones.
+        if (latitude != null && longitude != null)
+          'location': {
+            'type': 'Point',
+            'coordinates': [longitude, latitude],
+          },
       };
 }
 

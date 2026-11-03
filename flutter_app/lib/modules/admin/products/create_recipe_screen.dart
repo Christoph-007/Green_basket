@@ -287,9 +287,9 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   Widget _buildImageUpload() {
     return Card(
       child: InkWell(
-        onTap: () {
-          // TODO: Implement image picker
-        },
+        onTap: () => Get.snackbar('Not available yet',
+            'Recipe photo upload is coming soon. The recipe is saved without a photo.',
+            snackPosition: SnackPosition.BOTTOM),
         borderRadius: BorderRadius.circular(AppRadius.md),
         child: Container(
           height: 160,

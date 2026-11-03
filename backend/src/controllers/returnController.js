@@ -1,7 +1,16 @@
+const mongoose = require('mongoose');
 const Return = require('../models/Return');
 const Order = require('../models/Order');
 const Wallet = require('../models/Wallet');
 const { creditWallet } = require('../utils/walletHelpers');
+
+// A return can be requested once the customer has the goods: delivery orders end at
+// "delivered" (then "completed"), pickup orders end at "completed".
+const RETURNABLE_STATUSES = ['delivered', 'completed'];
+const RETURN_WINDOW_DAYS = 7;
+const ITEM_CONDITIONS = ['unopened', 'opened', 'damaged', 'wrong_item'];
+const REFUND_METHODS = ['wallet', 'original_payment'];
+const bad = (res, error) => res.status(400).json({ success: false, error });
 
 /**
  * @desc    Request return/exchange
@@ -11,8 +20,9 @@ const { creditWallet } = require('../utils/walletHelpers');
 exports.requestReturn = async (req, res) => {
     try {
         const { orderId, type, reason, items, images, refundMethod, exchangeItems } = req.body;
+        const cleanReason = typeof reason === 'string' ? reason.trim() : '';
 
-        if (!orderId || !type || !reason || !items || items.length === 0) {
+        if (!orderId || !type || !cleanReason || !Array.isArray(items) || items.length === 0) {
             return res.status(400).json({
                 success: false,
                 error: 'orderId, type, reason, and items are required'
@@ -26,7 +36,15 @@ exports.requestReturn = async (req, res) => {
             });
         }
 
-        const order = await Order.findOne({ orderId, customer: req.user._id });
+        if (refundMethod !== undefined && !REFUND_METHODS.includes(refundMethod)) {
+            return bad(res, `refundMethod must be one of: ${REFUND_METHODS.join(', ')}`);
+        }
+
+        // The app sends the order's database id; API clients may send the readable order number.
+        const orderMatch = mongoose.Types.ObjectId.isValid(orderId)
+            ? { $or: [{ _id: orderId }, { orderId }] }
+            : { orderId };
+        const order = await Order.findOne({ ...orderMatch, customer: req.user._id });
 
         if (!order) {
             return res.status(404).json({
@@ -35,22 +53,16 @@ exports.requestReturn = async (req, res) => {
             });
         }
 
-        if (order.status !== 'delivered') {
-            return res.status(400).json({
-                success: false,
-                error: 'Returns can only be requested for delivered orders'
-            });
+        if (!RETURNABLE_STATUSES.includes(order.status)) {
+            return bad(res, 'Returns can only be requested for delivered or completed orders');
         }
 
         // Check 7-day return window
         const deliveredAt = order.deliveredAt || order.updatedAt;
         const daysSinceDelivery = (Date.now() - deliveredAt) / (24 * 60 * 60 * 1000);
 
-        if (daysSinceDelivery > 7) {
-            return res.status(400).json({
-                success: false,
-                error: 'Return window (7 days) has expired'
-            });
+        if (daysSinceDelivery > RETURN_WINDOW_DAYS) {
+            return bad(res, `Return window (${RETURN_WINDOW_DAYS} days) has expired`);
         }
 
         // Check for existing active return
@@ -67,30 +79,43 @@ exports.requestReturn = async (req, res) => {
             });
         }
 
-        // Map items
-        const returnItems = items.map(item => ({
-            product: item.productId,
-            quantity: item.quantity,
-            reason: item.reason,
-            condition: item.condition
-        }));
-
-        // Calculate refund amount based on items
+        // Validate every item against what was actually ordered, and price the refund from it.
+        const returnItems = [];
+        const seenProducts = new Set();
         let refundAmount = 0;
         for (const item of items) {
-            const orderItem = order.items.find(
-                oi => oi.product.toString() === item.productId
-            );
-            if (orderItem) {
-                refundAmount += orderItem.price * item.quantity;
+            const productId = item && item.productId;
+            if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
+                return bad(res, 'Each item needs a valid productId');
             }
+            const orderItem = order.items.find(oi => oi.product.toString() === String(productId));
+            if (!orderItem) {
+                return bad(res, 'One of the items is not part of this order');
+            }
+            if (seenProducts.has(String(productId))) {
+                return bad(res, 'Each product can only be listed once');
+            }
+            seenProducts.add(String(productId));
+
+            const quantity = Number(item.quantity);
+            const maxQuantity = Math.max(1, Math.ceil(orderItem.quantity));
+            if (!Number.isInteger(quantity) || quantity < 1 || quantity > maxQuantity) {
+                return bad(res, `Return quantity must be between 1 and ${maxQuantity}`);
+            }
+            if (item.condition !== undefined && !ITEM_CONDITIONS.includes(item.condition)) {
+                return bad(res, `condition must be one of: ${ITEM_CONDITIONS.join(', ')}`);
+            }
+
+            returnItems.push({ product: productId, quantity, reason: item.reason, condition: item.condition });
+            refundAmount += orderItem.price * quantity;
         }
+        refundAmount = Math.round(refundAmount * 100) / 100;
 
         const returnRequest = await Return.create({
             order: order._id,
             user: req.user._id,
             type,
-            reason,
+            reason: cleanReason,
             items: returnItems,
             images: images || [],
             exchangeItems: exchangeItems || [],
@@ -287,7 +312,7 @@ exports.processReturn = async (req, res) => {
                     title: action === 'approve' ? 'Return Approved' : 'Return Rejected',
                     message: action === 'approve'
                         ? `Your return ${returnRequest.returnId} has been approved. ₹${returnRequest.refundAmount} refunded to your wallet.`
-                        : `Your return ${returnRequest.returnId} has been rejected. Reason: ${rejectionReason}`,
+                        : `Your return ${returnRequest.returnId} has been rejected. Reason: ${returnRequest.rejectionReason}`,
                     channels: ['push', 'email']
                 }
             );

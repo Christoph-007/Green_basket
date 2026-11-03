@@ -6,6 +6,7 @@ const Review = require('../models/Review');
 const PlatformSettings = require('../models/PlatformSettings');
 const notify = require('../services/notify');
 const notificationService = require('../services/notificationService');
+const { FULFILLED_STATUSES } = require('../utils/orderStatus');
 
 exports.getSettings = async (req, res) => {
     try {
@@ -456,8 +457,7 @@ exports.getMerchantAnalytics = async (req, res) => {
         if (period === 'month') {
             startDate.setDate(startDate.getDate() - 30);
             groupBy = { $dayOfMonth: "$createdAt" };
-            // For month, we'll still show 7 buckets or simplify it to weeks
-            // Let's keep it simple for now: group by day of week but over last 30 days
+            // Month view groups by day of month over the last 30 days
         } else if (period === 'year') {
             startDate.setFullYear(startDate.getFullYear() - 1);
             groupBy = { $month: "$createdAt" };
@@ -468,14 +468,14 @@ exports.getMerchantAnalytics = async (req, res) => {
         }
 
         const [orders, products, reviews, salesAgg, topProductsAgg] = await Promise.all([
-            Order.find({ merchant: merchantId, status: 'delivered' }),
+            Order.find({ merchant: merchantId, status: { $in: FULFILLED_STATUSES } }),
             Product.find({ merchant: merchantId }),
             Review.find({ merchant: merchantId }).sort({ createdAt: -1 }).limit(10).populate('customer', 'name'),
 
             Order.aggregate([
                 { $match: { 
                     merchant: merchantIdObj, 
-                    status: 'delivered', 
+                    status: { $in: FULFILLED_STATUSES }, 
                     createdAt: { $gte: startDate }
                 } },
                 { $group: {
@@ -484,7 +484,7 @@ exports.getMerchantAnalytics = async (req, res) => {
                 } }
             ]),
             Order.aggregate([
-                { $match: { merchant: merchantIdObj, status: 'delivered' } },
+                { $match: { merchant: merchantIdObj, status: { $in: FULFILLED_STATUSES } } },
                 { $unwind: "$items" },
                 { $group: {
                     _id: "$items.product",

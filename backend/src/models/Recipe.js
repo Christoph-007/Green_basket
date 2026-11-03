@@ -27,7 +27,12 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['breakfast', 'lunch', 'dinner', 'snack', 'dessert', 'beverage']
+        enum: ['breakfast', 'lunch', 'dinner', 'snack', 'snacks', 'dessert', 'beverage']
+    },
+    mealType: {
+        type: String,
+        enum: ['breakfast', 'lunch', 'dinner', 'snack', 'snacks', 'dessert', 'beverage'],
+        index: true
     },
 
     // Servings & Time
@@ -143,9 +148,15 @@ const recipeSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Calculate total time
+// Calculate total time and sync meal timing
 recipeSchema.pre('save', function (next) {
     this.totalTime = this.prepTime + this.cookTime;
+
+    if (this.category && !this.mealType) {
+        this.mealType = this.category;
+    } else if (this.mealType && !this.category) {
+        this.category = this.mealType;
+    }
 
     if (this.isModified('name') && !this.slug) {
         const baseSlug = this.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');

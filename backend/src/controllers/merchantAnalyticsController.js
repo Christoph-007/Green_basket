@@ -2,6 +2,7 @@ const Order = require('../models/Order');
 const Product = require('../models/Product');
 const Review = require('../models/Review');
 const User = require('../models/User');
+const { FULFILLED_STATUSES } = require('../utils/orderStatus');
 
 /**
  * @desc    Get sales analytics for merchant
@@ -46,7 +47,7 @@ exports.getSalesAnalytics = async (req, res) => {
         // Get current period orders - use deliveredAt if available, fall back to createdAt
         const orders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             $or: [
                 { deliveredAt: dateRange },
                 { deliveredAt: { $exists: false }, createdAt: dateRange },
@@ -61,7 +62,7 @@ exports.getSalesAnalytics = async (req, res) => {
 
         const previousPeriodOrders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             $or: [
                 { deliveredAt: {
                     $gte: new Date(dateRange.$gte - periodLength),
@@ -198,7 +199,7 @@ exports.getProductAnalytics = async (req, res) => {
             {
                 $match: {
                     merchant: merchantId,
-                    status: 'delivered'
+                    status: { $in: FULFILLED_STATUSES }
                 }
             },
             { $unwind: '$items' },
@@ -244,7 +245,7 @@ exports.getProductAnalytics = async (req, res) => {
             {
                 $match: {
                     merchant: merchantId,
-                    status: 'delivered',
+                    status: { $in: FULFILLED_STATUSES },
                     deliveredAt: { $gte: thirtyDaysAgo }
                 }
             },
@@ -308,7 +309,7 @@ exports.getCustomerAnalytics = async (req, res) => {
 
         // All customers
         const allCustomerAgg = await Order.aggregate([
-            { $match: { merchant: merchantId, status: 'delivered' } },
+            { $match: { merchant: merchantId, status: { $in: FULFILLED_STATUSES } } },
             {
                 $group: {
                     _id: '$customer',
@@ -326,7 +327,7 @@ exports.getCustomerAnalytics = async (req, res) => {
 
         // Top customers
         const topCustomers = await Order.aggregate([
-            { $match: { merchant: merchantId, status: 'delivered' } },
+            { $match: { merchant: merchantId, status: { $in: FULFILLED_STATUSES } } },
             {
                 $group: {
                     _id: '$customer',
@@ -472,7 +473,7 @@ exports.getRevenueForecast = async (req, res) => {
         const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
         const orders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: ninetyDaysAgo }
         }).sort({ deliveredAt: 1 });
 

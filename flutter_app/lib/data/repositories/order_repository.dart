@@ -139,13 +139,6 @@ class OrderRepository {
     return response.data as Map<String, dynamic>;
   }
 
-  Future<void> submitReview(String orderId, {required int rating, String? review}) async {
-    await _api.post('/orders/$orderId/review', data: {
-      'rating': rating,
-      if (review != null && review.isNotEmpty) 'review': review,
-    });
-  }
-
   // Addresses
   Future<List<AddressModel>> getAddresses() async {
     final response = await _api.get('/users/addresses');

@@ -19,6 +19,5 @@ router.patch('/:id/cancel', authenticate, orderController.cancelOrder);
 router.get('/:id/track', authenticate, orderController.enhancedTrackOrder);
 router.get('/:orderId/tracking', authenticate, orderController.getOrderTracking);
 router.patch('/:id/location', authenticate, orderController.updateOrderLocation);
-router.post('/:id/review', authenticate, orderController.addReview);
 
 module.exports = router;

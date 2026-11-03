@@ -25,13 +25,18 @@ class RecipeController extends GetxController {
     'Dessert',
   ];
 
+  int _requestId = 0;
+
   @override
   void onInit() {
     super.onInit();
     fetchRecipes();
+    // The meal chips are filtered by the server, so reload whenever one is picked.
+    ever(selectedCategory, (_) => fetchRecipes());
   }
 
   Future<void> fetchRecipes() async {
+    final requestId = ++_requestId;
     isLoading.value = true;
     try {
       double? lat, lng, radius;
@@ -41,26 +46,26 @@ class RecipeController extends GetxController {
         lng = home.longitude;
         radius = home.selectedRadiusKm.value;
       }
-      recipes.value = await _repo.getRecipes(
+      final result = await _repo.getRecipes(
         limit: 50,
+        mealType: selectedCategory.value,
         lat: lat,
         lng: lng,
         radius: radius,
       );
-    } catch (_) {}
-    isLoading.value = false;
+      // Ignore the answer if another chip was tapped while this one was loading.
+      if (requestId == _requestId) recipes.value = result;
+    } catch (_) {
+      // keep whatever is showing
+    }
+    if (requestId == _requestId) isLoading.value = false;
   }
 
+  /// The meal filter is applied by the server; only the search box filters here.
   List<RecipeModel> get filteredRecipes {
-    return recipes.where((r) {
-      final matchCat = selectedCategory.value == 'All' || 
-          (r.tags.any((t) => t.toLowerCase() == selectedCategory.value.toLowerCase()));
-      
-      final matchSearch = searchQuery.value.isEmpty ||
-          r.title.toLowerCase().contains(searchQuery.value.toLowerCase());
-          
-      return matchCat && matchSearch;
-    }).toList();
+    final query = searchQuery.value.toLowerCase();
+    if (query.isEmpty) return recipes.toList();
+    return recipes.where((r) => r.title.toLowerCase().contains(query)).toList();
   }
 }
 
@@ -305,6 +310,27 @@ class _RecipeCard extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
+                        // Meal timing badge
+                        if (recipe.displayMealType.isNotEmpty) ...[
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(AppRadius.full),
+                            ),
+                            child: Text(
+                              recipe.displayMealType.toUpperCase(),
+                              style: const TextStyle(
+                                fontFamily: AppTextStyles.fontFamily,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                        ],
                         // Difficulty badge
                         Container(
                           padding: const EdgeInsets.symmetric(

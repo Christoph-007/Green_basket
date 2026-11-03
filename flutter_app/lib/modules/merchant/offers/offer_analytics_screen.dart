@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
+import 'package:greenbasket_app/modules/merchant/widgets/merchant_bottom_nav.dart';
 
 class _OfferAnalyticsController extends GetxController {
   final _repo = MerchantRepository();
@@ -50,6 +51,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
     final controller = Get.put(_OfferAnalyticsController());
 
     return Scaffold(
+      bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Offer Analytics'),

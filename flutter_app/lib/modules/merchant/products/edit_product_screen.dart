@@ -531,10 +531,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
       child: Padding(
         padding: EdgeInsets.only(right: index < 2 ? AppSpacing.sm : 0),
         child: GestureDetector(
-          onTap: () {
-            // TODO: open image picker
-            setState(() => _existingImages[index] = true);
-          },
+          // Photos already on the product are shown; adding or removing them is not built yet.
+          onTap: () => Get.snackbar('Photos not available yet',
+                'Photo upload is coming soon. For now, products are saved without photos.',
+                snackPosition: SnackPosition.BOTTOM),
           child: Container(
             height: 100,
             decoration: BoxDecoration(
@@ -547,31 +547,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               ),
             ),
             child: hasImage
-                ? Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      const Center(
-                        child: Icon(Icons.image,
-                            color: AppColors.primary, size: 36),
-                      ),
-                      Positioned(
-                        top: 4,
-                        right: 4,
-                        child: GestureDetector(
-                          onTap: () => setState(
-                              () => _existingImages[index] = false),
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                              color: AppColors.error,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(Icons.close,
-                                color: Colors.white, size: 12),
-                          ),
-                        ),
-                      ),
-                    ],
+                ? const Center(
+                    child: Icon(Icons.image,
+                        color: AppColors.primary, size: 36),
                   )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,

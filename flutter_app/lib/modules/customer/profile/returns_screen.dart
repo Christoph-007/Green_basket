@@ -1,69 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import 'package:greenbasket_app/data/models/return_model.dart';
+import 'package:greenbasket_app/data/repositories/return_repository.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 
-class _ReturnItem {
-  final String id;
-  final String orderId;
-  final String itemName;
-  final String reason;
-  final String status;
-  final double refundAmount;
-  final String requestedDate;
-  final String statusStep;
-  final bool isCompleted;
-
-  const _ReturnItem({
-    required this.id,
-    required this.orderId,
-    required this.itemName,
-    required this.reason,
-    required this.status,
-    required this.refundAmount,
-    required this.requestedDate,
-    required this.statusStep,
-    required this.isCompleted,
-  });
-}
-
-const List<_ReturnItem> _mockReturns = [
-  _ReturnItem(
-    id: 'r1',
-    orderId: '#GB2024005',
-    itemName: 'Organic Bananas × 6',
-    reason: 'Item was damaged during delivery',
-    status: 'Pickup Scheduled',
-    refundAmount: 89.00,
-    requestedDate: '18 Mar 2026',
-    statusStep: 'pickup_scheduled',
-    isCompleted: false,
-  ),
-  _ReturnItem(
-    id: 'r2',
-    orderId: '#GB2024003',
-    itemName: 'Fresh Orange Juice 1L',
-    reason: 'Wrong product delivered',
-    status: 'Refunded',
-    refundAmount: 145.00,
-    requestedDate: '05 Mar 2026',
-    statusStep: 'refunded',
-    isCompleted: true,
-  ),
-];
-
-const List<String> _statusSteps = [
-  'requested',
-  'pickup_scheduled',
-  'picked_up',
-  'refunded',
-];
-
-const Map<String, String> _statusLabels = {
-  'requested': 'Requested',
-  'pickup_scheduled': 'Pickup Scheduled',
-  'picked_up': 'Picked Up',
-  'refunded': 'Refunded',
-};
+const List<String> _progressSteps = ['Requested', 'Approved', 'Refunded'];
 
 class ReturnsScreen extends StatefulWidget {
   const ReturnsScreen({super.key});
@@ -74,12 +19,19 @@ class ReturnsScreen extends StatefulWidget {
 
 class _ReturnsScreenState extends State<ReturnsScreen>
     with SingleTickerProviderStateMixin {
+  final _repo = ReturnRepository();
   late final TabController _tabCtrl;
+
+  List<ReturnModel> _returns = [];
+  bool _loading = true;
+  String? _error;
+  String? _cancellingId;
 
   @override
   void initState() {
     super.initState();
     _tabCtrl = TabController(length: 2, vsync: this);
+    _load();
   }
 
   @override
@@ -88,12 +40,65 @@ class _ReturnsScreenState extends State<ReturnsScreen>
     super.dispose();
   }
 
+  Future<void> _load() async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+    try {
+      final data = await _repo.getMyReturns();
+      if (!mounted) return;
+      setState(() => _returns = data);
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _error = 'Could not load your returns. Please try again.');
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _cancel(ReturnModel item) async {
+    final confirmed = await Get.dialog<bool>(AlertDialog(
+      title: const Text('Cancel return request?'),
+      content: Text('Return ${item.returnId} will be withdrawn.'),
+      actions: [
+        TextButton(
+          onPressed: () => Get.back(result: false),
+          child: const Text('Keep it'),
+        ),
+        TextButton(
+          onPressed: () => Get.back(result: true),
+          child: const Text('Cancel request',
+              style: TextStyle(color: AppColors.error)),
+        ),
+      ],
+    ));
+    if (confirmed != true) return;
+
+    setState(() => _cancellingId = item.id);
+    try {
+      await _repo.cancelReturn(item.id);
+      Get.snackbar('Request cancelled', 'Your return request was withdrawn.',
+          snackPosition: SnackPosition.BOTTOM);
+    } on DioException catch (e) {
+      final body = e.response?.data;
+      final message = body is Map ? (body['error'] ?? body['message']) : null;
+      Get.snackbar('Could not cancel',
+          message?.toString() ?? 'Please try again.',
+          snackPosition: SnackPosition.BOTTOM);
+    } catch (_) {
+      Get.snackbar('Could not cancel', 'Please try again.',
+          snackPosition: SnackPosition.BOTTOM);
+    } finally {
+      if (mounted) setState(() => _cancellingId = null);
+    }
+    await _load();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final pending =
-        _mockReturns.where((r) => !r.isCompleted).toList();
-    final completed =
-        _mockReturns.where((r) => r.isCompleted).toList();
+    final pending = _returns.where((r) => !r.isCompleted).toList();
+    final completed = _returns.where((r) => r.isCompleted).toList();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -106,8 +111,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
-        title: const Text('Returns & Refunds',
-            style: AppTextStyles.titleLarge),
+        title: const Text('Returns & Refunds', style: AppTextStyles.titleLarge),
         bottom: TabBar(
           controller: _tabCtrl,
           labelColor: AppColors.primary,
@@ -120,61 +124,73 @@ class _ReturnsScreenState extends State<ReturnsScreen>
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabCtrl,
-        children: [
-          _buildList(pending),
-          _buildList(completed),
-        ],
-      ),
+      body: _buildBody(pending, completed),
     );
   }
 
-  Widget _buildList(List<_ReturnItem> returns) {
-    if (returns.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.assignment_return_outlined,
-                color: AppColors.textHint, size: 64),
-            const SizedBox(height: AppSpacing.md),
-            const Text('No returns here',
-                style: AppTextStyles.headlineMedium),
-            const SizedBox(height: AppSpacing.xs),
-            Text('Completed returns will appear here',
-                style: AppTextStyles.bodySmall
-                    .copyWith(color: AppColors.textSecondary)),
-          ],
-        ),
-      );
+  Widget _buildBody(List<ReturnModel> pending, List<ReturnModel> completed) {
+    if (_loading && _returns.isEmpty) return const GBPageLoader();
+    if (_error != null && _returns.isEmpty) {
+      return ErrorState(message: _error, onRetry: _load);
     }
-    return ListView.separated(
-      padding: const EdgeInsets.all(AppSpacing.screenPadding),
-      itemCount: returns.length,
-      separatorBuilder: (_, __) =>
-          const SizedBox(height: AppSpacing.sm),
-      itemBuilder: (_, i) => _buildReturnCard(returns[i]),
+    return TabBarView(
+      controller: _tabCtrl,
+      children: [
+        _buildList(pending, 'No pending returns',
+            'Return an item from a delivered order and it will show up here'),
+        _buildList(completed, 'No completed returns',
+            'Refunded and closed requests will appear here'),
+      ],
     );
   }
 
-  Widget _buildReturnCard(_ReturnItem item) {
-    Color statusColor;
-    switch (item.statusStep) {
-      case 'refunded':
-        statusColor = AppColors.success;
-        break;
-      case 'picked_up':
-        statusColor = AppColors.primary;
-        break;
-      case 'pickup_scheduled':
-        statusColor = AppColors.warning;
-        break;
+  Widget _buildList(List<ReturnModel> returns, String title, String message) {
+    return RefreshIndicator(
+      color: AppColors.primary,
+      onRefresh: _load,
+      child: returns.isEmpty
+          ? ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: EmptyState(
+                    icon: Icons.assignment_return_outlined,
+                    title: title,
+                    message: message,
+                  ),
+                ),
+              ],
+            )
+          : ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(AppSpacing.screenPadding),
+              itemCount: returns.length,
+              separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+              itemBuilder: (_, i) => _buildReturnCard(returns[i]),
+            ),
+    );
+  }
+
+  Color _statusColor(ReturnModel item) {
+    if (item.isCancelledByCustomer) return AppColors.textSecondary;
+    if (item.isRejected) return AppColors.error;
+    switch (item.progressStep) {
+      case 2:
+        return AppColors.success;
+      case 1:
+        return AppColors.primary;
       default:
-        statusColor = AppColors.textSecondary;
+        return AppColors.warning;
     }
+  }
 
-    final currentStepIndex = _statusSteps.indexOf(item.statusStep);
+  Widget _buildReturnCard(ReturnModel item) {
+    final statusColor = _statusColor(item);
+    final currentStep = item.progressStep;
+    final showReason = item.isRejected &&
+        !item.isCancelledByCustomer &&
+        (item.rejectionReason ?? '').isNotEmpty;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -187,16 +203,21 @@ class _ReturnsScreenState extends State<ReturnsScreen>
         children: [
           // Header row
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(item.orderId,
-                        style: AppTextStyles.titleMedium
-                            .copyWith(color: AppColors.primary)),
-                    Text(item.itemName,
-                        style: AppTextStyles.bodyMedium),
+                    Text(
+                      item.orderNumber.isEmpty
+                          ? item.returnId
+                          : 'Order ${item.orderNumber}',
+                      style: AppTextStyles.titleMedium
+                          .copyWith(color: AppColors.primary),
+                    ),
+                    if (item.items.isNotEmpty)
+                      Text(item.itemsSummary, style: AppTextStyles.bodyMedium),
                   ],
                 ),
               ),
@@ -204,15 +225,14 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 3),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
                       color: statusColor.withOpacity(0.1),
-                      borderRadius:
-                          BorderRadius.circular(AppRadius.full),
+                      borderRadius: BorderRadius.circular(AppRadius.full),
                     ),
                     child: Text(
-                      item.status,
+                      item.statusLabel,
                       style: TextStyle(
                         fontFamily: AppTextStyles.fontFamily,
                         fontSize: 11,
@@ -222,7 +242,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                     ),
                   ),
                   const SizedBox(height: 2),
-                  Text(item.requestedDate,
+                  Text(AppHelpers.formatDate(item.createdAt),
                       style: AppTextStyles.labelSmall),
                 ],
               ),
@@ -232,6 +252,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
 
           // Reason
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(Icons.info_outline,
                   size: 14, color: AppColors.textSecondary),
@@ -243,102 +264,120 @@ class _ReturnsScreenState extends State<ReturnsScreen>
               ),
             ],
           ),
+          if (showReason) ...[
+            const SizedBox(height: AppSpacing.xs),
+            Text('Rejected: ${item.rejectionReason}',
+                style: AppTextStyles.bodySmall.copyWith(color: AppColors.error)),
+          ],
           const SizedBox(height: AppSpacing.sm),
 
           // Refund amount
-          Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
-            decoration: BoxDecoration(
-              color: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(AppRadius.sm),
+          if (!item.isRejected)
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer,
+                borderRadius: BorderRadius.circular(AppRadius.sm),
+              ),
+              child: Text(
+                'Refund: ${AppHelpers.formatCurrency(item.refundAmount)}'
+                '${item.refundMethod == 'wallet' ? ' to wallet' : ''}',
+                style: AppTextStyles.labelLarge
+                    .copyWith(color: AppColors.primary),
+              ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.currency_rupee_rounded,
-                    size: 14, color: AppColors.primary),
-                Text(
-                  'Refund: ₹${item.refundAmount.toStringAsFixed(2)}',
-                  style: AppTextStyles.labelLarge
-                      .copyWith(color: AppColors.primary),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
 
-          // Progress stepper
-          const Divider(height: 1),
-          const SizedBox(height: AppSpacing.sm),
-          const Text('Return Status',
-              style: AppTextStyles.labelLarge),
-          const SizedBox(height: AppSpacing.sm),
-          SizedBox(
-            height: 50,
-            child: Row(
-              children: List.generate(_statusSteps.length, (i) {
-                final stepDone = i <= currentStepIndex;
-                final isCurrent = i == currentStepIndex;
-                final isLast = i == _statusSteps.length - 1;
-                return Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center,
-                          children: [
-                            AnimatedContainer(
-                              duration:
-                                  const Duration(milliseconds: 200),
-                              width: isCurrent ? 24 : 18,
-                              height: isCurrent ? 24 : 18,
-                              decoration: BoxDecoration(
-                                color: stepDone
-                                    ? AppColors.primary
-                                    : AppColors.border,
-                                shape: BoxShape.circle,
-                              ),
-                              child: stepDone
-                                  ? const Icon(Icons.check_rounded,
-                                      color: Colors.white, size: 12)
-                                  : null,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              _statusLabels[_statusSteps[i]] ?? '',
-                              style: TextStyle(
-                                fontFamily: AppTextStyles.fontFamily,
-                                fontSize: 9,
-                                fontWeight: isCurrent
-                                    ? FontWeight.w700
-                                    : FontWeight.w400,
-                                color: stepDone
-                                    ? AppColors.primary
-                                    : AppColors.textHint,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (!isLast)
+          // Progress stepper (not shown once a request was rejected or cancelled)
+          if (!item.isRejected) ...[
+            const SizedBox(height: AppSpacing.md),
+            const Divider(height: 1),
+            const SizedBox(height: AppSpacing.sm),
+            const Text('Return Status', style: AppTextStyles.labelLarge),
+            const SizedBox(height: AppSpacing.sm),
+            SizedBox(
+              height: 50,
+              child: Row(
+                children: List.generate(_progressSteps.length, (i) {
+                  final stepDone = i <= currentStep;
+                  final isCurrent = i == currentStep;
+                  final isLast = i == _progressSteps.length - 1;
+                  return Expanded(
+                    child: Row(
+                      children: [
                         Expanded(
-                          child: Container(
-                            height: 2,
-                            margin: const EdgeInsets.only(bottom: 20),
-                            color: i < currentStepIndex
-                                ? AppColors.primary
-                                : AppColors.border,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                width: isCurrent ? 24 : 18,
+                                height: isCurrent ? 24 : 18,
+                                decoration: BoxDecoration(
+                                  color: stepDone
+                                      ? AppColors.primary
+                                      : AppColors.border,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: stepDone
+                                    ? const Icon(Icons.check_rounded,
+                                        color: Colors.white, size: 12)
+                                    : null,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _progressSteps[i],
+                                style: TextStyle(
+                                  fontFamily: AppTextStyles.fontFamily,
+                                  fontSize: 9,
+                                  fontWeight: isCurrent
+                                      ? FontWeight.w700
+                                      : FontWeight.w400,
+                                  color: stepDone
+                                      ? AppColors.primary
+                                      : AppColors.textHint,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
-                    ],
-                  ),
-                );
-              }),
+                        if (!isLast)
+                          Expanded(
+                            child: Container(
+                              height: 2,
+                              margin: const EdgeInsets.only(bottom: 20),
+                              color: i < currentStep
+                                  ? AppColors.primary
+                                  : AppColors.border,
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
             ),
-          ),
+          ],
+
+          // Withdraw a request that nobody has looked at yet
+          if (item.canCancel) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: _cancellingId == item.id ? null : () => _cancel(item),
+                child: _cancellingId == item.id
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Cancel request',
+                        style: TextStyle(color: AppColors.error)),
+              ),
+            ),
+          ],
         ],
       ),
     );

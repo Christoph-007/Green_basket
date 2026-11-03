@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
+import 'package:greenbasket_app/utils/order_status.dart';
 import 'merchant_order_controller.dart';
 import 'merchant_order_detail_screen.dart';
 import '../widgets/merchant_drawer.dart';
@@ -157,7 +158,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                             ),
                           ),
                           const SizedBox(width: 8),
-                          _buildStatusBadge(order.status),
+                          _buildStatusBadge(order.status, order.deliveryType),
                         ],
                       ),
                       const Padding(
@@ -282,98 +283,48 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                   style: AppTextStyles.bodySmall),
                             ],
                           ),
-                          if (order.status == 'pending')
-                            ElevatedButton(
+                          Builder(builder: (_) {
+                            final next = OrderStatusRules.merchantNextStatus(
+                                order.status, order.deliveryType);
+                            final label = OrderStatusRules.merchantActionLabel(
+                                order.status, order.deliveryType);
+                            final shape = RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.full));
+                            if (next == null || label == null) {
+                              return OutlinedButton(
+                                onPressed: () => Get.to(() =>
+                                    MerchantOrderDetailScreen(order: order)),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 0),
+                                  minimumSize: const Size(0, 36),
+                                  shape: shape,
+                                ),
+                                child: const Text('View Details',
+                                    style: TextStyle(fontSize: 12)),
+                              );
+                            }
+                            final isPending = order.status == 'pending';
+                            return ElevatedButton(
                               onPressed: () =>
-                                  controller.updateStatus(order.id, 'confirmed'),
+                                  controller.updateStatus(order.id, next),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
+                                backgroundColor: isPending
+                                    ? AppColors.primary
+                                    : AppColors.success,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 0),
                                 minimumSize: const Size(0, 36),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.full)),
+                                shape: shape,
                               ),
-                              child: const Text('Accept Order',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold)),
-                            )
-                          else if (order.status == 'confirmed' ||
-                              order.status == 'preparing')
-                            ElevatedButton(
-                              onPressed: () =>
-                                  controller.updateStatus(order.id, 'ready'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.success,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 0),
-                                minimumSize: const Size(0, 36),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.full)),
-                              ),
-                              child: Text(
-                                  order.deliveryType == 'pickup'
-                                      ? 'Ready to pick up'
-                                      : 'Mark Ready',
-                                  style: TextStyle(
+                              child: Text(isPending ? 'Accept Order' : label,
+                                  style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white)),
-                            )
-                          else if (order.status == 'ready')
-                            ElevatedButton.icon(
-                              onPressed: null,
-                              icon: const Icon(Icons.check_circle, size: 16),
-                              label: const Text('Ready to pick up',
-                                  style: TextStyle(fontSize: 12)),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.info,
-                                disabledBackgroundColor: AppColors.info.withOpacity(0.8),
-                                disabledForegroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 14, vertical: 0),
-                                minimumSize: const Size(0, 36),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.full)),
-                              ),
-                            )
-                          else if (order.status == 'out-for-delivery' || order.status == 'dispatched')
-                            ElevatedButton.icon(
-                              onPressed: null,
-                              icon: const Icon(Icons.shopping_bag_outlined, size: 16),
-                              label: const Text('Ready to pick up',
-                                  style: TextStyle(fontSize: 12)),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                disabledBackgroundColor: AppColors.primary.withOpacity(0.8),
-                                disabledForegroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 14, vertical: 0),
-                                minimumSize: const Size(0, 36),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.full)),
-                              ),
-                            )
-                          else
-                            OutlinedButton(
-                              onPressed: () => Get.to(
-                                  () => MerchantOrderDetailScreen(order: order)),
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 0),
-                                minimumSize: const Size(0, 36),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(AppRadius.full)),
-                              ),
-                              child: const Text('View Details',
-                                  style: TextStyle(fontSize: 12)),
-                            ),
+                            );
+                          }),
                         ],
                       ),
                     ],
@@ -388,7 +339,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
     });
   }
 
-  Widget _buildStatusBadge(String status) {
+  Widget _buildStatusBadge(String status, String deliveryType) {
     Color bgColor;
     Color textColor;
     String text = status.capitalizeFirst ?? '';
@@ -412,19 +363,25 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
       case 'ready':
         bgColor = AppColors.info.withOpacity(0.1);
         textColor = AppColors.info;
-        text = 'Ready';
+        text = deliveryType == 'pickup'
+            ? 'Ready for Pick up'
+            : 'Ready for Delivery';
         break;
       case 'out-for-delivery':
       case 'dispatched':
         bgColor = AppColors.primary.withOpacity(0.1);
         textColor = AppColors.primary;
-        text = 'Ready to Pick up';
+        text = 'Out for Delivery';
         break;
-      case 'completed':
       case 'delivered':
         bgColor = AppColors.success.withOpacity(0.1);
         textColor = AppColors.success;
         text = 'Delivered';
+        break;
+      case 'completed':
+        bgColor = AppColors.success.withOpacity(0.1);
+        textColor = AppColors.success;
+        text = 'Completed';
         break;
       case 'cancelled':
         bgColor = AppColors.error.withOpacity(0.1);

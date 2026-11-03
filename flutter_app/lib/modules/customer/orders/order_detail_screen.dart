@@ -11,6 +11,7 @@ import '../../../utils/order_status.dart';
 import '../../../widgets/common/gb_app_bar.dart';
 import '../../../widgets/common/gb_loader.dart';
 import '../../../widgets/common/empty_state.dart';
+import 'return_request_sheet.dart';
 import '../../../utils/responsive_helper.dart';
 
 class OrderDetailController extends GetxController {
@@ -39,6 +40,26 @@ class OrderDetailController extends GetxController {
   bool get canCancel =>
       order.value != null &&
       OrderStatusRules.customerCancellable.contains(order.value!.status);
+
+  /// Delivered (or, for pickup, completed) orders can be returned.
+  bool get canReturn =>
+      order.value != null &&
+      (order.value!.status == 'delivered' || order.value!.status == 'completed');
+
+  Future<void> openReturnSheet() async {
+    final current = order.value;
+    if (current == null) return;
+    final submitted = await Get.bottomSheet<bool>(
+      ReturnRequestSheet(order: current),
+      isScrollControlled: true,
+      backgroundColor: AppColors.surface,
+    );
+    if (submitted == true) {
+      Get.snackbar('Return requested', 'We will review it within 24 hours.',
+          snackPosition: SnackPosition.BOTTOM);
+      Get.toNamed(Routes.returns);
+    }
+  }
 
   Future<void> cancelOrder(String reason) async {
     final current = order.value;
@@ -316,6 +337,19 @@ class OrderDetailScreen extends StatelessWidget {
                         minimumSize: const Size(double.infinity, 48),
                       ),
                       child: const Text('Cancel Order'),
+                    ),
+
+                  // Return items from a delivered / completed order
+                  if (ctrl.canReturn)
+                    OutlinedButton.icon(
+                      onPressed: ctrl.openReturnSheet,
+                      icon: const Icon(Icons.assignment_return_outlined),
+                      label: const Text('Return items'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primary,
+                        side: const BorderSide(color: AppColors.primary),
+                        minimumSize: const Size(double.infinity, 48),
+                      ),
                     ),
 
                   const SizedBox(height: 32),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'payouts_controller.dart';
+import 'package:greenbasket_app/modules/merchant/widgets/merchant_bottom_nav.dart';
 
 class PayoutsScreen extends StatelessWidget {
   const PayoutsScreen({super.key});
@@ -12,6 +13,7 @@ class PayoutsScreen extends StatelessWidget {
     final controller = Get.put(PayoutsController());
 
     return Scaffold(
+      bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Payouts'),

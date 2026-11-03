@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import '../../../data/repositories/admin_repository.dart';
 import '../admin_controller.dart';
 import 'create_recipe_screen.dart';
 import 'admin_recipe_detail_screen.dart';
@@ -14,6 +15,7 @@ class AdminRecipesScreen extends StatefulWidget {
 
 class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
   final controller = Get.find<AdminController>();
+  final _repo = AdminRepository();
   final _searchController = TextEditingController();
   final RxString _searchQuery = ''.obs;
 
@@ -33,6 +35,59 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
     if (value is double) return value.toInt();
     if (value is String) return int.tryParse(value) ?? 0;
     return 0;
+  }
+
+  String _recipeId(Map<String, dynamic> recipe) =>
+      (recipe['_id'] ?? recipe['id'] ?? '').toString();
+
+  Future<void> _toggleStatus(Map<String, dynamic> recipe) async {
+    final id = _recipeId(recipe);
+    if (id.isEmpty) return;
+    final publishing = recipe['status']?.toString().toLowerCase() != 'published';
+    try {
+      await _repo.updateRecipe(id, {'status': publishing ? 'published' : 'draft'});
+      await controller.fetchRecipes();
+      Get.snackbar(
+        publishing ? 'Published' : 'Unpublished',
+        publishing
+            ? '${recipe['name']} is now visible to customers.'
+            : '${recipe['name']} is now hidden from customers.',
+        backgroundColor: AppColors.success,
+        colorText: Colors.white,
+      );
+    } catch (_) {
+      Get.snackbar('Error', 'Could not update the recipe. Please try again.',
+          backgroundColor: AppColors.error, colorText: Colors.white);
+    }
+  }
+
+  Future<void> _confirmDelete(Map<String, dynamic> recipe) async {
+    final id = _recipeId(recipe);
+    if (id.isEmpty) return;
+    final confirmed = await Get.dialog<bool>(AlertDialog(
+      title: const Text('Delete recipe?'),
+      content: Text('"${recipe['name']}" will be removed for everyone. This cannot be undone.'),
+      actions: [
+        TextButton(
+          onPressed: () => Get.back(result: false),
+          child: const Text('Keep it'),
+        ),
+        TextButton(
+          onPressed: () => Get.back(result: true),
+          child: const Text('Delete', style: TextStyle(color: AppColors.error)),
+        ),
+      ],
+    ));
+    if (confirmed != true) return;
+    try {
+      await _repo.deleteRecipe(id);
+      await controller.fetchRecipes();
+      Get.snackbar('Deleted', '${recipe['name']} was deleted.',
+          backgroundColor: AppColors.success, colorText: Colors.white);
+    } catch (_) {
+      Get.snackbar('Error', 'Could not delete the recipe. Please try again.',
+          backgroundColor: AppColors.error, colorText: Colors.white);
+    }
   }
 
   void _showRecipeOptions(Map<String, dynamic> recipe) {
@@ -70,18 +125,16 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
               ),
               title: Text(recipe['status']?.toString().toLowerCase() == 'published' ? 'Unpublish' : 'Publish'),
               onTap: () {
-                // TODO: Call API to toggle status
                 Navigator.pop(ctx);
+                _toggleStatus(recipe);
               },
             ),
             ListTile(
               leading: const Icon(Icons.delete_outline, color: AppColors.error),
               title: const Text('Delete Recipe', style: TextStyle(color: AppColors.error)),
               onTap: () {
-                // TODO: Call API to delete recipe
                 Navigator.pop(ctx);
-                Get.snackbar('Deleted', '${recipe['name']} deleted.',
-                    backgroundColor: AppColors.error, colorText: Colors.white);
+                _confirmDelete(recipe);
               },
             ),
             const SizedBox(height: AppSpacing.sm),

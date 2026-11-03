@@ -17,6 +17,11 @@ const MERCHANT_TRANSITIONS = {
     delivered: ['completed']
 };
 
+// Orders that count as fulfilled for revenue, payouts and analytics.
+// Pickup orders go ready -> completed and never become 'delivered', and
+// delivery orders end as 'completed' after 'delivered', so both must count.
+const FULFILLED_STATUSES = ['delivered', 'completed'];
+
 // Customers may cancel until the merchant starts preparing
 const CUSTOMER_CANCELLABLE = ['payment_pending', 'pending', 'confirmed'];
 
@@ -48,6 +53,7 @@ function allowedMerchantNextStatuses(order) {
 }
 
 module.exports = {
+    FULFILLED_STATUSES,
     MERCHANT_TRANSITIONS,
     CUSTOMER_CANCELLABLE,
     ADMIN_CANCELLABLE,

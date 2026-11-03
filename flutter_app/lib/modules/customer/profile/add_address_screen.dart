@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/models/order_model.dart';
@@ -24,6 +26,14 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   bool _isSaving = false;
   bool _isLocating = false;
 
+  // Filled by "Use current location"; only kept while the address text still matches.
+  double? _latitude;
+  double? _longitude;
+  String _detectedText = '';
+
+  String get _currentText =>
+      '${_addressCtrl.text.trim()}|${_cityCtrl.text.trim()}|${_pincodeCtrl.text.trim()}';
+
   final List<String> _labels = ['Home', 'Work', 'Other'];
 
   @override
@@ -35,21 +45,74 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     super.dispose();
   }
 
+  void _showLocationError(String message) {
+    Get.snackbar('Location unavailable', message,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColors.error,
+        colorText: Colors.white);
+  }
+
+  /// Reads the phone's real GPS position and turns it into an address.
   Future<void> _useCurrentLocation() async {
     setState(() => _isLocating = true);
-    // TODO: Integrate location service (geolocator + geocoding)
-    await Future.delayed(const Duration(milliseconds: 1200));
-    setState(() {
-      _isLocating = false;
-      _addressCtrl.text =
-          '42, Sunshine Apartments, MG Road, Bengaluru';
-      _cityCtrl.text = 'Bengaluru';
-      _pincodeCtrl.text = '560001';
-    });
-    Get.snackbar('Location Detected', 'Address filled automatically',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.success,
-        colorText: Colors.white);
+    try {
+      if (!await Geolocator.isLocationServiceEnabled()) {
+        _showLocationError('Turn on location services and try again.');
+        return;
+      }
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        _showLocationError(
+            'Location permission is needed. You can allow it in your phone settings.');
+        return;
+      }
+
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
+      );
+      var places = <Placemark>[];
+      try {
+        places =
+            await placemarkFromCoordinates(position.latitude, position.longitude);
+      } catch (_) {
+        // The position is known but the street lookup failed; the user can type the address.
+      }
+      if (!mounted) return;
+
+      setState(() {
+        if (places.isNotEmpty) {
+          final place = places.first;
+          final street = [place.street, place.subLocality]
+              .where((part) => part != null && part.trim().isNotEmpty)
+              .join(', ');
+          if (street.isNotEmpty) _addressCtrl.text = street;
+          if ((place.locality ?? '').isNotEmpty) _cityCtrl.text = place.locality!;
+          if ((place.postalCode ?? '').isNotEmpty) {
+            _pincodeCtrl.text = place.postalCode!;
+          }
+        }
+        _latitude = position.latitude;
+        _longitude = position.longitude;
+        _detectedText = _currentText;
+      });
+      Get.snackbar(
+          'Location Detected',
+          places.isEmpty
+              ? 'We found where you are but not the street address. Please type it in.'
+              : 'Check the details and edit them if needed',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: AppColors.success,
+          colorText: Colors.white);
+    } catch (_) {
+      _showLocationError(
+          'Could not get your location. Please enter the address yourself.');
+    } finally {
+      if (mounted) setState(() => _isLocating = false);
+    }
   }
 
   Future<void> _save() async {
@@ -65,6 +128,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         state: 'Kerala',
         pincode: _pincodeCtrl.text.trim(),
         isDefault: true,
+        // Only send the GPS point if the user did not retype the address afterwards.
+        latitude: _currentText == _detectedText ? _latitude : null,
+        longitude: _currentText == _detectedText ? _longitude : null,
       );
       await _repo.addAddress(address);
       if (mounted) setState(() => _isSaving = false);

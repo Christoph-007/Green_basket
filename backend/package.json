@@ -11,7 +11,8 @@
     "test": "jest --watchAll",
     "test:run": "jest --no-coverage --forceExit",
     "test:coverage": "jest --coverage --forceExit",
-    "check:api": "node scripts/check-api-contract.js"
+    "check:api": "node scripts/check-api-contract.js && node scripts/check-payload-contract.js",
+    "check:payload": "node scripts/check-payload-contract.js"
   },
   "keywords": [
     "marketplace",

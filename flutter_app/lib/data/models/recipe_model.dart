@@ -14,6 +14,8 @@ class RecipeModel {
   final bool isPublished;
   final double? distance;
   final bool? isNearby;
+  final String? category;
+  final String? mealType;
 
   RecipeModel({
     required this.id,
@@ -31,9 +33,17 @@ class RecipeModel {
     this.isPublished = true,
     this.distance,
     this.isNearby,
+    this.category,
+    this.mealType,
   });
 
   int get totalTime => prepTime + cookTime;
+
+  String get displayMealType {
+    final t = mealType ?? category ?? '';
+    if (t.isEmpty) return '';
+    return t[0].toUpperCase() + t.substring(1).toLowerCase();
+  }
 
   factory RecipeModel.fromJson(Map<String, dynamic> json) {
     return RecipeModel(
@@ -45,6 +55,8 @@ class RecipeModel {
       prepTime: json['prepTime'] ?? 10,
       cookTime: json['cookTime'] ?? 20,
       difficulty: json['difficulty'] ?? 'easy',
+      category: json['category'],
+      mealType: json['mealType'] ?? json['category'],
       ingredients: (json['ingredients'] as List<dynamic>? ?? [])
           .map((e) => RecipeIngredient.fromJson(e))
           .toList(),

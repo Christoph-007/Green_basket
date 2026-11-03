@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import '../../../data/repositories/admin_repository.dart';
+import '../../../data/repositories/auth_repository.dart';
 import '../admin_controller.dart';
 
 class UserDetailScreen extends StatefulWidget {
@@ -43,6 +46,91 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         return AppColors.warning;
       default:
         return AppColors.info;
+    }
+  }
+
+  String _errorMessage(Object error, String fallback) {
+    if (error is DioException) {
+      final body = error.response?.data;
+      final message = body is Map ? (body['message'] ?? body['error']) : null;
+      if (message != null) return message.toString();
+    }
+    return fallback;
+  }
+
+  Future<void> _sendPasswordReset() async {
+    final email = _user['email']?.toString() ?? '';
+    if (email.isEmpty) {
+      Get.snackbar('No email', 'This user has no email address on file.',
+          backgroundColor: AppColors.warning, colorText: Colors.white);
+      return;
+    }
+    try {
+      await AuthRepository().forgotPassword(email);
+      Get.snackbar('Reset code sent', 'A password reset code was emailed to $email.',
+          backgroundColor: AppColors.info, colorText: Colors.white);
+    } catch (e) {
+      Get.snackbar('Could not send', _errorMessage(e, 'Please try again.'),
+          backgroundColor: AppColors.error, colorText: Colors.white);
+    }
+  }
+
+  Future<void> _showSendNotificationDialog() async {
+    final userId = (_user['_id'] ?? _user['id'] ?? '').toString();
+    if (userId.isEmpty) {
+      Get.snackbar('Error', 'This user has no id, so a notification cannot be sent.',
+          backgroundColor: AppColors.error, colorText: Colors.white);
+      return;
+    }
+    final titleCtrl = TextEditingController();
+    final messageCtrl = TextEditingController();
+    final send = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Notify ${_user['name'] ?? 'user'}'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleCtrl,
+              decoration: const InputDecoration(labelText: 'Title'),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            TextField(
+              controller: messageCtrl,
+              maxLines: 3,
+              decoration: const InputDecoration(labelText: 'Message'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              if (titleCtrl.text.trim().isEmpty || messageCtrl.text.trim().isEmpty) return;
+              Navigator.pop(ctx, true);
+            },
+            child: const Text('Send'),
+          ),
+        ],
+      ),
+    );
+    if (send != true) return;
+    try {
+      await AdminRepository().sendNotification({
+        'userIds': [userId],
+        'title': titleCtrl.text.trim(),
+        'message': messageCtrl.text.trim(),
+        'channels': ['inApp', 'push'],
+      });
+      Get.snackbar('Notification sent', 'Sent to ${_user['name'] ?? 'the user'}.',
+          backgroundColor: AppColors.success, colorText: Colors.white);
+    } catch (e) {
+      Get.snackbar('Could not send', _errorMessage(e, 'Please try again.'),
+          backgroundColor: AppColors.error, colorText: Colors.white);
     }
   }
 
@@ -404,30 +492,14 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               icon: Icons.lock_reset,
               label: 'Reset Password',
               color: AppColors.info,
-              onTap: () {
-                // TODO: Call API to trigger password reset email
-                Get.snackbar(
-                  'Reset Sent',
-                  'Password reset email sent to ${_user['email']?.toString() ?? 'user'}.',
-                  backgroundColor: AppColors.info,
-                  colorText: Colors.white,
-                );
-              },
+              onTap: _sendPasswordReset,
             ),
             const SizedBox(height: AppSpacing.sm),
             _actionButton(
               icon: Icons.notifications_outlined,
               label: 'Send Notification',
               color: AppColors.primary,
-              onTap: () {
-                // TODO: Navigate to notification composer with pre-selected user
-                Get.snackbar(
-                  'Notification',
-                  'Notification sent to ${_user['name']}.',
-                  backgroundColor: AppColors.primary,
-                  colorText: Colors.white,
-                );
-              },
+              onTap: _showSendNotificationDialog,
             ),
           ],
         ),

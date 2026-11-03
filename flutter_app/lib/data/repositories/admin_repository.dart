@@ -42,8 +42,14 @@ class AdminRepository {
     return _extractList(data, ['merchants']);
   }
 
-  Future<void> verifyMerchant(String id, bool approved) async {
-    await _api.patch('/admin/merchants/$id/verify', data: {'approved': approved});
+  /// Approve or reject a merchant. The backend reads `status` ('approved' | 'rejected')
+  /// and an optional `rejectionReason` that is shown to the merchant.
+  Future<void> verifyMerchant(String id, bool approved, {String? rejectionReason}) async {
+    await _api.patch('/admin/merchants/$id/verify', data: {
+      'status': approved ? 'approved' : 'rejected',
+      if (!approved && rejectionReason != null && rejectionReason.isNotEmpty)
+        'rejectionReason': rejectionReason,
+    });
   }
 
   Future<void> toggleMerchantBlock(String id) async {

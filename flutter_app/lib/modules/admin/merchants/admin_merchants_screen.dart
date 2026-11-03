@@ -199,6 +199,73 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
     );
   }
 
+  String _merchantId(Map<String, dynamic> merchant) =>
+      (merchant['_id'] ?? merchant['id'] ?? '').toString();
+
+  Future<void> _approve(Map<String, dynamic> merchant) async {
+    final id = _merchantId(merchant);
+    if (id.isEmpty) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Approve merchant?'),
+        content: Text(
+            '${merchant['businessName'] ?? 'This merchant'} will be able to list products and receive orders.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Approve'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true) await controller.verifyMerchant(id, true);
+  }
+
+  Future<void> _reject(Map<String, dynamic> merchant) async {
+    final id = _merchantId(merchant);
+    if (id.isEmpty) return;
+    final reason = await showDialog<String>(
+      context: context,
+      builder: (_) => _RejectReasonDialog(
+          businessName: (merchant['businessName'] ?? 'this merchant').toString()),
+    );
+    if (reason != null && reason.isNotEmpty) {
+      await controller.verifyMerchant(id, false, rejectionReason: reason);
+    }
+  }
+
+  /// Pending merchants can be approved or rejected; a rejected one can still be approved.
+  Widget _buildDecisionButtons(Map<String, dynamic> merchant, String status) {
+    return Row(
+      children: [
+        if (status == 'Pending') ...[
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () => _reject(merchant),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.error,
+                side: const BorderSide(color: AppColors.error),
+              ),
+              child: const Text('Reject'),
+            ),
+          ),
+          const SizedBox(width: 12),
+        ],
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () => _approve(merchant),
+            child: const Text('Approve'),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildMerchantCard(Map<String, dynamic> merchant) {
     final businessName = merchant['businessName'] ?? 'Unknown';
     final email = merchant['email'] ?? 'No email';
@@ -235,49 +302,103 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [BoxShadow(color: Color(0x201F5C35), blurRadius: 18, offset: Offset(0, 6))],
           ),
-          child: Row(
+          child: Column(
             children: [
-              Container(
-                height: 44,
-                width: 44,
-                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
-                alignment: Alignment.center,
-                child: Text(businessName.isNotEmpty ? businessName[0] : 'M',
-                    style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 18)),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(businessName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
-                    const SizedBox(height: 2),
-                    Text(email, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(999)),
-                child: Text(status,
-                    style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.w500)),
-              ),
-              if (merchant['isStoreOpen'] == false) ...[
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(999),
+              Row(
+                children: [
+                  Container(
+                    height: 44,
+                    width: 44,
+                    decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
+                    alignment: Alignment.center,
+                    child: Text(businessName.isNotEmpty ? businessName[0] : 'M',
+                        style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 18)),
                   ),
-                  child: const Text('CLOSED',
-                      style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.bold)),
-                ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(businessName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                        const SizedBox(height: 2),
+                        Text(email, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(999)),
+                    child: Text(status,
+                        style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.w500)),
+                  ),
+                  if (merchant['isStoreOpen'] == false) ...[
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: const Text('CLOSED',
+                          style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ],
+              ),
+              if (status != 'Active') ...[
+                const SizedBox(height: 12),
+                _buildDecisionButtons(merchant, status),
               ],
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _RejectReasonDialog extends StatefulWidget {
+  final String businessName;
+  const _RejectReasonDialog({required this.businessName});
+
+  @override
+  State<_RejectReasonDialog> createState() => _RejectReasonDialogState();
+}
+
+class _RejectReasonDialogState extends State<_RejectReasonDialog> {
+  final _reasonCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _reasonCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Reject ${widget.businessName}?'),
+      content: TextField(
+        controller: _reasonCtrl,
+        maxLines: 3,
+        decoration: const InputDecoration(
+          labelText: 'Reason (shown to the merchant)',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            final reason = _reasonCtrl.text.trim();
+            if (reason.isEmpty) return;
+            Navigator.pop(context, reason);
+          },
+          child: const Text('Reject', style: TextStyle(color: AppColors.error)),
+        ),
+      ],
     );
   }
 }

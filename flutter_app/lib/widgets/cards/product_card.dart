@@ -143,6 +143,35 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                 ),
+
+              // Closed badge
+              if (!product.isStoreOpen)
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(AppRadius.md)),
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.error,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          'STORE CLOSED',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
 
@@ -280,34 +309,6 @@ class ProductCard extends StatelessWidget {
                         ),
                     ],
                   ),
-                  // Closed badge
-                  if (!product.isStoreOpen)
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.4),
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(AppRadius.md)),
-                        ),
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: AppColors.error,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              'STORE CLOSED',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ),

@@ -10,6 +10,7 @@ import '../offers/offer_analytics_screen.dart';
 import '../offers/offers_screen.dart';
 import '../settings/store_settings_screen.dart';
 import '../orders/merchant_disputes_screen.dart';
+import '../merchant_nav_controller.dart';
 
 class MerchantDrawer extends StatelessWidget {
   const MerchantDrawer({super.key});
@@ -41,11 +42,12 @@ class MerchantDrawer extends StatelessWidget {
                   ),
                 ),
                 _drawerGroup('Orders & Products'),
-                _drawerItem(Icons.list_alt, 'View Orders', () => Get.toNamed(Routes.merchantOrders)),
+                _drawerItem(Icons.home_outlined, 'Home', () => MerchantNavController.goTo(0)),
+                _drawerItem(Icons.list_alt, 'View Orders', () => MerchantNavController.goTo(1)),
                 _drawerItem(Icons.gavel_outlined, 'Disputes', () => Get.to(() => const MerchantDisputesScreen())),
                 _drawerItem(Icons.add_box, 'Add Product', () => Get.toNamed(Routes.merchantAddProduct)),
                 _drawerItem(Icons.upload_file, 'Bulk Upload', () => Get.toNamed(Routes.merchantBulkUpload)),
-                _drawerItem(Icons.edit, 'Inventory', () => Get.toNamed(Routes.merchantProducts)),
+                _drawerItem(Icons.edit, 'Inventory', () => MerchantNavController.goTo(2)),
 
                 _drawerGroup('Finance & Analytics'),
                 _drawerItem(Icons.account_balance_wallet, 'Financial', () => Get.to(() => const FinancialScreen())),

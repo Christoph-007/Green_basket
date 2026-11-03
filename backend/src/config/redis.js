@@ -7,8 +7,7 @@ const redisClient = new Redis(process.env.REDIS_URL || 'redis://localhost:6379',
         return delay;
     },
     // Don't crash if Redis is unavailable, just log error
-    lazyConnect: true // If true, ioredis will not connect automatically until a command is sent. But usually we want explicit connection handling.
-    // Actually, ioredis connects automatically by default. Let's keep it simple.
+    lazyConnect: true // do not connect until the first command is sent
 });
 
 redisClient.on('error', (err) => {

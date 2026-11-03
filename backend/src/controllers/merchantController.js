@@ -162,7 +162,7 @@ exports.getDashboardStats = async (req, res) => {
                         _id: '$status',
                         count: { $sum: 1 },
                         revenue: {
-                            $sum: { $cond: [{ $eq: ['$status', 'delivered'] }, '$totalAmount', 0] }
+                            $sum: { $cond: [{ $in: ['$status', ['delivered', 'completed']] }, '$totalAmount', 0] }
                         }
                     }
                 }
@@ -174,7 +174,7 @@ exports.getDashboardStats = async (req, res) => {
                         _id: null,
                         todayOrders: { $sum: 1 },
                         todayRevenue: {
-                            $sum: { $cond: [{ $eq: ['$status', 'delivered'] }, '$totalAmount', 0] }
+                            $sum: { $cond: [{ $in: ['$status', ['delivered', 'completed']] }, '$totalAmount', 0] }
                         }
                     }
                 }
@@ -200,7 +200,7 @@ exports.getDashboardStats = async (req, res) => {
             else if (curr._id === 'confirmed') acc.confirmed += curr.count;
             else if (curr._id === 'ready') acc.processing += curr.count;
             else if (curr._id === 'out-for-delivery') acc.shipped += curr.count;
-            else if (curr._id === 'delivered') { acc.delivered += curr.count; acc.totalRevenue = curr.revenue; }
+            else if (curr._id === 'delivered' || curr._id === 'completed') { acc.delivered += curr.count; acc.totalRevenue += curr.revenue; }
             else if (curr._id === 'cancelled' || curr._id === 'refunded') acc.cancelled += curr.count;
             return acc;
         }, {

@@ -5,10 +5,19 @@ const recipeCalculator = require('../services/recipeCalculator');
 // Get All Recipes
 exports.getAllRecipes = async (req, res) => {
     try {
-        const { page = 1, limit = 12, category, cuisine, difficulty, search, lat, lng, radius } = req.query;
+        const { page = 1, limit = 12, category, mealType, cuisine, difficulty, search, lat, lng, radius } = req.query;
+        const pageNum = Math.max(1, parseInt(page, 10) || 1);
+        const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 12));
 
         const query = { status: 'published' };
-        if (category) query.category = category;
+        const timing = (mealType || category || '').toLowerCase();
+        if (timing && timing !== 'all') {
+            const timingVariants = timing.startsWith('snack') ? ['snack', 'snacks'] : [timing];
+            query.$or = [
+                { category: { $in: timingVariants } },
+                { mealType: { $in: timingVariants } }
+            ];
+        }
         if (cuisine) query.cuisine = cuisine;
         if (difficulty) query.difficulty = difficulty;
         if (search) {
@@ -21,28 +30,28 @@ exports.getAllRecipes = async (req, res) => {
                 populate: { path: 'merchant', select: 'location' }
             })
             .sort({ createdAt: -1 })
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
+            .limit(limitNum)
+            .skip((pageNum - 1) * limitNum)
             .lean();
 
         const { haversineKm } = require('../utils/haversine');
+        const originLat = parseFloat(lat);
+        const originLng = parseFloat(lng);
+        const radiusKm = parseFloat(radius);
         const recipesWithDistance = recipes.map(r => {
             let distance = null;
-            if (lat && lng && r.ingredients && r.ingredients.length > 0) {
+            if (Number.isFinite(originLat) && Number.isFinite(originLng) && r.ingredients && r.ingredients.length > 0) {
                 const p = r.ingredients[0].product;
-                if (p && p.merchant && p.merchant.location) {
-                    distance = haversineKm(
-                        parseFloat(lat),
-                        parseFloat(lng),
-                        p.merchant.location.coordinates[1],
-                        p.merchant.location.coordinates[0]
-                    );
+                const coords = p && p.merchant && p.merchant.location && p.merchant.location.coordinates;
+                if (Array.isArray(coords) && coords.length === 2) {
+                    distance = haversineKm(originLat, originLng, coords[1], coords[0]);
                 }
             }
             return {
                 ...r,
-                distance: distance ? Math.round(distance * 10) / 10 : null,
-                isNearby: radius ? (distance <= parseFloat(radius)) : true
+                distance: distance !== null ? Math.round(distance * 10) / 10 : null,
+                // A recipe whose location is unknown is not flagged as far away.
+                isNearby: Number.isFinite(radiusKm) && distance !== null ? distance <= radiusKm : true
             };
         });
 
@@ -53,10 +62,10 @@ exports.getAllRecipes = async (req, res) => {
             data: {
                 recipes: recipesWithDistance,
                 pagination: {
-                    page: parseInt(page),
-                    limit: parseInt(limit),
+                    page: pageNum,
+                    limit: limitNum,
                     total,
-                    pages: Math.ceil(total / limit)
+                    pages: Math.ceil(total / limitNum)
                 }
             }
         });
@@ -339,8 +348,7 @@ exports.createRecipe = async (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Error creating recipe',
-            error: error.message,
-            stack: error.stack
+            error: error.message
         });
     }
 };
@@ -349,9 +357,14 @@ exports.createRecipe = async (req, res) => {
 exports.updateRecipe = async (req, res) => {
     try {
         const { id } = req.params;
-        const updates = req.body;
+        const updates = { ...req.body };
 
-        const recipe = await Recipe.findByIdAndUpdate(id, updates, { new: true });
+        // findByIdAndUpdate skips the model's save hook, so keep category and mealType
+        // in step here; otherwise an edited recipe would stay under its old meal.
+        if (updates.category && !updates.mealType) updates.mealType = updates.category;
+        else if (updates.mealType && !updates.category) updates.category = updates.mealType;
+
+        const recipe = await Recipe.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
 
         if (!recipe) {
             return res.status(404).json({
@@ -366,9 +379,9 @@ exports.updateRecipe = async (req, res) => {
             data: { recipe }
         });
     } catch (error) {
-        res.status(500).json({
+        res.status(error.name === 'ValidationError' ? 400 : 500).json({
             success: false,
-            message: 'Error updating recipe',
+            message: error.name === 'ValidationError' ? 'Invalid recipe data' : 'Error updating recipe',
             error: error.message
         });
     }

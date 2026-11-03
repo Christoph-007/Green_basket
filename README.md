@@ -16,7 +16,7 @@ API with real-time updates.
 
 ## Tech stack
 
-- **App:** Flutter (Dart 3.10), GetX for state/routing/DI, Dio, Socket.IO client, Razorpay SDK, Firebase Messaging, Google Maps
+- **App:** Flutter (Dart 3.10), GetX for state/routing/DI, Dio, Socket.IO client, Razorpay SDK, Firebase Messaging, Geolocator/Geocoding
 - **API:** Node.js 18+, Express 4, MongoDB with Mongoose 8, Socket.IO, JWT auth (access + refresh tokens)
 - **Integrations:** Razorpay (orders, verification, webhook, refunds), Cloudinary (images), SendGrid (email), Twilio (SMS), Firebase Cloud Messaging (push)
 - **Testing:** Jest + Supertest against a real in-memory MongoDB, Flutter test
@@ -34,8 +34,8 @@ flowchart LR
     Cron["Expiry job (every 5 min)"] --> API
 ```
 
-About 20k lines of backend JavaScript (24 models, 26 controllers) and 40k
-lines of Dart (68 screens).
+About 21k lines of backend JavaScript (24 models, 26 controllers) and 41k
+lines of Dart (79 screens).
 
 ## Engineering highlights
 
@@ -70,8 +70,11 @@ The parts that needed the most care, and the tests that cover them:
   ([`utils/orderStatus.js`](backend/src/utils/orderStatus.js), [`order_status.dart`](flutter_app/lib/utils/order_status.dart))
 - **The app and API can't drift apart.** `npm run check:api` checks every
   HTTP call in the Flutter code against the routes the backend actually
-  serves. An integration test drives the app's real repositories against a
-  seeded backend.
+  serves, and that every body/query key the app sends is one the handler
+  actually reads (so a renamed field fails the build instead of failing
+  quietly on a phone). Both checks also run inside `npm run test:run`. An
+  integration test drives the app's real repositories against a seeded
+  backend.
 
 ## Repository layout
 
@@ -107,14 +110,24 @@ See [`flutter_app/README.md`](flutter_app/README.md) for iOS simulator and devic
 ## Tests
 
 ```bash
-cd backend && npm run test:run     # 287 tests, real in-memory MongoDB
-cd backend && npm run check:api    # every app API call matches a backend route
-cd flutter_app && flutter test     # status-rule tests (+ integration test, see below)
+cd backend && npm run test:run     # 357 tests, real in-memory MongoDB
+cd backend && npm run check:api    # every app call matches a backend route, and every key it sends is read
+cd flutter_app && flutter test     # status rules, token-refresh logic (+ integration test, see below)
 ```
 
 The Flutter ↔ backend integration test (`flutter_app/test/api_integration_test.dart`)
 runs against a seeded local backend. The steps are in
 [`flutter_app/README.md`](flutter_app/README.md#tests).
+
+## Known limitations
+
+Honest list of what is not built yet, so nothing in the app pretends otherwise:
+
+- **Photo upload** is not implemented in the app (product, recipe and profile photos). The backend already accepts product images (`multipart`, field `images`); the app screens say "coming soon" instead of faking it.
+- **Scheduled notifications** are not implemented; "Send now" works.
+- **Tapping a push notification** does not navigate to the related screen yet.
+- **Android push** needs `google-services.json` (see `flutter_app/README.md`); iOS is configured.
+- **Exchanges**: the app raises returns (refund to wallet); the backend also models exchanges, which the app does not offer yet.
 
 ## Documentation
 

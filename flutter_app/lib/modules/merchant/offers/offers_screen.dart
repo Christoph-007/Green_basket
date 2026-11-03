@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'offers_controller.dart';
+import 'package:greenbasket_app/modules/merchant/widgets/merchant_bottom_nav.dart';
 
 class OffersScreen extends StatefulWidget {
   const OffersScreen({super.key});
@@ -59,6 +60,7 @@ class _OffersScreenState extends State<OffersScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Offers & Discounts'),

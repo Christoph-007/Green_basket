@@ -28,7 +28,6 @@ import 'modules/customer/orders/order_detail_screen.dart';
 import 'modules/customer/orders/order_list_screen.dart';
 import 'modules/customer/orders/order_success_screen.dart';
 import 'modules/customer/orders/order_tracking_screen.dart';
-import 'modules/customer/orders/review_screen.dart';
 import 'modules/customer/profile/wallet_screen.dart';
 import 'modules/customer/profile/loyalty_screen.dart';
 import 'modules/customer/profile/wishlist_screen.dart';
@@ -132,7 +131,6 @@ class App extends StatelessWidget {
         GetPage(name: Routes.orderDetail, page: () => const OrderDetailScreen()),
         GetPage(name: Routes.orderSuccess, page: () => const OrderSuccessScreen()),
         GetPage(name: Routes.orderTracking, page: () => const OrderTrackingScreen()),
-        GetPage(name: Routes.reviewOrder, page: () => const ReviewScreen()),
         GetPage(name: Routes.wallet, page: () => const WalletScreen()),
         GetPage(name: Routes.loyalty, page: () => const LoyaltyScreen()),
         GetPage(name: Routes.wishlist, page: () => const WishlistScreen()),

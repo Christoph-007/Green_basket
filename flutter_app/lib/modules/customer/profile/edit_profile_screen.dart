@@ -167,9 +167,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             bottom: 0,
                             right: 0,
                             child: GestureDetector(
-                              onTap: () {
-                                // TODO: Launch image picker
-                              },
+                              onTap: () => Get.snackbar('Not available yet',
+                                  'Changing your profile photo is coming soon.',
+                                  snackPosition: SnackPosition.BOTTOM),
                               child: Container(
                                 width: 28,
                                 height: 28,

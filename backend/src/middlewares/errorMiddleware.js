@@ -12,7 +12,8 @@ exports.errorHandler = (err, req, res, next) => {
     res.status(statusCode).json({
         success: false,
         message: err.message,
-        stack: process.env.NODE_ENV === 'production' ? undefined : err.stack
+        // Only show stack traces on a developer's machine; an unset NODE_ENV must not leak them.
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
     });
 };
 

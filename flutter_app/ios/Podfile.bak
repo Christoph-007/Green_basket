@@ -1,0 +1,79 @@
+platform :ios, '14.0'
+
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+  end
+
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT\=(.*)/)
+    return matches[1].strip if matches
+  end
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+
+flutter_ios_podfile_setup
+
+target 'Runner' do
+  use_frameworks!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+      config.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
+    end
+  end
+
+  # Fix: native assets configuration.
+  # Instead of forcing iphoneos globally, we let Xcode handle the SDKROOT.
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # Support arm64 simulator (Apple Silicon)
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
+      # Remove arch exclusions that prevent arm64 builds for simulator
+      config.build_settings.delete('EXCLUDED_ARCHS[sdk=iphonesimulator*]')
+    end
+  end
+
+  installer.aggregate_targets.each do |aggregate_target|
+    aggregate_target.user_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
+        config.build_settings.delete('EXCLUDED_ARCHS[sdk=iphonesimulator*]')
+        # Ensure native assets are included correctly without stripping during debug
+        config.build_settings['STRIP_INSTALLED_PRODUCT'] = 'NO'
+      end
+    end
+    aggregate_target.user_project.save
+  end
+
+  frameworks_script = File.join(__dir__, 'Pods', 'Target Support Files', 'Pods-Runner', 'Pods-Runner-frameworks.sh')
+  if File.exist?(frameworks_script)
+    content = File.read(frameworks_script)
+    unless content.include?('xattr -cr "$1"')
+      content.gsub!(/code_sign_if_enabled\(\) \{/, "code_sign_if_enabled() {\n  xattr -cr \"$1\" 2>/dev/null || true")
+      File.write(frameworks_script, content)
+    end
+  end
+end

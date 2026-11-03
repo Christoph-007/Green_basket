@@ -26,10 +26,6 @@ class WishlistScreen extends StatelessWidget {
       body: Obx(() {
         if (ctrl.isLoading.value) return const GBLoader();
         
-        // Fetch products for the IDs in wishlist
-        // Note: WishlistController only knows IDs. We need ProductRepository to get details.
-        // Actually, the backend getWishlist returns full products.
-        // Let's update WishlistController to store ProductModels.
         return _WishlistGrid();
       }),
     );

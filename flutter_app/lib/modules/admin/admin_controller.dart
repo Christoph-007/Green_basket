@@ -182,9 +182,9 @@ class AdminController extends GetxController {
     }
   }
 
-  Future<void> verifyMerchant(String id, bool approved) async {
+  Future<void> verifyMerchant(String id, bool approved, {String? rejectionReason}) async {
     try {
-      await _repo.verifyMerchant(id, approved);
+      await _repo.verifyMerchant(id, approved, rejectionReason: rejectionReason);
       Get.snackbar('Success', approved ? 'Merchant Approved' : 'Merchant Rejected',
           backgroundColor: approved ? Get.theme.primaryColor : Get.theme.colorScheme.error,
           colorText: Get.theme.colorScheme.onPrimary);

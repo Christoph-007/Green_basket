@@ -25,10 +25,17 @@ class MerchantOrderController extends GetxController {
       final all = await _repo.getMerchantOrders();
 
       pendingOrders.assignAll(all.where((o) => o.status == 'pending'));
-      preparingOrders.assignAll(
-          all.where((o) => ['confirmed', 'preparing', 'ready', 'out-for-delivery', 'dispatched'].contains(o.status)));
-      completedOrders.assignAll(
-          all.where((o) => o.status == 'delivered' || o.status == 'completed'));
+      // Anything not yet completed stays in Pending / Preparing
+      // (accepted, preparing, ready, out for delivery, delivered-awaiting-completion).
+      preparingOrders.assignAll(all.where((o) => [
+            'confirmed',
+            'preparing',
+            'ready',
+            'out-for-delivery',
+            'dispatched',
+            'delivered'
+          ].contains(o.status)));
+      completedOrders.assignAll(all.where((o) => o.status == 'completed'));
       cancelledOrders.assignAll(
           all.where((o) => o.status == 'cancelled' || o.status == 'refunded'));
     } catch (e) {

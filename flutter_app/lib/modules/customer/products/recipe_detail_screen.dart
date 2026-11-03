@@ -248,6 +248,8 @@ class RecipeDetailScreen extends StatelessWidget {
                           spacing: AppSpacing.sm,
                           runSpacing: AppSpacing.sm,
                           children: [
+                            if (recipe.displayMealType.isNotEmpty)
+                              _MetaChip(icon: Icons.restaurant_menu_rounded, label: recipe.displayMealType, color: AppColors.primary),
                             _MetaChip(icon: Icons.access_time_rounded, label: '${recipe.totalTime} min', color: AppColors.primary),
                             _MetaChip(icon: Icons.bar_chart_rounded, label: recipe.difficulty, color: _getDifficultyColor(recipe.difficulty)),
                             _MetaChip(icon: Icons.people_outline_rounded, label: '${ctrl.servings.value} servings', color: AppColors.secondary),

@@ -53,7 +53,7 @@ function readBackendRoutes() {
             }
         }
     }
-    return { routes, mountedFiles: new Set(mounts.map(m => m.file)) };
+    return { routes, mountedFiles: new Set(mounts.map(m => m.file)), mounts };
 }
 
 function join(prefix, p) {
@@ -141,4 +141,4 @@ if (require.main === module) {
     process.exit(result.missing.length ? 1 : 0);
 }
 
-module.exports = { check };
+module.exports = { check, readBackendRoutes, readFlutterCalls, segmentsMatch, join, walk, BACKEND, FLUTTER_LIB };

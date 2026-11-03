@@ -105,25 +105,33 @@ exports.deleteReview = async (req, res) => {
     }
 };
 
+// Orders a customer may review once the merchant has handed them over:
+// delivery orders end at "delivered" (then "completed"), pickup orders end at "completed".
+const REVIEWABLE_STATUSES = ['delivered', 'completed'];
+const MAX_COMMENT_LENGTH = 500;
+
 exports.addReview = async (req, res) => {
     try {
         const { productId, merchantId, orderId, rating, comment, images } = req.body;
+        const mongoose = require('mongoose');
 
         // Validation
-        if (!rating || rating < 1 || rating > 5) {
+        const numericRating = Number(rating);
+        if (!Number.isInteger(numericRating) || numericRating < 1 || numericRating > 5) {
             return res.status(400).json({
                 success: false,
-                error: 'Rating must be between 1 and 5'
+                error: 'Rating must be a whole number between 1 and 5'
             });
         }
 
-        if (!comment || comment.trim().length < 5) {
+        // The comment is optional; when given it only has to fit the stored limit.
+        const cleanComment = typeof comment === 'string' ? comment.trim() : '';
+        if (cleanComment.length > MAX_COMMENT_LENGTH) {
             return res.status(400).json({
                 success: false,
-                error: 'Comment must be at least 5 characters long'
+                error: `Comment must be at most ${MAX_COMMENT_LENGTH} characters long`
             });
         }
-
 
         if (!productId && !merchantId) {
             return res.status(400).json({
@@ -132,39 +140,47 @@ exports.addReview = async (req, res) => {
             });
         }
 
-        // Verify user has a delivered order for this product/merchant
+        for (const [name, value] of Object.entries({ productId, merchantId, orderId })) {
+            if (value && !mongoose.Types.ObjectId.isValid(value)) {
+                return res.status(400).json({ success: false, error: `Invalid ${name}` });
+            }
+        }
+
+        // Find the customer's orders that can be reviewed for this product/merchant
         const Order = require('../models/Order');
         const orderQuery = {
             customer: req.user._id,
-            status: 'delivered'
+            status: { $in: REVIEWABLE_STATUSES }
         };
 
         if (productId) orderQuery['items.product'] = productId;
         if (merchantId) orderQuery.merchant = merchantId;
         if (orderId) orderQuery._id = orderId;
 
-        const eligibleOrder = await Order.findOne(orderQuery);
+        const candidateOrders = await Order.find(orderQuery).sort({ createdAt: -1 }).limit(50);
 
-        if (!eligibleOrder) {
+        if (candidateOrders.length === 0) {
             return res.status(403).json({
                 success: false,
-                error: 'You can only review products or merchants from your delivered orders'
+                error: 'You can only review products or merchants from your delivered or completed orders'
             });
         }
 
-        // Check for existing review to prevent duplicates
+        // One review per order (per product, for product reviews). Orders from the
+        // same merchant can each be reviewed; only a repeat for the same order is refused.
         const Review = require('../models/Review');
-        const existingQuery = { customer: req.user._id };
+        const alreadyReviewed = await Review.find({
+            customer: req.user._id,
+            order: { $in: candidateOrders.map(o => o._id) },
+            product: productId || null
+        }, 'order');
+        const reviewedOrderIds = new Set(alreadyReviewed.map(r => r.order.toString()));
+        const eligibleOrder = candidateOrders.find(o => !reviewedOrderIds.has(o._id.toString()));
 
-        if (productId) existingQuery.product = productId;
-        if (merchantId) existingQuery.merchant = merchantId;
-
-        const existingReview = await Review.findOne(existingQuery);
-
-        if (existingReview) {
+        if (!eligibleOrder) {
             return res.status(400).json({
                 success: false,
-                error: 'You have already submitted a review for this item. You can edit your existing review.'
+                error: 'You have already reviewed this order.'
             });
         }
 
@@ -174,8 +190,8 @@ exports.addReview = async (req, res) => {
             product: productId || undefined,
             merchant: merchantId || eligibleOrder.merchant,
             order: eligibleOrder._id,
-            rating: parseInt(rating),
-            comment: comment.trim(),
+            rating: numericRating,
+            comment: cleanComment || undefined,
             images: images || []
         });
 
@@ -202,7 +218,7 @@ exports.addReview = async (req, res) => {
                 totalReviews: allMerchantReviews.length
             });
 
-            // Ensure all products in this order reflect this rating too 
+            // Ensure all products in this order reflect this rating too
             if (!productId && eligibleOrder.items && eligibleOrder.items.length > 0) {
                 const Product = require('../models/Product');
                 // Use a Set to avoid updating same product multiple times if they bought multiple of it
@@ -211,7 +227,7 @@ exports.addReview = async (req, res) => {
                     const prod = await Product.findById(pId);
                     if (prod) {
                         const newTotal = (prod.totalReviews || 0) + 1;
-                        const newAvg = ((prod.averageRating || 0) * (prod.totalReviews || 0) + parseInt(rating)) / newTotal;
+                        const newAvg = ((prod.averageRating || 0) * (prod.totalReviews || 0) + numericRating) / newTotal;
                         await Product.findByIdAndUpdate(pId, {
                             averageRating: parseFloat(newAvg.toFixed(1)),
                             totalReviews: newTotal
@@ -220,10 +236,6 @@ exports.addReview = async (req, res) => {
                 }
             }
         }
-
-
-
-
 
         await review.populate('customer', 'name');
 
@@ -357,8 +369,8 @@ exports.updateReview = async (req, res) => {
         }
 
         if (comment !== undefined) {
-            if (comment.trim().length < 5) {
-                return res.status(400).json({ success: false, error: 'Comment must be at least 5 characters' });
+            if (comment.trim().length > MAX_COMMENT_LENGTH) {
+                return res.status(400).json({ success: false, error: `Comment must be at most ${MAX_COMMENT_LENGTH} characters long` });
             }
             review.comment = comment.trim();
         }

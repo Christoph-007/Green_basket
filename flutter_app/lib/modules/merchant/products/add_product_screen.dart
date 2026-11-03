@@ -36,7 +36,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _tagsController = TextEditingController();
   final _keywordsController = TextEditingController();
   final List<String> _tags = [];
-  final List<bool> _imageSlots = [false, false, false];
 
   // Step 4: Preparation
   final List<Map<String, dynamic>> _preparationOptions = [];
@@ -534,62 +533,29 @@ class _AddProductScreenState extends State<AddProductScreen> {
       child: Padding(
         padding: EdgeInsets.only(right: index < 2 ? AppSpacing.sm : 0),
         child: GestureDetector(
-          onTap: () {
-            setState(() => _imageSlots[index] = true);
-          },
+          // Photo upload is not built yet; say so instead of pretending a photo was added.
+          onTap: () => Get.snackbar('Photos not available yet',
+                'Photo upload is coming soon. For now, products are saved without photos.',
+                snackPosition: SnackPosition.BOTTOM),
           child: Container(
             height: 100,
             decoration: BoxDecoration(
-              color: _imageSlots[index]
-                  ? AppColors.primaryContainer
-                  : AppColors.surface,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppRadius.md),
-              border: Border.all(
-                color: _imageSlots[index]
-                    ? AppColors.primary
-                    : AppColors.border,
-                width: _imageSlots[index] ? 1.5 : 1,
-              ),
+              border: Border.all(color: AppColors.border),
             ),
-            child: _imageSlots[index]
-                ? Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      const Center(
-                        child: Icon(Icons.image,
-                            color: AppColors.primary, size: 36),
-                      ),
-                      Positioned(
-                        top: 4,
-                        right: 4,
-                        child: GestureDetector(
-                          onTap: () =>
-                              setState(() => _imageSlots[index] = false),
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                              color: AppColors.error,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(Icons.close,
-                                color: Colors.white, size: 12),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add_photo_alternate_outlined,
-                          color: AppColors.textHint, size: 28),
-                      const SizedBox(height: AppSpacing.xs),
-                      Text(
-                        index == 0 ? 'Main Photo' : 'Photo ${index + 1}',
-                        style: AppTextStyles.labelSmall,
-                      ),
-                    ],
-                  ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.add_photo_alternate_outlined,
+                    color: AppColors.textHint, size: 28),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  index == 0 ? 'Main Photo' : 'Photo ${index + 1}',
+                  style: AppTextStyles.labelSmall,
+                ),
+              ],
+            ),
           ),
         ),
       ),

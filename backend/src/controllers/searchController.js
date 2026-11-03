@@ -1,6 +1,7 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
 const Order = require('../models/Order');
+const { FULFILLED_STATUSES } = require('../utils/orderStatus');
 
 /**
  * @desc    Advanced product search
@@ -185,7 +186,7 @@ exports.getTrendingProducts = async (req, res) => {
         const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
         const matchStage = {
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: sevenDaysAgo }
         };
 

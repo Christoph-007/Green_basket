@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -60,7 +61,8 @@ class OrderListController extends GetxController {
     } catch (_) {}
   }
 
-  Future<bool> submitReview({
+  /// Returns null when the review was saved, otherwise the reason to show the user.
+  Future<String?> submitReview({
     required String orderId,
     required String merchantId,
     required int rating,
@@ -74,10 +76,15 @@ class OrderListController extends GetxController {
         comment: comment,
       );
       reviewedOrders[orderId] = rating;
-      return true;
+      return null;
+    } on DioException catch (e) {
+      debugPrint('submitReview error: ${e.response?.data ?? e.message}');
+      final body = e.response?.data;
+      final reason = body is Map ? (body['error'] ?? body['message']) : null;
+      return reason?.toString() ?? 'Could not reach the server. Please try again.';
     } catch (e) {
       debugPrint('submitReview error: $e');
-      return false;
+      return 'Something went wrong. Please try again.';
     }
   }
 }
@@ -290,15 +297,12 @@ class _OrderCard extends StatelessWidget {
                         ? null
                         : () async {
                             setState(() => isSubmitting = true);
-                            final comment =
-                                commentCtrl.text.trim().isEmpty
-                                    ? 'Good experience!'
-                                    : commentCtrl.text.trim();
+                            final comment = commentCtrl.text.trim();
                             final merchantId = order.merchantId ??
                                 (order.items.isNotEmpty
                                     ? order.items.first.merchantId
                                     : '');
-                            final success = await ctrl.submitReview(
+                            final error = await ctrl.submitReview(
                               orderId: order.id,
                               merchantId: merchantId,
                               rating: selectedRating,
@@ -306,7 +310,7 @@ class _OrderCard extends StatelessWidget {
                             );
                             setState(() => isSubmitting = false);
                             if (ctx.mounted) Navigator.pop(ctx);
-                            if (success) {
+                            if (error == null) {
                               Get.snackbar(
                                 'Review Submitted ⭐',
                                 'Thank you for your feedback!',
@@ -318,7 +322,7 @@ class _OrderCard extends StatelessWidget {
                             } else {
                               Get.snackbar(
                                 'Could Not Submit',
-                                'You may have already reviewed this order.',
+                                error,
                                 backgroundColor: AppColors.error,
                                 colorText: Colors.white,
                                 margin: const EdgeInsets.all(12),

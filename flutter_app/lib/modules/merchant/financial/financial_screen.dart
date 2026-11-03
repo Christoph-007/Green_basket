@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'financial_controller.dart';
+import 'package:greenbasket_app/modules/merchant/widgets/merchant_bottom_nav.dart';
 
 class FinancialScreen extends StatefulWidget {
   const FinancialScreen({super.key});
@@ -46,6 +47,7 @@ class _FinancialScreenState extends State<FinancialScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Financial Summary'),

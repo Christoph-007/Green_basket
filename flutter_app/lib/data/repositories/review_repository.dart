@@ -3,18 +3,18 @@ import '../providers/api_provider.dart';
 class ReviewRepository {
   final _api = ApiProvider();
 
-  /// Customer: submit a merchant review for a delivered order
+  /// Customer: review the merchant of a delivered or completed order (comment optional)
   Future<Map<String, dynamic>> addMerchantReview({
     required String merchantId,
     required String orderId,
     required int rating,
-    required String comment,
+    String comment = '',
   }) async {
     final response = await _api.post('/reviews', data: {
       'merchantId': merchantId,
       'orderId': orderId,
       'rating': rating,
-      'comment': comment,
+      if (comment.isNotEmpty) 'comment': comment,
     });
     return response.data as Map<String, dynamic>;
   }

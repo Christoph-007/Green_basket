@@ -19,7 +19,7 @@ const resolveCategoryId = async (category) => {
 
 exports.getAllProducts = async (req, res) => {
     try {
-        const { page = 1, limit = 12, category, merchant, search, sort = '-createdAt', isFeatured } = req.query;
+        const { page = 1, limit = 12, category, merchant, search, sort = '-createdAt', isFeatured, isOrganic } = req.query;
         const isAdmin = req.user && req.userType === 'admin';
         const query = {};
 
@@ -38,6 +38,8 @@ exports.getAllProducts = async (req, res) => {
 
         if (merchant) query.merchant = merchant;
         if (isFeatured === 'true') query.isFeatured = true;
+        // "Organic" is stored as the tag 'organic' (isOrganic is converted to a tag on create/update)
+        if (isOrganic === 'true') query.tags = 'organic';
         if (search) {
             const searchRegex = new RegExp(escapeRegex(search), 'i');
             query.$or = [

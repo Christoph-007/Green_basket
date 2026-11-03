@@ -2,6 +2,7 @@ const Payout = require('../models/Payout');
 const Order = require('../models/Order');
 const PlatformSettings = require('../models/PlatformSettings');
 const Merchant = require('../models/Merchant');
+const { FULFILLED_STATUSES } = require('../utils/orderStatus');
 
 /**
  * @desc    Get merchant earnings
@@ -39,7 +40,7 @@ exports.getMerchantFinancialSummary = async (req, res) => {
         // Current period stats
         const orders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: startDate }
         });
 
@@ -48,7 +49,7 @@ exports.getMerchantFinancialSummary = async (req, res) => {
         const netEarnings = grossSales - commission;
 
         // Calculate pending payout (all time earned - all time withdrawn)
-        const allOrders = await Order.find({ merchant: merchantId, status: 'delivered' });
+        const allOrders = await Order.find({ merchant: merchantId, status: { $in: FULFILLED_STATUSES } });
         const totalGrossAllTime = allOrders.reduce((sum, o) => sum + o.totalAmount, 0);
         const totalEarnedAllTime = totalGrossAllTime - (totalGrossAllTime * commissionRate) / 100;
 
@@ -109,7 +110,7 @@ exports.getMerchantTransactions = async (req, res) => {
 
         const orders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: startDate }
         })
         .sort({ deliveredAt: -1 })
@@ -163,7 +164,7 @@ exports.getMerchantEarnings = async (req, res) => {
         // Get current period orders
         const currentPeriodOrders = await Order.find({
             merchant: merchantId,
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: {
                 $gte: startOfWeek,
                 $lte: endOfWeek
@@ -189,7 +190,7 @@ exports.getMerchantEarnings = async (req, res) => {
         // Get all delivered orders (total earnings)
         const allOrders = await Order.find({
             merchant: merchantId,
-            status: 'delivered'
+            status: { $in: FULFILLED_STATUSES }
         });
 
         const totalRevenue = allOrders.reduce((sum, o) => sum + o.totalAmount, 0);
@@ -262,7 +263,7 @@ exports.requestPayout = async (req, res) => {
 
         const commissionRate = settings.commission.defaultRate;
 
-        const allOrders = await Order.find({ merchant: merchantId, status: 'delivered' });
+        const allOrders = await Order.find({ merchant: merchantId, status: { $in: FULFILLED_STATUSES } });
         const totalRevenue = allOrders.reduce((sum, o) => sum + o.totalAmount, 0);
         const totalCommission = (totalRevenue * commissionRate) / 100;
         const totalEarned = totalRevenue - totalCommission;
@@ -445,7 +446,7 @@ exports.generatePayouts = async (req, res) => {
             // Get orders for this merchant in this period
             const orders = await Order.find({
                 merchant: merchant._id,
-                status: 'delivered',
+                status: { $in: FULFILLED_STATUSES },
                 deliveredAt: {
                     $gte: startDate,
                     $lte: endDate
@@ -639,7 +640,7 @@ exports.getFinancialReports = async (req, res) => {
 
         // Get all delivered orders in period
         const orders = await Order.find({
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: startDate, $lte: endDate }
         }).populate('merchant', 'businessName');
 
@@ -744,7 +745,7 @@ exports.getRevenueOrders = async (req, res) => {
         }
 
         const orders = await Order.find({
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: startDate, $lte: endDate }
         })
         .populate('merchant', 'businessName')
@@ -900,7 +901,7 @@ exports.getGSTReport = async (req, res) => {
         const endDate = new Date(y, endMonth + 1, 0, 23, 59, 59, 999);
 
         const orders = await Order.find({
-            status: 'delivered',
+            status: { $in: FULFILLED_STATUSES },
             deliveredAt: { $gte: startDate, $lte: endDate }
         });
 

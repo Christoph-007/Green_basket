@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:get_storage/get_storage.dart';
 import '../../config/constants.dart';
+import '../../utils/single_flight.dart';
 
 class ApiProvider {
   late final Dio _dio;
   final _storage = GetStorage();
-  bool _isRefreshing = false;
+  // Requests that hit 401 together share a single token refresh.
+  final _refreshGate = SingleFlight<bool?>();
 
   static final ApiProvider _instance = ApiProvider._internal();
   factory ApiProvider() => _instance;
@@ -28,38 +30,56 @@ class ApiProvider {
         handler.next(options);
       },
       onError: (error, handler) async {
-        if (error.response?.statusCode == 401 &&
-            !error.requestOptions.path.contains('/auth/')) {
-          // Attempt token refresh
-          final refreshed = await _refreshToken();
-          if (refreshed) {
-            // Retry the original request with new token
-            final opts = error.requestOptions;
-            opts.headers['Authorization'] =
-                'Bearer ${_storage.read(AppConstants.tokenKey)}';
-            try {
-              final response = await _dio.fetch(opts);
-              return handler.resolve(response);
-            } catch (e) {
-              return handler.next(error);
-            }
-          } else {
-            _logout();
+        final request = error.requestOptions;
+        final isAuthCall = request.path.contains('/auth/');
+        if (error.response?.statusCode != 401 || isAuthCall) {
+          return handler.next(error);
+        }
+
+        // A request we already retried with a fresh token and that is still
+        // refused means the session really is over.
+        if (request.extra['retried'] == true) {
+          _logout();
+          return handler.next(error);
+        }
+
+        // Another request may have renewed the token while this one was in flight.
+        final sentWith = request.headers['Authorization'];
+        final currentToken = _storage.read(AppConstants.tokenKey);
+        final alreadyRenewed =
+            currentToken != null && sentWith != 'Bearer $currentToken';
+
+        final refreshed = alreadyRenewed ? true : await _refreshToken();
+
+        if (refreshed == true) {
+          request.headers['Authorization'] =
+              'Bearer ${_storage.read(AppConstants.tokenKey)}';
+          request.extra['retried'] = true;
+          try {
+            final response = await _dio.fetch(request);
+            return handler.resolve(response);
+          } on DioException catch (e) {
+            return handler.next(e);
           }
         }
+
+        // false: the server refused the refresh token -> sign out.
+        // null: the server could not be reached -> keep the session, fail this request only.
+        if (refreshed == false) _logout();
         handler.next(error);
       },
     ));
   }
 
-  /// Refresh JWT using stored refresh token
-  Future<bool> _refreshToken() async {
-    if (_isRefreshing) return false;
-    _isRefreshing = true;
-    try {
-      final refreshToken = _storage.read(AppConstants.refreshTokenKey);
-      if (refreshToken == null) return false;
+  /// Refresh the JWT using the stored refresh token. Concurrent callers share one call.
+  /// Returns true when renewed, false when the server refused the refresh token
+  /// (the session is over) and null when the server could not be reached.
+  Future<bool?> _refreshToken() => _refreshGate.run(_requestNewToken);
 
+  Future<bool?> _requestNewToken() async {
+    final refreshToken = _storage.read(AppConstants.refreshTokenKey);
+    if (refreshToken == null) return false;
+    try {
       final response = await Dio(BaseOptions(
         baseUrl: AppConstants.baseUrl,
         connectTimeout:
@@ -80,16 +100,21 @@ class ApiProvider {
         return true;
       }
       return false;
+    } on DioException catch (e) {
+      final status = e.response?.statusCode;
+      // The server answered and refused the refresh token.
+      if (status == 400 || status == 401 || status == 403) return false;
+      // No answer (offline, timeout, server error): do not sign the user out.
+      return null;
     } catch (_) {
-      return false;
-    } finally {
-      _isRefreshing = false;
+      return null;
     }
   }
 
   void _logout() {
     _storage.erase();
-    Get.offAllNamed('/login');
+    // Several requests can fail together; only navigate once.
+    if (Get.currentRoute != '/login') Get.offAllNamed('/login');
   }
 
   // ── HTTP Methods ─────────────────────────────────────────────────

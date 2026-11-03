@@ -68,11 +68,21 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Good morning',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: Colors.white.withOpacity(0.8),
-                    ),
+                  Builder(
+                    builder: (context) {
+                      final hour = DateTime.now().hour;
+                      final greeting = hour < 12
+                          ? 'Good morning'
+                          : hour < 17
+                              ? 'Good afternoon'
+                              : 'Good evening';
+                      return Text(
+                        greeting,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      );
+                    },
                   ),
                   const Text(
                     'Admin Dashboard',

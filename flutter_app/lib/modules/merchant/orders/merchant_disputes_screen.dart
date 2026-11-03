@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
 import 'package:intl/intl.dart';
+import 'package:greenbasket_app/modules/merchant/widgets/merchant_bottom_nav.dart';
 
 class MerchantDisputesScreen extends StatefulWidget {
   const MerchantDisputesScreen({super.key});
@@ -55,6 +56,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Disputes'),
