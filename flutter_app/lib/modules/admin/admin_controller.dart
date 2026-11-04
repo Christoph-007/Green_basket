@@ -99,7 +99,13 @@ class AdminController extends GetxController {
   String _errorMessage(Object e) {
     if (e is DioException) {
       final d = e.response?.data;
-      if (d is Map && d['error'] != null) return d['error'].toString();
+      if (d is Map && d['error'] != null) {
+        final base = d['error'].toString();
+        // In debug builds also show the server's real reason, so a developer
+        // can see what went wrong. Release builds keep the friendly text.
+        if (kDebugMode && d['details'] != null) return '$base (${d['details']})';
+        return base;
+      }
       if (d is Map && d['message'] != null) return d['message'].toString();
       return e.message ?? 'Network error';
     }
