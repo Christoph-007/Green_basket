@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -25,70 +26,36 @@ class AdminFinanceScreen extends StatelessWidget {
       body: Column(
         children: [
           // Header
-          Container(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 20,
-              left: 20,
-              right: 20,
-              bottom: 24,
+          GBGradientHeader(
+            title: 'Financial Reports',
+            colors: const [AppColors.brandDeep, AppColors.brandDeepLight],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            bottomPadding: 24,
+            menuIconSize: 28,
+            subtitleGap: 20,
+            titleStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -0.5,
             ),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.brandDeep, AppColors.brandDeepLight],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+            trailing: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(14),
               ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(32),
-                bottomRight: Radius.circular(32),
-              ),
+              child: const Icon(Icons.account_balance_wallet,
+                  color: Colors.white, size: 22),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Builder(
-                          builder: (context) => IconButton(
-                            icon: const Icon(Icons.menu, color: Colors.white, size: 28),
-                            onPressed: () => Scaffold.of(context).openDrawer(),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'Financial Reports',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -0.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Icon(Icons.account_balance_wallet, color: Colors.white, size: 22),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Overview of total revenue, fees, and payouts',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+            subtitle: const Text(
+              'Overview of total revenue, fees, and payouts',
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
           

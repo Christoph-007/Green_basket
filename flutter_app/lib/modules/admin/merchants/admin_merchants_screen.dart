@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'merchant_analytics_screen.dart';
@@ -92,57 +93,11 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
   }
 
   Widget _buildAdminHeader(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + 20,
-        left: 20,
-        right: 20,
-        bottom: 28,
-      ),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.brandForest, AppColors.brandMid],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(32),
-          bottomRight: Radius.circular(32),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Builder(builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.white),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                    );
-                  }),
-                  const SizedBox(width: 8),
-                  const Text('All Merchants',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'Inter')),
-                ],
-              ),
-              Container(
-                height: 36,
-                width: 36,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.1), borderRadius: BorderRadius.circular(18)),
-                child: const Icon(Icons.storefront, color: Colors.white, size: 20),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text('Admin › Merchants',
-              style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13, fontFamily: 'Inter')),
-        ],
-      ),
+    return GBGradientHeader(
+      title: 'All Merchants',
+      trailingIcon: Icons.storefront,
+      subtitle: Text('Admin › Merchants',
+          style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13)),
     );
   }
 
