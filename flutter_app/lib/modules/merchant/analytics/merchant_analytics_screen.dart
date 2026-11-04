@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -21,17 +22,12 @@ class MerchantAnalyticsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Performance Analytics'),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: Builder(builder: (context) {
+      appBar: GBAppBar(title: 'Performance Analytics', leading: Builder(builder: (context) {
           return IconButton(tooltip: 'Open menu', 
             icon: const Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
-        }),
-      ),
+        }), backgroundColor: Colors.white),
       drawer: const MerchantDrawer(),
       body: Obx(() {
         if (controller.isLoading.value) {

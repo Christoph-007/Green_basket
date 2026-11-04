@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -145,13 +146,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Merchant Analytics'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: 'Merchant Analytics', actions: [
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => [
@@ -161,8 +156,10 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
               ),
             ],
           ),
-        ],
-      ),
+        ], leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        )),
 
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())

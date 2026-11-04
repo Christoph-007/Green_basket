@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/data/repositories/merchant_repository.dart';
@@ -25,19 +26,7 @@ class MerchantProductsScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: AppBar(
-          title: const Text('Inventory Management'),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          leading: Builder(
-            builder: (context) {
-              return IconButton(tooltip: 'Open menu', 
-                icon: const Icon(Icons.menu, color: AppColors.textPrimary),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              );
-            },
-          ),
-          actions: [
+        appBar: GBAppBar(title: 'Inventory Management', actions: [
             IconButton(tooltip: 'Search', 
               icon: const Icon(Icons.search, color: AppColors.textPrimary),
               onPressed: () {},
@@ -46,8 +35,7 @@ class MerchantProductsScreen extends StatelessWidget {
               icon: const Icon(Icons.upload_file, color: AppColors.primary),
               onPressed: () => Get.to(() => const BulkUploadScreen()),
             ),
-          ],
-          bottom: TabBar(
+          ], bottom: TabBar(
             isScrollable: true,
             labelColor: AppColors.primary,
             unselectedLabelColor: AppColors.textSecondary,
@@ -64,8 +52,14 @@ class MerchantProductsScreen extends StatelessWidget {
                   text:
                       'Out of Stock (${controller.products.where((p) => p.stock == 0).length})')),
             ],
-          ),
-        ),
+          ), leading: Builder(
+            builder: (context) {
+              return IconButton(tooltip: 'Open menu', 
+                icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              );
+            },
+          ), backgroundColor: Colors.white),
         drawer: const MerchantDrawer(),
         bottomNavigationBar: _BulkBar(controller: controller),
         body: const TabBarView(

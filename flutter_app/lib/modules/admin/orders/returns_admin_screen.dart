@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -57,13 +58,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Returns & Refunds'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        bottom: TabBar(
+      appBar: GBAppBar(title: 'Returns & Refunds', bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
@@ -73,8 +68,10 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
             Tab(text: 'Processing'),
             Tab(text: 'Completed'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        )),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(

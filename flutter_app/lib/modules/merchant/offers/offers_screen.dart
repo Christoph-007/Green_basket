@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -58,13 +59,7 @@ class _OffersScreenState extends State<OffersScreen>
     return Scaffold(
       bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Offers & Discounts'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-        bottom: TabBar(
+      appBar: GBAppBar(title: 'Offers & Discounts', bottom: TabBar(
           controller: _tabController,
           labelStyle: AppTextStyles.labelLarge,
           unselectedLabelStyle: AppTextStyles.labelLarge,
@@ -76,8 +71,10 @@ class _OffersScreenState extends State<OffersScreen>
             Tab(text: 'Scheduled'),
             Tab(text: 'Expired'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
+          onPressed: () => Get.back(),
+        )),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

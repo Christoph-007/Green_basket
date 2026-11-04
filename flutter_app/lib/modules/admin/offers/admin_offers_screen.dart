@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -64,13 +65,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Offers & Promotions'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        bottom: TabBar(
+      appBar: GBAppBar(title: 'Offers & Promotions', bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
@@ -79,8 +74,10 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
             Tab(text: 'Platform (${_platformOffers.length})'),
             Tab(text: 'Merchant (${_merchantOffers.length})'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showCreateOfferSheet(),
         backgroundColor: AppColors.primary,

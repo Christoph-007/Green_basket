@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../admin_controller.dart';
@@ -83,13 +84,10 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Categories'),
-        leading: IconButton(tooltip: 'Back', 
+      appBar: GBAppBar(title: 'Categories', leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
-        ),
-      ),
+        )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Get.to(() => const CreateCategoryScreen()),
         backgroundColor: AppColors.primary,

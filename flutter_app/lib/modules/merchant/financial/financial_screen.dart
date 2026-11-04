@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -51,13 +52,7 @@ class _FinancialScreenState extends State<FinancialScreen>
     return Scaffold(
       bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Financial Summary'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: 'Financial Summary', actions: [
           IconButton(
             icon: const Icon(Icons.download_outlined),
             onPressed: () {
@@ -65,8 +60,7 @@ class _FinancialScreenState extends State<FinancialScreen>
             },
             tooltip: 'Download Report',
           ),
-        ],
-        bottom: TabBar(
+        ], bottom: TabBar(
           controller: _tabController,
           labelStyle: AppTextStyles.labelSmall,
           unselectedLabelStyle: AppTextStyles.labelSmall,
@@ -77,8 +71,10 @@ class _FinancialScreenState extends State<FinancialScreen>
           tabs: controller.periodLabels
               .map((p) => Tab(text: p))
               .toList(),
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
+          onPressed: () => Get.back(),
+        )),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

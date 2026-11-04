@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
@@ -115,9 +116,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Payout Requests'),
-        actions: [
+      appBar: GBAppBar(title: 'Payout Requests', actions: [
           ExportCsvButton(
             path: '/financial/admin/payouts/export',
             noun: 'payouts',
@@ -125,12 +124,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
               'status': const ['Pending', 'Processing', 'Completed'][_tabController.index],
             },
           ),
-        ],
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        bottom: TabBar(
+        ], bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
@@ -140,8 +134,10 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
             Tab(text: 'Processing'),
             Tab(text: 'Completed'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        )),
       body: Column(
         children: [
           Obx(() => _buildPendingBanner()),

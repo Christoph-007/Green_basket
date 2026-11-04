@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -15,11 +16,7 @@ class MerchantReviewsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Customer Reviews'),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
+      appBar: GBAppBar(title: 'Customer Reviews', backgroundColor: Colors.white),
       body: Obx(() {
         final reviews = controller.recentReviews;
         

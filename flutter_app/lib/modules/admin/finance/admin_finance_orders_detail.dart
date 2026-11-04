@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -45,22 +46,15 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: Text(widget.title),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: widget.title, actions: [
           IconButton(tooltip: 'Refresh', 
             icon: const Icon(Icons.refresh, size: 20),
             onPressed: _loadData,
           ),
-        ],
-      ),
+        ], leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        ), backgroundColor: Colors.white, foregroundColor: Colors.black),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : orders.isEmpty

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
@@ -125,13 +126,10 @@ class _MerchantOrderDetailScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: Text('Order #${widget.order.orderNumber}', overflow: TextOverflow.ellipsis),
-        leading: IconButton(tooltip: 'Back', 
+      appBar: GBAppBar(title: 'Order #${widget.order.orderNumber}', leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
-        ),
-      ),
+        )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

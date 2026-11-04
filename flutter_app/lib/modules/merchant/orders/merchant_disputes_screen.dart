@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -60,14 +61,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
     return Scaffold(
       bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Disputes'),
-        backgroundColor: AppColors.surface,
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        bottom: TabBar(
+      appBar: GBAppBar(title: 'Disputes', bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
@@ -77,8 +71,10 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
             Tab(text: 'Under Review'),
             Tab(text: 'Resolved'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        ), backgroundColor: AppColors.surface),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(

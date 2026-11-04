@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -294,26 +295,14 @@ class _DisputesScreenState extends State<DisputesScreen>
 
       return Scaffold(
         backgroundColor: AppColors.background,
-        appBar: AppBar(
-          backgroundColor: AppColors.surface,
-          elevation: 0,
-          centerTitle: true,
-          leading: IconButton(tooltip: 'Back', 
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                size: 20, color: AppColors.textPrimary),
-            onPressed: () => Get.back(),
-          ),
-          title: const Text('My Disputes & Returns',
-              style: AppTextStyles.titleLarge),
-          actions: [
+        appBar: GBAppBar(title: 'My Disputes & Returns', actions: [
             IconButton(
               icon:
                   const Icon(Icons.add_rounded, color: AppColors.primary),
               onPressed: _showRaiseDisputeDialog,
               tooltip: 'Raise a Dispute',
             ),
-          ],
-          bottom: TabBar(
+          ], bottom: TabBar(
             controller: _tabCtrl,
             labelColor: AppColors.primary,
             unselectedLabelColor: AppColors.textSecondary,
@@ -323,8 +312,11 @@ class _DisputesScreenState extends State<DisputesScreen>
               Tab(text: 'Active (${activeDisputes.length})'),
               Tab(text: 'Resolved (${resolvedDisputes.length})'),
             ],
-          ),
-        ),
+          ), leading: IconButton(tooltip: 'Back', 
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                size: 20, color: AppColors.textPrimary),
+            onPressed: () => Get.back(),
+          ), backgroundColor: AppColors.surface),
         body: TabBarView(
           controller: _tabCtrl,
           children: [

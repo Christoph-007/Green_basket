@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -178,13 +179,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('User Details'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: 'User Details', actions: [
           TextButton(
             onPressed: _showBlockConfirmDialog,
             child: Text(
@@ -195,8 +190,10 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               ),
             ),
           ),
-        ],
-      ),
+        ], leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+          onPressed: () => Get.back(),
+        )),
       body: _user.isEmpty
           ? const Center(child: Text('User details not found'))
           : SingleChildScrollView(

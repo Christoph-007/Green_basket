@@ -54,13 +54,16 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
+      // No back button on a screen that has nowhere to go back to.
       leading: showBack
           ? (leading ??
-              IconButton(
-                tooltip: 'Back',
-                icon: Icon(backIcon, size: 20),
-                onPressed: () => Get.back(),
-              ))
+              (Navigator.of(context).canPop()
+                  ? IconButton(
+                      tooltip: 'Back',
+                      icon: Icon(backIcon, size: 20),
+                      onPressed: () => Get.back(),
+                    )
+                  : null))
           : leading,
       title: Text(title, style: AppTextStyles.titleLarge),
       actions: actions,

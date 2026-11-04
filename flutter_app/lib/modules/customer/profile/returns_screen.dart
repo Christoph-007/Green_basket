@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -99,17 +100,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
-          onPressed: () => Get.back(),
-        ),
-        title: const Text('Returns & Refunds', style: AppTextStyles.titleLarge),
-        bottom: TabBar(
+      appBar: GBAppBar(title: 'Returns & Refunds', bottom: TabBar(
           controller: _tabCtrl,
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
@@ -119,8 +110,11 @@ class _ReturnsScreenState extends State<ReturnsScreen>
             Tab(text: 'Pending (${pending.length})'),
             Tab(text: 'Completed (${completed.length})'),
           ],
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              size: 20, color: AppColors.textPrimary),
+          onPressed: () => Get.back(),
+        ), backgroundColor: AppColors.surface),
       body: _buildBody(pending, completed),
     );
   }

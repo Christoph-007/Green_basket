@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -193,13 +194,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Edit Product'),
-        leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: 'Edit Product', actions: [
           IconButton(
             icon: const Icon(Icons.delete_outline, color: AppColors.error),
             onPressed: _isDeleting || _isSaving ? null : _deleteProduct,
@@ -216,12 +211,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     style: AppTextStyles.labelLarge
                         .copyWith(color: AppColors.primary)),
           ),
-        ],
-        bottom: PreferredSize(
+        ], bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),
           child: _buildTabBar(),
-        ),
-      ),
+        ), leading: IconButton(tooltip: 'Back', 
+          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
+          onPressed: () => Get.back(),
+        )),
       body: _isLoadingCategories
           ? const Center(child: CircularProgressIndicator())
           : AnimatedSwitcher(

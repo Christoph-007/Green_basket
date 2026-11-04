@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 // import 'package:cached_network_image/cached_network_image.dart'; // No longer used in this file
@@ -185,22 +186,15 @@ class CategoriesScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text('Categories', style: AppTextStyles.titleLarge),
-        actions: [
+      appBar: GBAppBar(title: 'Categories', actions: [
           IconButton(tooltip: 'Search', 
             icon: const Icon(Icons.search),
             onPressed: () => Get.toNamed(Routes.search),
           ),
-        ],
-        bottom: PreferredSize(
+        ], bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+        ), backgroundColor: AppColors.surface),
       body: Column(
         children: [
           // Top horizontal category list (Refined Chip List)
