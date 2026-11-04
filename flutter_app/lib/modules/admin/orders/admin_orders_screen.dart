@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/config/status_style.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -245,59 +246,13 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
   }
 
   Map<String, dynamic> _getStatusInfo(String status) {
-    switch (status.toLowerCase()) {
-      case 'delivered':
-        return {
-          'color': AppColors.brandForest,
-          'bgColor': AppColors.primaryContainer,
-          'icon': Icons.check_circle_outline,
-          'label': 'Delivered',
-        };
-      case 'confirmed':
-        return {
-          'color': AppColors.info,
-          'bgColor': AppColors.statusConfirmed,
-          'icon': Icons.thumb_up_outlined,
-          'label': 'Confirmed',
-        };
-      case 'ready':
-        return {
-          'color': AppColors.purpleDeep,
-          'bgColor': AppColors.purpleContainer,
-          'icon': Icons.inventory_2_outlined,
-          'label': 'Ready',
-        };
-      case 'dispatched':
-      case 'out-for-delivery':
-        return {
-          'color': AppColors.secondaryDark,
-          'bgColor': AppColors.statusPreparing,
-          'icon': Icons.local_shipping_outlined,
-          'label': 'Out for Delivery',
-        };
-      case 'cancelled':
-        return {
-          'color': AppColors.errorStrong,
-          'bgColor': AppColors.statusCancelled,
-          'icon': Icons.cancel_outlined,
-          'label': 'Cancelled',
-        };
-      case 'refunded':
-        return {
-          'color': AppColors.errorStrong,
-          'bgColor': AppColors.statusCancelled,
-          'icon': Icons.replay,
-          'label': 'Refunded',
-        };
-      case 'pending':
-      default:
-        return {
-          'color': AppColors.warningDeep,
-          'bgColor': AppColors.statusPending,
-          'icon': Icons.schedule,
-          'label': 'Pending',
-        };
-    }
+    final style = OrderStatusStyle.of(status);
+    return {
+      'color': style.fg,
+      'bgColor': style.bg,
+      'icon': style.icon,
+      'label': style.label,
+    };
   }
 
   Widget _buildOrderCard(Map<String, dynamic> order) {
