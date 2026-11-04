@@ -81,6 +81,18 @@ class MerchantRepository {
     await _api.delete('/products/$id');
   }
 
+  /// PUT /api/bulk/products/bulk-update-stock. Returns {successCount, errorCount, errors}.
+  Future<Map<String, dynamic>> bulkUpdateStock(List<Map<String, dynamic>> updates) async {
+    final response = await _api.put('/bulk/products/bulk-update-stock', data: {'updates': updates});
+    return ((response.data as Map<String, dynamic>)['data'] as Map<String, dynamic>?) ?? {};
+  }
+
+  /// PUT /api/bulk/products/bulk-update-price. Returns {successCount, errorCount, errors}.
+  Future<Map<String, dynamic>> bulkUpdatePrice(List<Map<String, dynamic>> updates) async {
+    final response = await _api.put('/bulk/products/bulk-update-price', data: {'updates': updates});
+    return ((response.data as Map<String, dynamic>)['data'] as Map<String, dynamic>?) ?? {};
+  }
+
   // GET /api/bulk/products/upload-history
   Future<List<Map<String, dynamic>>> getUploadHistory() async {
     final response = await _api.get('/bulk/products/upload-history');

@@ -67,6 +67,7 @@ class MerchantProductsScreen extends StatelessWidget {
           ),
         ),
         drawer: const MerchantDrawer(),
+        bottomNavigationBar: _BulkBar(controller: controller),
         body: const TabBarView(
           children: [
             _ProductGrid(),
@@ -155,11 +156,15 @@ class _ProductGrid extends StatelessWidget {
           final stock = controller.stockOf(product);
           final inStock = stock > 0;
           final lowStock = inStock && stock <= 5;
+          final selected = controller.selectedIds.contains(product.id);
 
           return Container(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(AppRadius.lg),
+              border: selected
+                  ? Border.all(color: AppColors.primary, width: 2)
+                  : null,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.04),
@@ -172,7 +177,12 @@ class _ProductGrid extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(AppRadius.lg),
+                onLongPress: () => controller.toggleSelected(product.id),
                 onTap: () async {
+                  if (controller.isSelecting) {
+                    controller.toggleSelected(product.id);
+                    return;
+                  }
                   final result = await Get.to(() => EditProductScreen(product: product));
                   if (result == true) controller.fetchProducts();
                 },
@@ -207,6 +217,16 @@ class _ProductGrid extends StatelessWidget {
                                 color: Colors.white.withValues(alpha: 0.7),
                                 borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(AppRadius.lg)),
+                              ),
+                            ),
+                          if (selected)
+                            const Positioned(
+                              top: 8,
+                              left: 8,
+                              child: CircleAvatar(
+                                radius: 12,
+                                backgroundColor: AppColors.primary,
+                                child: Icon(Icons.check, size: 16, color: Colors.white),
                               ),
                             ),
                           Positioned(
@@ -393,6 +413,130 @@ class _StockStepperState extends State<_StockStepper> {
           ),
           _button(Icons.add, 'Increase stock', () => _change(1)),
         ],
+      );
+    });
+  }
+}
+
+/// Appears while products are ticked (long-press a card to start): set the
+/// same stock, or move the prices by a percentage, for all of them at once.
+class _BulkBar extends StatelessWidget {
+  final MerchantProductController controller;
+
+  const _BulkBar({required this.controller});
+
+  Future<void> _run(Future<Map<String, dynamic>> Function() action) async {
+    try {
+      final result = await action();
+      final done = (result['successCount'] as num?)?.toInt() ?? 0;
+      final failed = (result['errorCount'] as num?)?.toInt() ?? 0;
+      if (failed == 0) {
+        GBSnack.success('Updated', '$done products updated.');
+      } else {
+        GBSnack.info('Partly updated', '$done updated, $failed could not be changed.');
+      }
+    } catch (e) {
+      GBSnack.fromError(e, title: "Couldn't update products");
+    }
+  }
+
+  Future<void> _askStock() async {
+    final text = TextEditingController();
+    final value = await Get.dialog<int>(
+      AlertDialog(
+        title: Text('Set stock for ${controller.selectedIds.length} products'),
+        content: TextField(
+          controller: text,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(labelText: 'Stock (whole number)'),
+        ),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              final n = int.tryParse(text.text.trim());
+              if (n == null || n < 0) {
+                GBSnack.error('Check the number', 'Enter a whole number, zero or more.');
+                return;
+              }
+              Get.back(result: n);
+            },
+            child: const Text('Apply'),
+          ),
+        ],
+      ),
+    );
+    if (value != null) await _run(() => controller.bulkSetStock(value));
+  }
+
+  Future<void> _askPrice() async {
+    final text = TextEditingController();
+    final value = await Get.dialog<double>(
+      AlertDialog(
+        title: Text('Change price of ${controller.selectedIds.length} products'),
+        content: TextField(
+          controller: text,
+          autofocus: true,
+          keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+          decoration: const InputDecoration(
+            labelText: 'Percent change',
+            helperText: 'For example 10 to raise by 10%, -5 to lower by 5%',
+            suffixText: '%',
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              final n = double.tryParse(text.text.trim());
+              if (n == null || n <= -100 || n > 500) {
+                GBSnack.error('Check the number', 'Enter a percentage between -99 and 500.');
+                return;
+              }
+              Get.back(result: n);
+            },
+            child: const Text('Apply'),
+          ),
+        ],
+      ),
+    );
+    if (value != null) await _run(() => controller.bulkChangePrice(value));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final count = controller.selectedIds.length;
+      if (count == 0) return const SizedBox.shrink();
+      return SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.sm),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, -2))],
+          ),
+          child: Row(
+            children: [
+              IconButton(
+                tooltip: 'Clear selection',
+                icon: const Icon(Icons.close),
+                onPressed: controller.clearSelection,
+              ),
+              Expanded(child: Text('$count selected', style: AppTextStyles.titleMedium)),
+              TextButton.icon(
+                onPressed: _askStock,
+                icon: const Icon(Icons.inventory_2_outlined, size: 18),
+                label: const Text('Set stock'),
+              ),
+              TextButton.icon(
+                onPressed: _askPrice,
+                icon: const Icon(Icons.sell_outlined, size: 18),
+                label: const Text('Price'),
+              ),
+            ],
+          ),
+        ),
       );
     });
   }
