@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
@@ -507,16 +508,7 @@ class ProductDetailScreen extends StatelessWidget {
               right: 0,
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.shadow,
-                      blurRadius: 12,
-                      offset: Offset(0, -4),
-                    )
-                  ],
-                ),
+                decoration: GBCard.decoration(),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: responsive.maxContentWidth),

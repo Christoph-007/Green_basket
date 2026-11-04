@@ -347,10 +347,7 @@ class _Summary extends StatelessWidget {
       return Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-        ),
+        decoration: GBCard.decoration(),
         child: child,
       );
     });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -158,10 +159,7 @@ class AdminFinanceScreen extends StatelessWidget {
       if (current.isEmpty) {
         return Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          decoration: GBCard.decoration(),
           child: Text(
               error.isEmpty
                   ? 'Revenue trend: no revenue in this period yet.'
@@ -198,17 +196,7 @@ class AdminFinanceScreen extends StatelessWidget {
 
       return Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.shadowTint,
-              blurRadius: 18,
-              offset: Offset(0, 6),
-            ),
-          ],
-        ),
+        decoration: GBCard.decoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -342,17 +330,7 @@ class AdminFinanceScreen extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowTint,
-            blurRadius: 18,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: Column(
         children: completedPayouts.map((p) {
           final name = p['merchant']?['businessName'] ?? p['merchant']?['name'] ?? p['agent']?['name'] ?? 'Unknown';

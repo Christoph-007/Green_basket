@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -235,12 +236,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                     if (_zones.isEmpty)
                       Container(
                         padding: const EdgeInsets.all(AppSpacing.xl),
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.lg),
-                          border: Border.all(color: AppColors.border),
-                        ),
+                        decoration: GBCard.decoration(),
                         child: Center(
                           child: Text(
                             'No delivery zones configured.\nTap + Add Zone to get started.',
@@ -283,15 +279,11 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(
+      decoration: GBCard.decoration().copyWith(border: Border.all(
           color: isActive
               ? AppColors.primary.withValues(alpha: 0.2)
               : AppColors.border,
-        ),
-      ),
+        )),
       child: Column(
         children: [
           Padding(

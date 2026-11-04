@@ -76,11 +76,7 @@ class _RecipeCard extends StatelessWidget {
       onTap: () => Get.toNamed(Routes.recipeDetail, arguments: {'recipeId': recipe.id}),
       child: Container(
         width: 160,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.border),
-        ),
+        decoration: GBCard.decoration(),
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
@@ -214,19 +215,9 @@ class _OffersScreenState extends State<OffersScreen>
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(
+      decoration: GBCard.decoration().copyWith(border: Border.all(
           color: isExpired ? AppColors.border : typeColor.withValues(alpha: 0.2),
-        ),
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.shadow,
-              blurRadius: 4,
-              offset: const Offset(0, 2))
-        ],
-      ),
+        )),
       child: Column(
         children: [
           Padding(

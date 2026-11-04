@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -137,10 +138,7 @@ class OrderDetailScreen extends StatelessWidget {
                   // Order header
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -169,10 +167,7 @@ class OrderDetailScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(AppRadius.md),
-                      ),
+                      decoration: GBCard.decoration(),
                       child: Column(
                         children: List.generate(steps.length, (i) {
                           final isDone = i <= currentStep;
@@ -194,10 +189,7 @@ class OrderDetailScreen extends StatelessWidget {
                   Text('Items Ordered', style: AppTextStyles.titleLarge),
                   const SizedBox(height: 12),
                   Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -275,10 +267,7 @@ class OrderDetailScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Row(
                       children: [
                         Icon(Icons.location_on_outlined,
@@ -304,10 +293,7 @@ class OrderDetailScreen extends StatelessWidget {
                   // Price summary
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       children: [
                         _PriceRow('Subtotal', AppHelpers.formatCurrency(order.subtotal)),

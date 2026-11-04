@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -137,10 +138,7 @@ class CheckoutScreen extends StatelessWidget {
               // ── Place order ───────────────────────────────────────────
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
-                ),
+                decoration: GBCard.decoration(),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: responsive.maxContentWidth),

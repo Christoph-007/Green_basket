@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -84,11 +85,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
               // Offer header
               Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(AppRadius.lg),
-                  border: Border.all(color: AppColors.border),
-                ),
+                decoration: GBCard.decoration(),
                 child: Row(
                   children: [
                     Container(
@@ -165,11 +162,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
               if (controller.redemptions.isEmpty)
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                    border: Border.all(color: AppColors.border),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Center(
                     child: Text('No redemptions yet',
                         style: AppTextStyles.bodyMedium),
@@ -227,11 +220,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
         final stat = stats[i];
         return Container(
           padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(AppRadius.md),
-            border: Border.all(color: AppColors.border),
-          ),
+          decoration: GBCard.decoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -266,11 +255,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: Column(
         children: [
           SizedBox(
@@ -331,11 +316,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: Row(
         children: [
           CircleAvatar(

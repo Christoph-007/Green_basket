@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -129,11 +130,7 @@ class _FinancialScreenState extends State<FinancialScreen>
               else
                 Container(
                   height: 150,
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppRadius.lg),
-                    border: Border.all(color: AppColors.border),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Center(
                     child: Text('No chart data available',
                         style: AppTextStyles.bodyMedium),
@@ -156,11 +153,7 @@ class _FinancialScreenState extends State<FinancialScreen>
               if (controller.transactions.isEmpty)
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                    border: Border.all(color: AppColors.border),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Center(
                     child: Text('No transactions found',
                         style: AppTextStyles.bodyMedium),
@@ -188,11 +181,7 @@ class _FinancialScreenState extends State<FinancialScreen>
   Widget _statCard(String label, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,11 +216,7 @@ class _FinancialScreenState extends State<FinancialScreen>
     return Container(
       height: 150,
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: CustomPaint(
         size: const Size(double.infinity, 120),
         painter: _LineChartPainter(values: values),
@@ -290,14 +275,11 @@ class _FinancialScreenState extends State<FinancialScreen>
     return Container(
       padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md, vertical: AppSpacing.sm),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(
+      decoration: GBCard.decoration().copyWith(border: Border(
           bottom: BorderSide(color: AppColors.divider),
           left: BorderSide(color: AppColors.border),
           right: BorderSide(color: AppColors.border),
-        ),
-      ),
+        )),
       child: Row(
         children: [
           Expanded(

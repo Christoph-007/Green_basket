@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:dio/dio.dart';
@@ -334,14 +335,7 @@ class _OrderCard extends StatelessWidget {
           Get.toNamed(Routes.orderDetail, arguments: {'orderId': order.id}),
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.shadow, blurRadius: 4, offset: Offset(0, 2))
-          ],
-        ),
+        decoration: GBCard.decoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -44,15 +44,7 @@ extension _EditProductScreenStateSections on _EditProductScreenState {
   Widget _buildBottomNav() {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.shadow,
-              blurRadius: 8,
-              offset: Offset(0, -2))
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,

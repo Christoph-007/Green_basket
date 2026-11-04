@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -261,11 +262,7 @@ class RecipeDetailScreen extends StatelessWidget {
                           children: [
                             Expanded(child: Text('Ingredients', style: AppTextStyles.titleLarge)),
                             Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(AppRadius.full),
-                                border: Border.all(color: AppColors.border),
-                              ),
+                              decoration: GBCard.decoration(radius: AppRadius.full),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -290,10 +287,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         // Ingredient list with availability
                         Container(
                           padding: const EdgeInsets.all(AppSpacing.md),
-                          decoration: BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.circular(AppRadius.md),
-                          ),
+                          decoration: GBCard.decoration(),
                           child: ctrl.ingredientDetails.isNotEmpty
                               ? Column(
                                   children: List.generate(ctrl.ingredientDetails.length, (i) {
@@ -468,10 +462,7 @@ class RecipeDetailScreen extends StatelessWidget {
               bottom: 0, left: 0, right: 0,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 28),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
-                ),
+                decoration: GBCard.decoration(),
                 child: SizedBox(
                   width: double.infinity,
                   height: 52,

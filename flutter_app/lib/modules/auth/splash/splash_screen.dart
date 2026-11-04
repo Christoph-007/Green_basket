@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
@@ -89,17 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
                   Container(
                     width: 96,
                     height: 96,
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
-                          blurRadius: 20,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Center(
                       child: Icon(Icons.eco, size: 52, color: AppColors.primaryText),
                     ),

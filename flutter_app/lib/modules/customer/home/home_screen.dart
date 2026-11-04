@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:flutter/material.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -95,11 +96,7 @@ class HomeScreen extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: AppColors.divider),
-                              ),
+                              decoration: GBCard.decoration().copyWith(border: Border.all(color: AppColors.divider)),
                               child: Row(
                                 children: [
                                   Text(
@@ -152,11 +149,7 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(AppRadius.md),
-                        border: Border.all(color: AppColors.border),
-                      ),
+                      decoration: GBCard.decoration(),
                       child: Row(
                         children: [
                           Icon(Icons.search,

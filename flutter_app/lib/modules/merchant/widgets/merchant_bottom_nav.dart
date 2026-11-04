@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import '../merchant_controller.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -15,10 +16,7 @@ class MerchantBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final nav = MerchantNavController.instance;
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.divider)),
-      ),
+      decoration: GBCard.decoration().copyWith(border: Border(top: BorderSide(color: AppColors.divider))),
       child: Obx(() => BottomNavigationBar(
             currentIndex: nav.index.value,
             onTap: MerchantNavController.goTo,

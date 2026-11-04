@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -230,11 +231,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                   _sectionHeader('Store Status'),
                   const SizedBox(height: AppSpacing.md),
                   Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                      border: Border.all(color: _isManualOpen ? AppColors.success : AppColors.error),
-                    ),
+                    decoration: GBCard.decoration().copyWith(border: Border.all(color: _isManualOpen ? AppColors.success : AppColors.error)),
                     child: SwitchListTile(
                       title: Text(_isManualOpen ? 'ONLINE / OPEN' : 'OFFLINE / CLOSED', 
                         style: AppTextStyles.titleMedium.copyWith(
@@ -282,11 +279,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                   _sectionHeader('Store Hours'),
                   const SizedBox(height: AppSpacing.md),
                   Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                      border: Border.all(color: AppColors.border),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       children: _storeHours.asMap().entries.map((e) {
                         final i = e.key;
@@ -405,11 +398,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                   _sectionHeader('Notification Preferences'),
                   const SizedBox(height: AppSpacing.md),
                   Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                      border: Border.all(color: AppColors.border),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -480,11 +469,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                   _sectionHeader('Order Management'),
                   const SizedBox(height: AppSpacing.md),
                   Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                      border: Border.all(color: AppColors.border),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       children: [
                         SwitchListTile(
@@ -558,13 +543,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
             ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))
-          ],
-        ),
+        decoration: GBCard.decoration(),
         child: SafeArea(
           child: SizedBox(
             width: double.infinity,

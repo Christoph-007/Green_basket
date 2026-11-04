@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -202,10 +203,7 @@ class LoyaltyScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
+                    decoration: GBCard.decoration(),
                     child: Column(
                       children: [
                         Row(
@@ -249,10 +247,7 @@ class LoyaltyScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppRadius.md),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Column(
                     children: [
                       Text(
@@ -298,18 +293,14 @@ class LoyaltyScreen extends StatelessWidget {
                   (t) => Container(
                     margin: const EdgeInsets.only(bottom: 8),
                     padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                      border: Border.all(
+                    decoration: GBCard.decoration().copyWith(border: Border.all(
                         color: tier == (t['name'] as String).toLowerCase()
                             ? t['color'] as Color
                             : AppColors.border,
                         width: tier == (t['name'] as String).toLowerCase()
                             ? 2
                             : 1,
-                      ),
-                    ),
+                      )),
                     child: Row(
                       children: [
                         Icon(Icons.stars_rounded, color: t['color'] as Color),
@@ -355,10 +346,7 @@ class LoyaltyScreen extends StatelessWidget {
                         (h) => Container(
                           margin: const EdgeInsets.only(bottom: 8),
                           padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.circular(AppRadius.md),
-                          ),
+                          decoration: GBCard.decoration(),
                           child: Row(
                             children: [
                               Icon(

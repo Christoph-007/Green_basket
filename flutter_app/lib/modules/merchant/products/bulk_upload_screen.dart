@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -225,11 +226,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
 
             // Instructions accordion
             Container(
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(AppRadius.md),
-                border: Border.all(color: AppColors.border),
-              ),
+              decoration: GBCard.decoration(),
               child: Column(
                 children: [
                   InkWell(
@@ -336,11 +333,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
             if (!_isLoadingHistory && _recentUploads.isEmpty)
               Container(
                 padding: const EdgeInsets.all(AppSpacing.lg),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                  border: Border.all(color: AppColors.border),
-                ),
+                decoration: GBCard.decoration(),
                 child: Center(
                   child: Text('No upload history yet.',
                       style: AppTextStyles.bodyMedium
@@ -356,15 +349,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.shadow,
-                blurRadius: 8,
-                offset: Offset(0, -2))
-          ],
-        ),
+        decoration: GBCard.decoration(),
         child: SafeArea(
           child: SizedBox(
             width: double.infinity,
@@ -439,11 +424,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: Row(
         children: [
           Container(

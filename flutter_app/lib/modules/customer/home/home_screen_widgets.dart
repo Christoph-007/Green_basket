@@ -202,11 +202,7 @@ class _BannerSectionState extends State<_BannerSection> {
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.full),
-                              ),
+                              decoration: GBCard.decoration(radius: AppRadius.full),
                               child: Text(
                                 buttonText,
                                 style: AppTextStyles.labelLarge
@@ -405,17 +401,7 @@ class _HomeRecipeCard extends StatelessWidget {
       ),
       child: Container(
         width: 160,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.shadowFaint,
-              blurRadius: 6,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
+        decoration: GBCard.decoration(),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

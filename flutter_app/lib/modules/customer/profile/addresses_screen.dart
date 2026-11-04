@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -123,14 +124,10 @@ class _AddressCard extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(
+      decoration: GBCard.decoration().copyWith(border: Border.all(
           color: isDefault ? AppColors.primary : AppColors.border,
           width: isDefault ? 1.5 : 1,
-        ),
-      ),
+        )),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

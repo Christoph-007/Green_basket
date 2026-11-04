@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 
@@ -324,11 +325,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
   Widget _infoChip(IconData icon, String label) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(radius: AppRadius.full),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

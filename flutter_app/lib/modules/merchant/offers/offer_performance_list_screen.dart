@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -65,11 +66,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
 
                     return Container(
                       margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        border: Border.all(color: AppColors.border),
-                      ),
+                      decoration: GBCard.decoration(),
                       child: InkWell(
                         onTap: () => Get.to(() => const OfferAnalyticsScreen(), arguments: offer),
                         borderRadius: BorderRadius.circular(AppRadius.lg),

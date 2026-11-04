@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:get/get.dart';
 import '../../../utils/order_status.dart';
@@ -215,11 +216,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 // Stepper
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.md),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius:
-                        BorderRadius.circular(AppRadius.md),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Column(
                     children: List.generate(steps.length, (i) {
                       final step = steps[i];
@@ -286,11 +283,7 @@ class OrderTrackingScreen extends StatelessWidget {
                     style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius:
-                        BorderRadius.circular(AppRadius.md),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: ListView.separated(
                     shrinkWrap: true,
                     physics:
@@ -357,11 +350,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius:
-                        BorderRadius.circular(AppRadius.md),
-                  ),
+                  decoration: GBCard.decoration(),
                   child: Row(
                     mainAxisAlignment:
                         MainAxisAlignment.spaceBetween,

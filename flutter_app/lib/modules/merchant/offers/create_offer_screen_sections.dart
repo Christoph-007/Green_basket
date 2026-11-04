@@ -12,13 +12,9 @@ extension _CreateOfferScreenStateSections on _CreateOfferScreenState {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(
+        decoration: GBCard.decoration().copyWith(border: Border.all(
             color: date != null ? AppColors.primary : AppColors.border,
-          ),
-        ),
+          )),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

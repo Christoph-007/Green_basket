@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -73,11 +74,7 @@ class CartScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(24),
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(AppRadius.lg),
-                      border: Border.all(color: AppColors.border),
-                    ),
+                    decoration: GBCard.decoration(),
                     padding: const EdgeInsets.all(20),
                     child: _buildSummary(context, ctrl, couponCtrl),
                   ),
@@ -367,17 +364,7 @@ class _CartItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: Row(
         children: [
           // Image

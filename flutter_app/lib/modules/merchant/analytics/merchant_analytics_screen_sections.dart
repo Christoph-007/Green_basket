@@ -4,11 +4,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
   Widget _miniStatCard(String label, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
+      decoration: GBCard.decoration(),
       child: Column(
         children: [
           Icon(icon, size: 20, color: color),
@@ -53,17 +49,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
   Widget _analyticsCard(BuildContext context, String title, String subtitle,
       IconData icon, Color color, VoidCallback onTap) {
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -125,11 +111,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.lg),
-          border: Border.all(color: AppColors.border),
-        ),
+        decoration: GBCard.decoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

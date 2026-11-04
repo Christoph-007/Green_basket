@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/config/theme.dart';
 
 /// A tappable KPI tile: icon chip, large value and a small title.
@@ -33,17 +34,7 @@ class GBStatCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.shadowTint,
-                  blurRadius: 18,
-                  offset: Offset(0, 6),
-                ),
-              ],
-            ),
+            decoration: GBCard.decoration(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

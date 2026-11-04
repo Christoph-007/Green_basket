@@ -30,10 +30,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
       child: Container(
         padding: const EdgeInsets.symmetric(
             vertical: AppSpacing.sm, horizontal: AppSpacing.sm),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.sm),
-        ),
+        decoration: GBCard.decoration(radius: AppRadius.sm),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -90,11 +87,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(AppSpacing.xl),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                  border: Border.all(color: AppColors.divider),
-                ),
+                decoration: GBCard.decoration().copyWith(border: Border.all(color: AppColors.divider)),
                 child: Column(
                   children: [
                     Icon(Icons.receipt_long_outlined,

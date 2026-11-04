@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -199,12 +200,9 @@ class CategoriesScreen extends StatelessWidget {
           Container(
             height: 52,
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              border: Border(
+            decoration: GBCard.decoration().copyWith(border: Border(
                 bottom: BorderSide(color: AppColors.divider.withValues(alpha: 0.5)),
-              ),
-            ),
+              )),
             child: Obx(() {
               // Read the selection here, not inside itemBuilder: itemBuilder
               // runs later during layout, outside Obx's tracking, so the
@@ -329,11 +327,7 @@ class CategoriesScreen extends StatelessWidget {
                           horizontal: 10,
                           vertical: 4,
                         ),
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: AppColors.divider),
-                        ),
+                        decoration: GBCard.decoration().copyWith(border: Border.all(color: AppColors.divider)),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

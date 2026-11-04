@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
@@ -67,13 +68,7 @@ class _OfferTile extends StatelessWidget {
     final minOrder = offer['minOrderValue'] ?? 0;
 
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        boxShadow: [
-          BoxShadow(color: AppColors.shadow, blurRadius: 10, offset: Offset(0, 4))
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppRadius.lg),
         child: Column(

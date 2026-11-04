@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/data/services/storage_service.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -428,15 +429,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(
                   AppSpacing.md, AppSpacing.sm, AppSpacing.md, 28),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColors.shadow,
-                      blurRadius: 8,
-                      offset: Offset(0, -2)),
-                ],
-              ),
+              decoration: GBCard.decoration(),
               child: SizedBox(
                 width: double.infinity,
                 height: 52,

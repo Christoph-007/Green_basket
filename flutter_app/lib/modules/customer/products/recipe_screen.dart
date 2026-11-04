@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
@@ -241,16 +242,7 @@ class _RecipeCard extends StatelessWidget {
         arguments: {'recipeId': recipe.id},
       ),
       child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.shadowFaint,
-                blurRadius: 6,
-                offset: Offset(0, 2)),
-          ],
-        ),
+        decoration: GBCard.decoration(),
         clipBehavior: Clip.hardEdge,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -40,10 +41,7 @@ class MerchantProfileScreen extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.symmetric(
                     vertical: AppSpacing.xl, horizontal: AppSpacing.lg),
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  border: Border(bottom: BorderSide(color: AppColors.border)),
-                ),
+                decoration: GBCard.decoration().copyWith(border: Border(bottom: BorderSide(color: AppColors.border))),
                 child: Row(
                   children: [
                     Container(
@@ -148,17 +146,7 @@ class MerchantProfileScreen extends StatelessWidget {
   Widget _profileCard(BuildContext context, String title, String subtitle,
       IconData icon, Color color, VoidCallback onTap) {
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -218,17 +206,7 @@ class _AlertSoundCardState extends State<_AlertSoundCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: SwitchListTile(
         contentPadding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg, vertical: AppSpacing.sm),

@@ -79,11 +79,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
           onTap: () => GBSnack.plain('Photos not available yet', 'Photo upload is coming soon. For now, products are saved without photos.', position: SnackPosition.BOTTOM),
           child: Container(
             height: 100,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppRadius.md),
-              border: Border.all(color: AppColors.border),
-            ),
+            decoration: GBCard.decoration(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -105,15 +101,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
   Widget _buildBottomNav() {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.shadow,
-              blurRadius: 8,
-              offset: Offset(0, -2))
-        ],
-      ),
+      decoration: GBCard.decoration(),
       child: SafeArea(
         child: Row(
           children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
@@ -147,20 +148,9 @@ class _ProductGrid extends StatelessWidget {
           final selected = controller.selectedIds.contains(product.id);
 
           return Container(
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppRadius.lg),
-              border: selected
+            decoration: GBCard.decoration().copyWith(border: selected
                   ? Border.all(color: AppColors.primary, width: 2)
-                  : null,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+                  : null),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
@@ -497,10 +487,7 @@ class _BulkBar extends StatelessWidget {
       return SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.sm),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
-          ),
+          decoration: GBCard.decoration(),
           child: Row(
             children: [
               IconButton(
