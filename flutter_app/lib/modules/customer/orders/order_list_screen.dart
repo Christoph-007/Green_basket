@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_status_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -464,39 +465,6 @@ class _StatusBadge extends StatelessWidget {
   final String status;
   const _StatusBadge({required this.status});
 
-  Color get color {
-    switch (status) {
-      case 'pending':
-        return AppColors.warning;
-      case 'confirmed':
-        return AppColors.info;
-      case 'preparing':
-        return AppColors.secondary;
-      case 'dispatched':
-        return AppColors.primary;
-      case 'delivered':
-      case 'completed':
-        return AppColors.success;
-      case 'cancelled':
-        return AppColors.error;
-      default:
-        return AppColors.textSecondary;
-    }
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: color.withValues(alpha: 0.4)),
-      ),
-      child: Text(
-        AppHelpers.getOrderStatusLabel(status),
-        style: AppTextStyles.labelSmall.copyWith(color: color),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => GBStatusChip(status: status);
 }

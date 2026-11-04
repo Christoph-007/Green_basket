@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_status_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -499,17 +500,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     }
   }
 
-  Widget _statusBadge(String status, Map<String, dynamic> statusInfo) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: (statusInfo['bgColor'] as Color),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        statusInfo['label'] as String,
-        style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: statusInfo['color'] as Color),
-      ),
-    );
-  }
+  Widget _statusBadge(String status, Map<String, dynamic> statusInfo) =>
+      GBStatusChip(status: status);
 }

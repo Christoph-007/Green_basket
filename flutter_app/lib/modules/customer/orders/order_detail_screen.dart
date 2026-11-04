@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_status_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -341,30 +342,7 @@ class OrderDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _statusBadge(String status) {
-    Color color;
-    switch (status) {
-      case 'delivered':
-        color = AppColors.success;
-        break;
-      case 'cancelled':
-        color = AppColors.error;
-        break;
-      default:
-        color = AppColors.primary;
-    }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(AppRadius.full),
-      ),
-      child: Text(
-        AppHelpers.getOrderStatusLabel(status),
-        style: AppTextStyles.labelSmall.copyWith(color: color),
-      ),
-    );
-  }
+  Widget _statusBadge(String status) => GBStatusChip(status: status);
 }
 
 class _TimelineStep extends StatelessWidget {

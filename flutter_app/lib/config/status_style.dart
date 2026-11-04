@@ -26,14 +26,14 @@ class OrderStatusStyle {
     switch (status.toLowerCase()) {
       case 'delivered':
         return OrderStatusInfo(
-          fg: AppColors.brandForest,
+          fg: AppColors.isDark ? AppColors.primaryText : AppColors.brandForest,
           bg: AppColors.primaryContainer,
           icon: Icons.check_circle_outline,
           label: 'Delivered',
         );
       case 'completed':
         return OrderStatusInfo(
-          fg: AppColors.brandForest,
+          fg: AppColors.isDark ? AppColors.primaryText : AppColors.brandForest,
           bg: AppColors.primaryContainer,
           icon: Icons.task_alt,
           label: 'Completed',
@@ -54,7 +54,7 @@ class OrderStatusStyle {
         );
       case 'ready':
         return OrderStatusInfo(
-          fg: AppColors.purpleDeep,
+          fg: AppColors.isDark ? const Color(0xFFCE93D8) : AppColors.purpleDeep,
           bg: AppColors.purpleContainer,
           icon: Icons.inventory_2_outlined,
           label: 'Ready',

@@ -8,7 +8,10 @@ class GBStatusChip extends StatelessWidget {
   final String status;
   final bool showIcon;
 
-  const GBStatusChip({super.key, required this.status, this.showIcon = true});
+  /// Shown instead of the standard label (for example "Ready for Pick up").
+  final String? label;
+
+  const GBStatusChip({super.key, required this.status, this.showIcon = true, this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class GBStatusChip extends StatelessWidget {
           ],
           Flexible(
             child: Text(
-              style.label,
+              label ?? style.label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: style.fg),

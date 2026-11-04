@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_status_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -297,72 +298,15 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
   }
 
   Widget _buildStatusBadge(String status, String deliveryType) {
-    Color bgColor;
-    Color textColor;
-    String text = status.capitalizeFirst ?? '';
-
+    String? text;
     switch (status) {
       case 'pending':
-        bgColor = AppColors.warning.withValues(alpha: 0.1);
-        textColor = AppColors.warning;
         text = 'New';
         break;
-      case 'confirmed':
-        bgColor = Colors.blue.withValues(alpha: 0.1);
-        textColor = Colors.blue;
-        text = 'Confirmed';
-        break;
-      case 'preparing':
-        bgColor = Colors.orange.withValues(alpha: 0.1);
-        textColor = Colors.orange;
-        text = 'Preparing';
-        break;
       case 'ready':
-        bgColor = AppColors.info.withValues(alpha: 0.1);
-        textColor = AppColors.info;
-        text = deliveryType == 'pickup'
-            ? 'Ready for Pick up'
-            : 'Ready for Delivery';
+        text = deliveryType == 'pickup' ? 'Ready for Pick up' : 'Ready for Delivery';
         break;
-      case 'out-for-delivery':
-      case 'dispatched':
-        bgColor = AppColors.primary.withValues(alpha: 0.1);
-        textColor = AppColors.primary;
-        text = 'Out for Delivery';
-        break;
-      case 'delivered':
-        bgColor = AppColors.success.withValues(alpha: 0.1);
-        textColor = AppColors.success;
-        text = 'Delivered';
-        break;
-      case 'completed':
-        bgColor = AppColors.success.withValues(alpha: 0.1);
-        textColor = AppColors.success;
-        text = 'Completed';
-        break;
-      case 'cancelled':
-        bgColor = AppColors.error.withValues(alpha: 0.1);
-        textColor = AppColors.error;
-        text = 'Cancelled';
-        break;
-      case 'refunded':
-        bgColor = AppColors.error.withValues(alpha: 0.1);
-        textColor = AppColors.error;
-        text = 'Refunded';
-        break;
-      default:
-        bgColor = AppColors.background;
-        textColor = AppColors.textSecondary;
     }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(AppRadius.full),
-      ),
-      child: Text(text,
-          style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: textColor)),
-    );
+    return GBStatusChip(status: status, label: text);
   }
 }
