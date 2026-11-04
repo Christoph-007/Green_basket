@@ -163,13 +163,10 @@ class _RecipeCard extends StatelessWidget {
                               GBSnack.plain('Not added', (result['message'] ?? 'No ingredients could be added').toString(), position: SnackPosition.BOTTOM);
                               return;
                             }
-                            Get.snackbar(
+                            GBSnack.success(
                               'Added to Cart 🛒',
                               (result['message'] ?? '${recipe.title} ingredients added').toString(),
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: AppColors.success,
-                              colorText: Colors.white,
-                              margin: const EdgeInsets.all(16),
+                              position: SnackPosition.BOTTOM,
                               duration: const Duration(seconds: 2),
                             );
                             Future.delayed(const Duration(milliseconds: 500), () {
@@ -180,13 +177,10 @@ class _RecipeCard extends StatelessWidget {
                               }
                             });
                           } catch (_) {
-                            Get.snackbar(
+                            GBSnack.error(
                               'Error',
                               'Could not add recipe to cart',
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: AppColors.error,
-                              colorText: Colors.white,
-                              margin: const EdgeInsets.all(16),
+                              position: SnackPosition.BOTTOM,
                             );
                           }
                         },

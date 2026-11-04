@@ -145,10 +145,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       Get.back(result: true);
       GBSnack.success('Success', 'Product added successfully!', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to add product: ${e.toString().split(':').last.trim()}',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withValues(alpha: 0.1),
-          colorText: Colors.red);
+      GBSnack.error('Error', 'Failed to add product: ${e.toString().split(':').last.trim()}',
+          position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSubmitting = false);
     }

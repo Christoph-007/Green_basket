@@ -126,15 +126,13 @@ class RecipeDetailController extends GetxController {
         message += '\n($skippedDist too far, $skippedStock out of stock, $skippedOtherStore from another store)';
       }
 
-      Get.snackbar(
-        addedCount > 0 ? 'Added to Cart 🛒' : 'No items added',
-        message,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: addedCount > 0 ? AppColors.success : AppColors.warning,
-        colorText: Colors.white,
-        margin: const EdgeInsets.all(16),
-        duration: const Duration(seconds: 3),
-      );
+      if (addedCount > 0) {
+        GBSnack.success('Added to Cart 🛒', message,
+            position: SnackPosition.BOTTOM, duration: const Duration(seconds: 3));
+      } else {
+        GBSnack.warning('No items added', message,
+            position: SnackPosition.BOTTOM, duration: const Duration(seconds: 3));
+      }
 
       // Use NavController to switch to Cart Tab
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -145,13 +143,10 @@ class RecipeDetailController extends GetxController {
         }
       });
     } catch (e) {
-      Get.snackbar(
+      GBSnack.error(
         'Error',
         'Could not add ingredients to cart.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.error,
-        colorText: Colors.white,
-        margin: const EdgeInsets.all(16),
+        position: SnackPosition.BOTTOM,
       );
     }
     isAddingToCart.value = false;

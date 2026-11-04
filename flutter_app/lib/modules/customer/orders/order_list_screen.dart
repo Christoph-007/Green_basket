@@ -1,6 +1,7 @@
 import '../nav_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
@@ -311,22 +312,13 @@ class _OrderCard extends StatelessWidget {
                             setState(() => isSubmitting = false);
                             if (ctx.mounted) Navigator.pop(ctx);
                             if (error == null) {
-                              Get.snackbar(
+                              GBSnack.success(
                                 'Review Submitted ⭐',
                                 'Thank you for your feedback!',
-                                backgroundColor: AppColors.success,
-                                colorText: Colors.white,
                                 duration: const Duration(seconds: 3),
-                                margin: const EdgeInsets.all(12),
                               );
                             } else {
-                              Get.snackbar(
-                                'Could Not Submit',
-                                error,
-                                backgroundColor: AppColors.error,
-                                colorText: Colors.white,
-                                margin: const EdgeInsets.all(12),
-                              );
+                              GBSnack.error('Could Not Submit', error);
                             }
                           },
                     child: isSubmitting

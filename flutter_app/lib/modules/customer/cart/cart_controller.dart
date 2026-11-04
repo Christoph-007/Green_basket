@@ -262,10 +262,7 @@ class CartController extends GetxController {
       if (e is DioException) {
         message = e.response?.data?['message'] ?? e.response?.data?['error'] ?? message;
       }
-      Get.snackbar('Error', message,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Get.theme.colorScheme.errorContainer,
-          colorText: Get.theme.colorScheme.onErrorContainer);
+      GBSnack.error('Error', message, position: SnackPosition.BOTTOM);
     }
   }
 

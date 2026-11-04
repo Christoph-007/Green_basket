@@ -179,14 +179,12 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                     'refundAmount': double.tryParse(_refundController.text) ?? 0,
                   });
                   _fetchReturns();
-                  Get.snackbar(
-                    _approving ? 'Return Approved' : 'Return Rejected',
-                    _approving
-                        ? 'Refund of ₹${_refundController.text} will be processed.'
-                        : 'Return has been rejected.',
-                    backgroundColor: _approving ? AppColors.success : AppColors.error,
-                    colorText: Colors.white,
-                  );
+                  if (_approving) {
+                    GBSnack.success('Return Approved',
+                        'Refund of ₹${_refundController.text} will be processed.');
+                  } else {
+                    GBSnack.error('Return Rejected', 'Return has been rejected.');
+                  }
                 } catch (e) {
                   GBSnack.error('Error', 'Failed to process return');
                 }

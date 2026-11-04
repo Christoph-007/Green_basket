@@ -3,7 +3,6 @@ import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import '../../../data/repositories/product_repository.dart';
 
 
-import '../../../config/theme.dart';
 
 class WishlistController extends GetxController {
   final _repo = ProductRepository();
@@ -36,10 +35,7 @@ class WishlistController extends GetxController {
       } else {
         await _repo.addToWishlist(productId);
         wishlistIds.add(productId);
-        Get.snackbar('Added', 'Added to wishlist',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: AppColors.primaryContainer,
-            colorText: AppColors.primary);
+        GBSnack.success('Added', 'Added to wishlist', position: SnackPosition.BOTTOM);
       }
     } catch (_) {
       GBSnack.plain('Error', 'Failed to update wishlist', position: SnackPosition.BOTTOM);

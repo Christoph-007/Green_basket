@@ -60,12 +60,10 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
     try {
       final csv = await _repo.getUploadTemplate();
       await Clipboard.setData(ClipboardData(text: csv));
-      Get.snackbar(
+      GBSnack.success(
         'Template Copied',
         'CSV template copied to clipboard. Paste it into a .csv file and fill it in.',
-        backgroundColor: AppColors.primary,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        position: SnackPosition.BOTTOM,
       );
     } catch (_) {
       GBSnack.plain('Error', 'Could not load the CSV template', position: SnackPosition.BOTTOM);

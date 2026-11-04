@@ -154,13 +154,10 @@ class _BannerSectionState extends State<_BannerSection> {
                       final code = offer['couponCode'];
                       if (code != null && code.toString().isNotEmpty) {
                         Clipboard.setData(ClipboardData(text: code));
-                        Get.snackbar(
+                        GBSnack.success(
                           'Success',
                           'Coupon code "$code" copied to clipboard',
-                          backgroundColor: AppColors.success,
-                          colorText: Colors.white,
-                          snackPosition: SnackPosition.BOTTOM,
-                          margin: const EdgeInsets.all(16),
+                          position: SnackPosition.BOTTOM,
                         );
                       }
                     }

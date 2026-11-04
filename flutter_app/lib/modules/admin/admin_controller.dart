@@ -227,9 +227,7 @@ class AdminController extends GetxController {
       }
     } catch (e) {
       debugPrint('toggleCategoryStatus error: $e');
-      Get.snackbar('Error', 'Failed to update category status',
-          backgroundColor: Get.theme.colorScheme.error,
-          colorText: Get.theme.colorScheme.onError);
+      GBSnack.error('Error', 'Failed to update category status');
     }
   }
 
@@ -237,14 +235,10 @@ class AdminController extends GetxController {
     try {
       await _repo.deleteCategory(id);
       categories.removeWhere((c) => (c['_id'] ?? c['id']) == id);
-      Get.snackbar('Deleted', 'Category removed successfully',
-          backgroundColor: Get.theme.colorScheme.error,
-          colorText: Get.theme.colorScheme.onError);
+      GBSnack.error('Deleted', 'Category removed successfully');
     } catch (e) {
       debugPrint('deleteCategoryById error: $e');
-      Get.snackbar('Error', 'Failed to delete category',
-          backgroundColor: Get.theme.colorScheme.error,
-          colorText: Get.theme.colorScheme.onError);
+      GBSnack.error('Error', 'Failed to delete category');
     }
   }
 
@@ -260,9 +254,11 @@ class AdminController extends GetxController {
   Future<void> verifyMerchant(String id, bool approved, {String? rejectionReason}) async {
     try {
       await _repo.verifyMerchant(id, approved, rejectionReason: rejectionReason);
-      Get.snackbar('Success', approved ? 'Merchant Approved' : 'Merchant Rejected',
-          backgroundColor: approved ? Get.theme.primaryColor : Get.theme.colorScheme.error,
-          colorText: Get.theme.colorScheme.onPrimary);
+      if (approved) {
+        GBSnack.success('Success', 'Merchant Approved');
+      } else {
+        GBSnack.error('Success', 'Merchant Rejected');
+      }
       fetchAll();
     } catch (e) {
       debugPrint('verifyMerchant error: $e');

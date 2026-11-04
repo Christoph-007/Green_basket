@@ -83,8 +83,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                 } else if (action == 'Refund') {
                   await _repo.refundOrder(orderId);
                 }
-                Get.snackbar('Action Taken', '$action has been applied.',
-                    backgroundColor: AppColors.primary, colorText: Colors.white);
+                GBSnack.success('Action Taken', '$action has been applied.');
                 _fetchOrderDetail();
               } catch (e) {
                 String msg = 'Failed to perform action';

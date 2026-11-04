@@ -161,14 +161,13 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 await controller.toggleUserBlock(_user['_id']);
                 setState(() => _isBlocked = !_isBlocked);
                 if (ctx.mounted) Navigator.pop(ctx);
-                Get.snackbar(
-                  _isBlocked ? 'User Blocked' : 'User Unblocked',
-                  '${_user['name']} has been ${_isBlocked ? 'blocked' : 'unblocked'}.',
-                  backgroundColor: _isBlocked
-                      ? AppColors.error
-                      : AppColors.success,
-                  colorText: Colors.white,
-                );
+                final blockedTitle = _isBlocked ? 'User Blocked' : 'User Unblocked';
+                final blockedText = '${_user['name']} has been ${_isBlocked ? 'blocked' : 'unblocked'}.';
+                if (_isBlocked) {
+                  GBSnack.error(blockedTitle, blockedText);
+                } else {
+                  GBSnack.success(blockedTitle, blockedText);
+                }
               } catch (e) {
                 GBSnack.plain('Error', 'Failed to update user status');
               }

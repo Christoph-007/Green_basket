@@ -555,12 +555,10 @@ class ProductDetailScreen extends StatelessWidget {
                               onPressed: !product.isStoreOpen ? null : () {
                                 if (product.preparationOptions.isNotEmpty && 
                                     ctrl.selectedPreparationOption.value == null) {
-                                  Get.snackbar(
-                                    'Select Option', 
+                                  GBSnack.warning(
+                                    'Select Option',
                                     'Please select a preparation option',
-                                    backgroundColor: AppColors.primaryContainer,
-                                    colorText: AppColors.primary,
-                                    snackPosition: SnackPosition.BOTTOM,
+                                    position: SnackPosition.BOTTOM,
                                   );
                                   return;
                                 }

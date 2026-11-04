@@ -535,9 +535,12 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
                 await controller.toggleMerchantBlock(_merchantId);
                 setState(() => _isBlocked = !_isBlocked);
                 if (ctx.mounted) Navigator.pop(ctx);
-                Get.snackbar('Success', _isBlocked ? 'Merchant Blocked' : 'Merchant Unblocked',
-                    backgroundColor: _isBlocked ? AppColors.error : AppColors.success,
-                    colorText: Colors.white);
+                final blockedText = _isBlocked ? 'Merchant Blocked' : 'Merchant Unblocked';
+                if (_isBlocked) {
+                  GBSnack.error('Success', blockedText);
+                } else {
+                  GBSnack.success('Success', blockedText);
+                }
               } catch (e) {
                 GBSnack.plain('Error', 'Failed to update merchant status');
               }
