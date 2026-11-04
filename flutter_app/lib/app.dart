@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/modules/auth/onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 import 'bindings/app_bindings.dart';
 import 'config/routes.dart';
@@ -103,6 +104,7 @@ class App extends StatelessWidget {
       getPages: [
         // ─── Auth ────────────────────────────────────────────────────────
         GetPage(name: Routes.splash, page: () => const SplashScreen()),
+        GetPage(name: Routes.onboarding, page: () => const OnboardingScreen()),
         GetPage(name: Routes.login, page: () => const LoginScreen()),
         GetPage(name: Routes.signup, page: () => const SignupScreen()),
         GetPage(name: Routes.otp, page: () => const OtpScreen()),

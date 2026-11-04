@@ -56,7 +56,9 @@ class _SplashScreenState extends State<SplashScreen>
             Get.offAllNamed(Routes.login);
         }
       } else {
-        Get.offAllNamed(Routes.login);
+        // First launch: a short introduction, then login.
+        Get.offAllNamed(
+            storage.isOnboarded ? Routes.login : Routes.onboarding);
       }
     } catch (e) {
       debugPrint('Splash navigation error: $e');

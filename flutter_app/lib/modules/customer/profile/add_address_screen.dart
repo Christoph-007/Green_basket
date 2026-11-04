@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
+import 'package:greenbasket_app/data/services/storage_service.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +53,61 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     GBSnack.error('Location unavailable', message, position: SnackPosition.BOTTOM);
   }
 
+  /// A short reason shown once, before the phone's own location prompt.
+  Future<bool> _explainLocation() async {
+    final storage = StorageService();
+    if (storage.locationExplained) return true;
+    if (!mounted) return false;
+    final allow = await showModalBottomSheet<bool>(
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          builder: (ctx) => Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.location_on,
+                    size: 40, color: AppColors.primary),
+                const SizedBox(height: AppSpacing.md),
+                const Text('Use your location?',
+                    style: AppTextStyles.headlineMedium),
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  'We use it to fill in your address and to show sellers near you. You can change this any time in your phone settings.',
+                  style: AppTextStyles.bodyMedium
+                      .copyWith(color: AppColors.textSecondary),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GBButton(
+                        label: 'Not now',
+                        variant: GBButtonVariant.outline,
+                        onPressed: () => Navigator.pop(ctx, false),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: GBButton(
+                        label: 'Allow',
+                        onPressed: () => Navigator.pop(ctx, true),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ) ??
+        false;
+    if (allow) storage.setLocationExplained();
+    return allow;
+  }
+
   /// Reads the phone's real GPS position and turns it into an address.
   Future<void> _useCurrentLocation() async {
     setState(() => _isLocating = true);
@@ -61,6 +118,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       }
       var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
+        // Say why first; only "Allow" opens the system prompt.
+        if (!await _explainLocation()) return;
         permission = await Geolocator.requestPermission();
       }
       if (permission == LocationPermission.denied ||

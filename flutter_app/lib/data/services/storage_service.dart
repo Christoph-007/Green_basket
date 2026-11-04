@@ -69,6 +69,12 @@ class StorageService {
   void setOrderAlertSound(bool on) =>
       _box.write(AppConstants.orderAlertSoundKey, on);
 
+  // The explanation before the first location permission prompt was shown
+  bool get locationExplained =>
+      _box.read(AppConstants.locationExplainedKey) ?? false;
+  void setLocationExplained() =>
+      _box.write(AppConstants.locationExplainedKey, true);
+
   // FCM Token
   String? get fcmToken => _box.read(AppConstants.fcmTokenKey);
   void saveFcmToken(String token) =>
