@@ -179,6 +179,12 @@ class AdminRepository {
     return data['data'] as Map<String, dynamic>? ?? {};
   }
 
+  /// Downloads one of the CSV exports (orders, users, payouts) as text.
+  Future<String> exportCsv(String path, {Map<String, dynamic>? params}) async {
+    final response = await _api.get(path, params: params);
+    return (response.data ?? '').toString();
+  }
+
   // Backend: GET /api/admin/analytics/revenue-trend
   Future<Map<String, dynamic>> getRevenueTrend({String period = 'month'}) async {
     final response = await _api.get('/admin/analytics/revenue-trend', params: {'period': period});

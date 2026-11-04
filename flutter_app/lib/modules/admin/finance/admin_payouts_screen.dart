@@ -4,6 +4,7 @@ import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../admin_controller.dart';
+import '../widgets/export_csv_button.dart';
 
 class AdminPayoutsScreen extends StatefulWidget {
   const AdminPayoutsScreen({super.key});
@@ -116,6 +117,15 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Payout Requests'),
+        actions: [
+          ExportCsvButton(
+            path: '/financial/admin/payouts/export',
+            noun: 'payouts',
+            params: () => {
+              'status': const ['Pending', 'Processing', 'Completed'][_tabController.index],
+            },
+          ),
+        ],
         leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'admin_order_detail_screen.dart';
 import '../widgets/admin_drawer.dart';
+import '../widgets/export_csv_button.dart';
 
 import '../admin_controller.dart';
 
@@ -73,6 +74,17 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ExportCsvButton(
+                        path: '/admin/orders/export',
+                        noun: 'orders',
+                        params: () => {
+                          if (_selectedFilter.value != 'All')
+                            'status': _selectedFilter.value.toLowerCase(),
+                        },
+                      ),
+                    ),
                     // Filter Pills
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,

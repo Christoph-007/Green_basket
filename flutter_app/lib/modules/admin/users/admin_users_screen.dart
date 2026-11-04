@@ -5,6 +5,7 @@ import 'package:greenbasket_app/config/theme.dart';
 import '../admin_controller.dart';
 import 'user_detail_screen.dart';
 import '../widgets/admin_drawer.dart';
+import '../widgets/export_csv_button.dart';
 
 class AdminUsersScreen extends StatefulWidget {
   const AdminUsersScreen({super.key});
@@ -42,7 +43,18 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 children: [
                   _buildSearchBar(),
-                  const SizedBox(height: 16),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ExportCsvButton(
+                      path: '/admin/users/export',
+                      noun: 'users',
+                      params: () => {
+                        if (_searchQuery.trim().isNotEmpty) 'search': _searchQuery.trim(),
+                        if (_selectedFilter != 'All')
+                          'blocked': _selectedFilter == 'Blocked' ? 'true' : 'false',
+                      },
+                    ),
+                  ),
                   Row(
                     children: [
                       _buildPill('All'),
