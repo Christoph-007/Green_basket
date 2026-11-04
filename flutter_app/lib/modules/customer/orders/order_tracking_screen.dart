@@ -237,7 +237,7 @@ class OrderTrackingScreen extends StatelessWidget {
                   height: 180,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE8EAE6),
+                    color: AppColors.neutralSoft,
                     borderRadius:
                         BorderRadius.circular(AppRadius.md),
                   ),

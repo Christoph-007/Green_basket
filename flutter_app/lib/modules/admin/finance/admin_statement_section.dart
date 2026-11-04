@@ -37,7 +37,7 @@ class AdminStatementSection extends StatelessWidget {
             children: [
               const Expanded(
                 child: Text('Financial Statement',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A))),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
               ),
               if (loading)
                 const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
@@ -94,13 +94,13 @@ class AdminStatementSection extends StatelessWidget {
             )),
             const SizedBox(height: 16),
             const Text('Month by month',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A))),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
             const SizedBox(height: 8),
             ...months.map((m) => _monthTile(context, m)),
             if (years.length > 1) ...[
               const SizedBox(height: 16),
               const Text('Year by year',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A))),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
               const SizedBox(height: 8),
               _box(Column(
                 children: years.map((y) {
@@ -144,7 +144,7 @@ class AdminStatementSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: Color(0x141F5C35), blurRadius: 10, offset: Offset(0, 3))],
+        boxShadow: const [BoxShadow(color: AppColors.shadowTintLight, blurRadius: 10, offset: Offset(0, 3))],
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -153,7 +153,7 @@ class AdminStatementSection extends StatelessWidget {
           tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
           title: Text((m['name'] ?? '').toString(),
-              style: TextStyle(fontWeight: FontWeight.w600, color: empty ? Colors.grey : const Color(0xFF1A1A1A))),
+              style: TextStyle(fontWeight: FontWeight.w600, color: empty ? Colors.grey : AppColors.textPrimary)),
           subtitle: Text(empty ? 'No sales' : '${m['orders']} orders · Gross ${_money(m['grossRevenue'])}',
               style: AppTextStyles.bodySmall),
           trailing: Text(empty ? '—' : _money(m['netRevenue']),
@@ -193,7 +193,7 @@ class AdminStatementSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [BoxShadow(color: Color(0x201F5C35), blurRadius: 18, offset: Offset(0, 6))],
+        boxShadow: const [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
       ),
       child: child,
     );

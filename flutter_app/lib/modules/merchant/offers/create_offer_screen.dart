@@ -227,7 +227,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFFE53935), Color(0xFFFF5722)],
+                    colors: [AppColors.error, AppColors.deepOrange],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),

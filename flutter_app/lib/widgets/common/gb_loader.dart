@@ -28,8 +28,8 @@ class GBShimmerBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: const Color(0xFFE0E0E0),
-      highlightColor: const Color(0xFFF5F5F5),
+      baseColor: AppColors.border,
+      highlightColor: AppColors.background,
       child: Container(
         width: width,
         height: height,
@@ -48,8 +48,8 @@ class GBProductCardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: const Color(0xFFE0E0E0),
-      highlightColor: const Color(0xFFF5F5F5),
+      baseColor: AppColors.border,
+      highlightColor: AppColors.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

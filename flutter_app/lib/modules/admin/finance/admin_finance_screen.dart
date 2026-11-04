@@ -23,7 +23,7 @@ class AdminFinanceScreen extends StatelessWidget {
     final AdminController controller = Get.find<AdminController>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: AppColors.backgroundAlt,
       drawer: const AdminDrawer(),
       body: Column(
         children: [
@@ -37,7 +37,7 @@ class AdminFinanceScreen extends StatelessWidget {
             ),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF1B4332), Color(0xFF2D6A4F)],
+                colors: [AppColors.brandDeep, AppColors.brandDeepLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -132,7 +132,7 @@ class AdminFinanceScreen extends StatelessWidget {
                           title: 'Total Revenue',
                           value: _money(totalRevenue),
                           icon: Icons.trending_up,
-                          color: const Color(0xFF1F5C35),
+                          color: AppColors.brandAccent,
                           onTap: () {
                              Get.to(() => const AdminFinanceOrdersDetailScreen(
                                 title: 'Total Revenue Orders',
@@ -194,7 +194,7 @@ class AdminFinanceScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF1A1A1A),
+                      color: AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -290,7 +290,7 @@ class AdminFinanceScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x201F5C35),
+            color: AppColors.shadowTint,
             blurRadius: 18,
             offset: Offset(0, 6),
           ),
@@ -309,7 +309,7 @@ class AdminFinanceScreen extends StatelessWidget {
               if (p != completedPayouts.last)
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Divider(color: Color(0xFFE8E8E8), height: 1),
+                  child: Divider(color: AppColors.borderLight, height: 1),
                 ),
             ],
           );
@@ -337,7 +337,7 @@ class AdminFinanceScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x201F5C35),
+                color: AppColors.shadowTint,
                 blurRadius: 18,
                 offset: Offset(0, 6),
               ),
@@ -361,7 +361,7 @@ class AdminFinanceScreen extends StatelessWidget {
                 child: Text(
                   value,
                   maxLines: 1,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF1A1A1A)),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.textPrimary),
                 ),
               ),
               const SizedBox(height: 4),
@@ -369,7 +369,7 @@ class AdminFinanceScreen extends StatelessWidget {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: Color(0xFF9C9B99), fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 12, color: AppColors.textMuted, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -392,9 +392,9 @@ class AdminFinanceScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF1A1A1A))),
+                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.textPrimary)),
                     const SizedBox(height: 4),
-                    Text(date, style: const TextStyle(fontSize: 12, color: Color(0xFF9C9B99))),
+                    Text(date, style: const TextStyle(fontSize: 12, color: AppColors.textMuted)),
                   ],
                 ),
               ),
@@ -404,7 +404,7 @@ class AdminFinanceScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
-                  color: isCredit ? const Color(0xFF1A4D2E) : const Color(0xFFDC2626),
+                  color: isCredit ? AppColors.brandForest : AppColors.errorStrong,
                 ),
               ),
             ],

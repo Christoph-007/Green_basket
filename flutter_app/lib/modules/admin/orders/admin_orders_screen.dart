@@ -37,7 +37,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F4F1),
+      backgroundColor: AppColors.backgroundWarm,
       drawer: const AdminDrawer(),
       body: Column(
         children: [
@@ -51,7 +51,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
             ),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF1A4D2E), Color(0xFF2D7A4A)],
+                colors: [AppColors.brandForest, AppColors.brandMid],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -192,7 +192,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
           decoration: BoxDecoration(
             color: isActive ? AppColors.primary : Colors.white,
             borderRadius: BorderRadius.circular(999),
-            border: isActive ? null : Border.all(color: const Color(0xFFE8E8E8)),
+            border: isActive ? null : Border.all(color: AppColors.borderLight),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -248,52 +248,52 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
     switch (status.toLowerCase()) {
       case 'delivered':
         return {
-          'color': const Color(0xFF1A4D2E),
-          'bgColor': const Color(0xFFE8F5E9),
+          'color': AppColors.brandForest,
+          'bgColor': AppColors.primaryContainer,
           'icon': Icons.check_circle_outline,
           'label': 'Delivered',
         };
       case 'confirmed':
         return {
           'color': AppColors.info,
-          'bgColor': const Color(0xFFE3F2FD),
+          'bgColor': AppColors.statusConfirmed,
           'icon': Icons.thumb_up_outlined,
           'label': 'Confirmed',
         };
       case 'ready':
         return {
-          'color': const Color(0xFF6A1B9A),
-          'bgColor': const Color(0xFFF3E5F5),
+          'color': AppColors.purpleDeep,
+          'bgColor': AppColors.purpleContainer,
           'icon': Icons.inventory_2_outlined,
           'label': 'Ready',
         };
       case 'dispatched':
       case 'out-for-delivery':
         return {
-          'color': const Color(0xFFE65100),
-          'bgColor': const Color(0xFFFFF3E0),
+          'color': AppColors.secondaryDark,
+          'bgColor': AppColors.statusPreparing,
           'icon': Icons.local_shipping_outlined,
           'label': 'Out for Delivery',
         };
       case 'cancelled':
         return {
-          'color': const Color(0xFFDC2626),
-          'bgColor': const Color(0xFFFFEBEE),
+          'color': AppColors.errorStrong,
+          'bgColor': AppColors.statusCancelled,
           'icon': Icons.cancel_outlined,
           'label': 'Cancelled',
         };
       case 'refunded':
         return {
-          'color': const Color(0xFFDC2626),
-          'bgColor': const Color(0xFFFFEBEE),
+          'color': AppColors.errorStrong,
+          'bgColor': AppColors.statusCancelled,
           'icon': Icons.replay,
           'label': 'Refunded',
         };
       case 'pending':
       default:
         return {
-          'color': const Color(0xFFD97706),
-          'bgColor': const Color(0xFFFFF9C4),
+          'color': AppColors.warningDeep,
+          'bgColor': AppColors.statusPending,
           'icon': Icons.schedule,
           'label': 'Pending',
         };
@@ -351,7 +351,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
             borderRadius: BorderRadius.circular(16),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x101F5C35),
+                color: AppColors.shadowTintFaint,
                 blurRadius: 12,
                 offset: Offset(0, 4),
               ),
@@ -420,7 +420,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
               ),
               
               const SizedBox(height: 12),
-              const Divider(height: 1, color: Color(0xFFF0F0F0)),
+              const Divider(height: 1, color: AppColors.divider),
               const SizedBox(height: 12),
 
               // Row 2: Customer + Merchant
@@ -476,7 +476,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
+                      color: AppColors.background,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Row(
@@ -496,7 +496,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
+                      color: AppColors.background,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Row(

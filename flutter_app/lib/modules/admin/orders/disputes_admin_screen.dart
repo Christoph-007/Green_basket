@@ -119,7 +119,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
       case 'open':
         return AppColors.error;
       case 'escalated':
-        return const Color(0xFFD32F2F);
+        return AppColors.errorDark;
       case 'investigating':
         return AppColors.warning;
       case 'resolved':

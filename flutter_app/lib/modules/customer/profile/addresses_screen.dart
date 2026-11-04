@@ -126,7 +126,7 @@ class _AddressCard extends StatelessWidget {
       labelIcon = Icons.home_rounded;
     } else if (label.toLowerCase() == 'work') {
       labelColor = AppColors.info;
-      labelBg = const Color(0xFFE3F2FD);
+      labelBg = AppColors.statusConfirmed;
       labelIcon = Icons.work_rounded;
     }
 

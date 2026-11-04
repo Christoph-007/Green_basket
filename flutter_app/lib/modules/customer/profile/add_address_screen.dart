@@ -183,7 +183,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       height: 200,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE8EAE6),
+                        color: AppColors.neutralSoft,
                         borderRadius:
                             BorderRadius.circular(AppRadius.md),
                         border: Border.all(color: AppColors.border),
@@ -400,7 +400,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 color: AppColors.surface,
                 boxShadow: [
                   BoxShadow(
-                      color: Color(0x1A000000),
+                      color: AppColors.shadow,
                       blurRadius: 8,
                       offset: Offset(0, -2)),
                 ],

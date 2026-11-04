@@ -573,7 +573,7 @@ class ProductDetailScreen extends StatelessWidget {
                   color: AppColors.surface,
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0x1A000000),
+                      color: AppColors.shadow,
                       blurRadius: 12,
                       offset: Offset(0, -4),
                     )

@@ -43,6 +43,56 @@ class AppColors {
 
   // Shadow
   static const Color shadow = Color(0x1A000000);
+  static const Color shadowFaint = Color(0x0D000000);
+  // Green-tinted shadows used by admin cards
+  static const Color shadowTint = Color(0x201F5C35);
+  static const Color shadowTintLight = Color(0x141F5C35);
+  static const Color shadowTintFaint = Color(0x101F5C35);
+
+  // ── Extended palette ─────────────────────────────────────────────
+  // These hold colours that screens previously declared inline. The values
+  // are unchanged; they now live in one place.
+
+  // Brand greens used by admin headers and accents
+  static const Color brandDeep = Color(0xFF1B4332);
+  static const Color brandDeepLight = Color(0xFF2D6A4F);
+  static const Color brandForest = Color(0xFF1A4D2E);
+  static const Color brandMid = Color(0xFF2D7A4A);
+  static const Color brandAccent = Color(0xFF1F5C35);
+  static const Color primarySoft = Color(0xFFE8F2EC);
+  static const Color primarySofter = Color(0xFFE8F0E8);
+
+  // Neutrals
+  static const Color borderLight = Color(0xFFE8E8E8);
+  static const Color textMuted = Color(0xFF9C9B99);
+  static const Color neutralGrey = Color(0xFF9E9E9E);
+  static const Color neutralSoft = Color(0xFFE8EAE6);
+  static const Color backgroundWarm = Color(0xFFF5F4F1);
+  static const Color backgroundAlt = Color(0xFFF9F9F9);
+
+  // Reds
+  static const Color errorStrong = Color(0xFFDC2626);
+  static const Color errorDark = Color(0xFFD32F2F);
+  static const Color errorSoft = Color(0xFFFEE2E2);
+
+  // Ambers and oranges
+  static const Color warningAmber = Color(0xFFF59E0B);
+  static const Color warningDeep = Color(0xFFD97706);
+  static const Color amber = Color(0xFFFFC107);
+  static const Color amberDark = Color(0xFFFF8F00);
+  static const Color amberContainer = Color(0xFFFEF3C7);
+  static const Color orange = Color(0xFFFF9800);
+  static const Color deepOrange = Color(0xFFFF5722);
+
+  // Purples, blues and others (charts, badges)
+  static const Color purple = Color(0xFF9C27B0);
+  static const Color chartPurple = Color(0xFF7B1FA2);
+  static const Color purpleDeep = Color(0xFF6A1B9A);
+  static const Color purpleContainer = Color(0xFFF3E5F5);
+  static const Color chartBrown = Color(0xFF8D6E63);
+  static const Color blue = Color(0xFF2196F3);
+  static const Color blueDark = Color(0xFF1565C0);
+  static const Color cyan = Color(0xFF00BCD4);
 }
 
 class AppSpacing {

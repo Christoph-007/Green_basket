@@ -138,15 +138,15 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
   Color _discountBgColor(String type) {
     switch (type.toLowerCase()) {
       case 'percentage':
-        return const Color(0xFF4CAF50);
+        return AppColors.primaryLight;
       case 'flat':
-        return const Color(0xFF2196F3);
+        return AppColors.blue;
       case 'free_delivery':
-        return const Color(0xFFFF9800);
+        return AppColors.orange;
       case 'bogo':
-        return const Color(0xFF9C27B0);
+        return AppColors.purple;
       case 'bundle':
-        return const Color(0xFF00BCD4);
+        return AppColors.cyan;
       default:
         return AppColors.primary;
     }

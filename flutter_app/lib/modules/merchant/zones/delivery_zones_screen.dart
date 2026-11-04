@@ -160,7 +160,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                       height: 220,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE8F0E8),
+                        color: AppColors.primarySofter,
                         borderRadius: BorderRadius.circular(AppRadius.lg),
                         border: Border.all(color: AppColors.border),
                       ),

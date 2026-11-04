@@ -447,7 +447,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
             Row(
               children: [
                 const Icon(Icons.workspace_premium,
-                    color: Color(0xFFFF8F00)),
+                    color: AppColors.amberDark),
                 const SizedBox(width: AppSpacing.sm),
                 const Text('Premium Merchant Rate',
                     style: AppTextStyles.titleLarge),
@@ -481,7 +481,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                               '${_premiumCtrl.text}%',
                               style: AppTextStyles.headlineLarge
                                   .copyWith(
-                                      color: const Color(0xFFFF8F00)),
+                                      color: AppColors.amberDark),
                             ),
                             Text('For premium merchants',
                                 style: AppTextStyles.bodySmall),
@@ -493,7 +493,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                       _editingPremium
                           ? Icons.check
                           : Icons.edit_outlined,
-                      color: const Color(0xFFFF8F00)),
+                      color: AppColors.amberDark),
                   onPressed: () =>
                       setState(() => _editingPremium = !_editingPremium),
                 ),

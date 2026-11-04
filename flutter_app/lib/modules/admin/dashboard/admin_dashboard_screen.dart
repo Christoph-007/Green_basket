@@ -516,8 +516,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         };
       case 'ready':
         return {
-          'color': const Color(0xFF6A1B9A),
-          'bgColor': const Color(0xFFF3E5F5),
+          'color': AppColors.purpleDeep,
+          'bgColor': AppColors.purpleContainer,
           'icon': Icons.inventory_2_outlined,
           'label': 'Ready',
         };

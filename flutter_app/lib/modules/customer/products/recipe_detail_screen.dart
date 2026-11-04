@@ -472,7 +472,7 @@ class RecipeDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 28),
                 decoration: const BoxDecoration(
                   color: AppColors.surface,
-                  boxShadow: [BoxShadow(color: Color(0x1A000000), blurRadius: 8, offset: Offset(0, -2))],
+                  boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
                 ),
                 child: SizedBox(
                   width: double.infinity,

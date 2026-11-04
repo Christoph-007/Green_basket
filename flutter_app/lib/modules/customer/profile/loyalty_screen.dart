@@ -77,14 +77,14 @@ class LoyaltyScreen extends StatelessWidget {
 
   // Correct tiers synced with backend
   static const _tiers = [
-    {'name': 'Bronze', 'min': 0, 'max': 499, 'color': Color(0xFF8D6E63)},
-    {'name': 'Silver', 'min': 500, 'max': 999, 'color': Color(0xFF9E9E9E)},
-    {'name': 'Gold', 'min': 1000, 'max': 2499, 'color': Color(0xFFFFC107)},
+    {'name': 'Bronze', 'min': 0, 'max': 499, 'color': AppColors.chartBrown},
+    {'name': 'Silver', 'min': 500, 'max': 999, 'color': AppColors.neutralGrey},
+    {'name': 'Gold', 'min': 1000, 'max': 2499, 'color': AppColors.amber},
     {
       'name': 'Platinum',
       'min': 2500,
       'max': 999999,
-      'color': Color(0xFF7B1FA2),
+      'color': AppColors.chartPurple,
     },
   ];
 
@@ -434,13 +434,13 @@ class LoyaltyScreen extends StatelessWidget {
   Color _getTierColor(String tier) {
     switch (tier.toLowerCase()) {
       case 'silver':
-        return const Color(0xFF9E9E9E);
+        return AppColors.neutralGrey;
       case 'gold':
-        return const Color(0xFFFFC107);
+        return AppColors.amber;
       case 'platinum':
-        return const Color(0xFF7B1FA2);
+        return AppColors.chartPurple;
       default:
-        return const Color(0xFF8D6E63);
+        return AppColors.chartBrown;
     }
   }
 }

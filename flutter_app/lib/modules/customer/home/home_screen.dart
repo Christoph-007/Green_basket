@@ -407,8 +407,8 @@ class _BannerSectionState extends State<_BannerSection> {
   final _bannerColors = [
     [AppColors.primary, AppColors.primaryDark],
     [AppColors.secondary, AppColors.secondaryDark],
-    [const Color(0xFF1E88E5), const Color(0xFF1565C0)],
-    [const Color(0xFFE53935), const Color(0xFFD32F2F)],
+    [AppColors.info, AppColors.blueDark],
+    [AppColors.error, AppColors.errorDark],
   ];
 
   String _getOfferTitle(Map<String, dynamic> offer) {
@@ -750,7 +750,7 @@ class _HomeRecipeCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.md),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x0D000000),
+              color: AppColors.shadowFaint,
               blurRadius: 6,
               offset: Offset(0, 2),
             ),

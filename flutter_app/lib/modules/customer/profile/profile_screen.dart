@@ -230,13 +230,13 @@ class _TierBadge extends StatelessWidget {
   Color get color {
     switch (tier) {
       case 'silver':
-        return const Color(0xFF9E9E9E);
+        return AppColors.neutralGrey;
       case 'gold':
-        return const Color(0xFFFFC107);
+        return AppColors.amber;
       case 'platinum':
-        return const Color(0xFF7B1FA2);
+        return AppColors.chartPurple;
       default:
-        return const Color(0xFF8D6E63);
+        return AppColors.chartBrown;
     }
   }
 

@@ -20,7 +20,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F4F1),
+      backgroundColor: AppColors.backgroundWarm,
       drawer: const AdminDrawer(),
       body: Column(
         children: [
@@ -83,7 +83,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF1A4D2E), Color(0xFF2D7A4A)],
+          colors: [AppColors.brandForest, AppColors.brandMid],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -134,19 +134,19 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8E8E8)),
+        border: Border.all(color: AppColors.borderLight),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          const Icon(Icons.search, color: Color(0xFF9C9B99), size: 18),
+          const Icon(Icons.search, color: AppColors.textMuted, size: 18),
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
               onChanged: (val) => setState(() => _searchQuery = val),
               decoration: const InputDecoration(
                 hintText: 'Search users...',
-                hintStyle: TextStyle(color: Color(0xFF9C9B99), fontSize: 14),
+                hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 14),
                 border: InputBorder.none,
                 isDense: true,
               ),
@@ -167,7 +167,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
         decoration: BoxDecoration(
           color: isActive ? AppColors.primary : Colors.white,
           borderRadius: BorderRadius.circular(999),
-          border: isActive ? null : Border.all(color: const Color(0xFFE8E8E8)),
+          border: isActive ? null : Border.all(color: AppColors.borderLight),
         ),
         child: Text(
           title,
@@ -185,8 +185,8 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
     final name = user['name'] ?? 'Unknown';
     final email = user['email'] ?? 'No email';
     final isBlocked = user['isBlocked'] ?? false;
-    final color = isBlocked ? const Color(0xFFFEE2E2) : const Color(0xFFE8F2EC);
-    final statusColor = isBlocked ? const Color(0xFFDC2626) : const Color(0xFF1F5C35);
+    final color = isBlocked ? AppColors.errorSoft : AppColors.primarySoft;
+    final statusColor = isBlocked ? AppColors.errorStrong : AppColors.brandAccent;
 
     return Material(
       color: Colors.transparent,
@@ -198,7 +198,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: Color(0x201F5C35), blurRadius: 18, offset: Offset(0, 6))],
+            boxShadow: const [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
           ),
           child: Row(
             children: [
