@@ -9,6 +9,9 @@ import 'package:greenbasket_app/modules/admin/orders/admin_orders_screen.dart';
 import 'package:greenbasket_app/modules/admin/orders/admin_order_detail_screen.dart';
 import 'package:greenbasket_app/modules/admin/merchants/admin_merchants_screen.dart';
 import '../widgets/admin_drawer.dart';
+import '../orders/disputes_admin_screen.dart';
+import '../orders/returns_admin_screen.dart';
+import '../finance/admin_payouts_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
@@ -194,12 +197,29 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               }),
             ],
           )),
+          const SizedBox(height: 12),
+          // One-tap entry points to the queues that also live in the menu.
+          Row(
+            children: [
+              _actionCard('Disputes', AppColors.errorSoft, AppColors.errorStrong,
+                  icon: Icons.gavel_outlined,
+                  onTap: () => Get.to(() => const DisputesAdminScreen())),
+              const SizedBox(width: 12),
+              _actionCard('Returns', AppColors.statusConfirmed, AppColors.info,
+                  icon: Icons.keyboard_return,
+                  onTap: () => Get.to(() => const ReturnsAdminScreen())),
+              const SizedBox(width: 12),
+              _actionCard('Payouts', AppColors.primaryContainer, AppColors.primary,
+                  icon: Icons.payment,
+                  onTap: () => Get.to(() => const AdminPayoutsScreen())),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _actionCard(String text, Color bgColor, Color iconColor, {VoidCallback? onTap}) {
+  Widget _actionCard(String text, Color bgColor, Color iconColor, {VoidCallback? onTap, IconData icon = Icons.report_gmailerrorred}) {
     return Expanded(
       child: Material(
         color: Colors.transparent,
@@ -215,7 +235,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             ),
             child: Row(
               children: [
-                Icon(Icons.report_gmailerrorred, color: iconColor),
+                Icon(icon, color: iconColor),
                 const SizedBox(width: 8),
                 Expanded(child: Text(text, style: AppTextStyles.labelSmall.copyWith(color: Colors.black))),
               ],
