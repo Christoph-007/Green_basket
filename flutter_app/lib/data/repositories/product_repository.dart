@@ -1,3 +1,4 @@
+import 'package:greenbasket_app/utils/ttl_cache.dart';
 import '../providers/api_provider.dart';
 import '../models/product_model.dart';
 
@@ -81,11 +82,21 @@ class ProductRepository {
     return ProductModel.fromJson(inner);
   }
 
-  Future<List<CategoryModel>> getCategories() async {
-    final response = await _api.get('/categories');
-    final data = response.data as Map<String, dynamic>;
-    final items = data['data'] as List<dynamic>? ?? [];
-    return items.map((e) => CategoryModel.fromJson(e)).toList();
+  // Categories change rarely and several screens ask for them, so keep the
+  // last list for a couple of minutes. Shared by every repository instance.
+  static final _categoriesCache =
+      TtlCache<List<CategoryModel>>(const Duration(minutes: 2));
+
+  /// Call after categories are created, edited or deleted.
+  static void invalidateCategories() => _categoriesCache.clear();
+
+  Future<List<CategoryModel>> getCategories({bool force = false}) {
+    return _categoriesCache.get(() async {
+      final response = await _api.get('/categories');
+      final data = response.data as Map<String, dynamic>;
+      final items = data['data'] as List<dynamic>? ?? [];
+      return items.map((e) => CategoryModel.fromJson(e)).toList();
+    }, force: force);
   }
 
   Future<List<ProductModel>> search(String query) async {

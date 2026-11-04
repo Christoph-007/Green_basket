@@ -1,4 +1,5 @@
 import 'package:greenbasket_app/data/providers/api_provider.dart';
+import 'package:greenbasket_app/data/repositories/product_repository.dart';
 
 class AdminRepository {
   final _api = ApiProvider();
@@ -108,11 +109,13 @@ class AdminRepository {
   // Backend: PUT /api/admin/categories/:id
   Future<void> updateCategory(String id, Map<String, dynamic> body) async {
     await _api.put('/admin/categories/$id', data: body);
+    ProductRepository.invalidateCategories();
   }
 
   // Backend: DELETE /api/admin/categories/:id
   Future<void> deleteCategory(String id) async {
     await _api.delete('/admin/categories/$id');
+    ProductRepository.invalidateCategories();
   }
 
   // Backend: GET /api/recipes/admin/all (admin - all recipes including drafts)
@@ -302,6 +305,7 @@ class AdminRepository {
 
   Future<Map<String, dynamic>> createCategory(Map<String, dynamic> body) async {
     final response = await _api.post('/categories', data: body);
+    ProductRepository.invalidateCategories();
     return response.data as Map<String, dynamic>;
   }
 
