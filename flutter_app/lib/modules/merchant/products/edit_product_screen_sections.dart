@@ -59,16 +59,7 @@ extension _EditProductScreenStateSections on _EditProductScreenState {
           children: [
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _isSaving ? null : _saveChanges,
-                child: _isSaving
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                            strokeWidth: 2, color: Colors.white))
-                    : const Text('Update Product'),
-              ),
+              child: GBButton(label: 'Update Product', isLoading: _isSaving, onPressed: _saveChanges),
             ),
             const SizedBox(height: AppSpacing.sm),
             SizedBox(

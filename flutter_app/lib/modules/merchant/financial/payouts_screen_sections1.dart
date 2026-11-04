@@ -67,28 +67,14 @@ extension _PayoutsScreenSections1 on PayoutsScreen {
                       )),
                 ],
               ),
-              Obx(() => ElevatedButton(
-                    onPressed: controller.isRequesting.value ||
-                            controller.availableBalance.value <= 0
+              Obx(() => GBButton(
+                    label: 'Request Payout',
+                    isLoading: controller.isRequesting.value,
+                    onPressed: controller.availableBalance.value <= 0
                         ? null
                         : () => _confirmPayout(Get.context!, controller),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: AppColors.primary,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.lg,
-                        vertical: AppSpacing.sm,
-                      ),
-                    ),
-                    child: controller.isRequesting.value
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2))
-                        : Text('Request Payout',
-                            style: AppTextStyles.labelLarge
-                                .copyWith(color: AppColors.primary)),
+                    backgroundColor: Colors.white,
+                    foregroundColor: AppColors.primary,
                   )),
             ],
           ),

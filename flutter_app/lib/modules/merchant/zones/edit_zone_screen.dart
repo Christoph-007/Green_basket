@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -256,16 +257,7 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
         child: SafeArea(
           child: SizedBox(
             width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _isSaving ? null : _saveZone,
-              child: _isSaving
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                          strokeWidth: 2, color: Colors.white))
-                  : Text(_isEditing ? 'Save Zone' : 'Create Zone'),
-            ),
+            child: GBButton(label: _isEditing ? 'Save Zone' : 'Create Zone', isLoading: _isSaving, onPressed: _saveZone),
           ),
         ),
       ),

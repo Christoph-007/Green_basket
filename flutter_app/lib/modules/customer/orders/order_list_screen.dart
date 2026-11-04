@@ -1,6 +1,7 @@
 import '../nav_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -282,19 +283,18 @@ class _OrderCard extends StatelessWidget {
                 // Submit button
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedRating == 0
-                          ? AppColors.border
-                          : AppColors.primary,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.md),
-                      ),
-                      elevation: 0,
-                    ),
-                    onPressed: isSubmitting || selectedRating == 0
+                  child: GBButton(
+                    label: selectedRating == 0
+                        ? 'Select a rating first'
+                        : 'Submit Review',
+                    isLoading: isSubmitting,
+                    backgroundColor: selectedRating == 0
+                        ? AppColors.border
+                        : AppColors.primary,
+                    foregroundColor: selectedRating == 0
+                        ? AppColors.textSecondary
+                        : Colors.white,
+                    onPressed: selectedRating == 0
                         ? null
                         : () async {
                             setState(() => isSubmitting = true);
@@ -321,19 +321,6 @@ class _OrderCard extends StatelessWidget {
                               GBSnack.error('Could Not Submit', error);
                             }
                           },
-                    child: isSubmitting
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                                color: Colors.white, strokeWidth: 2))
-                        : Text(
-                            selectedRating == 0
-                                ? 'Select a rating first'
-                                : 'Submit Review',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 16),
-                          ),
                   ),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -208,15 +209,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
               const SizedBox(height: AppSpacing.xl),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _isPublishing ? null : _publish,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: _isPublishing
-                      ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                      : const Text('Publish Recipe'),
-                ),
+                child: GBButton(label: 'Publish Recipe', isLoading: _isPublishing, onPressed: _publish),
               ),
               const SizedBox(height: AppSpacing.lg),
             ],

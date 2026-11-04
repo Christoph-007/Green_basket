@@ -402,17 +402,7 @@ class _MerchantOrderDetailScreenState
               if (_primaryActionLabel != null)
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _isUpdating ? null : _advanceStatus,
-                    child: _isUpdating
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white))
-                        : Text(_primaryActionLabel!),
-                  ),
+                  child: GBButton(label: _primaryActionLabel!, isLoading: _isUpdating, onPressed: _advanceStatus),
                 ),
               if (_primaryActionLabel != null)
                 const SizedBox(height: AppSpacing.sm),

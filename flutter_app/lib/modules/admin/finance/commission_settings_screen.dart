@@ -231,20 +231,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                     const SizedBox(height: AppSpacing.xl),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _isSaving ? null : _saveSettings,
-                        style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16)),
-                        child: _isSaving
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: Colors.white))
-                            : const Text('Save All Changes'),
-                      ),
+                      child: GBButton(label: 'Save All Changes', isLoading: _isSaving, onPressed: _saveSettings),
                     ),
                     const SizedBox(height: AppSpacing.lg),
                   ],

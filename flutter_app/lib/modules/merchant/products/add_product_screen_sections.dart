@@ -124,18 +124,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
             if (_currentStep > 0) const SizedBox(width: AppSpacing.md),
             Expanded(
               flex: 2,
-              child: ElevatedButton(
-                onPressed: _isSubmitting
-                    ? null
-                    : (_currentStep < 3 ? _nextStep : _submitProduct),
-                child: _isSubmitting
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                            strokeWidth: 2, color: Colors.white))
-                    : Text(_currentStep < 3 ? 'Next Step' : 'Add Product'),
-              ),
+              child: GBButton(label: _currentStep < 3 ? 'Next Step' : 'Add Product', isLoading: _isSubmitting, onPressed: (_currentStep < 3 ? _nextStep : _submitProduct)),
             ),
           ],
         ),

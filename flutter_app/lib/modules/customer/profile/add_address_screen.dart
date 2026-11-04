@@ -440,25 +440,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               child: SizedBox(
                 width: double.infinity,
                 height: 52,
-                child: ElevatedButton(
-                  onPressed: _isSaving ? null : _save,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(AppRadius.md),
-                    ),
-                  ),
-                  child: _isSaving
-                      ? const SizedBox(
-                          width: 22,
-                          height: 22,
-                          child: CircularProgressIndicator(
-                              color: Colors.white, strokeWidth: 2.5),
-                        )
-                      : const Text('Save Address'),
-                ),
+                child: GBButton(label: 'Save Address', isLoading: _isSaving, onPressed: _save, backgroundColor: AppColors.primary, foregroundColor: Colors.white),
               ),
             ),
           ],

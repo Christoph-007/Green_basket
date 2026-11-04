@@ -44,10 +44,11 @@ class GBButton extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2.5,
               valueColor: AlwaysStoppedAnimation<Color>(
-                (variant == GBButtonVariant.primary ||
-                        variant == GBButtonVariant.danger)
-                    ? Colors.white
-                    : AppColors.primary,
+                foregroundColor ??
+                    ((variant == GBButtonVariant.primary ||
+                            variant == GBButtonVariant.danger)
+                        ? Colors.white
+                        : AppColors.primary),
               ),
             ),
           )
