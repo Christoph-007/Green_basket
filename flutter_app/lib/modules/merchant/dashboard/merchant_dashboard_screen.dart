@@ -207,7 +207,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
             const SizedBox(height: 4),
             Text(label,
                 style: const TextStyle(
-                    fontSize: 10, color: AppColors.textSecondary),
+                    fontSize: 11, color: AppColors.textSecondary),
                 textAlign: TextAlign.center),
           ],
         ),
@@ -319,7 +319,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                 style: AppTextStyles.titleMedium.copyWith(
                     color: color, fontWeight: FontWeight.w700)),
             Text(label,
-                style: TextStyle(fontSize: 10, color: color),
+                style: TextStyle(fontSize: 11, color: color),
                 textAlign: TextAlign.center),
           ],
         ),
@@ -721,7 +721,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
       child: Text(
         isPaid ? 'PAID' : method.toUpperCase(),
         style: TextStyle(
-          fontSize: 9,
+          fontSize: 11,
           fontWeight: FontWeight.w700,
           color: isPaid ? AppColors.success : Colors.orange.shade700,
         ),

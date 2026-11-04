@@ -305,7 +305,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                         Text(
                           _typeLabel(type),
                           style: AppTextStyles.labelSmall
-                              .copyWith(color: Colors.white70, fontSize: 9),
+                              .copyWith(color: Colors.white70, fontSize: 11),
                         ),
                       ],
                     ),
@@ -336,7 +336,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                                 ),
                                 child: const Text('⚡ Flash',
                                     style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 11,
                                         color: AppColors.error)),
                               ),
                             ],
@@ -534,7 +534,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                                 ),
                                 child: const Text('⚡ Flash Sale',
                                     style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 11,
                                         color: AppColors.error)),
                               ),
                             ],

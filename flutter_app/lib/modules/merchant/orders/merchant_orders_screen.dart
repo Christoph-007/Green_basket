@@ -151,7 +151,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(color: AppColors.info),
                                     ),
-                                    child: const Text('PICKUP', style: TextStyle(fontSize: 10, color: AppColors.info, fontWeight: FontWeight.bold)),
+                                    child: const Text('PICKUP', style: TextStyle(fontSize: 11, color: AppColors.info, fontWeight: FontWeight.bold)),
                                   ),
                                 ],
                               ],
@@ -229,7 +229,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                         child: Center(
                                           child: Text('${item.quantity}x',
                                               style: const TextStyle(
-                                                  fontSize: 10,
+                                                  fontSize: 11,
                                                   fontWeight: FontWeight.bold,
                                                   color: AppColors.primary)),
                                         ),

@@ -220,7 +220,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                         _statuses[stepIndex],
                         style: AppTextStyles.labelSmall.copyWith(
                           color: isDone ? AppColors.primary : AppColors.textHint,
-                          fontSize: 9,
+                          fontSize: 11,
                         ),
                         textAlign: TextAlign.center,
                       ),

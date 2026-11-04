@@ -329,7 +329,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                                 _progressSteps[i],
                                 style: TextStyle(
                                   fontFamily: AppTextStyles.fontFamily,
-                                  fontSize: 9,
+                                  fontSize: 11,
                                   fontWeight: isCurrent
                                       ? FontWeight.w700
                                       : FontWeight.w400,

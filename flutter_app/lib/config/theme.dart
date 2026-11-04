@@ -190,6 +190,15 @@ class AppTextStyles {
     height: 1.6,
   );
 
+  /// 13 px body text, used by compact rows and list subtitles.
+  static const TextStyle bodyCompact = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPrimary,
+    height: 1.6,
+  );
+
   static const TextStyle bodySmall = TextStyle(
     fontFamily: fontFamily,
     fontSize: 12,
@@ -320,6 +329,10 @@ class AppTheme {
           unselectedItemColor: AppColors.textSecondary,
           showSelectedLabels: true,
           showUnselectedLabels: true,
+          // Same size for selected and unselected so icons stay level, and
+          // small enough for six tabs in Poppins.
+          selectedFontSize: 11,
+          unselectedFontSize: 11,
           type: BottomNavigationBarType.fixed,
           elevation: 8,
         ),

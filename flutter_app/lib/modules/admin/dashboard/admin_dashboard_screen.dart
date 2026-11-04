@@ -446,7 +446,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                               ),
                               child: Text(
                                 '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
-                                style: const TextStyle(fontSize: 10, color: AppColors.textSecondary),
+                                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                               ),
                             ),
                           ],
@@ -478,7 +478,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           Text(
                             paymentMethod == 'COD' ? 'COD' : paymentMethod,
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 11,
                               color: paymentStatus == 'completed' || paymentStatus == 'paid'
                                   ? AppColors.success
                                   : AppColors.textSecondary,

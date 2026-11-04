@@ -816,7 +816,7 @@ class _HomeRecipeCard extends StatelessWidget {
                               recipe.displayMealType.toUpperCase(),
                               style: const TextStyle(
                                 fontFamily: AppTextStyles.fontFamily,
-                                fontSize: 9,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.primary,
                               ),
@@ -836,7 +836,7 @@ class _HomeRecipeCard extends StatelessWidget {
                             recipe.difficulty.toUpperCase(),
                             style: TextStyle(
                               fontFamily: AppTextStyles.fontFamily,
-                              fontSize: 9,
+                              fontSize: 11,
                               fontWeight: FontWeight.w700,
                               color: _difficultyColor,
                             ),

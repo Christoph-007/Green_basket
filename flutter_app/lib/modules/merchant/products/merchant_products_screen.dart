@@ -216,7 +216,7 @@ class _ProductGrid extends StatelessWidget {
                               child: Text(
                                 inStock ? 'In Stock' : 'Out of Stock',
                                 style: const TextStyle(
-                                    fontSize: 9,
+                                    fontSize: 11,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),

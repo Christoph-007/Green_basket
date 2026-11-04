@@ -258,7 +258,7 @@ class _TierBadge extends StatelessWidget {
             AppHelpers.getLoyaltyTierLabel(tier),
             style: TextStyle(
               fontFamily: AppTextStyles.fontFamily,
-              fontSize: 10,
+              fontSize: 11,
               fontWeight: FontWeight.w600,
               color: color,
             ),

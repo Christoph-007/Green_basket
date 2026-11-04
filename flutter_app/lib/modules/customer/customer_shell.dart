@@ -108,7 +108,8 @@ class _CustomerShellState extends State<CustomerShell> {
                               count > 9 ? '9+' : count.toString(),
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 9,
+                                fontSize: 11,
+                                height: 1.0,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

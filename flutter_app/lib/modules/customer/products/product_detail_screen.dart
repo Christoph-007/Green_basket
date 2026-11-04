@@ -251,7 +251,7 @@ class ProductDetailScreen extends StatelessWidget {
                                           child: Text(
                                             '#$tag',
                                             style: AppTextStyles.labelSmall
-                                                .copyWith(fontSize: 10),
+                                                .copyWith(fontSize: 11),
                                           ),
                                         ))
                                     .toList(),
@@ -733,7 +733,7 @@ class _RecipeCard extends StatelessWidget {
                       ),
                       child: Text(
                         '${recipe.totalTime}m',
-                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

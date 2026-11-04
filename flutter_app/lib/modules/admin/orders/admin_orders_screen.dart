@@ -526,7 +526,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   if (dateDisplay.isNotEmpty)
                     Text(
                       dateDisplay,
-                      style: const TextStyle(fontSize: 10, color: AppColors.textHint),
+                      style: const TextStyle(fontSize: 11, color: AppColors.textHint),
                     ),
                   const SizedBox(width: 12),
                   // Amount

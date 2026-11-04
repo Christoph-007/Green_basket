@@ -323,7 +323,7 @@ class _RecipeCard extends StatelessWidget {
                               recipe.displayMealType.toUpperCase(),
                               style: const TextStyle(
                                 fontFamily: AppTextStyles.fontFamily,
-                                fontSize: 9,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.primary,
                               ),
@@ -344,7 +344,7 @@ class _RecipeCard extends StatelessWidget {
                             recipe.difficulty.toUpperCase(),
                             style: TextStyle(
                               fontFamily: AppTextStyles.fontFamily,
-                              fontSize: 9,
+                              fontSize: 11,
                               fontWeight: FontWeight.w700,
                               color: _difficultyColor,
                             ),
@@ -362,7 +362,7 @@ class _RecipeCard extends StatelessWidget {
                             '${recipe.distance}km',
                             style: AppTextStyles.labelSmall.copyWith(
                               color: recipe.isNearby == false ? AppColors.error : AppColors.textSecondary,
-                              fontSize: 10,
+                              fontSize: 11,
                             ),
                           ),
                           const SizedBox(width: 8),

@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                       'Organic',
                       style: TextStyle(
                         fontFamily: AppTextStyles.fontFamily,
-                        fontSize: 9,
+                        fontSize: 11,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -109,7 +109,7 @@ class ProductCard extends StatelessWidget {
                       '${product.discountPercent}% OFF',
                       style: const TextStyle(
                         fontFamily: AppTextStyles.fontFamily,
-                        fontSize: 9,
+                        fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),

@@ -436,7 +436,7 @@ class _CartItemTile extends StatelessWidget {
                       child: Text(
                         item.unit.toUpperCase(),
                         style: AppTextStyles.bodySmall.copyWith(
-                          fontSize: 9,
+                          fontSize: 11,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primary,
                         ),

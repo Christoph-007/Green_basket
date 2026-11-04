@@ -108,7 +108,7 @@ class MerchantProfileScreen extends StatelessWidget {
                                   child: const Text('Verified',
                                       style: TextStyle(
                                           color: AppColors.success,
-                                          fontSize: 10,
+                                          fontSize: 11,
                                           fontWeight: FontWeight.bold)),
                                 ),
                             ],
