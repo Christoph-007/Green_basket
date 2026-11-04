@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 const categoryController = require('../controllers/categoryController');
+const adminReportController = require('../controllers/adminReportController');
 const { authenticate, isAdmin } = require('../middlewares/authMiddleware');
 
 router.use(authenticate, isAdmin);
@@ -13,13 +14,18 @@ router.get('/merchants/:id/analytics', adminController.getMerchantAnalytics);
 router.patch('/merchants/:id/block', adminController.toggleMerchantBlock);
 
 
+router.get('/users/export', adminReportController.exportUsers);
 router.get('/users', adminController.getUsers);
 router.patch('/users/:id/block', adminController.toggleUserBlock);
 
 router.get('/stats', adminController.getPlatformStats);
 
 // Order Management Routes
+router.get('/orders/export', adminReportController.exportOrders);
 router.get('/orders/all', adminController.getAllOrders);
+
+// Reports
+router.get('/analytics/revenue-trend', adminReportController.getRevenueTrend);
 
 // Platform Settings
 router.get('/settings', adminController.getSettings);

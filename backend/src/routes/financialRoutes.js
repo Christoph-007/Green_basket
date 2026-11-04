@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const financialController = require('../controllers/financialController');
+const adminReportController = require('../controllers/adminReportController');
 const { protect, restrictTo, isAdmin } = require('../middlewares/authMiddleware');
 
 router.use(protect);
@@ -15,6 +16,7 @@ router.get('/payouts/:id', financialController.getPayoutById);
 
 // Admin routes
 router.get('/admin/payouts', isAdmin, financialController.getAllPayouts);
+router.get('/admin/payouts/export', isAdmin, adminReportController.exportPayouts);
 router.post('/admin/payouts/generate', isAdmin, financialController.generatePayouts);
 router.post('/admin/payouts/:id/process', isAdmin, financialController.processPayout);
 router.patch('/admin/payouts/:id/hold', isAdmin, financialController.holdReleasePayout);
