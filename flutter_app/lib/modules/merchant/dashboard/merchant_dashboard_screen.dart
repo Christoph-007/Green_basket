@@ -8,6 +8,7 @@ import 'package:greenbasket_app/modules/merchant/merchant_controller.dart';
 
 import '../widgets/merchant_drawer.dart';
 import '../orders/merchant_disputes_screen.dart';
+import '../merchant_nav_controller.dart';
 
 class MerchantDashboardScreen extends StatefulWidget {
   const MerchantDashboardScreen({super.key});
@@ -43,6 +44,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               children: [
                 _buildHeader(),
                 _buildQuickStats(),
+                _buildAttentionRow(),
                 _buildDisputesAlert(),
                 _buildOrderStatusCards(),
                 _buildNewOrders(),
@@ -210,6 +212,80 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                     fontSize: 11, color: AppColors.textSecondary),
                 textAlign: TextAlign.center),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// What needs the seller now: orders waiting and products running low.
+  /// Each card opens the matching tab. Nothing shows when all is well.
+  Widget _buildAttentionRow() {
+    return Obx(() {
+      final waiting = controller.pendingCount.value;
+      final low = controller.lowStockProducts.value;
+      if (waiting == 0 && low == 0) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+        child: Row(
+          children: [
+            if (waiting > 0)
+              Expanded(
+                child: _attentionCard(
+                  Icons.pending_actions,
+                  '$waiting order${waiting > 1 ? 's' : ''} waiting',
+                  'Open orders',
+                  () => MerchantNavController.goTo(1),
+                ),
+              ),
+            if (waiting > 0 && low > 0) const SizedBox(width: AppSpacing.sm),
+            if (low > 0)
+              Expanded(
+                child: _attentionCard(
+                  Icons.inventory_2_outlined,
+                  '$low low on stock',
+                  'Restock now',
+                  () => MerchantNavController.goTo(2),
+                ),
+              ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _attentionCard(
+      IconData icon, String title, String action, VoidCallback onTap) {
+    return Material(
+      color: AppColors.amberContainer,
+      borderRadius: BorderRadius.circular(AppRadius.md),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(AppRadius.md),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Row(
+            children: [
+              Icon(icon, color: AppColors.amberDark, size: 22),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.titleMedium
+                            .copyWith(fontWeight: FontWeight.w600)),
+                    Text(action,
+                        style: AppTextStyles.bodySmall
+                            .copyWith(color: AppColors.textSecondary)),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios,
+                  size: 14, color: AppColors.textSecondary),
+            ],
+          ),
         ),
       ),
     );
