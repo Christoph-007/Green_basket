@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -351,7 +352,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         ),
         _statItem(
           'Spent',
-          '₹${_user['totalSpent']?.toString() ?? '0'}',
+          AppHelpers.formatCurrencyFlexible(_user['totalSpent']),
           Icons.currency_rupee,
           AppColors.primary,
         ),

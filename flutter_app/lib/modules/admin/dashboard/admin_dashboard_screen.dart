@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -154,7 +155,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         final revenue = report['summary']?['totalGrossRevenue']?.toString() ?? '0';
         return Row(
           children: [
-            _metricItem('Revenue', '₹$revenue'),
+            _metricItem('Revenue', AppHelpers.formatCurrencyFlexible(revenue)),
             _metricDivider(),
             _metricItem('Pending Actions', '${controller.pendingActionsCount.value}'),
           ],

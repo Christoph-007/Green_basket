@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'admin_product_detail_screen.dart';
@@ -334,7 +335,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Text('₹$price', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+                        Text(AppHelpers.formatCurrencyFlexible(price), style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
                         const SizedBox(width: AppSpacing.sm),
                         const Icon(Icons.star, size: 12, color: Colors.orange),
                         const SizedBox(width: 2),

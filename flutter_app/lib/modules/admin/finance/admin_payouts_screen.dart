@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../admin_controller.dart';
@@ -64,7 +65,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Recipient: $name', style: AppTextStyles.bodyMedium),
-            Text('Amount: ₹$amount', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+            Text('Amount: ${AppHelpers.formatCurrencyFlexible(amount)}', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
           ],
         ),
         actions: [
@@ -96,7 +97,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
         title: const Text('Bulk Process Payouts?', style: AppTextStyles.titleLarge),
         content: Text(
-          'Process all ${pending.length} pending payouts (Total: ₹$totalAmount)?',
+          'Process all ${pending.length} pending payouts (Total: ${AppHelpers.formatCurrency(totalAmount)})?',
           style: AppTextStyles.bodyMedium,
         ),
         actions: [
@@ -177,7 +178,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Total Pending: ₹$totalAmount', style: AppTextStyles.titleMedium.copyWith(color: AppColors.warning)),
+                Text('Total Pending: ${AppHelpers.formatCurrency(totalAmount)}', style: AppTextStyles.titleMedium.copyWith(color: AppColors.warning)),
                 Text('${pending.length} payout requests awaiting', style: AppTextStyles.bodySmall),
               ],
             ),
@@ -256,7 +257,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Amount', style: AppTextStyles.bodySmall),
-                    Text('₹$amount', style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primary)),
+                    Text(AppHelpers.formatCurrencyFlexible(amount), style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primary)),
                   ],
                 ),
                 Column(

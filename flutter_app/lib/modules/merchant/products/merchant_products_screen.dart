@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'merchant_product_controller.dart';
@@ -241,7 +242,7 @@ class _ProductGrid extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('₹${product.price}',
+                                Text(AppHelpers.formatPrice(product.price),
                                     style: AppTextStyles.titleMedium
                                         .copyWith(color: AppColors.primary)),
                                 Text(' / ${product.unit}',

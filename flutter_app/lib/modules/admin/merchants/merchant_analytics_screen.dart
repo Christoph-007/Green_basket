@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -71,7 +72,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
       _averageRating = (data['averageRating'] as num?)?.toDouble() ?? 0.0;
 
       _stats = {
-        'revenue': '₹${data['totalRevenue'] ?? data['revenue'] ?? 0}',
+        'revenue': AppHelpers.formatCurrencyFlexible(data['totalRevenue'] ?? data['revenue']),
         'orders': '${data['totalOrders'] ?? data['orders'] ?? 0}',
         'products': '${data['totalProducts'] ?? data['products'] ?? 0}',
         'avgRating': _averageRating.toStringAsFixed(1),
@@ -98,7 +99,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
           .map((p) => {
                 'name': p['name']?.toString() ?? '',
                 'sales': '${p['soldCount'] ?? p['sales'] ?? 0} sold',
-                'revenue': '₹${p['revenue'] ?? 0}',
+                'revenue': AppHelpers.formatCurrencyFlexible(p['revenue']),
               })
           .toList();
 
@@ -119,7 +120,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
           .toList();
     } catch (_) {
       _stats = {
-        'revenue': '₹0',
+        'revenue': AppHelpers.formatCurrency(0),
         'orders': '0',
         'products': '0',
         'avgRating': '0.0'

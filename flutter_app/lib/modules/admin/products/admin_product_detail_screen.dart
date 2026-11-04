@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -137,7 +138,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                   Text('by $merchant', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary)),
                   const Divider(height: 32),
                   
-                  _buildDetailRow('Price', '₹$price', Icons.payments_outlined),
+                  _buildDetailRow('Price', AppHelpers.formatCurrencyFlexible(price), Icons.payments_outlined),
                   _buildDetailRow('Stock', '$stock units', Icons.inventory_2_outlined),
                   _buildDetailRow('Category', category, Icons.category_outlined),
                   

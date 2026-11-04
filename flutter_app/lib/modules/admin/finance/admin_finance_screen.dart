@@ -11,12 +11,7 @@ import 'admin_statement_section.dart';
 class AdminFinanceScreen extends StatelessWidget {
   const AdminFinanceScreen({super.key});
 
-  /// Display-only: formats a rupee amount with thousands separators and two
-  /// decimals. Falls back to the raw value if it is not a number.
-  static String _money(String raw) {
-    final n = num.tryParse(raw);
-    return n == null ? '₹$raw' : AppHelpers.formatCurrency(n.toDouble());
-  }
+  static String _money(String raw) => AppHelpers.formatCurrencyFlexible(raw);
 
   @override
   Widget build(BuildContext context) {

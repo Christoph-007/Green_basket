@@ -174,7 +174,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               const SizedBox(width: AppSpacing.sm),
               _kpiCard(
                 'Total Revenue',
-                '₹${controller.totalRevenue.value}',
+                AppHelpers.formatCurrencyFlexible(controller.totalRevenue.value),
                 Icons.account_balance_wallet_outlined,
                 Colors.blue.shade50,
                 Colors.blue.shade700,

@@ -1,8 +1,32 @@
 import 'package:intl/intl.dart';
 
 class AppHelpers {
-  static String formatCurrency(double amount) {
-    return '₹${NumberFormat('#,##0.00').format(amount)}';
+  /// Indian rupee amount with lakh/crore grouping and two decimals:
+  /// 1234567 -> ₹12,34,567.00
+  static String formatCurrency(num amount, {int decimals = 2}) {
+    return NumberFormat.currency(
+      locale: 'en_IN',
+      symbol: '₹',
+      decimalDigits: decimals,
+    ).format(amount);
+  }
+
+  /// Formats a value that may be a number, a numeric string or null
+  /// (typical of API maps). null shows ₹0.00; text that is not a number is
+  /// shown unchanged after the rupee sign.
+  static String formatCurrencyFlexible(Object? value) {
+    if (value == null) return formatCurrency(0);
+    if (value is num) return formatCurrency(value);
+    final text = value.toString().trim();
+    final parsed = num.tryParse(text);
+    return parsed == null ? '₹$text' : formatCurrency(parsed);
+  }
+
+  /// Product price: no decimals for whole amounts (₹49), two decimals
+  /// otherwise (₹49.50).
+  static String formatPrice(num amount) {
+    final whole = amount == amount.truncateToDouble();
+    return formatCurrency(amount, decimals: whole ? 0 : 2);
   }
 
 

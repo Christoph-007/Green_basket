@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -574,7 +575,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
               _detailRow('Customer', userName),
               if (userEmail.isNotEmpty) _detailRow('Email', userEmail),
               _detailRow('Order', '#$orderId'),
-              if (orderAmount != null) _detailRow('Order Total', '₹$orderAmount'),
+              if (orderAmount != null) _detailRow('Order Total', AppHelpers.formatCurrencyFlexible(orderAmount)),
               _detailRow('Type', returnType.toUpperCase()),
               _detailRow('Refund Amount', '₹${refundAmount.toStringAsFixed(0)}'),
               _detailRow('Refund Method', refundMethod.replaceAll('_', ' ')),
