@@ -357,8 +357,19 @@ exports.deleteProduct = async (req, res) => {
 exports.updateStock = async (req, res) => {
     try {
         const { id } = req.params;
-        const { stock } = req.body;
         const merchantId = req.user._id;
+
+        // Stock is a whole number of units, zero or more. Text such as "7" is accepted.
+        const rawStock = req.body.stock;
+        const stock = (rawStock === null || rawStock === undefined || rawStock === '' || typeof rawStock === 'boolean')
+            ? NaN
+            : Number(rawStock);
+        if (!Number.isInteger(stock) || stock < 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'stock must be a whole number, zero or more'
+            });
+        }
 
         // 1. Check if product exists at all
         const product = await Product.findById(id);
