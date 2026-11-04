@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
@@ -23,7 +24,7 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: GBAppBar(title: 'My Cart', showBack: false, actions: [
+      appBar: GBBrandAppBar(title: 'My Cart', actions: [
           Obx(
             () => ctrl.items.isNotEmpty
                 ? TextButton(
@@ -31,7 +32,7 @@ class CartScreen extends StatelessWidget {
                     child: Text(
                       'Clear',
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.errorText,
+                        color: Colors.white,
                       ),
                     ),
                   )

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -335,20 +336,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _filterChip(String label, bool selected, VoidCallback onTap) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      showCheckmark: false,
-      selectedColor: AppColors.primaryContainer,
-      backgroundColor: AppColors.surface,
-      side: BorderSide(color: selected ? AppColors.primary : AppColors.border),
-      labelStyle: AppTextStyles.labelSmall.copyWith(
-        color: selected ? AppColors.primary : AppColors.textSecondary,
-      ),
-      onSelected: (_) => onTap(),
-    );
-  }
+  Widget _filterChip(String label, bool selected, VoidCallback onTap) =>
+      GBFilterChip(label: label, selected: selected, onTap: onTap);
 
   Widget _buildFilters() {
     final sort = _ctrl.sortBy.value;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -137,17 +138,10 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
           final isSelected = _selectedFilter == filter;
           final chipLabel =
               filter == 'All' ? 'All' : _categoryLabel(filter);
-          return ChoiceChip(
-            label: Text(chipLabel),
+          return GBFilterChip(
+            label: chipLabel,
             selected: isSelected,
-            onSelected: (_) => setState(() => _selectedFilter = filter),
-            selectedColor: AppColors.primary,
-            labelStyle: AppTextStyles.labelSmall.copyWith(
-              color: isSelected ? Colors.white : AppColors.textSecondary,
-            ),
-            backgroundColor: AppColors.surface,
-            side: BorderSide(
-                color: isSelected ? AppColors.primary : AppColors.border),
+            onTap: () => setState(() => _selectedFilter = filter),
           );
         },
       ),

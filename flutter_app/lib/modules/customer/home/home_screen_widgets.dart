@@ -14,42 +14,32 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.surface,
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-      child: Row(
+    return GBGradientHeader(
+      showMenu: false,
+      title: 'What are you looking for?',
+      titleStyle: AppTextStyles.headlineLarge.copyWith(color: Colors.white),
+      subtitle: Text(_greeting,
+          style: AppTextStyles.bodyCompact
+              .copyWith(color: Colors.white.withValues(alpha: 0.9))),
+      trailing: Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_greeting,
-                  style: AppTextStyles.bodySmall),
-              const SizedBox(height: 2),
-              Text('What are you looking for?',
-                  style: AppTextStyles.headlineMedium),
-            ],
+          IconButton(
+            tooltip: 'Notifications',
+            icon: const Icon(Icons.notifications_outlined),
+            color: Colors.white,
+            onPressed: () => Get.toNamed('/customer/notifications'),
           ),
-          const Spacer(),
-          Stack(
-            children: [
-              IconButton(tooltip: 'Notifications', 
-                icon: const Icon(Icons.notifications_outlined),
-                color: AppColors.textPrimary,
-                onPressed: () => Get.toNamed('/customer/notifications'),
+          Positioned(
+            top: 8,
+            right: 8,
+            child: Container(
+              width: 8,
+              height: 8,
+              decoration: const BoxDecoration(
+                color: AppColors.warning,
+                shape: BoxShape.circle,
               ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: AppColors.error,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

@@ -9,91 +9,55 @@ extension _MerchantDashboardScreenStateSections1 on _MerchantDashboardScreenStat
             ? 'Good Afternoon'
             : 'Good Evening';
 
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: const BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(AppRadius.lg),
-          bottomRight: Radius.circular(AppRadius.lg),
-        ),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Builder(builder: (context) {
-                    return IconButton(tooltip: 'Open menu', 
-                      icon: const Icon(Icons.menu, color: Colors.white),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                    );
-                  }),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '$greeting 👋',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white.withValues(alpha: 0.8),
-                        ),
-                      ),
-                      Obx(() => Text(
-                            authController.user.value?.name ?? "Merchant Store",
-                            style: AppTextStyles.headlineLarge
-                                .copyWith(color: Colors.white),
-                          )),
-                    ],
-                  ),
-                ],
-              ),
-              Obx(() => CircleAvatar(
-                    backgroundColor: Colors.white.withValues(alpha: 0.2),
-                    child: Text(
-                      (authController.user.value?.name ?? "M")[0].toUpperCase(),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  )),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(AppRadius.full),
+    return Obx(() => GBGradientHeader(
+          title: authController.user.value?.name ?? "Merchant Store",
+          trailing: CircleAvatar(
+            backgroundColor: Colors.white.withValues(alpha: 0.2),
+            child: Text(
+              (authController.user.value?.name ?? "M")[0].toUpperCase(),
+              style: const TextStyle(color: Colors.white),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Obx(() => Icon(Icons.circle,
-                    size: 8,
-                    color: controller.isStoreOpen.value
-                        ? AppColors.success
-                        : AppColors.error)),
-                const SizedBox(width: 8),
-                Obx(() => Text(
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('$greeting 👋',
+                  style: AppTextStyles.bodyCompact
+                      .copyWith(color: Colors.white.withValues(alpha: 0.9))),
+              const SizedBox(height: AppSpacing.md),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(AppRadius.full),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.circle,
+                        size: 8,
+                        color: controller.isStoreOpen.value
+                            ? AppColors.success
+                            : AppColors.error),
+                    const SizedBox(width: 8),
+                    Text(
                       'Store Status: ${controller.isStoreOpen.value ? "Currently Open" : "Closed"}',
-                      style:
-                          AppTextStyles.bodySmall.copyWith(color: Colors.white),
-                    )),
-                const Spacer(),
-                Obx(() => Switch(
+                      style: AppTextStyles.bodySmall.copyWith(color: Colors.white),
+                    ),
+                    const Spacer(),
+                    Switch(
                       value: controller.isStoreOpen.value,
                       onChanged: controller.toggleStoreStatus,
                       activeColor: Colors.white,
                       activeTrackColor: AppColors.success,
-                    )),
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _buildQuickStats() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -29,6 +30,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       backgroundColor: AppColors.background,
       drawer: const AdminDrawer(),
       body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,61 +48,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   }
 
   Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: const BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(AppRadius.lg),
-          bottomRight: Radius.circular(AppRadius.lg),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Builder(
-                builder: (context) {
-                  return IconButton(tooltip: 'Open menu', 
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
-                  );
-                }
-              ),
-              const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Builder(
-                    builder: (context) {
-                      final hour = DateTime.now().hour;
-                      final greeting = hour < 12
-                          ? 'Good morning'
-                          : hour < 17
-                              ? 'Good afternoon'
-                              : 'Good evening';
-                      return Text(
-                        greeting,
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white.withValues(alpha: 0.8),
-                        ),
-                      );
-                    },
-                  ),
-                  Text(
-                    'Admin Dashboard',
-                    style: AppTextStyles.displayMedium,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.white.withValues(alpha: 0.2),
-            child: const Text('SA', style: TextStyle(color: Colors.white)),
-          ),
-        ],
+    final hour = DateTime.now().hour;
+    final greeting = hour < 12
+        ? 'Good morning'
+        : hour < 17
+            ? 'Good afternoon'
+            : 'Good evening';
+    return GBGradientHeader(
+      title: 'Admin Dashboard',
+      subtitle: Text(greeting,
+          style: AppTextStyles.bodyCompact.copyWith(color: Colors.white.withValues(alpha: 0.9))),
+      trailing: CircleAvatar(
+        backgroundColor: Colors.white.withValues(alpha: 0.2),
+        child: const Text('SA', style: TextStyle(color: Colors.white)),
       ),
     );
   }

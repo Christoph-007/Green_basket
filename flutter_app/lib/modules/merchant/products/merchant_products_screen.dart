@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -26,20 +27,20 @@ class MerchantProductsScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: GBAppBar(title: 'Inventory Management', actions: [
+        appBar: GBBrandAppBar(title: 'Inventory Management', showMenu: true, actions: [
             IconButton(tooltip: 'Search', 
-              icon: Icon(Icons.search, color: AppColors.textPrimary),
+              icon: const Icon(Icons.search),
               onPressed: () {},
             ),
             IconButton(tooltip: 'Upload', 
-              icon: Icon(Icons.upload_file, color: AppColors.primaryText),
+              icon: const Icon(Icons.upload_file),
               onPressed: () => Get.to(() => const BulkUploadScreen()),
             ),
           ], bottom: TabBar(
             isScrollable: true,
-            labelColor: AppColors.primary,
-            unselectedLabelColor: AppColors.textSecondary,
-            indicatorColor: AppColors.primary,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+            indicatorColor: Colors.white,
             indicatorWeight: 3,
             tabs: [
               Obx(() => Tab(
@@ -52,14 +53,7 @@ class MerchantProductsScreen extends StatelessWidget {
                   text:
                       'Out of Stock (${controller.products.where((p) => p.stock == 0).length})')),
             ],
-          ), leading: Builder(
-            builder: (context) {
-              return IconButton(tooltip: 'Open menu', 
-                icon: Icon(Icons.menu, color: AppColors.textPrimary),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              );
-            },
-          ), backgroundColor: AppColors.surface),
+          )),
         drawer: const MerchantDrawer(),
         bottomNavigationBar: _BulkBar(controller: controller),
         body: const TabBarView(

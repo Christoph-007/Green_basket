@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_loader.dart';
@@ -32,12 +33,12 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: GBAppBar(title: 'Orders Management', bottom: TabBar(
+      appBar: GBBrandAppBar(title: 'Orders Management', showMenu: true, bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          labelColor: AppColors.primary,
-          unselectedLabelColor: AppColors.textSecondary,
-          indicatorColor: AppColors.primary,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
           indicatorWeight: 3,
           tabs: [
             Obx(() => Tab(text: 'Pending (${controller.pendingOrders.length})')),
@@ -48,12 +49,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
             Obx(() =>
                 Tab(text: 'Cancelled (${controller.cancelledOrders.length})')),
           ],
-        ), leading: Builder(builder: (context) {
-          return IconButton(tooltip: 'Open menu', 
-            icon: Icon(Icons.menu, color: AppColors.textPrimary),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          );
-        }), backgroundColor: AppColors.surface),
+        )),
       drawer: const MerchantDrawer(),
       body: TabBarView(
         controller: _tabController,

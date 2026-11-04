@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:flutter/material.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
+        top: false,
         child: RefreshIndicator(
           color: AppColors.primary,
           onRefresh: ctrl.fetchData,

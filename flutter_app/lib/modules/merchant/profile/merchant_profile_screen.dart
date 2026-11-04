@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/data/services/storage_service.dart';
@@ -18,14 +19,7 @@ class MerchantProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: GBAppBar(title: 'Store Profile', leading: Builder(
-          builder: (context) {
-            return IconButton(tooltip: 'Open menu', 
-              icon: Icon(Icons.menu, color: AppColors.textPrimary),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            );
-          },
-        ), backgroundColor: AppColors.surface),
+      appBar: GBBrandAppBar(title: 'Store Profile', showMenu: true),
       drawer: const MerchantDrawer(),
       body: SingleChildScrollView(
         child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/config/status_style.dart';
 import 'package:get/get.dart';
@@ -130,54 +131,20 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
 
   Widget _buildPill(String title) {
     return Obx(() {
-      bool isActive = _selectedFilter.value == title;
       // Count orders matching this filter
       final count = title == 'All'
           ? controller.orders.length
-          : controller.orders.where((o) =>
-              (o['status']?.toString().toLowerCase() ?? '') == title.toLowerCase()).length;
-
-      return Semantics(button: true, child: GestureDetector(
+          : controller.orders
+              .where((o) =>
+                  (o['status']?.toString().toLowerCase() ?? '') ==
+                  title.toLowerCase())
+              .length;
+      return GBFilterChip(
+        label: _formatFilterLabel(title),
+        selected: _selectedFilter.value == title,
+        count: count > 0 ? count : null,
         onTap: () => _selectedFilter.value = title,
-        child: AnimatedContainer(
-          duration: AppMotion.normal,
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          decoration: BoxDecoration(
-            color: isActive ? AppColors.primary : Colors.white,
-            borderRadius: BorderRadius.circular(999),
-            border: isActive ? null : Border.all(color: AppColors.borderLight),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                _formatFilterLabel(title),
-                style: TextStyle(
-                  color: isActive ? Colors.white : AppColors.textPrimary,
-                  fontSize: 13,
-                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-                ),
-              ),
-              if (count > 0) ...[
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: isActive
-                        ? Colors.white.withValues(alpha: 0.25)
-                        : AppColors.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    '$count',
-                    style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: isActive ? Colors.white : AppColors.primary),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ));
+      );
     });
   }
 

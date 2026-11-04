@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -124,29 +125,11 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
     );
   }
 
-  Widget _buildPill(String title) {
-    bool isActive = _selectedFilter == title;
-    return Semantics(button: true, child: GestureDetector(
-      onTap: () => setState(() => _selectedFilter = title),
-      child: AnimatedContainer(
-        duration: AppMotion.normal,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isActive ? AppColors.primary : Colors.white,
-          borderRadius: BorderRadius.circular(999),
-          border: isActive ? null : Border.all(color: AppColors.borderLight),
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: isActive ? Colors.white : AppColors.textPrimary,
-            fontSize: 13,
-            fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-          ),
-        ),
-      ),
-    ));
-  }
+  Widget _buildPill(String title) => GBFilterChip(
+        label: title,
+        selected: _selectedFilter == title,
+        onTap: () => setState(() => _selectedFilter = title),
+      );
 
   Widget _buildUserCard(Map<String, dynamic> user) {
     final name = user['name'] ?? 'Unknown';

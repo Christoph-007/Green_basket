@@ -31,31 +31,9 @@ class AdminFinanceScreen extends StatelessWidget {
           // Header
           GBGradientHeader(
             title: 'Financial Reports',
-            colors: const [AppColors.brandDeep, AppColors.brandDeepLight],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            bottomPadding: 24,
-            menuIconSize: 28,
-            subtitleGap: 20,
-            titleStyle: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              letterSpacing: -0.5,
-            ),
-            trailing: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(Icons.account_balance_wallet,
-                  color: Colors.white, size: 22),
-            ),
-            subtitle: Text(
-              'Overview of total revenue, fees, and payouts',
-              style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
-            ),
+            trailingIcon: Icons.account_balance_wallet,
+            subtitle: Text('Admin › Finance',
+                style: AppTextStyles.bodyCompact.copyWith(color: Colors.white.withValues(alpha: 0.9))),
           ),
           
           Expanded(

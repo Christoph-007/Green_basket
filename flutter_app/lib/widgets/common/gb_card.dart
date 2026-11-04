@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 
+/// The one card look used on every panel: surface fill, 16 px corners, a
+/// hairline border and a soft shadow. Use [GBCard] for new cards and
+/// [GBCard.decoration] when a Container needs the same look.
 class GBCard extends StatelessWidget {
+  static const double defaultRadius = AppRadius.lg;
+
+  /// The standard card look as a decoration, for Containers that cannot be a [GBCard].
+  static BoxDecoration decoration({Color? color, double? radius}) => BoxDecoration(
+        color: color ?? AppColors.surface,
+        borderRadius: BorderRadius.circular(radius ?? defaultRadius),
+        border: Border.all(color: AppColors.borderLight),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadowFaint,
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      );
+
   final Widget child;
   final EdgeInsets? padding;
   final EdgeInsetsGeometry? margin;
@@ -31,7 +50,7 @@ class GBCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(borderRadius ?? AppRadius.md);
+    final radius = BorderRadius.circular(borderRadius ?? defaultRadius);
     final content = padding != null
         ? Padding(padding: padding!, child: child)
         : child;
@@ -42,14 +61,14 @@ class GBCard extends StatelessWidget {
         color: gradient == null ? (color ?? AppColors.surface) : null,
         gradient: gradient,
         borderRadius: radius,
-        border: border,
+        border: border ?? Border.all(color: AppColors.borderLight),
         boxShadow: shadow ??
             (elevation > 0
                 ? [
                     BoxShadow(
-                      color: AppColors.shadow,
-                      blurRadius: elevation * 4,
-                      offset: Offset(0, elevation),
+                      color: AppColors.shadowFaint,
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
                     ),
                   ]
                 : null),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -172,15 +173,8 @@ class AdminStatementSection extends StatelessWidget {
     );
   }
 
-  Widget _chip(String text, bool selected, VoidCallback onTap) {
-    return ChoiceChip(
-      label: Text(text),
-      selected: selected,
-      selectedColor: AppColors.primary.withValues(alpha: 0.15),
-      labelStyle: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: selected ? AppColors.primary : AppColors.textSecondary),
-      onSelected: (_) => onTap(),
-    );
-  }
+  Widget _chip(String text, bool selected, VoidCallback onTap) =>
+      GBFilterChip(label: text, selected: selected, onTap: onTap);
 
   Widget _box(Widget child) {
     return Container(

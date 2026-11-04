@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -33,6 +34,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
       backgroundColor: AppColors.background,
       drawer: const MerchantDrawer(),
       body: SafeArea(
+        top: false,
         child: RefreshIndicator(
           onRefresh: () async {
             await Future.wait([

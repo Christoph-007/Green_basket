@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -103,16 +104,16 @@ class OrderListScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: GBAppBar(title: 'My Orders', bottom: TabBar(
-            labelColor: AppColors.primary,
-            unselectedLabelColor: AppColors.textSecondary,
-            indicatorColor: AppColors.primary,
+        appBar: GBBrandAppBar(title: 'My Orders', bottom: TabBar(
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+            indicatorColor: Colors.white,
             tabs: [
               Tab(text: 'Active'),
               Tab(text: 'Past Orders'),
             ],
           ), leading: IconButton(tooltip: 'Back', 
-            icon: Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
+            icon: const Icon(Icons.arrow_back_ios, size: 20),
             onPressed: () {
               if (Navigator.canPop(context)) {
                 Get.back();
@@ -120,7 +121,7 @@ class OrderListScreen extends StatelessWidget {
                 Get.offAllNamed(Routes.customerHome);
               }
             },
-          ), backgroundColor: AppColors.surface),
+          )),
         body: Obx(() {
           if (ctrl.isLoading.value) return const GBListSkeleton(itemHeight: 130);
           return TabBarView(

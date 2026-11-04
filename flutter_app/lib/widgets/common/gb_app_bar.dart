@@ -10,6 +10,9 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? foregroundColor;
   final Widget? leading;
 
+  /// For screens with a side drawer: shows a menu button that opens it.
+  final bool showMenu;
+
   /// Something under the title, usually a [TabBar]. When set, the thin
   /// divider line is not drawn.
   final PreferredSizeWidget? bottom;
@@ -28,6 +31,7 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.leading,
+    this.showMenu = false,
     this.bottom,
     this.showDivider = true,
     this.backIcon = Icons.arrow_back_ios,
@@ -55,7 +59,15 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       automaticallyImplyLeading: false,
       // No back button on a screen that has nowhere to go back to.
-      leading: showBack
+      leading: showMenu
+          ? Builder(
+              builder: (context) => IconButton(
+                tooltip: 'Open menu',
+                icon: const Icon(Icons.menu),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            )
+          : showBack
           ? (leading ??
               (Navigator.of(context).canPop()
                   ? IconButton(
