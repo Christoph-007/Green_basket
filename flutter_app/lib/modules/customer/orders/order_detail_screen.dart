@@ -14,6 +14,8 @@ import '../../../widgets/common/gb_loader.dart';
 import '../../../widgets/common/empty_state.dart';
 import 'return_request_sheet.dart';
 import '../../../utils/responsive_helper.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
+import '../cart/cart_controller.dart';
 
 class OrderDetailController extends GetxController {
   final _repo = OrderRepository();
@@ -325,6 +327,17 @@ class OrderDetailScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+
+                  // Buy the same things again
+                  if (order.status == 'delivered' || order.status == 'completed') ...[
+                    GBButton(
+                      label: 'Reorder',
+                      leadingIcon: Icons.replay,
+                      isFullWidth: true,
+                      onPressed: () => Get.find<CartController>().reorder(order),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
 
                   // Cancel button for eligible orders
                   if (ctrl.canCancel)

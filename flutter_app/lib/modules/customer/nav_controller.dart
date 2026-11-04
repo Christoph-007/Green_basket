@@ -6,6 +6,7 @@ class NavController extends GetxController {
   /// Bottom-tab indexes in CustomerShell
   static const homeTab = 0;
   static const categoriesTab = 1;
+  static const cartTab = 3;
 
   final currentIndex = 0.obs;
 

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import '../../../data/models/order_model.dart';
 import '../../../data/repositories/order_repository.dart';
 import '../../../data/repositories/loyalty_repository.dart';
+import '../nav_controller.dart';
 
 class CartController extends GetxController {
   final _repo = OrderRepository();
@@ -157,6 +158,80 @@ class CartController extends GetxController {
       GBSnack.plain('Cart', (body is Map ? body['message'] : null)?.toString() ?? 'Could not update the cart', position: SnackPosition.BOTTOM);
       await fetchCart();
     } catch (_) {}
+  }
+
+  /// Puts every item of an earlier order back in the cart, then opens the
+  /// Cart tab. Items that are no longer available are named in one message.
+  Future<void> reorder(OrderModel order, {bool afterClearing = false}) async {
+    if (order.items.isEmpty) return;
+    var added = 0;
+    var storeConflict = false;
+    final unavailable = <String>[];
+    for (final item in order.items) {
+      try {
+        await _repo.addToCart(
+          productId: item.productId,
+          quantity: item.quantity,
+          preparationOption: item.preparationOption,
+        );
+        added++;
+      } on DioException catch (e) {
+        final body = e.response?.data;
+        if (e.response?.statusCode == 409 &&
+            body is Map &&
+            body['code'] == 'DIFFERENT_MERCHANT') {
+          storeConflict = true;
+        }
+        unavailable.add(item.productName);
+      } catch (_) {
+        unavailable.add(item.productName);
+      }
+    }
+
+    // The cart holds another store's items: offer a fresh cart, once.
+    if (storeConflict && added == 0 && !afterClearing) {
+      Get.dialog(AlertDialog(
+        title: const Text('Start a new cart?'),
+        content: const Text(
+            'Your cart has items from another store. An order can only contain items from one store.'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text('Keep Cart')),
+          TextButton(
+            onPressed: () async {
+              Get.back();
+              try {
+                await _repo.clearCart();
+                appliedCoupon.value = '';
+                discount.value = 0;
+                await reorder(order, afterClearing: true);
+              } catch (e) {
+                GBSnack.fromError(e, title: 'Cart');
+              }
+            },
+            child: const Text('Clear Cart & Reorder'),
+          ),
+        ],
+      ));
+      return;
+    }
+
+    await fetchCart();
+    if (added == 0) {
+      GBSnack.error('Could not reorder', 'These items are not available right now.',
+          position: SnackPosition.BOTTOM);
+      return;
+    }
+    if (unavailable.isEmpty) {
+      GBSnack.success('Reordered', '$added item${added > 1 ? 's' : ''} added to your cart',
+          position: SnackPosition.BOTTOM);
+    } else {
+      GBSnack.info('Partly reordered',
+          '$added added. Not available: ${unavailable.join(', ')}',
+          position: SnackPosition.BOTTOM);
+    }
+    if (Get.isRegistered<NavController>()) {
+      NavController.to.toTab(NavController.cartTab);
+    }
   }
 
   Future<void> removeItem(String productId, {String? preparation}) async {
