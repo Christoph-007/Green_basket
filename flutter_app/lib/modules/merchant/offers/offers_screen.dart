@@ -221,7 +221,7 @@ class _OffersScreenState extends State<OffersScreen>
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(
-          color: isExpired ? AppColors.border : typeColor.withOpacity(0.2),
+          color: isExpired ? AppColors.border : typeColor.withValues(alpha: 0.2),
         ),
         boxShadow: [
           BoxShadow(
@@ -242,7 +242,7 @@ class _OffersScreenState extends State<OffersScreen>
                     Container(
                       padding: const EdgeInsets.all(AppSpacing.sm),
                       decoration: BoxDecoration(
-                        color: typeColor.withOpacity(0.1),
+                        color: typeColor.withValues(alpha: 0.1),
                         borderRadius:
                             BorderRadius.circular(AppRadius.sm),
                       ),
@@ -266,7 +266,7 @@ class _OffersScreenState extends State<OffersScreen>
                       padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.md, vertical: AppSpacing.xs),
                       decoration: BoxDecoration(
-                        color: typeColor.withOpacity(0.1),
+                        color: typeColor.withValues(alpha: 0.1),
                         borderRadius:
                             BorderRadius.circular(AppRadius.full),
                       ),

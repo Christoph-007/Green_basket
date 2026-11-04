@@ -98,7 +98,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
       title: 'All Merchants',
       trailingIcon: Icons.storefront,
       subtitle: Text('Admin › Merchants',
-          style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13)),
+          style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
     );
   }
 

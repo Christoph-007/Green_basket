@@ -80,7 +80,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       return Text(
                         greeting,
                         style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                       );
                     },
@@ -94,7 +94,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             ],
           ),
           CircleAvatar(
-            backgroundColor: Colors.white.withOpacity(0.2),
+            backgroundColor: Colors.white.withValues(alpha: 0.2),
             child: const Text('SA', style: TextStyle(color: Colors.white)),
           ),
         ],
@@ -335,10 +335,10 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppRadius.md),
-            border: Border.all(color: AppColors.border.withOpacity(0.5)),
+            border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadow.withOpacity(0.05),
+                color: AppColors.shadow.withValues(alpha: 0.05),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -504,7 +504,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       case 'delivered':
         return {
           'color': AppColors.success,
-          'bgColor': AppColors.statusDelivered.withOpacity(0.3),
+          'bgColor': AppColors.statusDelivered.withValues(alpha: 0.3),
           'icon': Icons.check_circle_outline,
           'label': 'Delivered',
         };

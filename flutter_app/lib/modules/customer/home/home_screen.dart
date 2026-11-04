@@ -46,10 +46,10 @@ class HomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isShowAll
                           ? AppColors.surface
-                          : AppColors.primaryContainer.withOpacity(0.3),
+                          : AppColors.primaryContainer.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(0.2),
+                        color: AppColors.primary.withValues(alpha: 0.2),
                       ),
                     ),
                     child: Row(
@@ -502,7 +502,7 @@ class _BannerSectionState extends State<_BannerSection> {
                       borderRadius: BorderRadius.circular(AppRadius.lg),
                       boxShadow: [
                         BoxShadow(
-                          color: colors[0].withOpacity(0.3),
+                          color: colors[0].withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         )
@@ -535,7 +535,7 @@ class _BannerSectionState extends State<_BannerSection> {
                               style: TextStyle(
                                 fontFamily: AppTextStyles.fontFamily,
                                 fontSize: 13,
-                                color: Colors.white.withOpacity(0.85),
+                                color: Colors.white.withValues(alpha: 0.85),
                               ),
                             ),
                             const SizedBox(height: 14),
@@ -808,7 +808,7 @@ class _HomeRecipeCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.1),
+                              color: AppColors.primary.withValues(alpha: 0.1),
                               borderRadius:
                                   BorderRadius.circular(AppRadius.full),
                             ),
@@ -828,7 +828,7 @@ class _HomeRecipeCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: _difficultyColor.withOpacity(0.1),
+                            color: _difficultyColor.withValues(alpha: 0.1),
                             borderRadius:
                                 BorderRadius.circular(AppRadius.full),
                           ),

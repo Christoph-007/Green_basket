@@ -398,7 +398,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: _priorityColor(priority).withOpacity(0.1),
+                      color: _priorityColor(priority).withValues(alpha: 0.1),
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                     ),
@@ -435,7 +435,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: _statusColor(status).withOpacity(0.1),
+                      color: _statusColor(status).withValues(alpha: 0.1),
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                     ),
@@ -562,7 +562,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _statusColor(status).withOpacity(0.12),
+                      color: _statusColor(status).withValues(alpha: 0.12),
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                     ),
@@ -624,11 +624,11 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSpacing.md),
                   decoration: BoxDecoration(
-                    color: AppColors.success.withOpacity(0.06),
+                    color: AppColors.success.withValues(alpha: 0.06),
                     borderRadius:
                         BorderRadius.circular(AppRadius.md),
                     border: Border.all(
-                        color: AppColors.success.withOpacity(0.3)),
+                        color: AppColors.success.withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -712,7 +712,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
         padding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppRadius.full),
         ),
         child: Text(label,

@@ -302,7 +302,7 @@ class _RecipeCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.1),
+                              color: AppColors.primary.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(AppRadius.full),
                             ),
                             child: Text(
@@ -322,7 +322,7 @@ class _RecipeCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: _difficultyColor.withOpacity(0.1),
+                            color: _difficultyColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(
                                 AppRadius.full),
                           ),

@@ -355,7 +355,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _statusColor(displayStatus).withOpacity(0.1),
+                  color: _statusColor(displayStatus).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppRadius.full),
                 ),
                 child: Text(

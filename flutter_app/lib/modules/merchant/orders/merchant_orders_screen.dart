@@ -114,7 +114,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
               borderRadius: BorderRadius.circular(AppRadius.lg),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: 0.04),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -147,7 +147,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
-                                      color: AppColors.info.withOpacity(0.1),
+                                      color: AppColors.info.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(color: AppColors.info),
                                     ),
@@ -346,22 +346,22 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
 
     switch (status) {
       case 'pending':
-        bgColor = AppColors.warning.withOpacity(0.1);
+        bgColor = AppColors.warning.withValues(alpha: 0.1);
         textColor = AppColors.warning;
         text = 'New';
         break;
       case 'confirmed':
-        bgColor = Colors.blue.withOpacity(0.1);
+        bgColor = Colors.blue.withValues(alpha: 0.1);
         textColor = Colors.blue;
         text = 'Confirmed';
         break;
       case 'preparing':
-        bgColor = Colors.orange.withOpacity(0.1);
+        bgColor = Colors.orange.withValues(alpha: 0.1);
         textColor = Colors.orange;
         text = 'Preparing';
         break;
       case 'ready':
-        bgColor = AppColors.info.withOpacity(0.1);
+        bgColor = AppColors.info.withValues(alpha: 0.1);
         textColor = AppColors.info;
         text = deliveryType == 'pickup'
             ? 'Ready for Pick up'
@@ -369,27 +369,27 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
         break;
       case 'out-for-delivery':
       case 'dispatched':
-        bgColor = AppColors.primary.withOpacity(0.1);
+        bgColor = AppColors.primary.withValues(alpha: 0.1);
         textColor = AppColors.primary;
         text = 'Out for Delivery';
         break;
       case 'delivered':
-        bgColor = AppColors.success.withOpacity(0.1);
+        bgColor = AppColors.success.withValues(alpha: 0.1);
         textColor = AppColors.success;
         text = 'Delivered';
         break;
       case 'completed':
-        bgColor = AppColors.success.withOpacity(0.1);
+        bgColor = AppColors.success.withValues(alpha: 0.1);
         textColor = AppColors.success;
         text = 'Completed';
         break;
       case 'cancelled':
-        bgColor = AppColors.error.withOpacity(0.1);
+        bgColor = AppColors.error.withValues(alpha: 0.1);
         textColor = AppColors.error;
         text = 'Cancelled';
         break;
       case 'refunded':
-        bgColor = AppColors.error.withOpacity(0.1);
+        bgColor = AppColors.error.withValues(alpha: 0.1);
         textColor = AppColors.error;
         text = 'Refunded';
         break;

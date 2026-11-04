@@ -120,8 +120,8 @@ class OfferAnalyticsScreen extends StatelessWidget {
                                       vertical: 2),
                                   decoration: BoxDecoration(
                                     color: (status == 'Active' || status == 'active')
-                                        ? AppColors.success.withOpacity(0.1)
-                                        : AppColors.warning.withOpacity(0.1),
+                                        ? AppColors.success.withValues(alpha: 0.1)
+                                        : AppColors.warning.withValues(alpha: 0.1),
                                     borderRadius:
                                         BorderRadius.circular(AppRadius.full),
                                   ),
@@ -294,7 +294,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
                           duration: const Duration(milliseconds: 600),
                           height: 100 * ratio.toDouble(),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.8),
+                            color: AppColors.primary.withValues(alpha: 0.8),
                             borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(AppRadius.sm)),
                           ),

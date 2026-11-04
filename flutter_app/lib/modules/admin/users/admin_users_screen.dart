@@ -79,7 +79,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       title: 'All Users',
       trailingIcon: Icons.person,
       subtitle: Text('Admin › Users',
-          style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13)),
+          style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
     );
   }
 

@@ -163,7 +163,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
     }
 
     return Container(
-      color: AppColors.warning.withOpacity(0.1),
+      color: AppColors.warning.withValues(alpha: 0.1),
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
       child: Row(
         children: [
@@ -234,7 +234,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _statusColor(status).withOpacity(0.1),
+                    color: _statusColor(status).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppRadius.full),
                   ),
                   child: Text(

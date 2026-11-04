@@ -75,7 +75,7 @@ class _NotificationTile extends StatelessWidget {
         width: 48,
         height: 48,
         decoration: BoxDecoration(
-          color: notification.isRead ? AppColors.surfaceVariant : AppColors.primary.withOpacity(0.1),
+          color: notification.isRead ? AppColors.surfaceVariant : AppColors.primary.withValues(alpha: 0.1),
           shape: BoxShape.circle,
         ),
         child: Icon(
@@ -110,7 +110,7 @@ class _NotificationTile extends StatelessWidget {
         ],
       ),
       isThreeLine: true,
-      tileColor: notification.isRead ? Colors.transparent : AppColors.primary.withOpacity(0.02),
+      tileColor: notification.isRead ? Colors.transparent : AppColors.primary.withValues(alpha: 0.02),
     );
   }
 

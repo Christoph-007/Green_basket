@@ -348,7 +348,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.sm),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.06),
+          color: color.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
         child: Column(
@@ -920,7 +920,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                         CircleAvatar(
                           radius: 18,
                           backgroundColor:
-                              AppColors.primary.withOpacity(0.1),
+                              AppColors.primary.withValues(alpha: 0.1),
                           child: Text(
                             '${i + 1}',
                             style: AppTextStyles.labelLarge

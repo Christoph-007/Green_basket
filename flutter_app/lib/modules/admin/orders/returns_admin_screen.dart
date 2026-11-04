@@ -381,7 +381,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       margin: const EdgeInsets.only(right: 6),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary.withOpacity(0.1),
+                        color: AppColors.secondary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppRadius.full),
                       ),
                       child: Text('Exchange', style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondary)),
@@ -389,7 +389,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: _statusColor(status).withOpacity(0.1),
+                      color: _statusColor(status).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppRadius.full),
                     ),
                     child: Text(
@@ -448,7 +448,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.warning.withOpacity(0.1),
+                    color: AppColors.warning.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppRadius.full),
                   ),
                   child: Text(
@@ -560,7 +560,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: _statusColor(status).withOpacity(0.1),
+                  color: _statusColor(status).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppRadius.full),
                 ),
                 child: Text(
@@ -592,9 +592,9 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.sm),
                   decoration: BoxDecoration(
-                    color: AppColors.error.withOpacity(0.05),
+                    color: AppColors.error.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(AppRadius.sm),
-                    border: Border.all(color: AppColors.error.withOpacity(0.2)),
+                    border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -640,7 +640,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: AppColors.warning.withOpacity(0.1),
+                                  color: AppColors.warning.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(AppRadius.full),
                                 ),
                                 child: Text(cond, style: AppTextStyles.labelSmall.copyWith(color: AppColors.warning)),

@@ -93,7 +93,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                       Text(
                         '$greeting 👋',
                         style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                       ),
                       Obx(() => Text(
@@ -106,7 +106,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                 ],
               ),
               Obx(() => CircleAvatar(
-                    backgroundColor: Colors.white.withOpacity(0.2),
+                    backgroundColor: Colors.white.withValues(alpha: 0.2),
                     child: Text(
                       (authController.user.value?.name ?? "M")[0].toUpperCase(),
                       style: const TextStyle(color: Colors.white),
@@ -119,7 +119,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
             padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.md, vertical: AppSpacing.xs),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
+              color: Colors.white.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(AppRadius.full),
             ),
             child: Row(
@@ -192,7 +192,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: Colors.black.withOpacity(0.05)),
+          border: Border.all(color: Colors.black.withValues(alpha: 0.05)),
         ),
         child: Column(
           children: [
@@ -223,9 +223,9 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
         margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.error.withOpacity(0.05),
+          color: AppColors.error.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: AppColors.error.withOpacity(0.2)),
+          border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
         ),
         child: InkWell(
           onTap: () => Get.to(() => const MerchantDisputesScreen()),
@@ -243,7 +243,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                     ),
                     Text(
                       'Customers have raised issues. Please review.',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.error.withOpacity(0.7)),
+                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.error.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
@@ -309,9 +309,9 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
         padding: const EdgeInsets.symmetric(
             vertical: AppSpacing.sm, horizontal: AppSpacing.xs),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(
           children: [
@@ -650,7 +650,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: statusInfo.$2.withOpacity(0.1),
+                color: statusInfo.$2.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
               child: Icon(statusInfo.$3, color: statusInfo.$2, size: 22),
@@ -671,7 +671,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
-                          color: statusInfo.$2.withOpacity(0.1),
+                          color: statusInfo.$2.withValues(alpha: 0.1),
                           borderRadius:
                               BorderRadius.circular(AppRadius.full),
                         ),
@@ -714,8 +714,8 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: isPaid
-            ? AppColors.success.withOpacity(0.1)
-            : Colors.orange.withOpacity(0.1),
+            ? AppColors.success.withValues(alpha: 0.1)
+            : Colors.orange.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(

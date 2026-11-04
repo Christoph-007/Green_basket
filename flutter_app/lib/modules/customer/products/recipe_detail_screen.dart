@@ -400,8 +400,8 @@ class RecipeDetailScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(AppSpacing.sm),
                             decoration: BoxDecoration(
                               color: ctrl.availableCount.value == ctrl.totalCount.value
-                                  ? AppColors.success.withOpacity(0.08)
-                                  : AppColors.warning.withOpacity(0.08),
+                                  ? AppColors.success.withValues(alpha: 0.08)
+                                  : AppColors.warning.withValues(alpha: 0.08),
                               borderRadius: BorderRadius.circular(AppRadius.sm),
                             ),
                             child: Row(
@@ -527,7 +527,7 @@ class _MetaChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppRadius.full),
       ),
       child: Row(

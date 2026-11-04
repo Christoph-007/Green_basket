@@ -165,7 +165,7 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppRadius.md),
               ),
               child: Icon(op['icon'] as IconData, color: color, size: 22),

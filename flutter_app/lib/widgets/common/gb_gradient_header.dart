@@ -47,7 +47,7 @@ class GBGradientHeader extends StatelessWidget {
                 height: 36,
                 width: 36,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: Icon(trailingIcon, color: Colors.white, size: 20),

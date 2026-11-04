@@ -283,7 +283,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.error.withOpacity(0.1),
+                            color: AppColors.error.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(AppRadius.full),
                           ),
                           child: Text(
@@ -444,7 +444,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                             decoration: BoxDecoration(
                               color: _statusColor(
                                 order['status']!,
-                              ).withOpacity(0.1),
+                              ).withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(
                                 AppRadius.full,
                               ),
@@ -515,9 +515,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.08),
+          color: color.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Row(
           children: [
@@ -525,7 +525,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             const SizedBox(width: AppSpacing.sm),
             Text(label, style: AppTextStyles.labelLarge.copyWith(color: color)),
             const Spacer(),
-            Icon(Icons.chevron_right, color: color.withOpacity(0.6), size: 18),
+            Icon(Icons.chevron_right, color: color.withValues(alpha: 0.6), size: 18),
           ],
         ),
       ),

@@ -207,7 +207,7 @@ class CategoriesScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.surface,
               border: Border(
-                bottom: BorderSide(color: AppColors.divider.withOpacity(0.5)),
+                bottom: BorderSide(color: AppColors.divider.withValues(alpha: 0.5)),
               ),
             ),
             child: Obx(() {
@@ -244,7 +244,7 @@ class CategoriesScreen extends StatelessWidget {
                           boxShadow: isSelected
                               ? [
                                   BoxShadow(
-                                    color: AppColors.primary.withOpacity(0.2),
+                                    color: AppColors.primary.withValues(alpha: 0.2),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),
                                   ),
@@ -279,7 +279,7 @@ class CategoriesScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: isShowAll
                   ? AppColors.surface
-                  : AppColors.primaryContainer.withOpacity(0.3),
+                  : AppColors.primaryContainer.withValues(alpha: 0.3),
               child: Row(
                 children: [
                   Icon(

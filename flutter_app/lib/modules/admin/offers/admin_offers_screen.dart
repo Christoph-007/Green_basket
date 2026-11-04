@@ -275,7 +275,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
     return Card(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       elevation: expired ? 0.5 : 1,
-      color: expired ? AppColors.surface.withOpacity(0.7) : AppColors.surface,
+      color: expired ? AppColors.surface.withValues(alpha: 0.7) : AppColors.surface,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppRadius.md),
         onTap: () => _showOfferDetail(offer),
@@ -330,7 +330,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: AppColors.error.withOpacity(0.1),
+                                  color: AppColors.error.withValues(alpha: 0.1),
                                   borderRadius:
                                       BorderRadius.circular(AppRadius.full),
                                 ),
@@ -357,7 +357,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: _statusColor(status).withOpacity(0.1),
+                      color: _statusColor(status).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppRadius.full),
                     ),
                     child: Text(
@@ -495,7 +495,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: _discountBgColor(type).withOpacity(0.12),
+                      color: _discountBgColor(type).withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
                     child: Icon(_typeIcon(type),
@@ -514,7 +514,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                                   horizontal: 8, vertical: 2),
                               decoration: BoxDecoration(
                                 color:
-                                    _statusColor(status).withOpacity(0.12),
+                                    _statusColor(status).withValues(alpha: 0.12),
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.full),
                               ),
@@ -528,7 +528,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: AppColors.error.withOpacity(0.1),
+                                  color: AppColors.error.withValues(alpha: 0.1),
                                   borderRadius:
                                       BorderRadius.circular(AppRadius.full),
                                 ),

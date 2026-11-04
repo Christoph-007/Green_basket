@@ -253,7 +253,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         children: [
                           Icon(Icons.location_on_rounded,
                               color:
-                                  AppColors.primary.withOpacity(0.7),
+                                  AppColors.primary.withValues(alpha: 0.7),
                               size: 40),
                           const SizedBox(height: AppSpacing.xs),
                           Container(
@@ -261,7 +261,7 @@ class OrderTrackingScreen extends StatelessWidget {
                                 horizontal: AppSpacing.sm,
                                 vertical: AppSpacing.xs),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               borderRadius: BorderRadius.circular(
                                   AppRadius.full),
                             ),
@@ -401,7 +401,7 @@ class OrderTrackingScreen extends StatelessWidget {
                     ? AppColors.primary
                     : isActive
                         ? AppColors.primaryContainer
-                        : AppColors.border.withOpacity(0.3),
+                        : AppColors.border.withValues(alpha: 0.3),
                 shape: BoxShape.circle,
                 border: isActive
                     ? Border.all(
@@ -481,7 +481,7 @@ class _MapGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.grey.withOpacity(0.15)
+      ..color = Colors.grey.withValues(alpha: 0.15)
       ..strokeWidth = 1;
     const spacing = 30.0;
     for (double x = 0; x < size.width; x += spacing) {

@@ -166,7 +166,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                                       const EdgeInsets.all(AppSpacing.md),
                                   decoration: BoxDecoration(
                                     color:
-                                        AppColors.surface.withOpacity(0.9),
+                                        AppColors.surface.withValues(alpha: 0.9),
                                     shape: BoxShape.circle,
                                     boxShadow: [
                                       BoxShadow(
@@ -184,7 +184,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                                       vertical: AppSpacing.sm),
                                   decoration: BoxDecoration(
                                     color:
-                                        AppColors.surface.withOpacity(0.9),
+                                        AppColors.surface.withValues(alpha: 0.9),
                                     borderRadius: BorderRadius.circular(
                                         AppRadius.full),
                                   ),
@@ -288,7 +288,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(
           color: isActive
-              ? AppColors.primary.withOpacity(0.2)
+              ? AppColors.primary.withValues(alpha: 0.2)
               : AppColors.border,
         ),
       ),
@@ -407,7 +407,7 @@ class _MapGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.primary.withOpacity(0.06)
+      ..color = AppColors.primary.withValues(alpha: 0.06)
       ..strokeWidth = 1;
     for (double x = 0; x < size.width; x += 30) {
       canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);

@@ -102,7 +102,7 @@ class MerchantProfileScreen extends StatelessWidget {
                                       horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(
                                     color:
-                                        AppColors.success.withOpacity(0.1),
+                                        AppColors.success.withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: const Text('Verified',
@@ -163,7 +163,7 @@ class MerchantProfileScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -181,7 +181,7 @@ class MerchantProfileScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppRadius.md),
                   ),
                   child: Icon(icon, size: 24, color: color),

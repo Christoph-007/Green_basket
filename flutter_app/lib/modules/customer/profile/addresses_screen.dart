@@ -251,7 +251,7 @@ class _IconBtn extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 34, height: 34,
-        decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(AppRadius.sm)),
+        decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(AppRadius.sm)),
         child: Icon(icon, color: color, size: 18),
       ),
     ));

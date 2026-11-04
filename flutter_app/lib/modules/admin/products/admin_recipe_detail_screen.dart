@@ -39,7 +39,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
               icon: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.arrow_back_ios_new, size: 16, color: Colors.white),
@@ -98,8 +98,8 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: status.toLowerCase() == 'published'
-                              ? AppColors.success.withOpacity(0.1)
-                              : AppColors.textSecondary.withOpacity(0.1),
+                              ? AppColors.success.withValues(alpha: 0.1)
+                              : AppColors.textSecondary.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(AppRadius.full),
                         ),
                         child: Text(
@@ -186,7 +186,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                                       height: 28,
                                       decoration: BoxDecoration(
                                         color: hasProduct
-                                            ? AppColors.primary.withOpacity(0.1)
+                                            ? AppColors.primary.withValues(alpha: 0.1)
                                             : AppColors.background,
                                         borderRadius: BorderRadius.circular(AppRadius.sm),
                                       ),
@@ -299,7 +299,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                         ...dietaryTags.map((t) => Chip(
                           avatar: const Icon(Icons.eco, size: 16, color: AppColors.success),
                           label: Text(t.toString()),
-                          backgroundColor: AppColors.success.withOpacity(0.1),
+                          backgroundColor: AppColors.success.withValues(alpha: 0.1),
                           side: BorderSide.none,
                         )),
                         ...tags.map((t) => Chip(

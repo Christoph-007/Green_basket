@@ -87,7 +87,7 @@ class _OfferTile extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [AppColors.primary.withOpacity(0.05), AppColors.primary.withOpacity(0.1)],
+                  colors: [AppColors.primary.withValues(alpha: 0.05), AppColors.primary.withValues(alpha: 0.1)],
                 ),
               ),
               child: Row(
@@ -96,7 +96,7 @@ class _OfferTile extends StatelessWidget {
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.local_offer, color: AppColors.primary, size: 28),
@@ -126,7 +126,7 @@ class _OfferTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.primary, style: BorderStyle.solid),
                         borderRadius: BorderRadius.circular(6),
-                        color: AppColors.primary.withOpacity(0.05),
+                        color: AppColors.primary.withValues(alpha: 0.05),
                       ),
                       child: Text(
                         code,

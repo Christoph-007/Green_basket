@@ -308,12 +308,12 @@ class _ZoneRadiusPainter extends CustomPainter {
 
     // Outer circle (coverage area)
     final bgPaint = Paint()
-      ..color = AppColors.primary.withOpacity(0.1)
+      ..color = AppColors.primary.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, normalizedRadius, bgPaint);
 
     final borderPaint = Paint()
-      ..color = AppColors.primary.withOpacity(0.4)
+      ..color = AppColors.primary.withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;

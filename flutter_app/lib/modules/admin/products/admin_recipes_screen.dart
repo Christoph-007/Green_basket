@@ -228,7 +228,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                 decoration: BoxDecoration(
                   gradient: imageUrl == null || !imageUrl.startsWith('http')
                     ? LinearGradient(
-                        colors: [AppColors.primaryContainer, AppColors.primaryLight.withOpacity(0.3)],
+                        colors: [AppColors.primaryContainer, AppColors.primaryLight.withValues(alpha: 0.3)],
                       )
                     : null,
                   borderRadius: BorderRadius.circular(AppRadius.md),
@@ -254,7 +254,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
-                            color: _statusColor(status).withOpacity(0.1),
+                            color: _statusColor(status).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(AppRadius.full),
                           ),
                           child: Text(

@@ -114,7 +114,7 @@ class _ProductGrid extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.inventory_2_outlined,
-                  size: 64, color: AppColors.textHint.withOpacity(0.5)),
+                  size: 64, color: AppColors.textHint.withValues(alpha: 0.5)),
               const SizedBox(height: AppSpacing.md),
               const Text('No products found',
                   style: AppTextStyles.bodyLarge),
@@ -154,7 +154,7 @@ class _ProductGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppRadius.lg),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: 0.04),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -177,7 +177,7 @@ class _ProductGrid extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.05),
+                              color: AppColors.primary.withValues(alpha: 0.05),
                               borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(AppRadius.lg)),
                             ),
@@ -187,13 +187,13 @@ class _ProductGrid extends StatelessWidget {
                                       fit: BoxFit.cover)
                                   : Icon(Icons.local_florist,
                                       size: 50,
-                                      color: AppColors.primary.withOpacity(0.5)),
+                                      color: AppColors.primary.withValues(alpha: 0.5)),
                             ),
                           ),
                           if (!inStock)
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withValues(alpha: 0.7),
                                 borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(AppRadius.lg)),
                               ),

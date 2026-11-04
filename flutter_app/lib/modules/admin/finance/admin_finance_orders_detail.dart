@@ -109,7 +109,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.04),
+                            color: Colors.black.withValues(alpha: 0.04),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -123,7 +123,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                         leading: Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: amountColor.withOpacity(0.1),
+                            color: amountColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(

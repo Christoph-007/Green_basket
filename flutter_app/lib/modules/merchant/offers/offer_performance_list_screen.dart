@@ -105,7 +105,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                     decoration: BoxDecoration(
-                                      color: isActive ? AppColors.success.withOpacity(0.1) : AppColors.textHint.withOpacity(0.1),
+                                      color: isActive ? AppColors.success.withValues(alpha: 0.1) : AppColors.textHint.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(AppRadius.full),
                                     ),
                                     child: Text(

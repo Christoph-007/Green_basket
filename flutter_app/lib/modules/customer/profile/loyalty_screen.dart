@@ -115,7 +115,7 @@ class LoyaltyScreen extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         _getTierColor(tier),
-                        _getTierColor(tier).withOpacity(0.8),
+                        _getTierColor(tier).withValues(alpha: 0.8),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -142,7 +142,7 @@ class LoyaltyScreen extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(
                                 AppRadius.full,
                               ),

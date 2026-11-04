@@ -118,7 +118,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: (status == 'Active' ? AppColors.success : AppColors.error).withOpacity(0.1),
+                          color: (status == 'Active' ? AppColors.success : AppColors.error).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(AppRadius.full),
                         ),
                         child: Text(

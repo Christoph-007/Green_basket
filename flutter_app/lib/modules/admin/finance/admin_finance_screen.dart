@@ -44,7 +44,7 @@ class AdminFinanceScreen extends StatelessWidget {
             trailing: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
+                color: Colors.white.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: const Icon(Icons.account_balance_wallet,
@@ -192,7 +192,7 @@ class AdminFinanceScreen extends StatelessWidget {
             child: ChoiceChip(
               label: Text(e.value),
               selected: selected == e.key,
-              selectedColor: AppColors.primary.withOpacity(0.15),
+              selectedColor: AppColors.primary.withValues(alpha: 0.15),
               labelStyle: TextStyle(
                 color: selected == e.key ? AppColors.primary : AppColors.textSecondary,
                 fontWeight: FontWeight.w600,

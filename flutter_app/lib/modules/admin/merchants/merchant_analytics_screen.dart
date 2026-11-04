@@ -216,7 +216,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
                       margin: const EdgeInsets.only(top: 4),
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
-                        color: AppColors.error.withOpacity(0.1),
+                        color: AppColors.error.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppRadius.full),
                       ),
                       child: Text('BLOCKED',
@@ -274,7 +274,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
                   child: Icon(item['icon'] as IconData, color: color, size: 20),

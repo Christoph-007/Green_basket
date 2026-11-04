@@ -123,7 +123,7 @@ class ReferralScreen extends StatelessWidget {
                         color: AppColors.primaryContainer,
                         borderRadius: BorderRadius.circular(AppRadius.md),
                         border: Border.all(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withValues(alpha: 0.3),
                         ),
                       ),
                       child: Row(

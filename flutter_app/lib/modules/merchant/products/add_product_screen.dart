@@ -145,7 +145,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     } catch (e) {
       Get.snackbar('Error', 'Failed to add product: ${e.toString().split(':').last.trim()}',
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.1),
+          backgroundColor: Colors.red.withValues(alpha: 0.1),
           colorText: Colors.red);
     } finally {
       setState(() => _isSubmitting = false);

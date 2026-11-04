@@ -50,7 +50,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
             subtitle: Obx(() => Text(
                   'Admin › Orders  (${controller.orders.length})',
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 13,
                   ),
                 )),
@@ -92,7 +92,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                         child: Center(
                           child: Column(
                             children: [
-                              Icon(Icons.receipt_long_outlined, size: 56, color: AppColors.textHint.withOpacity(0.5)),
+                              Icon(Icons.receipt_long_outlined, size: 56, color: AppColors.textHint.withValues(alpha: 0.5)),
                               const SizedBox(height: 12),
                               Text(
                                 _selectedFilter.value == 'All'
@@ -155,8 +155,8 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                   decoration: BoxDecoration(
                     color: isActive
-                        ? Colors.white.withOpacity(0.25)
-                        : AppColors.primary.withOpacity(0.1),
+                        ? Colors.white.withValues(alpha: 0.25)
+                        : AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(

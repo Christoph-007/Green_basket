@@ -98,7 +98,7 @@ class _MerchantOrderDetailScreenState
     }
   }
 
-  Color get _statusBgColor => _statusColor.withOpacity(0.1);
+  Color get _statusBgColor => _statusColor.withValues(alpha: 0.1);
 
   Future<void> _advanceStatus() async {
     final next = _nextStatus;
@@ -145,7 +145,7 @@ class _MerchantOrderDetailScreenState
                     color: _statusBgColor,
                     borderRadius: BorderRadius.circular(AppRadius.full),
                     border:
-                        Border.all(color: _statusColor.withOpacity(0.3)),
+                        Border.all(color: _statusColor.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -363,10 +363,10 @@ class _MerchantOrderDetailScreenState
                     width: double.infinity,
                     padding: const EdgeInsets.all(AppSpacing.md),
                     decoration: BoxDecoration(
-                      color: AppColors.warning.withOpacity(0.05),
+                      color: AppColors.warning.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                       border: Border.all(
-                          color: AppColors.warning.withOpacity(0.3)),
+                          color: AppColors.warning.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       widget.order.notes?.isNotEmpty == true

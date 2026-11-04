@@ -156,7 +156,7 @@ class WalletScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.3),
+                              color: Colors.red.withValues(alpha: 0.3),
                               borderRadius:
                                   BorderRadius.circular(AppRadius.full),
                             ),
@@ -240,8 +240,8 @@ class WalletScreen extends StatelessWidget {
                               height: 40,
                               decoration: BoxDecoration(
                                 color: tx.isCredit
-                                    ? AppColors.success.withOpacity(0.1)
-                                    : AppColors.error.withOpacity(0.1),
+                                    ? AppColors.success.withValues(alpha: 0.1)
+                                    : AppColors.error.withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(

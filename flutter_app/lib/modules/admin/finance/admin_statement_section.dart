@@ -176,7 +176,7 @@ class AdminStatementSection extends StatelessWidget {
     return ChoiceChip(
       label: Text(text),
       selected: selected,
-      selectedColor: AppColors.primary.withOpacity(0.15),
+      selectedColor: AppColors.primary.withValues(alpha: 0.15),
       labelStyle: TextStyle(
         color: selected ? AppColors.primary : AppColors.textSecondary,
         fontWeight: FontWeight.w600,

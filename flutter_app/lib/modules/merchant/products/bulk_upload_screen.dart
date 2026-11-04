@@ -297,7 +297,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                           Container(
                             padding: const EdgeInsets.all(AppSpacing.sm),
                             decoration: BoxDecoration(
-                              color: AppColors.warning.withOpacity(0.1),
+                              color: AppColors.warning.withValues(alpha: 0.1),
                               borderRadius:
                                   BorderRadius.circular(AppRadius.sm),
                             ),
@@ -456,8 +456,8 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
             height: 40,
             decoration: BoxDecoration(
               color: isSuccess
-                  ? AppColors.success.withOpacity(0.1)
-                  : AppColors.error.withOpacity(0.1),
+                  ? AppColors.success.withValues(alpha: 0.1)
+                  : AppColors.error.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppRadius.sm),
             ),
             child: Icon(
@@ -492,8 +492,8 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                     horizontal: AppSpacing.sm, vertical: 2),
                 decoration: BoxDecoration(
                   color: isSuccess
-                      ? AppColors.success.withOpacity(0.1)
-                      : AppColors.error.withOpacity(0.1),
+                      ? AppColors.success.withValues(alpha: 0.1)
+                      : AppColors.error.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AppRadius.full),
                 ),
                 child: Text(
