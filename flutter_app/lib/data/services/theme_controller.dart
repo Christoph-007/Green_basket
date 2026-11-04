@@ -8,7 +8,7 @@ import 'package:greenbasket_app/data/services/storage_service.dart';
 class ThemeController extends GetxController with WidgetsBindingObserver {
   static ThemeController get to => Get.find<ThemeController>();
 
-  final mode = ThemeMode.system.obs;
+  final mode = ThemeMode.light.obs;
 
   @override
   void onInit() {
@@ -59,6 +59,6 @@ class ThemeController extends GetxController with WidgetsBindingObserver {
 
   static ThemeMode _fromName(String name) => ThemeMode.values.firstWhere(
         (m) => m.name == name,
-        orElse: () => ThemeMode.system,
+        orElse: () => ThemeMode.light,
       );
 }
