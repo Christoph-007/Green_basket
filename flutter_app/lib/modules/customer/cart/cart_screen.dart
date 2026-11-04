@@ -237,7 +237,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                GestureDetector(
+                Semantics(button: true, child: GestureDetector(
                   onTap: ctrl.clearCoupon,
                   child: Text(
                     'Remove',
@@ -245,7 +245,7 @@ class CartScreen extends StatelessWidget {
                       color: AppColors.error,
                     ),
                   ),
-                ),
+                )),
               ],
             ),
           );

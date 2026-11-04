@@ -120,7 +120,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
               ],
             ),
           ),
-          IconButton(
+          IconButton(tooltip: 'Decrease', 
             icon: const Icon(Icons.remove_circle_outline),
             color: AppColors.primary,
             onPressed: quantity > 0
@@ -132,7 +132,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
             child: Text('$quantity',
                 textAlign: TextAlign.center, style: AppTextStyles.titleMedium),
           ),
-          IconButton(
+          IconButton(tooltip: 'Increase', 
             icon: const Icon(Icons.add_circle_outline),
             color: AppColors.primary,
             onPressed: quantity < item.quantity

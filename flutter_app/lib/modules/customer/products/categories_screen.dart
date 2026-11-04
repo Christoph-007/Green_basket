@@ -188,7 +188,7 @@ class CategoriesScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text('Categories', style: AppTextStyles.titleLarge),
         actions: [
-          IconButton(
+          IconButton(tooltip: 'Search', 
             icon: const Icon(Icons.search),
             onPressed: () => Get.toNamed(Routes.search),
           ),
@@ -228,7 +228,7 @@ class CategoriesScreen extends StatelessWidget {
                   final isSelected = selectedId == cat.id;
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: GestureDetector(
+                    child: Semantics(button: true, child: GestureDetector(
                       onTap: () => ctrl.selectCategory(cat.id),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -264,7 +264,7 @@ class CategoriesScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
+                    )),
                   );
                 },
               );
@@ -302,7 +302,7 @@ class CategoriesScreen extends StatelessWidget {
                     ),
                   ),
                   if (ctrl.hasLocation.value)
-                    GestureDetector(
+                    Semantics(button: true, child: GestureDetector(
                       onTap: () => ctrl.toggleShowAll(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -324,10 +324,10 @@ class CategoriesScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
+                    )),
                   if (!isShowAll) ...[
                     const SizedBox(width: 8),
-                    GestureDetector(
+                    Semantics(button: true, child: GestureDetector(
                       onTap: () => _showRadiusPicker(context, ctrl),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -353,7 +353,7 @@ class CategoriesScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
+                    )),
                   ],
                 ],
               ),

@@ -567,7 +567,7 @@ class _ChoiceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Opacity(
       opacity: enabled ? 1 : 0.5,
-      child: GestureDetector(
+      child: Semantics(button: true, child: GestureDetector(
         onTap: enabled ? onTap : null,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
@@ -602,7 +602,7 @@ class _ChoiceTile extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

@@ -158,7 +158,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Add Product'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
         ),
@@ -667,7 +667,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('₹${opt['price']}'),
-                        IconButton(
+                        IconButton(tooltip: 'Delete', 
                           icon: const Icon(Icons.delete_outline, color: AppColors.error),
                           onPressed: () => setState(() => _preparationOptions.removeAt(index)),
                         ),

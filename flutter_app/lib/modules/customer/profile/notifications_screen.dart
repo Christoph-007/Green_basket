@@ -105,7 +105,7 @@ class _NotificationTile extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             DateFormat('MMM d, h:mm a').format(notification.createdAt),
-            style: AppTextStyles.labelSmall.copyWith(color: AppColors.textHint),
+            style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
           ),
         ],
       ),

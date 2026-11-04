@@ -98,7 +98,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                                 _selectedFilter.value == 'All'
                                     ? 'No orders found'
                                     : 'No ${_selectedFilter.value.toLowerCase()} orders',
-                                style: const TextStyle(color: AppColors.textHint, fontSize: 15),
+                                style: const TextStyle(color: AppColors.textSecondary, fontSize: 15),
                               ),
                             ],
                           ),
@@ -128,7 +128,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
           : controller.orders.where((o) =>
               (o['status']?.toString().toLowerCase() ?? '') == title.toLowerCase()).length;
 
-      return GestureDetector(
+      return Semantics(button: true, child: GestureDetector(
         onTap: () => _selectedFilter.value = title,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -172,7 +172,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
             ],
           ),
         ),
-      );
+      ));
     });
   }
 
@@ -424,7 +424,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   if (dateDisplay.isNotEmpty)
                     Text(
                       dateDisplay,
-                      style: const TextStyle(fontSize: 11, color: AppColors.textHint),
+                      style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                     ),
                   const SizedBox(width: 12),
                   // Amount

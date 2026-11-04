@@ -520,7 +520,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
         final isSelected = _selectedType == t.$1;
         Color color = isSelected ? AppColors.primary : AppColors.textHint;
         return Expanded(
-          child: GestureDetector(
+          child: Semantics(button: true, child: GestureDetector(
             onTap: () => setState(() => _selectedType = t.$1),
             child: Container(
               margin: const EdgeInsets.only(right: AppSpacing.sm),
@@ -551,7 +551,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
                 ],
               ),
             ),
-          ),
+          )),
         );
       }).toList(),
     );
@@ -559,7 +559,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
 
   Widget _buildDatePicker(
       String label, DateTime? date, VoidCallback onTap) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
@@ -575,7 +575,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
           children: [
             Text(label,
                 style: AppTextStyles.bodySmall
-                    .copyWith(color: AppColors.textHint)),
+                    .copyWith(color: AppColors.textSecondary)),
             const SizedBox(height: AppSpacing.xs),
             Row(
               children: [
@@ -593,7 +593,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: date != null
                           ? AppColors.textPrimary
-                          : AppColors.textHint,
+                          : AppColors.textSecondary,
                     ),
                   ),
                 ),
@@ -602,7 +602,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildTextField({

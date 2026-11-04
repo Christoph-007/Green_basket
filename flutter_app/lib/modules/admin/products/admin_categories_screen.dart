@@ -85,7 +85,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Categories'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -157,7 +157,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                           },
                           activeColor: AppColors.primary,
                         ),
-                        IconButton(
+                        IconButton(tooltip: 'More options', 
                           icon: const Icon(Icons.more_vert, color: AppColors.textSecondary, size: 20),
                           onPressed: () => _showOptionsMenu(context, cat),
                         ),

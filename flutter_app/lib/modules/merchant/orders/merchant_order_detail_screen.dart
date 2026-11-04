@@ -125,7 +125,7 @@ class _MerchantOrderDetailScreenState
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text('Order #${widget.order.orderNumber}', overflow: TextOverflow.ellipsis),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
         ),
@@ -209,7 +209,7 @@ class _MerchantOrderDetailScreenState
                                 style: AppTextStyles.titleMedium),
                             const SizedBox(height: 2),
                             if (widget.order.customerPhone?.isNotEmpty == true)
-                              GestureDetector(
+                              Semantics(button: true, child: GestureDetector(
                                 onTap: () {
                                   HapticFeedback.lightImpact();
                                 },
@@ -226,9 +226,9 @@ class _MerchantOrderDetailScreenState
                                     ),
                                   ],
                                 ),
-                              )
+                              ))
                             else
-                              GestureDetector(
+                              Semantics(button: true, child: GestureDetector(
                                 onTap: () {
                                   HapticFeedback.lightImpact();
                                 },
@@ -245,7 +245,7 @@ class _MerchantOrderDetailScreenState
                                     ),
                                   ],
                                 ),
-                              ),
+                              )),
                           ],
                         ),
                       ),

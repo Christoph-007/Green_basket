@@ -141,7 +141,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Upload area
-            GestureDetector(
+            Semantics(button: true, child: GestureDetector(
               onTap: _isUploading ? null : _selectFile,
               child: Container(
                 width: double.infinity,
@@ -214,7 +214,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                   ],
                 ),
               ),
-            ),
+            )),
             const SizedBox(height: AppSpacing.md),
 
             // Download template button

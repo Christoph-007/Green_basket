@@ -81,7 +81,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               Row(
                 children: [
                   Builder(builder: (context) {
-                    return IconButton(
+                    return IconButton(tooltip: 'Open menu', 
                       icon: const Icon(Icons.menu, color: Colors.white),
                       onPressed: () => Scaffold.of(context).openDrawer(),
                     );
@@ -411,7 +411,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                     const SizedBox(height: 4),
                     Text('New orders will appear here',
                         style: AppTextStyles.bodySmall
-                            .copyWith(color: AppColors.textHint)),
+                            .copyWith(color: AppColors.textSecondary)),
                   ],
                 ),
               )
@@ -570,7 +570,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                 padding: const EdgeInsets.only(top: 2),
                 child: Text('+${order.items.length - 3} more items',
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: AppColors.textHint)),
+                        .copyWith(color: AppColors.textSecondary)),
               ),
             const Divider(height: 20),
             // Footer

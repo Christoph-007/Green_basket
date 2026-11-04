@@ -24,7 +24,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: Builder(builder: (context) {
-          return IconButton(
+          return IconButton(tooltip: 'Open menu', 
             icon: const Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
@@ -202,13 +202,13 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                                       style: AppTextStyles.titleMedium),
                                 ],
                               ),
-                              GestureDetector(
+                              Semantics(button: true, child: GestureDetector(
                                 onTap: () => Get.to(
                                     () => const MerchantProductAnalyticsScreen()),
                                 child: Text('See All',
                                     style: AppTextStyles.bodySmall
                                         .copyWith(color: AppColors.primary)),
-                              ),
+                              )),
                             ],
                           ),
                           const SizedBox(height: AppSpacing.md),
@@ -437,7 +437,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                   AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: 2),
           Text(label,
-              style: const TextStyle(fontSize: 11, color: AppColors.textHint),
+              style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
               textAlign: TextAlign.center),
         ],
       ),
@@ -457,7 +457,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
               Flexible(
                 child: Text(label,
                     style: AppTextStyles.labelSmall
-                        .copyWith(color: AppColors.textHint),
+                        .copyWith(color: AppColors.textSecondary),
                     overflow: TextOverflow.ellipsis),
               ),
             ],
@@ -562,7 +562,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                     Text('Revenue Trend', style: AppTextStyles.titleMedium),
                   ],
                 ),
-                Text('Last 7 Days', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textHint)),
+                Text('Last 7 Days', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
               ],
             ),
             const SizedBox(height: AppSpacing.md),
@@ -596,7 +596,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textHint)),
+                          Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                         ],
                       ),
                     ),

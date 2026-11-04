@@ -111,7 +111,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
                                     child: Text(
                                       isActive ? 'Active' : 'Inactive',
                                       style: AppTextStyles.labelSmall.copyWith(
-                                        color: isActive ? AppColors.success : AppColors.textHint,
+                                        color: isActive ? AppColors.success : AppColors.textSecondary,
                                       ),
                                     ),
                                   ),

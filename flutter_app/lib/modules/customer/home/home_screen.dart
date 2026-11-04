@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         if (!isShowAll) ...[
-                          GestureDetector(
+                          Semantics(button: true, child: GestureDetector(
                             onTap: () =>
                                 HomeScreen._showRadiusPicker(context, ctrl),
                             child: Container(
@@ -110,10 +110,10 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
+                          )),
                           const SizedBox(width: 8),
                         ],
-                        GestureDetector(
+                        Semantics(button: true, child: GestureDetector(
                           onTap: () => ctrl.toggleShowAll(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        )),
                       ],
                     ),
                   );
@@ -143,7 +143,7 @@ class HomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: GestureDetector(
+                  child: Semantics(button: true, child: GestureDetector(
                     onTap: () => Get.toNamed(Routes.search),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -161,12 +161,12 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             'Search for fresh produce...',
                             style: AppTextStyles.bodyMedium
-                                .copyWith(color: AppColors.textHint),
+                                .copyWith(color: AppColors.textSecondary),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  )),
                 ),
               ),
 
@@ -359,7 +359,7 @@ class _Header extends StatelessWidget {
           const Spacer(),
           Stack(
             children: [
-              IconButton(
+              IconButton(tooltip: 'Notifications', 
                 icon: const Icon(Icons.notifications_outlined),
                 color: AppColors.textPrimary,
                 onPressed: () => Get.toNamed('/customer/notifications'),
@@ -474,7 +474,7 @@ class _BannerSectionState extends State<_BannerSection> {
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: GestureDetector(
+                child: Semantics(button: true, child: GestureDetector(
                   onTap: () {
                     if (widget.offers.isNotEmpty) {
                       final offer = widget.offers[i];
@@ -565,7 +565,7 @@ class _BannerSectionState extends State<_BannerSection> {
                     ],
                   ),
                 ),
-                ),
+                )),
               );
             },
           ),
@@ -618,7 +618,7 @@ class _SectionHeader extends StatelessWidget {
           ),
           const Spacer(),
           if (onSeeAll != null)
-            GestureDetector(
+            Semantics(button: true, child: GestureDetector(
               onTap: onSeeAll,
               child: Text(
                 'See All',
@@ -627,7 +627,7 @@ class _SectionHeader extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
+            )),
         ],
       ),
     );
@@ -652,7 +652,7 @@ class _CategoriesRow extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, i) {
           final cat = categories[i];
-          return GestureDetector(
+          return Semantics(button: true, child: GestureDetector(
             onTap: () =>
                 NavController.to.openCategories(categoryId: cat.id),
             child: Column(
@@ -692,7 +692,7 @@ class _CategoriesRow extends StatelessWidget {
                 ),
               ],
             ),
-          );
+          ));
         },
       ),
     );
@@ -738,7 +738,7 @@ class _HomeRecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () => Get.toNamed(
         Routes.recipeDetail,
         arguments: {'recipeId': recipe.id},
@@ -859,6 +859,6 @@ class _HomeRecipeCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

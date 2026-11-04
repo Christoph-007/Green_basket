@@ -34,7 +34,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
         elevation: 0,
         backgroundColor: Colors.white,
         leading: Builder(builder: (context) {
-          return IconButton(
+          return IconButton(tooltip: 'Open menu', 
             icon: const Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
@@ -253,7 +253,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                 child: Text(
                                     '+${order.items.length - 3} more items',
                                     style: AppTextStyles.bodySmall
-                                        .copyWith(color: AppColors.textHint)),
+                                        .copyWith(color: AppColors.textSecondary)),
                               ),
                             const Divider(height: 12),
                             Row(

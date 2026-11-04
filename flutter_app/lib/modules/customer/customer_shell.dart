@@ -88,7 +88,10 @@ class _CustomerShellState extends State<CustomerShell> {
             BottomNavigationBarItem(
               icon: Obx(() {
                 final count = Get.find<CartController>().itemCount;
-                return Stack(
+                return Semantics(
+                  label: count > 0 ? 'Cart, $count items' : 'Cart',
+                  excludeSemantics: true,
+                  child: Stack(
                   clipBehavior: Clip.none,
                   children: [
                     const Icon(Icons.shopping_cart_outlined),
@@ -117,6 +120,7 @@ class _CustomerShellState extends State<CustomerShell> {
                         ),
                       ),
                   ],
+                  ),
                 );
               }),
               activeIcon: const Icon(Icons.shopping_cart),

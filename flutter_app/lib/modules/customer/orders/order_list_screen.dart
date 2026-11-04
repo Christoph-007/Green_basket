@@ -104,7 +104,7 @@ class OrderListScreen extends StatelessWidget {
           backgroundColor: AppColors.surface,
           elevation: 0,
           centerTitle: true,
-          leading: IconButton(
+          leading: IconButton(tooltip: 'Back', 
             icon: const Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
             onPressed: () {
               if (Navigator.canPop(context)) {
@@ -236,7 +236,7 @@ class _OrderCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(5, (i) {
                     final star = i + 1;
-                    return GestureDetector(
+                    return Semantics(button: true, child: GestureDetector(
                       onTap: () => setState(() => selectedRating = star),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -250,7 +250,7 @@ class _OrderCard extends StatelessWidget {
                               : AppColors.border,
                         ),
                       ),
-                    );
+                    ));
                   }),
                 ),
                 const SizedBox(height: 20),
@@ -355,7 +355,7 @@ class _OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctrl = Get.find<OrderListController>();
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () =>
           Get.toNamed(Routes.orderDetail, arguments: {'orderId': order.id}),
       child: Container(
@@ -488,7 +488,7 @@ class _OrderCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 

@@ -321,7 +321,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                                         style: AppTextStyles.bodySmall.copyWith(
                                           color: isOpen
                                               ? AppColors.success
-                                              : AppColors.textHint,
+                                              : AppColors.textSecondary,
                                         ),
                                       ),
                                       const SizedBox(width: AppSpacing.xs),
@@ -608,7 +608,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
   }
 
   Widget _timePickerButton(String label, String time, VoidCallback onTap) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -640,7 +640,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _settingsGroupHeader(String title) {
@@ -670,7 +670,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
   }
 
   Widget _stepperButton(IconData icon, VoidCallback onTap) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         width: 32,
@@ -681,6 +681,6 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
         ),
         child: Icon(icon, size: 16, color: AppColors.textPrimary),
       ),
-    );
+    ));
   }
 }

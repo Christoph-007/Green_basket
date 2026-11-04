@@ -56,7 +56,7 @@ class AddressesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'My Addresses', backIcon: Icons.arrow_back_ios_new_rounded, actions: [
-          IconButton(
+          IconButton(tooltip: 'Add', 
             icon: const Icon(Icons.add_rounded, color: AppColors.primary),
             onPressed: () => Get.toNamed('${Routes.addresses}/add')?.then((_) => ctrl.fetchAddresses()),
           ),
@@ -173,7 +173,7 @@ class _AddressCard extends StatelessWidget {
           Text('$city – $pincode', style: AppTextStyles.bodySmall),
           const SizedBox(height: AppSpacing.sm),
           if (!isDefault)
-            GestureDetector(
+            Semantics(button: true, child: GestureDetector(
               onTap: () => controller.setAsDefault(id),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -183,7 +183,7 @@ class _AddressCard extends StatelessWidget {
                   Text('Set as default', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary)),
                 ],
               ),
-            ),
+            )),
         ],
       ),
     );
@@ -247,13 +247,13 @@ class _IconBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         width: 34, height: 34,
         decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(AppRadius.sm)),
         child: Icon(icon, color: color, size: 18),
       ),
-    );
+    ));
   }
 }

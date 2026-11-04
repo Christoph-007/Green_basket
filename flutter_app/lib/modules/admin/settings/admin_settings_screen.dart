@@ -134,7 +134,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Platform Settings'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),

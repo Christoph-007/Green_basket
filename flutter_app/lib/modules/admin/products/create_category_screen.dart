@@ -120,7 +120,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(widget.category != null ? 'Edit Category' : 'Create Category'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -196,7 +196,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
               itemBuilder: (_, i) {
                 final icon = _icons[i];
                 final isSelected = _selectedIcon == icon;
-                return GestureDetector(
+                return Semantics(button: true, child: GestureDetector(
                   onTap: () => setState(() => _selectedIcon = icon),
                   child: Container(
                     decoration: BoxDecoration(
@@ -211,7 +211,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
                       child: Text(icon, style: const TextStyle(fontSize: 22)),
                     ),
                   ),
-                );
+                ));
               },
             ),
           ],

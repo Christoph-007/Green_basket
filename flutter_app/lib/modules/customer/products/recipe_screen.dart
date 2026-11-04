@@ -96,7 +96,7 @@ class RecipeScreen extends StatelessWidget {
                 prefixIcon: const Icon(Icons.search_rounded,
                     color: AppColors.textHint),
                 suffixIcon: Obx(() => ctrl.searchQuery.value.isNotEmpty
-                    ? IconButton(
+                    ? IconButton(tooltip: 'Clear', 
                         icon: const Icon(Icons.clear_rounded,
                             color: AppColors.textHint, size: 18),
                         onPressed: () {
@@ -142,7 +142,7 @@ class RecipeScreen extends StatelessWidget {
                 itemBuilder: (_, i) {
                   final cat = ctrl.categories[i];
                   final isSelected = selectedCat == cat;
-                  return GestureDetector(
+                  return Semantics(button: true, child: GestureDetector(
                     onTap: () => ctrl.selectedCategory.value = cat,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 150),
@@ -165,7 +165,7 @@ class RecipeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
+                  ));
                 },
               );
             }),
@@ -234,7 +234,7 @@ class _RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () => Get.toNamed(
         Routes.recipeDetail,
         arguments: {'recipeId': recipe.id},
@@ -370,6 +370,6 @@ class _RecipeCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -143,7 +143,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Positioned(
                             bottom: 0,
                             right: 0,
-                            child: GestureDetector(
+                            child: Semantics(button: true, child: GestureDetector(
                               onTap: () => GBSnack.plain('Not available yet', 'Changing your profile photo is coming soon.', position: SnackPosition.BOTTOM),
                               child: Container(
                                 width: 28,
@@ -157,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 child: const Icon(Icons.camera_alt_rounded,
                                     color: Colors.white, size: 14),
                               ),
-                            ),
+                            )),
                           ),
                         ],
                       ),
@@ -193,7 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : null,
                     ),
                     const SizedBox(height: AppSpacing.sm),
-                    GestureDetector(
+                    Semantics(button: true, child: GestureDetector(
                       onTap: () async {
                         final picked = await showDatePicker(
                           context: context,
@@ -226,7 +226,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           suffixIcon: Icons.calendar_today_outlined,
                         ),
                       ),
-                    ),
+                    )),
                     const SizedBox(height: AppSpacing.xl),
 
                     // Dietary preferences
@@ -245,7 +245,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         final label = opt['label']!;
                         final value = opt['value']!;
                         final selected = _dietPrefs.contains(value);
-                        return GestureDetector(
+                        return Semantics(button: true, child: GestureDetector(
                           onTap: () {
                             setState(() {
                               if (selected) {
@@ -291,7 +291,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ],
                             ),
                           ),
-                        );
+                        ));
                       }).toList(),
                     ),
                     const SizedBox(height: AppSpacing.xl),
@@ -310,7 +310,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       runSpacing: AppSpacing.sm,
                       children: _allAllergens.map((allergen) {
                         final selected = _allergens.contains(allergen);
-                        return GestureDetector(
+                        return Semantics(button: true, child: GestureDetector(
                           onTap: () {
                             setState(() {
                               if (selected) {
@@ -356,7 +356,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ],
                             ),
                           ),
-                        );
+                        ));
                       }).toList(),
                     ),
                     const SizedBox(height: AppSpacing.xl),

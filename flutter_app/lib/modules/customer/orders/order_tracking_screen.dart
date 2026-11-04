@@ -144,7 +144,7 @@ class OrderTrackingScreen extends StatelessWidget {
         backgroundColor: AppColors.surface,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
@@ -439,7 +439,7 @@ class OrderTrackingScreen extends StatelessWidget {
                   style: AppTextStyles.titleMedium.copyWith(
                     color: isDone || isActive
                         ? AppColors.textPrimary
-                        : AppColors.textHint,
+                        : AppColors.textSecondary,
                     fontWeight: isActive
                         ? FontWeight.w700
                         : FontWeight.w500,
@@ -450,7 +450,7 @@ class OrderTrackingScreen extends StatelessWidget {
                   style: AppTextStyles.bodySmall.copyWith(
                     color: isDone || isActive
                         ? AppColors.textSecondary
-                        : AppColors.textHint,
+                        : AppColors.textSecondary,
                   ),
                 ),
               ],

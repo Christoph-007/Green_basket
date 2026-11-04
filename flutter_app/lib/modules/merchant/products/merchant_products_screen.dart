@@ -26,18 +26,18 @@ class MerchantProductsScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           leading: Builder(
             builder: (context) {
-              return IconButton(
+              return IconButton(tooltip: 'Open menu', 
                 icon: const Icon(Icons.menu, color: AppColors.textPrimary),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );
             },
           ),
           actions: [
-            IconButton(
+            IconButton(tooltip: 'Search', 
               icon: const Icon(Icons.search, color: AppColors.textPrimary),
               onPressed: () {},
             ),
-            IconButton(
+            IconButton(tooltip: 'Upload', 
               icon: const Icon(Icons.upload_file, color: AppColors.primary),
               onPressed: () => Get.to(() => const BulkUploadScreen()),
             ),

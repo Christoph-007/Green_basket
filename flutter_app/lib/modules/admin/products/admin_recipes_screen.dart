@@ -143,7 +143,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Recipes'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -305,7 +305,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                   ],
                 ),
               ),
-              IconButton(
+              IconButton(tooltip: 'More options', 
                 icon: const Icon(Icons.more_vert, color: AppColors.textSecondary),
                 onPressed: () => _showRecipeOptions(recipe),
               ),

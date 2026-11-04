@@ -198,7 +198,7 @@ class RecipeDetailScreen extends StatelessWidget {
                   expandedHeight: 250,
                   pinned: true,
                   backgroundColor: AppColors.surface,
-                  leading: GestureDetector(
+                  leading: Semantics(button: true, child: GestureDetector(
                     onTap: () => Get.back(),
                     child: Container(
                       margin: const EdgeInsets.all(8),
@@ -209,7 +209,7 @@ class RecipeDetailScreen extends StatelessWidget {
                       child: const Icon(Icons.arrow_back_ios_new_rounded,
                           color: Colors.white, size: 18),
                     ),
-                  ),
+                  )),
                   flexibleSpace: FlexibleSpaceBar(
                     background: recipe.image != null
                         ? CachedNetworkImage(
@@ -337,7 +337,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                                           ),
                                                           if (product['distance'] != null) ...[
                                                             const SizedBox(width: 4),
-                                                            const Text('•', style: TextStyle(color: AppColors.textHint, fontSize: 11)),
+                                                            const Text('•', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
                                                             const SizedBox(width: 4),
                                                             Text(
                                                               '${product['distance']}km away',
@@ -352,7 +352,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                               Text(
                                                 '${_formatQty(ing['quantity'])} ${ing['unit'] ?? ''}',
                                                 style: AppTextStyles.titleMedium.copyWith(
-                                                  color: isAvailable ? AppColors.primary : AppColors.textHint,
+                                                  color: isAvailable ? AppColors.primary : AppColors.textSecondary,
                                                 ),
                                               ),
                                             ],
@@ -551,13 +551,13 @@ class _StepperButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         width: 34, height: 34,
         alignment: Alignment.center,
         child: Icon(icon, color: AppColors.primary, size: 18),
       ),
-    );
+    ));
   }
 }

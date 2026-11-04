@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: AppColors.textSecondary,
                         ),
                       ),
-                      GestureDetector(
+                      Semantics(button: true, child: GestureDetector(
                         onTap: () => Get.toNamed(Routes.signup),
                         child: Text(
                           'Sign Up',
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ),

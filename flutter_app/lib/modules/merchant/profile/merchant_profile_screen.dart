@@ -21,7 +21,7 @@ class MerchantProfileScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: Builder(
           builder: (context) {
-            return IconButton(
+            return IconButton(tooltip: 'Open menu', 
               icon: const Icon(Icons.menu, color: AppColors.textPrimary),
               onPressed: () => Scaffold.of(context).openDrawer(),
             );

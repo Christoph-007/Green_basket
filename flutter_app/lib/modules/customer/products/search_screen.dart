@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
             prefixIcon: const Icon(Icons.search, color: AppColors.textHint),
-            suffixIcon: IconButton(
+            suffixIcon: IconButton(tooltip: 'Close', 
               icon: const Icon(Icons.close, color: AppColors.textSecondary),
               onPressed: () {
                 _textCtrl.clear();
@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           onChanged: (val) => _ctrl.search(val),
         ),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Get.back(),
         ),

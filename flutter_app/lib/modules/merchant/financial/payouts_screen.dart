@@ -519,7 +519,7 @@ class PayoutsScreen extends StatelessWidget {
                   child: Text(
                     payoutId.toString(),
                     style: AppTextStyles.labelSmall
-                        .copyWith(color: AppColors.textHint),
+                        .copyWith(color: AppColors.textSecondary),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),

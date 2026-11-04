@@ -54,7 +54,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
@@ -191,7 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: AppTextStyles.bodyMedium
                             .copyWith(color: AppColors.textSecondary),
                       ),
-                      GestureDetector(
+                      Semantics(button: true, child: GestureDetector(
                         onTap: () => Get.toNamed(Routes.login),
                         child: Text(
                           'Sign In',
@@ -200,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ),
@@ -233,7 +233,7 @@ class _RoleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
@@ -280,6 +280,6 @@ class _RoleTile extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

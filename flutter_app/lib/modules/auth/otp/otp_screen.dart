@@ -80,7 +80,7 @@ class _OtpScreenState extends State<OtpScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
@@ -181,9 +181,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     ? Text(
                         'Resend in ${_secondsLeft}s',
                         style: AppTextStyles.bodyMedium
-                            .copyWith(color: AppColors.textHint),
+                            .copyWith(color: AppColors.textSecondary),
                       )
-                    : GestureDetector(
+                    : Semantics(button: true, child: GestureDetector(
                         onTap: _resend,
                         child: Text(
                           'Resend OTP',
@@ -192,7 +192,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
+                      )),
               ],
             ),
           ],

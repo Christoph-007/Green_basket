@@ -146,7 +146,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Merchant Analytics'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -454,7 +454,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
                   child: Text(
                     'No reviews yet for this merchant.',
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: AppColors.textHint),
+                        .copyWith(color: AppColors.textSecondary),
                   ),
                 ),
               )

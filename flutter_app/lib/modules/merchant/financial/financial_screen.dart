@@ -52,7 +52,7 @@ class _FinancialScreenState extends State<FinancialScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Financial Summary'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
         ),

@@ -206,7 +206,7 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
                   ),
                   Text(widget.product.unit,
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: AppColors.textHint)),
+                          .copyWith(color: AppColors.textSecondary)),
                   const SizedBox(height: AppSpacing.md),
                   Row(
                     children: [
@@ -269,7 +269,7 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
 
   Widget _circleButton(IconData icon, VoidCallback onTap,
       {required Color color}) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: Container(
         width: 44,
@@ -281,6 +281,6 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
         ),
         child: Icon(icon, color: color, size: 22),
       ),
-    );
+    ));
   }
 }

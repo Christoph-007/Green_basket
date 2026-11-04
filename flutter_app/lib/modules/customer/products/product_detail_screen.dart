@@ -123,7 +123,7 @@ class ProductDetailScreen extends StatelessWidget {
                   expandedHeight: responsive.isTablet ? 450 : 300,
                   pinned: true,
                   backgroundColor: AppColors.surface,
-                  leading: GestureDetector(
+                  leading: Semantics(button: true, child: GestureDetector(
                     onTap: () => Get.back(),
                     child: Container(
                       margin: const EdgeInsets.all(8),
@@ -134,11 +134,11 @@ class ProductDetailScreen extends StatelessWidget {
                       child: const Icon(Icons.arrow_back_ios,
                           size: 18, color: AppColors.textPrimary),
                     ),
-                  ),
+                  )),
                   actions: [
                     Obx(() {
                       final isWishlisted = ctrl.wishlistCtrl.isWishlisted(product.id);
-                      return GestureDetector(
+                      return Semantics(button: true, child: GestureDetector(
                         onTap: ctrl.toggleWishlist,
                         child: Container(
                           margin: const EdgeInsets.all(8),
@@ -153,7 +153,7 @@ class ProductDetailScreen extends StatelessWidget {
                             size: 22,
                           ),
                         ),
-                      );
+                      ));
                     }),
                   ],
                   flexibleSpace: FlexibleSpaceBar(
@@ -291,7 +291,7 @@ class ProductDetailScreen extends StatelessWidget {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Sold by', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textHint)),
+                                        Text('Sold by', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
                                         Text(product.merchantName, style: AppTextStyles.titleMedium),
                                       ],
                                     ),
@@ -324,7 +324,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       '₹${(p.price + addon).toStringAsFixed(0)}',
                                       style: AppTextStyles.bodyMedium.copyWith(
                                         decoration: TextDecoration.lineThrough,
-                                        color: AppColors.textHint,
+                                        color: AppColors.textSecondary,
                                       ),
                                     ),
                                     const SizedBox(width: 8),
@@ -360,7 +360,7 @@ class ProductDetailScreen extends StatelessWidget {
                                     spacing: 8,
                                     runSpacing: 8,
                                     children: product.preparationOptions
-                                        .map((opt) => GestureDetector(
+                                        .map((opt) => Semantics(button: true, child: GestureDetector(
                                               onTap: () =>
                                                   ctrl.selectPreparation(opt),
                                               child: AnimatedContainer(
@@ -401,7 +401,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                            ))
+                                            )))
                                         .toList(),
                                   )),
                             ],
@@ -448,7 +448,7 @@ class ProductDetailScreen extends StatelessWidget {
                                 children: [
                                   Text('Nutrition Facts', style: AppTextStyles.titleLarge),
                                   Text('per 100g', 
-                                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.textHint)),
+                                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
                                 ],
                               ),
                               const SizedBox(height: 12),
@@ -594,7 +594,7 @@ class ProductDetailScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                IconButton(
+                                IconButton(tooltip: 'Decrease', 
                                   icon: const Icon(Icons.remove, size: 18),
                                   onPressed: ctrl.decrementQty,
                                   color: AppColors.textPrimary,
@@ -603,7 +603,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       ctrl.quantity.value.toString(),
                                       style: AppTextStyles.titleLarge,
                                     )),
-                                IconButton(
+                                IconButton(tooltip: 'Add', 
                                   icon: const Icon(Icons.add, size: 18),
                                   onPressed: ctrl.incrementQty,
                                   color: AppColors.primary,
@@ -684,7 +684,7 @@ class _RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () => Get.toNamed(Routes.recipeDetail, arguments: {'recipeId': recipe.id}),
       child: Container(
         width: 160,
@@ -819,6 +819,6 @@ class _RecipeCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

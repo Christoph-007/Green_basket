@@ -193,7 +193,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Edit Product'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
         ),
@@ -244,7 +244,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         children: List.generate(tabs.length, (i) {
           final isActive = i == _currentStep;
           return Expanded(
-            child: GestureDetector(
+            child: Semantics(button: true, child: GestureDetector(
               onTap: () => setState(() => _currentStep = i),
               child: Container(
                 padding:
@@ -269,7 +269,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   ),
                 ),
               ),
-            ),
+            )),
           );
         }),
       ),
@@ -670,7 +670,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('₹${opt['price']}'),
-                        IconButton(
+                        IconButton(tooltip: 'Delete', 
                           icon: const Icon(Icons.delete_outline, color: AppColors.error),
                           onPressed: () => setState(() => _preparationOptions.removeAt(index)),
                         ),

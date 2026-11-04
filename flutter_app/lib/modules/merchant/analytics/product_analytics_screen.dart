@@ -90,7 +90,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text(value, style: AppTextStyles.titleLarge),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textHint), textAlign: TextAlign.center),
+          Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary), textAlign: TextAlign.center),
         ],
       ),
     );

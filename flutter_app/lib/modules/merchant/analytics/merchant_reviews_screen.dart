@@ -30,7 +30,7 @@ class MerchantReviewsScreen extends StatelessWidget {
               children: [
                 Icon(Icons.rate_review_outlined, size: 64, color: AppColors.textHint.withOpacity(0.5)),
                 const SizedBox(height: 16),
-                Text('No reviews yet', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textHint)),
+                Text('No reviews yet', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondary)),
               ],
             ),
           );
@@ -162,7 +162,7 @@ class _ReviewCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Responding as your store', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textHint)),
+            Text('Responding as your store', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary)),
             const SizedBox(height: 12),
             TextField(
               controller: replyController,

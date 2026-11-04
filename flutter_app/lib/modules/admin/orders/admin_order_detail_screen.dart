@@ -106,7 +106,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Obx(() => Text('Order #${_order['orderNumber'] ?? _order['_id'] ?? 'Loading...'}')),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -214,7 +214,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                       Text(
                         _statuses[stepIndex],
                         style: AppTextStyles.labelSmall.copyWith(
-                          color: isDone ? AppColors.primary : AppColors.textHint,
+                          color: isDone ? AppColors.primary : AppColors.textSecondary,
                           fontSize: 11,
                         ),
                         textAlign: TextAlign.center,

@@ -137,7 +137,7 @@ class ReferralScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 12),
-                          GestureDetector(
+                          Semantics(button: true, child: GestureDetector(
                             onTap: () {
                               Clipboard.setData(ClipboardData(text: code));
                               GBSnack.plain('Copied', 'Referral code copied!', position: SnackPosition.BOTTOM);
@@ -146,7 +146,7 @@ class ReferralScreen extends StatelessWidget {
                               Icons.copy_outlined,
                               color: AppColors.primary,
                             ),
-                          ),
+                          )),
                         ],
                       ),
                     ),

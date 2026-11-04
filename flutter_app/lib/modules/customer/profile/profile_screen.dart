@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    IconButton(
+                    IconButton(tooltip: 'Edit', 
                       icon: const Icon(
                         Icons.edit_outlined,
                         color: AppColors.primary,
@@ -276,7 +276,7 @@ class _StatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GestureDetector(
+      child: Semantics(button: true, child: GestureDetector(
         onTap: onTap,
         child: Column(
           children: [
@@ -291,7 +291,7 @@ class _StatItem extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }
@@ -320,7 +320,7 @@ class _MenuSection extends StatelessWidget {
             child: Text(
               title,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textHint,
+                color: AppColors.textSecondary,
               ),
             ),
           ),

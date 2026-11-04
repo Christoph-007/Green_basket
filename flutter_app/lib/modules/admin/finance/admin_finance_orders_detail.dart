@@ -50,12 +50,12 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
         actions: [
-          IconButton(
+          IconButton(tooltip: 'Refresh', 
             icon: const Icon(Icons.refresh, size: 20),
             onPressed: _loadData,
           ),

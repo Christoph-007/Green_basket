@@ -19,8 +19,8 @@ class AppColors {
 
   // Text
   static const Color textPrimary = Color(0xFF1A1A1A);
-  static const Color textSecondary = Color(0xFF757575);
-  static const Color textHint = Color(0xFFBDBDBD);
+  static const Color textSecondary = Color(0xFF666666); // 5.7:1 on white, 5.3:1 on background
+  static const Color textHint = Color(0xFFBDBDBD); // placeholders and disabled states only
   static const Color textOnPrimary = Color(0xFFFFFFFF);
 
   // Status colors
@@ -64,7 +64,7 @@ class AppColors {
 
   // Neutrals
   static const Color borderLight = Color(0xFFE8E8E8);
-  static const Color textMuted = Color(0xFF9C9B99);
+  static const Color textMuted = Color(0xFF6F6F6F); // 5.0:1 on white (was #9C9B99, 2.8:1)
   static const Color neutralGrey = Color(0xFF9E9E9E);
   static const Color neutralSoft = Color(0xFFE8EAE6);
   static const Color backgroundWarm = Color(0xFFF5F4F1);

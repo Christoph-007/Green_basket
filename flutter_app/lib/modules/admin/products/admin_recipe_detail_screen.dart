@@ -35,7 +35,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,
-            leading: IconButton(
+            leading: IconButton(tooltip: 'Back', 
               icon: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
@@ -219,7 +219,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                                                   padding: const EdgeInsets.only(left: 4),
                                                   child: Text(
                                                     '(optional)',
-                                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.textHint),
+                                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                                                   ),
                                                 ),
                                             ],

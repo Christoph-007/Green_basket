@@ -116,7 +116,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Payout Requests'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),

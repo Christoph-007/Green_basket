@@ -308,7 +308,7 @@ class _DisputesScreenState extends State<DisputesScreen>
           backgroundColor: AppColors.surface,
           elevation: 0,
           centerTitle: true,
-          leading: IconButton(
+          leading: IconButton(tooltip: 'Back', 
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
                 size: 20, color: AppColors.textPrimary),
             onPressed: () => Get.back(),

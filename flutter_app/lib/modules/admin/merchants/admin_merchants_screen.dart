@@ -76,7 +76,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                     const Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Center(
-                        child: Text('No merchants found', style: TextStyle(color: AppColors.textHint)),
+                        child: Text('No merchants found', style: TextStyle(color: AppColors.textSecondary)),
                       ),
                     )
                   else
@@ -133,7 +133,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
 
   Widget _buildPill(String title) {
     bool isActive = _selectedFilter == title;
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () => setState(() => _selectedFilter = title),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
@@ -152,7 +152,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
           ),
         ),
       ),
-    );
+    ));
   }
 
   String _merchantId(Map<String, dynamic> merchant) =>

@@ -60,7 +60,7 @@ class _OffersScreenState extends State<OffersScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Offers & Discounts'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Get.back(),
         ),

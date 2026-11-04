@@ -92,7 +92,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
           SliverAppBar(
             expandedHeight: 250,
             pinned: true,
-            leading: IconButton(
+            leading: IconButton(tooltip: 'Back', 
               icon: const Icon(Icons.arrow_back_ios_new, size: 18),
               onPressed: () => Get.back(),
             ),

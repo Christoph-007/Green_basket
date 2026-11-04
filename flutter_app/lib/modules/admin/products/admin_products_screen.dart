@@ -165,7 +165,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
         title: Obx(() => _selectionMode.value
             ? Text('${_selectedIds.length} Selected')
             : const Text('Products Management')),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Close', 
           icon: Obx(() => Icon(_selectionMode.value ? Icons.close : Icons.arrow_back_ios_new, size: 18)),
           onPressed: () {
             if (_selectionMode.value) {
@@ -182,7 +182,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 onPressed: _selectedIds.isNotEmpty ? _showBulkActionsSheet : null,
                 child: const Text('Actions'),
               )
-            : IconButton(
+            : IconButton(tooltip: 'Filter', 
                 icon: const Icon(Icons.filter_list),
                 onPressed: _showFilterSheet,
               )),

@@ -103,7 +103,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
         backgroundColor: AppColors.surface,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
@@ -332,7 +332,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                                       : FontWeight.w400,
                                   color: stepDone
                                       ? AppColors.primary
-                                      : AppColors.textHint,
+                                      : AppColors.textSecondary,
                                 ),
                                 textAlign: TextAlign.center,
                               ),

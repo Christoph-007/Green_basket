@@ -272,7 +272,7 @@ class LoyaltyScreen extends StatelessWidget {
                         Text(
                           'You need at least 50 points to redeem.',
                           style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.textHint,
+                            color: AppColors.textSecondary,
                           ),
                         )
                       else ...[

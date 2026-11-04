@@ -254,7 +254,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Returns & Refunds'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -426,7 +426,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                     if (userEmail != null) ...[
                       const SizedBox(width: 4),
                       Flexible(
-                        child: Text('($userEmail)', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textHint)),
+                        child: Text('($userEmail)', style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary)),
                       ),
                     ],
                   ],

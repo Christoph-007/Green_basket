@@ -235,7 +235,7 @@ class OrderDetailScreen extends StatelessWidget {
                                   Text('x${item.quantity}',
                                       style: AppTextStyles.bodySmall),
                                   if (order.status == 'delivered')
-                                    GestureDetector(
+                                    Semantics(button: true, child: GestureDetector(
                                       onTap: () => Get.toNamed(Routes.disputes, arguments: {
                                         'order': order,
                                         'product': item,
@@ -251,7 +251,7 @@ class OrderDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    )),
                                 ],
                               ),
                             ),
@@ -432,7 +432,7 @@ class _TimelineStep extends StatelessWidget {
           child: Text(
             label,
             style: AppTextStyles.bodyMedium.copyWith(
-              color: isDone ? AppColors.textPrimary : AppColors.textHint,
+              color: isDone ? AppColors.textPrimary : AppColors.textSecondary,
               fontWeight: isCurrent ? FontWeight.w600 : FontWeight.w400,
             ),
           ),

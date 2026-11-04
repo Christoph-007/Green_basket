@@ -182,7 +182,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Create Recipe'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -415,7 +415,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                         },
                       ),
                     ),
-                    IconButton(
+                    IconButton(tooltip: 'Decrease', 
                       icon: const Icon(Icons.remove_circle_outline, color: AppColors.error, size: 20),
                       onPressed: () => _removeIngredient(i),
                     ),
@@ -476,7 +476,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                         ),
                       ),
                     ),
-                    IconButton(
+                    IconButton(tooltip: 'Decrease', 
                       icon: const Icon(Icons.remove_circle_outline, color: AppColors.error, size: 20),
                       onPressed: () => _removeStep(i),
                     ),

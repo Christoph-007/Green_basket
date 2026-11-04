@@ -96,14 +96,14 @@ class CategoryDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.surface,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
         title: Obx(() => Text(ctrl.category.value?.name ?? 'Category', style: AppTextStyles.titleLarge)),
         actions: [
-          IconButton(
+          IconButton(tooltip: 'Search', 
             icon: const Icon(Icons.search_rounded, color: AppColors.textPrimary),
             onPressed: () => Get.toNamed(Routes.search),
           ),
@@ -177,13 +177,13 @@ class CategoryDetailScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   if (ctrl.sortBy.value != 'relevance' || ctrl.organicOnly.value || ctrl.priceRange.value != 'all')
-                    GestureDetector(
+                    Semantics(button: true, child: GestureDetector(
                       onTap: ctrl.clearFilters,
                       child: Text(
                         'Clear Filters',
                         style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
                       ),
-                    ),
+                    )),
                 ],
               );
             }),
@@ -283,7 +283,7 @@ class _FilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
@@ -310,6 +310,6 @@ class _FilterChip extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

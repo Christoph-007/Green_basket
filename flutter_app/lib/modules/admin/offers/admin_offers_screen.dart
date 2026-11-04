@@ -193,7 +193,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Offers & Promotions'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -368,7 +368,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                   ),
 
                   // Options
-                  IconButton(
+                  IconButton(tooltip: 'More options', 
                     icon: const Icon(Icons.more_vert,
                         size: 18, color: AppColors.textSecondary),
                     onPressed: () => _showOfferOptions(offer),

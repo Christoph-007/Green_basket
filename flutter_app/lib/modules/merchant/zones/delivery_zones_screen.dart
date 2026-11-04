@@ -124,7 +124,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
             icon: const Icon(Icons.my_location),
             onPressed: _setStoreLocation,
           ),
-          IconButton(
+          IconButton(tooltip: 'Refresh', 
             icon: const Icon(Icons.refresh),
             onPressed: () {
               setState(() => _isLoading = true);
@@ -357,7 +357,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(
+                      IconButton(tooltip: 'Edit', 
                         onPressed: () async {
                           final result =
                               await Get.toNamed(
@@ -371,7 +371,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
-                      IconButton(
+                      IconButton(tooltip: 'Delete', 
                         onPressed: () => _deleteZone(index),
                         icon: const Icon(Icons.delete_outline,
                             size: 20, color: AppColors.error),

@@ -236,7 +236,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Commission Settings'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -417,7 +417,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                           ],
                         ),
                 ),
-                IconButton(
+                IconButton(tooltip: 'Confirm', 
                   icon: Icon(
                       _editingDefault
                           ? Icons.check
@@ -487,7 +487,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                           ],
                         ),
                 ),
-                IconButton(
+                IconButton(tooltip: 'Confirm', 
                   icon: Icon(
                       _editingPremium
                           ? Icons.check
@@ -696,7 +696,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                               style: AppTextStyles.titleMedium
                                   .copyWith(color: AppColors.primary),
                             ),
-                          IconButton(
+                          IconButton(tooltip: 'Confirm', 
                             icon: Icon(
                               isEditing
                                   ? Icons.check
@@ -716,7 +716,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                               });
                             },
                           ),
-                          IconButton(
+                          IconButton(tooltip: 'Delete', 
                             icon: const Icon(Icons.delete_outline,
                                 color: AppColors.error, size: 18),
                             onPressed: () {

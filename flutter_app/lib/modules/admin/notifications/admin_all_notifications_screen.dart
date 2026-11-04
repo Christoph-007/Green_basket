@@ -75,7 +75,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
               Text('Total: $_total', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
           ],
         ),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),

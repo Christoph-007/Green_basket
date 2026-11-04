@@ -59,7 +59,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             children: [
               Builder(
                 builder: (context) {
-                  return IconButton(
+                  return IconButton(tooltip: 'Open menu', 
                     icon: const Icon(Icons.menu, color: Colors.white),
                     onPressed: () => Scaffold.of(context).openDrawer(),
                   );

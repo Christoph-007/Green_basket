@@ -230,7 +230,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       spacing: AppSpacing.sm,
                       children: _labels.map((label) {
                         final isSelected = _selectedLabel == label;
-                        return GestureDetector(
+                        return Semantics(button: true, child: GestureDetector(
                           onTap: () =>
                               setState(() => _selectedLabel = label),
                           child: AnimatedContainer(
@@ -277,7 +277,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                               ],
                             ),
                           ),
-                        );
+                        ));
                       }).toList(),
                     ),
                     const SizedBox(height: AppSpacing.md),

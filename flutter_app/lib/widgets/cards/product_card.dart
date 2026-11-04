@@ -43,7 +43,10 @@ class ProductCard extends StatelessWidget {
               // ── Image section (dynamic height) ──────────────────────
               Stack(
                 children: [
-                  ClipRRect(
+                  Semantics(
+                    image: true,
+                    label: product.name,
+                    child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(AppRadius.md)),
                     child: product.primaryImage.isNotEmpty
@@ -65,6 +68,7 @@ class ProductCard extends StatelessWidget {
                                 _PlaceholderImage(height: imgHeight),
                           )
                         : _PlaceholderImage(height: imgHeight),
+                  ),
                   ),
 
               // Organic badge
@@ -122,7 +126,7 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   bottom: 6,
                   right: 6,
-                  child: GestureDetector(
+                  child: Semantics(button: true, child: GestureDetector(
                     onTap: onWishlistToggle,
                     child: Container(
                       width: 28,
@@ -141,7 +145,7 @@ class ProductCard extends StatelessWidget {
                             : AppColors.textSecondary,
                       ),
                     ),
-                  ),
+                  )),
                 ),
 
               // Closed badge
@@ -260,7 +264,7 @@ class ProductCard extends StatelessWidget {
                                 style: AppTextStyles.bodySmall.copyWith(
                                   decoration:
                                       TextDecoration.lineThrough,
-                                  color: AppColors.textHint,
+                                  color: AppColors.textSecondary,
                                   fontSize: 11,
                                 ),
                               ),
@@ -278,7 +282,7 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       if (onAddToCart != null)
-                        GestureDetector(
+                        Semantics(button: true, child: GestureDetector(
                           key: Key('add_to_cart_${product.id}'),
                           onTap: !product.isStoreOpen ? null : () {
                             debugPrint('[ProductCard] Tap on Add button for ${product.name}');
@@ -306,7 +310,7 @@ class ProductCard extends StatelessWidget {
                                 color: Colors.white, 
                                 size: 22),
                           ),
-                        ),
+                        )),
                     ],
                   ),
                 ],

@@ -57,7 +57,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                     const Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Center(
-                        child: Text('No users found', style: TextStyle(color: AppColors.textHint)),
+                        child: Text('No users found', style: TextStyle(color: AppColors.textSecondary)),
                       ),
                     )
                   else
@@ -114,7 +114,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
 
   Widget _buildPill(String title) {
     bool isActive = _selectedFilter == title;
-    return GestureDetector(
+    return Semantics(button: true, child: GestureDetector(
       onTap: () => setState(() => _selectedFilter = title),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
@@ -133,7 +133,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildUserCard(Map<String, dynamic> user) {

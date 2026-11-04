@@ -63,7 +63,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
       appBar: AppBar(
         title: const Text('Disputes'),
         backgroundColor: AppColors.surface,
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -222,7 +222,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Dispute Detail', style: AppTextStyles.headlineMedium),
-                  IconButton(onPressed: () => Get.back(), icon: const Icon(Icons.close)),
+                  IconButton(tooltip: 'Close', onPressed: () => Get.back(), icon: const Icon(Icons.close)),
                 ],
               ),
               const Divider(),

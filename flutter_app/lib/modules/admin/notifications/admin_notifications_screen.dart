@@ -108,7 +108,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('Send Notifications'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -313,7 +313,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                   : Center(
                       child: Text(
                         'Fill in title and body to see preview',
-                        style: AppTextStyles.bodySmall.copyWith(color: AppColors.textHint),
+                        style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
                       ),
                     ),
             ),

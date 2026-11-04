@@ -186,7 +186,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: const Text('User Details'),
-        leading: IconButton(
+        leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
         ),
@@ -402,7 +402,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                 padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
                 child: Text(
                   'No recent orders found',
-                  style: TextStyle(color: AppColors.textHint),
+                  style: TextStyle(color: AppColors.textSecondary),
                 ),
               )
             else
