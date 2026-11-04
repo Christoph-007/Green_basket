@@ -355,8 +355,8 @@ class AppTheme {
           showUnselectedLabels: true,
           // Same size for selected and unselected so icons stay level, and
           // small enough for six tabs in Poppins.
-          selectedFontSize: 11,
-          unselectedFontSize: 11,
+          selectedLabelStyle: TextStyle(fontSize: 11),
+          unselectedLabelStyle: TextStyle(fontSize: 11),
           type: BottomNavigationBarType.fixed,
           elevation: 8,
         ),
