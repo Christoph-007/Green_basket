@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -296,14 +297,7 @@ class LoyaltyScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () => ctrl.redeemPoints(points),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              foregroundColor: Colors.white,
-                            ),
-                            child: Text('Redeem All ($points Points)'),
-                          ),
+                          child: GBButton(label: 'Redeem All ($points Points)', onPressed: () => ctrl.redeemPoints(points), backgroundColor: AppColors.primary, foregroundColor: Colors.white),
                         ),
                       ],
                     ],

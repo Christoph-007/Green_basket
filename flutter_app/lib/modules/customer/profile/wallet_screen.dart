@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -312,8 +313,7 @@ class WalletScreen extends StatelessWidget {
             onPressed: () => Get.back(),
             child: const Text('Cancel'),
           ),
-          ElevatedButton(
-            onPressed: () {
+          GBButton(label: 'Add', onPressed: () {
               final amount =
                   double.tryParse(amountCtrl.text.trim()) ?? 0;
               // Same limits the backend enforces in POST /wallet/add-money
@@ -323,9 +323,7 @@ class WalletScreen extends StatelessWidget {
               }
               Get.back();
               ctrl.addMoney(amount);
-            },
-            child: const Text('Add'),
-          ),
+            }),
         ],
       ),
     );

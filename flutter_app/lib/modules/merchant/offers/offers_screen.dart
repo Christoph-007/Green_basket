@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'offers_controller.dart';
@@ -43,15 +44,10 @@ class _OffersScreenState extends State<OffersScreen>
           TextButton(
               onPressed: () => Navigator.pop(ctx),
               child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () {
+          GBButton(label: 'Delete', onPressed: () {
               Navigator.pop(ctx);
               controller.deleteOffer(id);
-            },
-            style:
-                ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: const Text('Delete'),
-          ),
+            }, backgroundColor: AppColors.error),
         ],
       ),
     );

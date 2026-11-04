@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
@@ -661,13 +662,10 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                 const SizedBox(height: AppSpacing.lg),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
+                  child: GBButton(label: 'Process This Return', onPressed: () {
                       Navigator.pop(ctx);
                       _showProcessDialog(ret);
-                    },
-                    child: const Text('Process This Return'),
-                  ),
+                    }),
                 ),
               ],
 

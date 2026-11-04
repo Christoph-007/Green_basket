@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -627,13 +628,10 @@ class PayoutsScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
+              child: GBButton(label: 'Confirm Payout Request', onPressed: () {
                   Navigator.pop(ctx);
                   controller.requestPayout();
-                },
-                child: const Text('Confirm Payout Request'),
-              ),
+                }),
             ),
             const SizedBox(height: AppSpacing.md),
           ],

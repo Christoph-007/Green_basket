@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -175,18 +176,11 @@ class _ReviewCard extends StatelessWidget {
         ),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () async {
+          GBButton(label: 'Post Reply', onPressed: () async {
               if (replyController.text.trim().isEmpty) return;
               Get.back();
               await controller.replyToCustomerReview(review['_id'], replyController.text.trim());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('Post Reply'),
-          ),
+            }, backgroundColor: AppColors.primary, foregroundColor: Colors.white),
         ],
       ),
     );

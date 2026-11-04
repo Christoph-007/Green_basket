@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -70,13 +71,10 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () {
+          GBButton(label: 'Process', onPressed: () {
               controller.processPayout(id, true);
               Navigator.pop(ctx);
-            },
-            child: const Text('Process'),
-          ),
+            }),
         ],
       ),
     );
@@ -102,14 +100,11 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () {
+          GBButton(label: 'Process All', onPressed: () {
               final ids = pending.map((p) => p['_id'] ?? p['id']).cast<String>().toList();
               controller.bulkProcessPayouts(ids, true);
               Navigator.pop(ctx);
-            },
-            child: const Text('Process All'),
-          ),
+            }),
         ],
       ),
     );
@@ -273,10 +268,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
               const SizedBox(height: AppSpacing.sm),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => _showProcessDialog(payout),
-                  child: const Text('Process Payout'),
-                ),
+                child: GBButton(label: 'Process Payout', onPressed: () => _showProcessDialog(payout)),
               ),
             ],
           ],

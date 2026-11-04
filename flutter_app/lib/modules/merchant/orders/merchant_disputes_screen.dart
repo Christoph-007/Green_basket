@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -247,14 +248,10 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
               if (status.toLowerCase() != 'resolved' && status.toLowerCase() != 'closed')
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
+                  child: GBButton(label: 'RESOLVE DISPUTE', onPressed: () {
                       Get.back();
                       _showResolveDialog(d);
-                    },
-                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.success),
-                    child: const Text('RESOLVE DISPUTE'),
-                  ),
+                    }, backgroundColor: AppColors.success),
                 ),
               const SizedBox(height: AppSpacing.md),
             ],
@@ -314,8 +311,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
         ),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text('CANCEL')),
-          ElevatedButton(
-            onPressed: () async {
+          GBButton(label: 'SUBMIT', onPressed: () async {
               final amt = double.tryParse(amtController.text) ?? 0;
               final desc = descController.text.trim();
               if (desc.isEmpty) {
@@ -336,10 +332,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
                 GBSnack.plain('Error', 'Failed to resolve dispute');
                 setState(() => _isLoading = false);
               }
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.success),
-            child: const Text('SUBMIT'),
-          ),
+            }, backgroundColor: AppColors.success),
         ],
       ),
     );

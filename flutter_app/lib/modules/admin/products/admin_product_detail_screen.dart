@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
@@ -53,9 +54,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
             style: AppTextStyles.bodyMedium),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            onPressed: () async {
+          GBButton(label: 'Delete', onPressed: () async {
               Navigator.pop(ctx);
               try {
                 await _repo.deleteProduct(_product['_id'] ?? _product['id']);
@@ -65,9 +64,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
               } catch (e) {
                 GBSnack.plain('Error', 'Failed to delete product');
               }
-            },
-            child: const Text('Delete'),
-          ),
+            }, backgroundColor: AppColors.error),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -168,8 +169,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
           ),
-          ElevatedButton(
-            onPressed: () async {
+          GBButton(label: 'Delete', onPressed: () async {
               Navigator.pop(ctx);
               setState(() => _isDeleting = true);
               try {
@@ -181,11 +181,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               } finally {
                 if (mounted) setState(() => _isDeleting = false);
               }
-            },
-            style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.error),
-            child: const Text('Delete'),
-          ),
+            }, backgroundColor: AppColors.error),
         ],
       ),
     );

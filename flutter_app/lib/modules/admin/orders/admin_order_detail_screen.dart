@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,11 +74,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: action == 'Cancel Order' ? AppColors.error : AppColors.primary,
-            ),
-            onPressed: () async {
+          GBButton(label: 'Confirm', onPressed: () async {
               Navigator.pop(ctx);
               final orderId = (_order['_id'] ?? _order['id']).toString();
               try {
@@ -97,9 +94,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                 }
                 GBSnack.error('Error', msg);
               }
-            },
-            child: const Text('Confirm'),
-          ),
+            }, backgroundColor: action == 'Cancel Order' ? AppColors.error : AppColors.primary),
         ],
       ),
     );
@@ -430,11 +425,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                   if (canCancel && canRefund) const SizedBox(width: AppSpacing.sm),
                   if (canRefund)
                     Expanded(
-                      child: ElevatedButton(
-                        onPressed: () => _showActionDialog(context, 'Refund'),
-                        style: ElevatedButton.styleFrom(backgroundColor: AppColors.info),
-                        child: const Text('Refund'),
-                      ),
+                      child: GBButton(label: 'Refund', onPressed: () => _showActionDialog(context, 'Refund'), backgroundColor: AppColors.info),
                     ),
                 ],
               );

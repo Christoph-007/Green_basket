@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -220,10 +221,7 @@ class AdminFinanceScreen extends StatelessWidget {
             Text(controller.financialError.value,
                 textAlign: TextAlign.center, style: AppTextStyles.bodySmall),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => controller.fetchFinancialReport(),
-              child: const Text('Retry'),
-            ),
+            GBButton(label: 'Retry', onPressed: () => controller.fetchFinancialReport()),
           ],
         ),
       ),

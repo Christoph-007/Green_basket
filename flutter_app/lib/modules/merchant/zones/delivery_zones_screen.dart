@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:geolocator/geolocator.dart';
@@ -65,12 +66,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
           TextButton(
               onPressed: () => Navigator.pop(ctx, false),
               child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            style:
-                ElevatedButton.styleFrom(backgroundColor: AppColors.error),
-            child: const Text('Delete'),
-          ),
+          GBButton(label: 'Delete', onPressed: () => Navigator.pop(ctx, true), backgroundColor: AppColors.error),
         ],
       ),
     );

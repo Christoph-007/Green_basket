@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -838,8 +839,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                 const SizedBox(height: AppSpacing.lg),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: selectedCatId == null
+                  child: GBButton(label: 'Add Override', onPressed: selectedCatId == null
                         ? null
                         : () {
                             final cat = available.firstWhere(
@@ -864,9 +864,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                               _catEditingMap[idx] = false;
                             });
                             Navigator.pop(ctx);
-                          },
-                    child: const Text('Add Override'),
-                  ),
+                          }),
                 ),
                 const SizedBox(height: AppSpacing.sm),
               ],

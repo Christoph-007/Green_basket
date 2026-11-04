@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -212,10 +213,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
           const SizedBox(width: 12),
         ],
         Expanded(
-          child: ElevatedButton(
-            onPressed: () => _approve(merchant),
-            child: const Text('Approve'),
-          ),
+          child: GBButton(label: 'Approve', onPressed: () => _approve(merchant)),
         ),
       ],
     );
