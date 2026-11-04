@@ -135,16 +135,7 @@ class _ReviewCard extends StatelessWidget {
             ),
           ] else ...[
             const SizedBox(height: AppSpacing.md),
-            OutlinedButton.icon(
-              onPressed: () => _showReplyDialog(context),
-              icon: const Icon(Icons.reply_rounded, size: 18),
-              label: const Text('Reply to Review'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.primary,
-                side: const BorderSide(color: AppColors.primary),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.sm)),
-              ),
-            ),
+            GBButton(label: 'Reply to Review', onPressed: () => _showReplyDialog(context), leadingIcon: Icons.reply_rounded, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary),
           ],
         ],
       ),

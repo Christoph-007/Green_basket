@@ -341,28 +341,11 @@ class OrderDetailScreen extends StatelessWidget {
 
                   // Cancel button for eligible orders
                   if (ctrl.canCancel)
-                    OutlinedButton(
-                      onPressed: ctrl.isCancelling.value ? null : ctrl.confirmCancel,
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.error,
-                        side: const BorderSide(color: AppColors.error),
-                        minimumSize: const Size(double.infinity, 48),
-                      ),
-                      child: const Text('Cancel Order'),
-                    ),
+                    GBButton(label: 'Cancel Order', onPressed: ctrl.isCancelling.value ? null : ctrl.confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.error, height: 48),
 
                   // Return items from a delivered / completed order
                   if (ctrl.canReturn)
-                    OutlinedButton.icon(
-                      onPressed: ctrl.openReturnSheet,
-                      icon: const Icon(Icons.assignment_return_outlined),
-                      label: const Text('Return items'),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primary),
-                        minimumSize: const Size(double.infinity, 48),
-                      ),
-                    ),
+                    GBButton(label: 'Return items', onPressed: ctrl.openReturnSheet, leadingIcon: Icons.assignment_return_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary, height: 48),
 
                   const SizedBox(height: 32),
                 ],

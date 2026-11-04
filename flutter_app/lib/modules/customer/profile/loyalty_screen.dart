@@ -281,19 +281,13 @@ class LoyaltyScreen extends StatelessWidget {
                         if (points >= 50)
                           SizedBox(
                             width: double.infinity,
-                            child: OutlinedButton(
-                              onPressed: () => ctrl.redeemPoints(50),
-                              child: const Text('Redeem 50 Points'),
-                            ),
+                            child: GBButton(label: 'Redeem 50 Points', onPressed: () => ctrl.redeemPoints(50), variant: GBButtonVariant.outline),
                           ),
                         if (points >= 100) ...[
                           const SizedBox(height: 8),
                           SizedBox(
                             width: double.infinity,
-                            child: OutlinedButton(
-                              onPressed: () => ctrl.redeemPoints(100),
-                              child: const Text('Redeem 100 Points'),
-                            ),
+                            child: GBButton(label: 'Redeem 100 Points', onPressed: () => ctrl.redeemPoints(100), variant: GBButtonVariant.outline),
                           ),
                         ],
                         const SizedBox(height: 8),

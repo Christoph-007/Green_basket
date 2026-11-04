@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
@@ -526,11 +527,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
             : 'Are you sure you want to block this merchant? They will lose access to their dashboard and their store will be hidden.'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _isBlocked ? AppColors.success : AppColors.error,
-            ),
-            onPressed: () async {
+          GBButton(label: _isBlocked ? 'Unblock' : 'Block', onPressed: () async {
               try {
                 await controller.toggleMerchantBlock(_merchantId);
                 setState(() => _isBlocked = !_isBlocked);
@@ -544,9 +541,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
               } catch (e) {
                 GBSnack.plain('Error', 'Failed to update merchant status');
               }
-            },
-            child: Text(_isBlocked ? 'Unblock' : 'Block'),
-          ),
+            }, backgroundColor: _isBlocked ? AppColors.success : AppColors.error),
         ],
       ),
     );

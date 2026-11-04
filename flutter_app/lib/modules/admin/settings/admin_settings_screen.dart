@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -170,16 +171,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
   Widget _buildSaveButton(String section) {
     return Align(
       alignment: Alignment.centerRight,
-      child: ElevatedButton(
-        onPressed: () => _saveSection(section),
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-            vertical: 10,
-          ),
-        ),
-        child: Text('Save $section'),
-      ),
+      child: GBButton(label: 'Save $section', onPressed: () => _saveSection(section)),
     );
   }
 

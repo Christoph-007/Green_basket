@@ -311,15 +311,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         {'label': 'Phone', 'value': hasAgent ? (a['phone']?.toString() ?? 'N/A') : '-'},
         if (hasAgent) {'label': 'Vehicle', 'value': a['vehicle']?.toString() ?? 'N/A'},
       ],
-      trailing: OutlinedButton(
-        onPressed: () => Get.toNamed('/admin/assign-order', arguments: _order),
-        style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          minimumSize: Size.zero,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ),
-        child: Text(hasAgent ? 'Reassign' : 'Assign', style: const TextStyle(fontSize: 12)),
-      ),
+      trailing: GBButton(label: hasAgent ? 'Reassign' : 'Assign', onPressed: () => Get.toNamed('/admin/assign-order', arguments: _order), variant: GBButtonVariant.outline),
     );
   }
 
@@ -412,14 +404,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                 children: [
                   if (canCancel)
                     Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => _showActionDialog(context, 'Cancel Order'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.error,
-                          side: const BorderSide(color: AppColors.error),
-                        ),
-                        child: const Text('Cancel'),
-                      ),
+                      child: GBButton(label: 'Cancel', onPressed: () => _showActionDialog(context, 'Cancel Order'), variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
                     ),
                   if (canCancel && canRefund) const SizedBox(width: AppSpacing.sm),
                   if (canRefund)

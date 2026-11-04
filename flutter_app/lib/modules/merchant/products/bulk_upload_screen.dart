@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:file_picker/file_picker.dart';
@@ -218,11 +219,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
             // Download template button
             SizedBox(
               width: double.infinity,
-              child: OutlinedButton.icon(
-                onPressed: _downloadTemplate,
-                icon: const Icon(Icons.download_outlined, size: 18),
-                label: const Text('Download CSV Template'),
-              ),
+              child: GBButton(label: 'Download CSV Template', onPressed: _downloadTemplate, leadingIcon: Icons.download_outlined, variant: GBButtonVariant.outline),
             ),
             const SizedBox(height: AppSpacing.lg),
 

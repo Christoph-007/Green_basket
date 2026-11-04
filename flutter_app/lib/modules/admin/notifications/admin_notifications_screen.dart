@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -327,11 +328,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
     return Row(
       children: [
         Expanded(
-          child: OutlinedButton.icon(
-            onPressed: _scheduleNotification,
-            icon: const Icon(Icons.schedule),
-            label: const Text('Schedule'),
-          ),
+          child: GBButton(label: 'Schedule', onPressed: _scheduleNotification, leadingIcon: Icons.schedule, variant: GBButtonVariant.outline),
         ),
         const SizedBox(width: AppSpacing.md),
         Expanded(

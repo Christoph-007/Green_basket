@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
@@ -418,14 +419,7 @@ class _MerchantOrderDetailScreenState
               if (_canCancel)
                 SizedBox(
                   width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: _isUpdating ? null : _confirmCancel,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.error,
-                      side: const BorderSide(color: AppColors.error),
-                    ),
-                    child: const Text('Cancel Order'),
-                  ),
+                  child: GBButton(label: 'Cancel Order', onPressed: _isUpdating ? null : _confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
                 ),
             ],
           ),

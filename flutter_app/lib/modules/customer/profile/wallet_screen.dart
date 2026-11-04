@@ -188,22 +188,9 @@ class WalletScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     SizedBox(
                       height: 36,
-                      child: ElevatedButton.icon(
-                        onPressed: ctrl.isLocked.value
+                      child: GBButton(label: 'Add Money', onPressed: ctrl.isLocked.value
                             ? null
-                            : () => _showAddMoneyDialog(context, ctrl),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: AppColors.primary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppRadius.full),
-                          ),
-                        ),
-                        icon: const Icon(Icons.add, size: 16),
-                        label: const Text('Add Money',
-                            style: TextStyle(fontSize: 13)),
-                      ),
+                            : () => _showAddMoneyDialog(context, ctrl), leadingIcon: Icons.add, backgroundColor: Colors.white, foregroundColor: AppColors.primary),
                     ),
                   ],
                 ),

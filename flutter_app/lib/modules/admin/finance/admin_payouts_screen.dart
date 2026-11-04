@@ -188,15 +188,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
               ],
             ),
           ),
-          ElevatedButton(
-            onPressed: pending.isNotEmpty ? _showBulkProcessDialog : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.warning,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              minimumSize: Size.zero,
-            ),
-            child: const Text('Process All', style: TextStyle(fontSize: 12)),
-          ),
+          GBButton(label: 'Process All', onPressed: pending.isNotEmpty ? _showBulkProcessDialog : null, backgroundColor: AppColors.warning),
         ],
       ),
     );

@@ -119,10 +119,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
           children: [
             if (_currentStep > 0)
               Expanded(
-                child: OutlinedButton(
-                  onPressed: _prevStep,
-                  child: const Text('Back'),
-                ),
+                child: GBButton(label: 'Back', onPressed: _prevStep, variant: GBButtonVariant.outline),
               ),
             if (_currentStep > 0) const SizedBox(width: AppSpacing.md),
             Expanded(

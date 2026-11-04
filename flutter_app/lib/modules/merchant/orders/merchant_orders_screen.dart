@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -293,38 +294,14 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.full));
                             if (next == null || label == null) {
-                              return OutlinedButton(
-                                onPressed: () => Get.to(() =>
-                                    MerchantOrderDetailScreen(order: order)),
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 0),
-                                  minimumSize: const Size(0, 36),
-                                  shape: shape,
-                                ),
-                                child: const Text('View Details',
-                                    style: TextStyle(fontSize: 12)),
-                              );
+                              return GBButton(label: 'View Details', onPressed: () => Get.to(() =>
+                                    MerchantOrderDetailScreen(order: order)), variant: GBButtonVariant.outline, height: 36);
                             }
                             final isPending = order.status == 'pending';
-                            return ElevatedButton(
-                              onPressed: () =>
-                                  controller.updateStatus(order.id, next),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: isPending
+                            return GBButton(label: isPending ? 'Accept Order' : label, onPressed: () =>
+                                  controller.updateStatus(order.id, next), backgroundColor: isPending
                                     ? AppColors.primary
-                                    : AppColors.success,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 0),
-                                minimumSize: const Size(0, 36),
-                                shape: shape,
-                              ),
-                              child: Text(isPending ? 'Accept Order' : label,
-                                  style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                            );
+                                    : AppColors.success, height: 36);
                           }),
                         ],
                       ),

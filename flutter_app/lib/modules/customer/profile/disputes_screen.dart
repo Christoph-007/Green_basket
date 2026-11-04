@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -269,18 +270,7 @@ class _DisputesScreenState extends State<DisputesScreen>
               onPressed: () => Get.back(),
               child: const Text('Cancel'),
             ),
-            ElevatedButton(
-              onPressed: _submitDispute,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppRadius.md),
-                ),
-              ),
-              child: Text(_dialogIssueType == 'Return Item' ? 'Request Return' : 'Submit Dispute'),
-            ),
+            GBButton(label: _dialogIssueType == 'Return Item' ? 'Request Return' : 'Submit Dispute', onPressed: _submitDispute, backgroundColor: AppColors.primary, foregroundColor: Colors.white),
           ],
         ),
       ),

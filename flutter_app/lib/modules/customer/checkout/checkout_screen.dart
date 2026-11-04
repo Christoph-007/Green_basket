@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -146,29 +147,11 @@ class CheckoutScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                       child: Obx(
-                        () => ElevatedButton(
-                          onPressed: ctrl.canPlaceOrder ? ctrl.placeOrder : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            minimumSize: const Size(double.infinity, 54),
-                            elevation: 0,
-                          ),
-                          child: Text(
-                            ctrl.isLoading.value
+                        () => GBButton(label: ctrl.isLoading.value
                                 ? 'PROCESSING...'
                                 : ctrl.quote.value == null
                                     ? 'Place Order'
-                                    : 'Place Order — ${AppHelpers.formatCurrency(ctrl.total)}',
-                            style: TextStyle(
-                              fontSize: responsive.adaptiveFontSize(16),
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.1,
-                            ),
-                          ),
-                        ),
+                                    : 'Place Order — ${AppHelpers.formatCurrency(ctrl.total)}', onPressed: ctrl.canPlaceOrder ? ctrl.placeOrder : null, backgroundColor: AppColors.primary, foregroundColor: Colors.white, height: 54),
                       ),
                     ),
                   ),

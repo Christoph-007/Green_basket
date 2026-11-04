@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/routes.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -72,17 +73,11 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: const Text('Start Date'),
-                      ),
+                      child: GBButton(label: 'Start Date', onPressed: () {}, variant: GBButtonVariant.outline),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: const Text('End Date'),
-                      ),
+                      child: GBButton(label: 'End Date', onPressed: () {}, variant: GBButtonVariant.outline),
                     ),
                   ],
                 ),
@@ -109,14 +104,10 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: op['color'] as Color),
-            onPressed: () {
+          GBButton(label: op['actionLabel'] as String, onPressed: () {
               Navigator.pop(ctx);
               _runOperation(id, op['title'] as String);
-            },
-            child: Text(op['actionLabel'] as String),
-          ),
+            }, backgroundColor: op['color'] as Color),
         ],
       ),
     );
@@ -201,15 +192,7 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
             ] else
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => _showOperationDialog(op),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    textStyle: AppTextStyles.labelSmall.copyWith(color: Colors.white),
-                  ),
-                  child: Text(op['actionLabel'] as String),
-                ),
+                child: GBButton(label: op['actionLabel'] as String, onPressed: () => _showOperationDialog(op), backgroundColor: color),
               ),
           ],
         ),

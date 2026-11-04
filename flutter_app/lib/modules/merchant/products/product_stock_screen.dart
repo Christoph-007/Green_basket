@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -211,17 +212,7 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: _isLoading ? null : () => _updateStock(false),
-                          icon: const Icon(Icons.remove_circle_outline,
-                              size: 18),
-                          label: const Text('Remove Stock'),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: AppColors.error,
-                            side: const BorderSide(
-                                color: AppColors.error),
-                          ),
-                        ),
+                        child: GBButton(label: 'Remove Stock', onPressed: _isLoading ? null : () => _updateStock(false), leadingIcon: Icons.remove_circle_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
                       ),
                       const SizedBox(width: AppSpacing.md),
                       Expanded(
@@ -257,10 +248,7 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
         child: SafeArea(
           child: SizedBox(
             width: double.infinity,
-            child: OutlinedButton(
-              onPressed: () => Get.back(result: true),
-              child: const Text('Done'),
-            ),
+            child: GBButton(label: 'Done', onPressed: () => Get.back(result: true), variant: GBButtonVariant.outline),
           ),
         ),
       ),

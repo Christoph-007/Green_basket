@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/config/routes.dart';
@@ -130,31 +131,13 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                     SizedBox(
                       width: double.infinity,
                       height: 52,
-                      child: ElevatedButton.icon(
-                        onPressed: () => Get.offAllNamed(Routes.orderList),
-                        icon: const Icon(Icons.my_location_rounded, size: 18),
-                        label: const Text('Track Order'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-                        ),
-                      ),
+                      child: GBButton(label: 'Track Order', onPressed: () => Get.offAllNamed(Routes.orderList), leadingIcon: Icons.my_location_rounded, backgroundColor: AppColors.primary, foregroundColor: Colors.white),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     SizedBox(
                       width: double.infinity,
                       height: 52,
-                      child: OutlinedButton.icon(
-                        onPressed: () => Get.offAllNamed(Routes.customerHome),
-                        icon: const Icon(Icons.shopping_bag_outlined, size: 18),
-                        label: const Text('Continue Shopping'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.primary,
-                          side: const BorderSide(color: AppColors.primary),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-                        ),
-                      ),
+                      child: GBButton(label: 'Continue Shopping', onPressed: () => Get.offAllNamed(Routes.customerHome), leadingIcon: Icons.shopping_bag_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary),
                     ),
                   ],
                 ),

@@ -180,15 +180,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
                 const SizedBox(height: AppSpacing.md),
                 SizedBox(
                   width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () => _showResolveDialog(d),
-                    icon: const Icon(Icons.gavel, size: 18),
-                    label: const Text('Resolve'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.success,
-                      side: const BorderSide(color: AppColors.success),
-                    ),
-                  ),
+                  child: GBButton(label: 'Resolve', onPressed: () => _showResolveDialog(d), leadingIcon: Icons.gavel, variant: GBButtonVariant.outline, foregroundColor: AppColors.success),
                 ),
               ],
             ],

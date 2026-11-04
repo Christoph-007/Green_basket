@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
@@ -152,11 +153,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _isBlocked ? AppColors.success : AppColors.error,
-            ),
-            onPressed: () async {
+          GBButton(label: _isBlocked ? 'Unblock' : 'Block', onPressed: () async {
               try {
                 await controller.toggleUserBlock(_user['_id']);
                 setState(() => _isBlocked = !_isBlocked);
@@ -171,9 +168,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               } catch (e) {
                 GBSnack.plain('Error', 'Failed to update user status');
               }
-            },
-            child: Text(_isBlocked ? 'Unblock' : 'Block'),
-          ),
+            }, backgroundColor: _isBlocked ? AppColors.success : AppColors.error),
         ],
       ),
     );

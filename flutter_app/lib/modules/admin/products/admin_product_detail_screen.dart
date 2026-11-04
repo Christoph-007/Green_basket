@@ -148,24 +148,12 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: _isLoading ? null : _toggleStatus,
-                      icon: Icon(status == 'Active' ? Icons.pause_circle_outline : Icons.play_circle_outline),
-                      label: Text(status == 'Active' ? 'Deactivate' : 'Activate'),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: status == 'Active' ? AppColors.error : AppColors.success,
-                      ),
-                    ),
+                    child: GBButton(label: status == 'Active' ? 'Deactivate' : 'Activate', onPressed: _isLoading ? null : _toggleStatus, leadingIcon: status == 'Active' ? Icons.pause_circle_outline : Icons.play_circle_outline, variant: GBButtonVariant.outline, foregroundColor: status == 'Active' ? AppColors.error : AppColors.success),
                   ),
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: _confirmDelete,
-                      icon: const Icon(Icons.delete_outline),
-                      label: const Text('Delete Product'),
-                      style: OutlinedButton.styleFrom(foregroundColor: AppColors.error),
-                    ),
+                    child: GBButton(label: 'Delete Product', onPressed: _confirmDelete, leadingIcon: Icons.delete_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
                   ),
                   const SizedBox(height: 32),
                 ],

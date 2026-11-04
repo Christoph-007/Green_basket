@@ -548,8 +548,7 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                 SizedBox(
                   width: double.infinity,
                   height: 50,
-                  child: ElevatedButton(
-                    onPressed: () => _submitCreateOffer(
+                  child: GBButton(label: 'Create Offer', onPressed: () => _submitCreateOffer(
                       titleCtrl: titleCtrl,
                       descCtrl: descCtrl,
                       type: selectedType,
@@ -563,18 +562,7 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                       endDate: endDate,
                       isFlashSale: isFlashSale,
                       isPublic: isPublic,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppRadius.md),
-                      ),
-                    ),
-                    child: const Text('Create Offer',
-                        style: TextStyle(
-                            color: Colors.white, fontSize: 16)),
-                  ),
+                    ), backgroundColor: AppColors.primary),
                 ),
                 const SizedBox(height: AppSpacing.xl),
               ],

@@ -15,7 +15,7 @@ class GBButton extends StatelessWidget {
   /// Override the fill colour (filled variants only).
   final Color? backgroundColor;
 
-  /// Override the text and icon colour (filled variants only).
+  /// Override the text and icon colour (and the outline colour for the outline variant).
   final Color? foregroundColor;
 
   /// Override the inner padding. Null keeps the theme padding.
@@ -108,8 +108,8 @@ class GBButton extends StatelessWidget {
       GBButtonVariant.outline => OutlinedButton(
           onPressed: isLoading ? null : onPressed,
           style: OutlinedButton.styleFrom(
-            foregroundColor: AppColors.primary,
-            side: const BorderSide(color: AppColors.primary),
+            foregroundColor: foregroundColor ?? AppColors.primary,
+            side: BorderSide(color: foregroundColor ?? AppColors.primary),
             minimumSize: Size(0, height ?? 52),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.md),

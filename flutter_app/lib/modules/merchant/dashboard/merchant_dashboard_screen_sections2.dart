@@ -294,32 +294,9 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                 ),
                 Row(
                   children: [
-                    OutlinedButton(
-                      onPressed: () => controller.declineOrder(order.id),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.error,
-                        side: const BorderSide(color: AppColors.error),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        minimumSize: const Size(0, 36),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppRadius.full)),
-                      ),
-                      child: const Text('Decline'),
-                    ),
+                    GBButton(label: 'Decline', onPressed: () => controller.declineOrder(order.id), variant: GBButtonVariant.outline, foregroundColor: AppColors.error, height: 36),
                     const SizedBox(width: 8),
-                    ElevatedButton(
-                      onPressed: () => controller.acceptOrder(order.id),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        minimumSize: const Size(0, 36),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppRadius.full)),
-                      ),
-                      child: const Text('Accept'),
-                    ),
+                    GBButton(label: 'Accept', onPressed: () => controller.acceptOrder(order.id), backgroundColor: AppColors.primary, height: 36),
                   ],
                 ),
               ],

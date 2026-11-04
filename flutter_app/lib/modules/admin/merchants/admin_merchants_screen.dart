@@ -201,14 +201,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
       children: [
         if (status == 'Pending') ...[
           Expanded(
-            child: OutlinedButton(
-              onPressed: () => _reject(merchant),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.error,
-                side: const BorderSide(color: AppColors.error),
-              ),
-              child: const Text('Reject'),
-            ),
+            child: GBButton(label: 'Reject', onPressed: () => _reject(merchant), variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
           ),
           const SizedBox(width: 12),
         ],

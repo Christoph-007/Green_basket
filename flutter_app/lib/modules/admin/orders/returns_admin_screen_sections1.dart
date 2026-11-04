@@ -166,11 +166,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _approving ? AppColors.success : AppColors.error,
-              ),
-              onPressed: () async {
+            GBButton(label: _approving ? 'Approve & Refund' : 'Reject', onPressed: () async {
                 Navigator.pop(ctx);
                 try {
                   final retId = (ret['_id'] ?? ret['id'] ?? '').toString();
@@ -188,9 +184,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                 } catch (e) {
                   GBSnack.error('Error', 'Failed to process return');
                 }
-              },
-              child: Text(_approving ? 'Approve & Refund' : 'Reject'),
-            ),
+              }, backgroundColor: _approving ? AppColors.success : AppColors.error),
           ],
         ),
       ),
@@ -363,15 +357,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                     ),
                   ),
                   if (isPending)
-                    ElevatedButton(
-                      onPressed: () => _showProcessDialog(ret),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: const Text('Process'),
-                    ),
+                    GBButton(label: 'Process', onPressed: () => _showProcessDialog(ret)),
                   if (status.toLowerCase() == 'rejected' && ret['rejectionReason'] != null)
                     Flexible(
                       child: Text(

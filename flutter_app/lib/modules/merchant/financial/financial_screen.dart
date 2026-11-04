@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -178,11 +179,7 @@ class _FinancialScreenState extends State<FinancialScreen>
               // Download button
               SizedBox(
                 width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.download_outlined, size: 18),
-                  label: const Text('Download Report'),
-                ),
+                child: GBButton(label: 'Download Report', onPressed: () {}, leadingIcon: Icons.download_outlined, variant: GBButtonVariant.outline),
               ),
               const SizedBox(height: AppSpacing.xl),
             ],

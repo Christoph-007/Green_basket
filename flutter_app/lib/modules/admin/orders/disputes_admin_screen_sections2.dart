@@ -177,21 +177,10 @@ extension _DisputesAdminScreenStateSections2 on _DisputesAdminScreenState {
                 Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {
+                      child: GBButton(label: 'Resolve', onPressed: () {
                           Navigator.pop(context);
                           _showResolveDialog(d);
-                        },
-                        icon: const Icon(Icons.gavel, size: 18),
-                        label: const Text('Resolve'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.success,
-                          side:
-                              const BorderSide(color: AppColors.success),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12),
-                        ),
-                      ),
+                        }, leadingIcon: Icons.gavel, variant: GBButtonVariant.outline, foregroundColor: AppColors.success),
                     ),
                   ],
                 ),
@@ -259,8 +248,7 @@ extension _DisputesAdminScreenStateSections2 on _DisputesAdminScreenState {
             TextButton(
                 onPressed: () => Navigator.pop(ctx),
                 child: const Text('Cancel')),
-            ElevatedButton(
-              onPressed: () async {
+            GBButton(label: 'Confirm', onPressed: () async {
                 Navigator.pop(ctx);
                 try {
                   final body = <String, dynamic>{
@@ -283,12 +271,7 @@ extension _DisputesAdminScreenStateSections2 on _DisputesAdminScreenState {
                 } catch (e) {
                   GBSnack.error('Error', 'Failed to resolve dispute');
                 }
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.success),
-              child: const Text('Confirm',
-                  style: TextStyle(color: Colors.white)),
-            ),
+              }, backgroundColor: AppColors.success),
           ],
         ),
       ),

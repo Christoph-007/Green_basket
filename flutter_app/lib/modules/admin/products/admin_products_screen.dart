@@ -91,14 +91,11 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
             Row(
               children: [
                 Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
+                  child: GBButton(label: 'Reset', onPressed: () {
                       _selectedCategory.value = 'All';
                       _selectedStatus.value = 'All';
                       Navigator.pop(ctx);
-                    },
-                    child: const Text('Reset'),
-                  ),
+                    }, variant: GBButtonVariant.outline),
                 ),
                 const SizedBox(width: AppSpacing.md),
                 Expanded(
