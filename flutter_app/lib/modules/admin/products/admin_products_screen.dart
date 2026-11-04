@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
@@ -237,7 +238,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
               }).toList();
 
               if (filteredProducts.isEmpty) {
-                return const Center(child: Text('No products found.'));
+                return const EmptyState(icon: Icons.inventory_2_outlined, title: 'No products found');
               }
 
               return ListView.builder(

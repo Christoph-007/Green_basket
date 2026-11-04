@@ -135,7 +135,7 @@ extension _AdminOffersScreenStateSections1 on _AdminOffersScreenState {
 
   Widget _buildOffersList(List<Map<String, dynamic>> offers) {
     if (offers.isEmpty) {
-      return const Center(child: Text('No offers found.'));
+      return const EmptyState(icon: Icons.local_offer_outlined, title: 'No offers found');
     }
     // Sort: active first, then by creation date desc
     final sorted = List<Map<String, dynamic>>.from(offers)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'Offer Performance', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBListSkeleton()
           : _offers.isEmpty
               ? Center(
                   child: Column(

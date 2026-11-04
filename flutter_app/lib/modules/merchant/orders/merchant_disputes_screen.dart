@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -77,7 +78,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
           onPressed: () => Get.back(),
         ), backgroundColor: AppColors.surface),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBListSkeleton()
           : RefreshIndicator(
               onRefresh: _fetchDisputes,
               child: TabBarView(

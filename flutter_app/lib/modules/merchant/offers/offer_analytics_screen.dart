@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
       appBar: GBAppBar(title: 'Offer Analytics', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const GBLoader();
         }
 
         final offer = controller.offerData.value ?? {};

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
@@ -68,11 +69,10 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ),
                   const SizedBox(height: 16),
                   if (filteredUsers.isEmpty)
-                    Padding(
-                      padding: EdgeInsets.all(32.0),
-                      child: Center(
-                        child: Text('No users found', style: TextStyle(color: AppColors.textSecondary)),
-                      ),
+                    const EmptyState(
+                      icon: Icons.people_outline,
+                      title: 'No users found',
+                      message: 'Try another search or filter.',
                     )
                   else
                     ...filteredUsers.map((user) => Padding(

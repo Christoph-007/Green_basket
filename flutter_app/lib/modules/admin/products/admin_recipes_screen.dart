@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -177,7 +178,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
               }).toList();
 
               if (recipeList.isEmpty) {
-                return const Center(child: Text('No recipes found.'));
+                return const EmptyState(icon: Icons.restaurant_menu, title: 'No recipes found');
               }
 
               return ListView.builder(

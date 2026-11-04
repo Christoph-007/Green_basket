@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
       ),
       body: Obx(() {
         if (_isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const GBLoader();
         }
         if (_order.isEmpty) {
           return const Center(child: Text('Order not found'));

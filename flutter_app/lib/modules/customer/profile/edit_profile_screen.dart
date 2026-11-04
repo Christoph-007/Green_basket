@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -120,7 +121,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ]),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBLoader()
           : Form(
               key: _formKey,
               child: SingleChildScrollView(

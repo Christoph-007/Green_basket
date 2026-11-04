@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
@@ -59,7 +60,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
           Expanded(
             child: Obx(() {
               if (controller.orders.isEmpty && controller.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
+                return const GBListSkeleton();
               }
 
               final filteredOrders = controller.orders.where((o) {

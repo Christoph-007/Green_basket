@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -99,7 +100,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
         child: Obx(() {
           final categoryList = controller.categories;
           if (categoryList.isEmpty) {
-            return const Center(child: Text('No categories found.'));
+            return const EmptyState(icon: Icons.category_outlined, title: 'No categories found');
           }
           return ListView.builder(
             padding: const EdgeInsets.all(AppSpacing.md),

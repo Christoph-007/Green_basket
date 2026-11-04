@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -81,7 +82,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
         ),
       ),
       body: _notifications.isEmpty && _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBListSkeleton()
           : _notifications.isEmpty
               ? Center(
                   child: Column(

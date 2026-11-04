@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_gradient_header.dart';
@@ -40,7 +41,7 @@ class AdminFinanceScreen extends StatelessWidget {
           Expanded(
             child: Obx(() {
               if (controller.isFinanceLoading.value && controller.financialReport.isEmpty) {
-                return const Center(child: CircularProgressIndicator());
+                return const GBLoader();
               }
               if (controller.financialError.value.isNotEmpty && controller.financialReport.isEmpty) {
                 return _buildError(controller);

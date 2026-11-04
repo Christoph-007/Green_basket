@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -134,7 +135,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
           ),
         ], showDivider: false),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBLoader()
           : RefreshIndicator(
               onRefresh: _fetchZones,
               child: SingleChildScrollView(

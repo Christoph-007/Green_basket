@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/empty_state.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
@@ -76,11 +77,10 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                   ),
                   const SizedBox(height: 16),
                   if (filteredMerchants.isEmpty)
-                    Padding(
-                      padding: EdgeInsets.all(32.0),
-                      child: Center(
-                        child: Text('No merchants found', style: TextStyle(color: AppColors.textSecondary)),
-                      ),
+                    const EmptyState(
+                      icon: Icons.storefront_outlined,
+                      title: 'No merchants found',
+                      message: 'Try another search or filter.',
                     )
                   else
                     ...filteredMerchants.map((merchant) => Padding(

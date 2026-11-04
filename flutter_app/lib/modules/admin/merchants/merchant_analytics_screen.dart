@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -162,7 +163,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
         )),
 
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBLoader()
           : SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

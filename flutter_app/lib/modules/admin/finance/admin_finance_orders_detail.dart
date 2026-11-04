@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -57,7 +58,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
           onPressed: () => Get.back(),
         )),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBListSkeleton()
           : orders.isEmpty
               ? Center(
                   child: Column(

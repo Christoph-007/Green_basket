@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -88,7 +89,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
           onPressed: () => Get.back(),
         )),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBListSkeleton()
           : RefreshIndicator(
               onRefresh: _fetchDisputes,
               child: Column(

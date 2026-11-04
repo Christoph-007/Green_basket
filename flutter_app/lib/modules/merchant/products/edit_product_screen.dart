@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -220,7 +221,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           onPressed: () => Get.back(),
         )),
       body: _isLoadingCategories
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBLoader()
           : AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
               child: _currentStep == 0

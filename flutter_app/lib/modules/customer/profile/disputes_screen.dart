@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -154,7 +155,7 @@ class _DisputesScreenState extends State<DisputesScreen>
                 const SizedBox(height: AppSpacing.xs),
                 Obx(() {
                   if (_isLoadingOrders.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const GBLoader();
                   }
                   if (_orders.isEmpty) {
                     return Text('No orders found to dispute.', style: TextStyle(color: AppColors.textSecondary));

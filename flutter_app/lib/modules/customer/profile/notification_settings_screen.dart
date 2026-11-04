@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
@@ -84,7 +85,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'Notification Settings', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const GBLoader()
           : SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Column(
