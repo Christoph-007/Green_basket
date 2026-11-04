@@ -25,12 +25,16 @@ class GBStatusChip extends StatelessWidget {
             Icon(style.icon, size: 14, color: style.fg),
             const SizedBox(width: 4),
           ],
-          Text(
-            style.label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: style.fg,
+          Flexible(
+            child: Text(
+              style.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: style.fg,
+              ),
             ),
           ),
         ],

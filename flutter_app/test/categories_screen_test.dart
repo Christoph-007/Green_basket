@@ -31,7 +31,7 @@ class FakeProductRepository extends ProductRepository {
   final requested = <String?>[];
 
   @override
-  Future<List<CategoryModel>> getCategories() async => [
+  Future<List<CategoryModel>> getCategories({bool force = false}) async => [
     CategoryModel(id: 'dairy', name: 'Dairy'),
     CategoryModel(id: 'fruits', name: 'Fruits'),
   ];
