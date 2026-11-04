@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../config/theme.dart';
 
 class GBTextField extends StatefulWidget {
@@ -15,6 +16,18 @@ class GBTextField extends StatefulWidget {
   final void Function(String)? onChanged;
   final int? maxLines;
   final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength;
+  final bool enabled;
+  final FocusNode? focusNode;
+  final Iterable<String>? autofillHints;
+  final void Function(String)? onSubmitted;
+  final TextCapitalization textCapitalization;
+
+  /// Text shown inside the field before and after the value, for example
+  /// a currency sign or a unit.
+  final String? prefixText;
+  final String? suffixText;
 
   const GBTextField({
     super.key,
@@ -31,6 +44,15 @@ class GBTextField extends StatefulWidget {
     this.onChanged,
     this.maxLines = 1,
     this.textInputAction,
+    this.inputFormatters,
+    this.maxLength,
+    this.enabled = true,
+    this.focusNode,
+    this.autofillHints,
+    this.onSubmitted,
+    this.textCapitalization = TextCapitalization.none,
+    this.prefixText,
+    this.suffixText,
   });
 
   @override
@@ -57,15 +79,25 @@ class _GBTextFieldState extends State<GBTextField> {
           onChanged: widget.onChanged,
           maxLines: widget.isPassword ? 1 : widget.maxLines,
           textInputAction: widget.textInputAction,
+          inputFormatters: widget.inputFormatters,
+          maxLength: widget.maxLength,
+          enabled: widget.enabled,
+          focusNode: widget.focusNode,
+          autofillHints: widget.autofillHints,
+          onFieldSubmitted: widget.onSubmitted,
+          textCapitalization: widget.textCapitalization,
           style: AppTextStyles.bodyLarge,
           decoration: InputDecoration(
             hintText: widget.hint,
+            prefixText: widget.prefixText,
+            suffixText: widget.suffixText,
             prefixIcon: widget.prefixIcon != null
                 ? Icon(widget.prefixIcon,
                     color: AppColors.textSecondary, size: 20)
                 : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
+                    tooltip: _obscure ? 'Show password' : 'Hide password',
                     icon: Icon(
                       _obscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                       color: AppColors.textSecondary,
