@@ -30,7 +30,7 @@ class NotificationsScreen extends StatelessWidget {
         ],
       ),
       body: Obx(() {
-        if (ctrl.isLoading.value) return const GBLoader();
+        if (ctrl.isLoading.value) return const GBListSkeleton(itemHeight: 72);
 
         if (ctrl.notifications.isEmpty) {
           return const EmptyState(

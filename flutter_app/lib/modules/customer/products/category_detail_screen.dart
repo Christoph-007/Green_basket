@@ -195,7 +195,7 @@ class CategoryDetailScreen extends StatelessWidget {
           // Product grid
           Expanded(
             child: Obx(() {
-              if (ctrl.isLoading.value) return const GBLoader();
+              if (ctrl.isLoading.value) return const GBProductGridSkeleton();
               
               final products = ctrl.filteredProducts;
               

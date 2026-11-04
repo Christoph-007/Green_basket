@@ -86,3 +86,60 @@ class GBPageLoader extends StatelessWidget {
     );
   }
 }
+
+/// Placeholder rows shown while a list loads, so the screen keeps its shape
+/// instead of showing a lone spinner.
+class GBListSkeleton extends StatelessWidget {
+  final int itemCount;
+  final double itemHeight;
+
+  const GBListSkeleton({super.key, this.itemCount = 6, this.itemHeight = 88});
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: 'Loading',
+      child: ExcludeSemantics(
+        child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.md),
+          itemCount: itemCount,
+          separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+          itemBuilder: (_, __) => GBShimmerBox(
+            width: double.infinity,
+            height: itemHeight,
+            borderRadius: AppRadius.md,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Placeholder product cards in a two-column grid while products load.
+class GBProductGridSkeleton extends StatelessWidget {
+  final int itemCount;
+
+  const GBProductGridSkeleton({super.key, this.itemCount = 6});
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: 'Loading',
+      child: ExcludeSemantics(
+        child: GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.md),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: AppSpacing.md,
+            crossAxisSpacing: AppSpacing.md,
+            childAspectRatio: 0.72,
+          ),
+          itemCount: itemCount,
+          itemBuilder: (_, __) => const GBProductCardShimmer(),
+        ),
+      ),
+    );
+  }
+}

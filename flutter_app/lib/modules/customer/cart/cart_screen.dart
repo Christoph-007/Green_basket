@@ -39,7 +39,7 @@ class CartScreen extends StatelessWidget {
           ),
         ]),
       body: Obx(() {
-        if (ctrl.isLoading.value) return const GBLoader();
+        if (ctrl.isLoading.value) return const GBListSkeleton(itemHeight: 96, itemCount: 4);
         if (ctrl.items.isEmpty) {
           return EmptyState(
             icon: Icons.shopping_cart_outlined,

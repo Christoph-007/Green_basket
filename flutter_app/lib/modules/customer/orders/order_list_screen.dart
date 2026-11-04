@@ -126,7 +126,7 @@ class OrderListScreen extends StatelessWidget {
           ),
         ),
         body: Obx(() {
-          if (ctrl.isLoading.value) return const GBLoader();
+          if (ctrl.isLoading.value) return const GBListSkeleton(itemHeight: 130);
           return TabBarView(
             children: [
               _OrdersList(orders: ctrl.activeOrders, isActive: true),

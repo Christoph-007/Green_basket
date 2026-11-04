@@ -25,7 +25,7 @@ class WishlistScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       appBar: const GBAppBar(title: 'Wishlist'),
       body: Obx(() {
-        if (ctrl.isLoading.value) return const GBLoader();
+        if (ctrl.isLoading.value) return const GBProductGridSkeleton();
         
         return _WishlistGrid();
       }),

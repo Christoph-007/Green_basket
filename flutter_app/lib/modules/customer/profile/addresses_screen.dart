@@ -66,7 +66,7 @@ class AddressesScreen extends StatelessWidget {
           ),
         ]),
       body: Obx(() {
-        if (ctrl.isLoading.value) return const GBLoader();
+        if (ctrl.isLoading.value) return const GBListSkeleton(itemHeight: 96);
         
         final addresses = ctrl.addresses;
         

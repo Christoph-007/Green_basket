@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_loader.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -81,7 +82,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                   : controller.cancelledOrders;
 
       if (controller.isLoading.value && orders.isEmpty) {
-        return const Center(child: CircularProgressIndicator());
+        return const GBListSkeleton(itemHeight: 140);
       }
 
       if (orders.isEmpty) {
