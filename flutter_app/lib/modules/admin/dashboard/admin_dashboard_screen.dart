@@ -171,7 +171,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     return Expanded(
       child: Column(
         children: [
-          Text(value, style: AppTextStyles.headlineLarge.copyWith(color: AppColors.primary)),
+          Text(value, style: AppTextStyles.headlineLarge.copyWith(color: AppColors.primaryText)),
           Text(label, style: AppTextStyles.bodySmall),
         ],
       ),
@@ -237,7 +237,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               children: [
                 Icon(icon, color: iconColor),
                 const SizedBox(width: 8),
-                Expanded(child: Text(text, style: AppTextStyles.labelSmall.copyWith(color: Colors.black))),
+                Expanded(child: Text(text, style: AppTextStyles.labelSmall.copyWith(color: AppColors.textPrimary))),
               ],
             ),
           ),
@@ -466,7 +466,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     children: [
                       Text(
                         '₹${amount.toStringAsFixed(amount.truncateToDouble() == amount ? 0 : 2)}',
-                        style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.w700, color: AppColors.primary),
+                        style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.w700, color: AppColors.primaryText),
                       ),
                       const SizedBox(height: 2),
                       Row(

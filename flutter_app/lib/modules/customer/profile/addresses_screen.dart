@@ -61,7 +61,7 @@ class AddressesScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'My Addresses', backIcon: Icons.arrow_back_ios_new_rounded, actions: [
           IconButton(tooltip: 'Add', 
-            icon: const Icon(Icons.add_rounded, color: AppColors.primary),
+            icon: Icon(Icons.add_rounded, color: AppColors.primaryText),
             onPressed: () => Get.toNamed('${Routes.addresses}/add')?.then((_) => ctrl.fetchAddresses()),
           ),
         ]),
@@ -153,7 +153,7 @@ class _AddressCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
                   decoration: BoxDecoration(color: AppColors.primaryContainer, borderRadius: BorderRadius.circular(AppRadius.full)),
-                  child: Text('Default', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary)),
+                  child: Text('Default', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText)),
                 ),
               ],
               const Spacer(),
@@ -182,9 +182,9 @@ class _AddressCard extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.radio_button_off_rounded, size: 16, color: AppColors.primary),
+                  Icon(Icons.radio_button_off_rounded, size: 16, color: AppColors.primaryText),
                   const SizedBox(width: 4),
-                  Text('Set as default', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary)),
+                  Text('Set as default', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText)),
                 ],
               ),
             )),
@@ -207,7 +207,7 @@ class _AddressCard extends StatelessWidget {
               Get.back();
               controller.deleteAddress(id);
             },
-            child: const Text('Delete', style: TextStyle(color: AppColors.error)),
+            child: Text('Delete', style: TextStyle(color: AppColors.errorText)),
           ),
         ],
       ),
@@ -227,7 +227,7 @@ class _EmptyAddresses extends StatelessWidget {
           Container(
             width: 80, height: 80,
             decoration: BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
-            child: const Icon(Icons.location_off_rounded, color: AppColors.primary, size: 40),
+            child: Icon(Icons.location_off_rounded, color: AppColors.primaryText, size: 40),
           ),
           const SizedBox(height: AppSpacing.md),
           Text('No addresses saved', style: AppTextStyles.headlineMedium),

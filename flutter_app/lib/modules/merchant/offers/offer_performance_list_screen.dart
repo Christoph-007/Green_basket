@@ -83,7 +83,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
                                   color: AppColors.primaryContainer,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(Icons.show_chart, color: AppColors.primary, size: 24),
+                                child: Icon(Icons.show_chart, color: AppColors.primaryText, size: 24),
                               ),
                               const SizedBox(width: AppSpacing.md),
                               Expanded(

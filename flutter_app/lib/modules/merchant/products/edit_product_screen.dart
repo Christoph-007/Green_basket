@@ -196,7 +196,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'Edit Product', actions: [
           IconButton(
-            icon: const Icon(Icons.delete_outline, color: AppColors.error),
+            icon: Icon(Icons.delete_outline, color: AppColors.errorText),
             onPressed: _isDeleting || _isSaving ? null : _deleteProduct,
             tooltip: 'Delete Product',
           ),
@@ -209,7 +209,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: CircularProgressIndicator(strokeWidth: 2))
                 : Text('Save',
                     style: AppTextStyles.labelLarge
-                        .copyWith(color: AppColors.primary)),
+                        .copyWith(color: AppColors.primaryText)),
           ),
         ], bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),
@@ -457,7 +457,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               ..._tags.map((tag) => Chip(
                     label: Text(tag,
                         style: AppTextStyles.labelSmall
-                            .copyWith(color: AppColors.primary)),
+                            .copyWith(color: AppColors.primaryText)),
                     deleteIcon: const Icon(Icons.close, size: 14),
                     onDeleted: () => _removeTag(tag),
                     backgroundColor: AppColors.primaryContainer,
@@ -575,7 +575,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       children: [
                         Text('₹${opt['price']}'),
                         IconButton(tooltip: 'Delete', 
-                          icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                          icon: Icon(Icons.delete_outline, color: AppColors.errorText),
                           onPressed: () => setState(() => _preparationOptions.removeAt(index)),
                         ),
                       ],

@@ -213,7 +213,7 @@ class _BannerSectionState extends State<_BannerSection> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.surface,
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.full),
                               ),
@@ -293,7 +293,7 @@ class _SectionHeader extends StatelessWidget {
               child: Text(
                 'See All',
                 style: AppTextStyles.bodyMedium.copyWith(
-                  color: AppColors.primary,
+                  color: AppColors.primaryText,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -342,16 +342,16 @@ class _CategoriesRow extends StatelessWidget {
                             width: 60,
                             height: 60,
                             fit: BoxFit.cover,
-                            placeholder: (_, __) => const Icon(
+                            placeholder: (_, __) => Icon(
                                 Icons.eco_outlined,
-                                color: AppColors.primary),
-                            errorWidget: (_, __, ___) => const Icon(
+                                color: AppColors.primaryText),
+                            errorWidget: (_, __, ___) => Icon(
                                 Icons.eco_outlined,
-                                color: AppColors.primary),
+                                color: AppColors.primaryText),
                           ),
                         )
-                      : const Icon(Icons.eco_outlined,
-                          color: AppColors.primary),
+                      : Icon(Icons.eco_outlined,
+                          color: AppColors.primaryText),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -446,16 +446,16 @@ class _HomeRecipeCard extends StatelessWidget {
                     errorWidget: (_, __, ___) => Container(
                       height: 110,
                       color: AppColors.primaryContainer,
-                      child: const Icon(Icons.restaurant_rounded,
-                          color: AppColors.primary, size: 32),
+                      child: Icon(Icons.restaurant_rounded,
+                          color: AppColors.primaryText, size: 32),
                     ),
                   )
                 : Container(
                     height: 110,
                     color: AppColors.primaryContainer,
-                    child: const Center(
+                    child: Center(
                       child: Icon(Icons.restaurant_rounded,
-                          color: AppColors.primary, size: 32),
+                          color: AppColors.primaryText, size: 32),
                     ),
                   ),
             Expanded(
@@ -484,11 +484,11 @@ class _HomeRecipeCard extends StatelessWidget {
                             ),
                             child: Text(
                               recipe.displayMealType.toUpperCase(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontFamily: AppTextStyles.fontFamily,
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.primary,
+                                color: AppColors.primaryText,
                               ),
                             ),
                           ),

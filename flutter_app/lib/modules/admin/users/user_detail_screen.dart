@@ -233,7 +233,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         )
                         .toUpperCase(),
                     style: AppTextStyles.headlineMedium.copyWith(
-                      color: AppColors.primary,
+                      color: AppColors.primaryText,
                     ),
                   ),
                 ),
@@ -260,7 +260,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                             child: Text(
                               _user['role']?.toString() ?? 'User',
                               style: AppTextStyles.labelSmall.copyWith(
-                                color: AppColors.primary,
+                                color: AppColors.primaryText,
                               ),
                             ),
                           ),
@@ -280,7 +280,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           child: Text(
                             'BLOCKED',
                             style: AppTextStyles.labelSmall.copyWith(
-                              color: AppColors.error,
+                              color: AppColors.errorText,
                             ),
                           ),
                         ),

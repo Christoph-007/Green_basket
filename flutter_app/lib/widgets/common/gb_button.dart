@@ -122,7 +122,7 @@ class GBButton extends StatelessWidget {
       GBButtonVariant.ghost => TextButton(
           onPressed: isLoading ? null : onPressed,
           style: TextButton.styleFrom(
-            foregroundColor: AppColors.primary,
+            foregroundColor: AppColors.primaryText,
             minimumSize: Size(0, height ?? 52),
           ),
           child: child,

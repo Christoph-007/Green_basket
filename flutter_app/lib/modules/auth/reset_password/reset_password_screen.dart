@@ -94,8 +94,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   color: AppColors.primaryContainer,
                   borderRadius: BorderRadius.circular(24),
                 ),
-                child: const Icon(Icons.lock_reset_outlined,
-                    size: 40, color: AppColors.primary),
+                child: Icon(Icons.lock_reset_outlined,
+                    size: 40, color: AppColors.primaryText),
               ),
               const SizedBox(height: 24),
               Text('Reset Password', style: AppTextStyles.displayMedium),
@@ -110,7 +110,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               Text(
                 _email,
                 style:
-                    AppTextStyles.titleMedium.copyWith(color: AppColors.primary),
+                    AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText),
               ),
               const SizedBox(height: 32),
               Pinput(
@@ -154,7 +154,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Text(
                     _authCtrl.errorMessage.value,
                     style:
-                        AppTextStyles.bodySmall.copyWith(color: AppColors.error),
+                        AppTextStyles.bodySmall.copyWith(color: AppColors.errorText),
                     textAlign: TextAlign.center,
                   ),
                 );
@@ -172,7 +172,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 child: Text(
                   'Resend code',
                   style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.primary,
+                    color: AppColors.primaryText,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

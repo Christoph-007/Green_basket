@@ -132,7 +132,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
           children: [
             Row(
               children: [
-                const Icon(Icons.notifications_active_outlined, color: AppColors.primary, size: 16),
+                Icon(Icons.notifications_active_outlined, color: AppColors.primaryText, size: 16),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(notif['title'] ?? 'No Title', style: AppTextStyles.labelLarge),
@@ -169,7 +169,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
                   ),
                   child: Text(
                     audience,
-                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
+                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText),
                   ),
                 ),
                 const Spacer(),

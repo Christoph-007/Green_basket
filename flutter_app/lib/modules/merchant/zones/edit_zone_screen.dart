@@ -145,7 +145,7 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
                         child: Text(
                           '${_radius.toStringAsFixed(1)} km',
                           style: AppTextStyles.titleMedium
-                              .copyWith(color: AppColors.primary),
+                              .copyWith(color: AppColors.primaryText),
                         ),
                       ),
                       Text('20 km', style: AppTextStyles.bodySmall),
@@ -224,8 +224,8 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.lightbulb_outline,
-                      color: AppColors.primary, size: 18),
+                  Icon(Icons.lightbulb_outline,
+                      color: AppColors.primaryText, size: 18),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(

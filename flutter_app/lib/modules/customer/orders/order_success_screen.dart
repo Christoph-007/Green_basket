@@ -64,7 +64,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                 child: Container(
                   width: 120, height: 120,
                   decoration: BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
-                  child: const Icon(Icons.check_circle_rounded, color: AppColors.primary, size: 72),
+                  child: Icon(Icons.check_circle_rounded, color: AppColors.primaryText, size: 72),
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -79,7 +79,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
                       decoration: BoxDecoration(color: AppColors.primaryContainer, borderRadius: BorderRadius.circular(AppRadius.full)),
-                      child: Text('Order ID: $_orderId', style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary)),
+                      child: Text('Order ID: $_orderId', style: AppTextStyles.labelLarge.copyWith(color: AppColors.primaryText)),
                     ),
                     const SizedBox(height: AppSpacing.lg),
 
@@ -95,7 +95,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(color: AppColors.primaryContainer, borderRadius: BorderRadius.circular(AppRadius.sm)),
-                            child: const Icon(Icons.delivery_dining_rounded, color: AppColors.primary, size: 24),
+                            child: Icon(Icons.delivery_dining_rounded, color: AppColors.primaryText, size: 24),
                           ),
                           const SizedBox(width: AppSpacing.md),
                           Expanded(
@@ -104,7 +104,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                               children: [
                                 Text('Estimated Delivery', style: AppTextStyles.bodySmall),
                                 const SizedBox(height: 2),
-                                Text(_estimatedDelivery, style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+                                Text(_estimatedDelivery, style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText)),
                               ],
                             ),
                           ),
@@ -137,7 +137,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                     SizedBox(
                       width: double.infinity,
                       height: 52,
-                      child: GBButton(label: 'Continue Shopping', onPressed: () => Get.offAllNamed(Routes.customerHome), leadingIcon: Icons.shopping_bag_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary),
+                      child: GBButton(label: 'Continue Shopping', onPressed: () => Get.offAllNamed(Routes.customerHome), leadingIcon: Icons.shopping_bag_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primaryText),
                     ),
                   ],
                 ),

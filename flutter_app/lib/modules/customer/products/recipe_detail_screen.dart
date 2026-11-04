@@ -179,7 +179,7 @@ class RecipeDetailScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline_rounded, size: 64, color: AppColors.error),
+                Icon(Icons.error_outline_rounded, size: 64, color: AppColors.errorText),
                 const SizedBox(height: 16),
                 Text('Recipe not found', style: AppTextStyles.titleLarge),
                 TextButton(onPressed: () => Get.back(), child: const Text('Go Back')),
@@ -324,7 +324,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                                     if (!isAvailable)
                                                       Text(
                                                         ing['rangeMessage'] ?? (product != null ? 'Out of stock' : 'Not linked to product'),
-                                                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.error),
+                                                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.errorText),
                                                       ),
                                                     if (isAvailable && product != null)
                                                       Row(
@@ -379,7 +379,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                               Expanded(child: Text(ing.name, style: AppTextStyles.bodyMedium)),
                                               Text(
                                                 '${ctrl.scaleQty(ing.quantity)} ${ing.unit}',
-                                                style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary),
+                                                style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText),
                                               ),
                                             ],
                                           ),
@@ -554,7 +554,7 @@ class _StepperButton extends StatelessWidget {
       child: Container(
         width: 34, height: 34,
         alignment: Alignment.center,
-        child: Icon(icon, color: AppColors.primary, size: 18),
+        child: Icon(icon, color: AppColors.primaryText, size: 18),
       ),
     ));
   }

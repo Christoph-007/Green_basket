@@ -162,7 +162,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
   Widget _buildSectionHeader(String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, color: AppColors.primary, size: 20),
+        Icon(icon, color: AppColors.primaryText, size: 20),
         const SizedBox(width: AppSpacing.sm),
         Text(title, style: AppTextStyles.titleLarge),
       ],

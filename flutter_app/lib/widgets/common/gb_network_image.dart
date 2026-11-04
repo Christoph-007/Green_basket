@@ -38,7 +38,7 @@ class GBNetworkImage extends StatelessWidget {
       height: height,
       color: AppColors.primaryContainer,
       alignment: Alignment.center,
-      child: Icon(fallbackIcon, color: AppColors.primary, size: fallbackIconSize),
+      child: Icon(fallbackIcon, color: AppColors.primaryText, size: fallbackIconSize),
     );
   }
 

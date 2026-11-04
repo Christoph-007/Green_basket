@@ -32,10 +32,10 @@ class AdminDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const CircleAvatar(
-                        backgroundColor: Colors.white,
+                      CircleAvatar(
+                        backgroundColor: AppColors.surface,
                         maxRadius: 30,
-                        child: Icon(Icons.shield, color: AppColors.primary, size: 30),
+                        child: Icon(Icons.shield, color: AppColors.primaryText, size: 30),
                       ),
                       const SizedBox(height: 12),
                       Text('Admin Portal', style: AppTextStyles.titleLarge.copyWith(color: Colors.white)),

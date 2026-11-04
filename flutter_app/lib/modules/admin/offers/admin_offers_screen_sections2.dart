@@ -94,7 +94,7 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                                       BorderRadius.circular(AppRadius.full),
                                 ),
                                 child: Text('⚡ Flash Sale',
-                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.error)),
+                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.errorText)),
                               ),
                             ],
                           ],
@@ -218,10 +218,10 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.delete_outline,
-                  color: AppColors.error),
-              title: const Text('Delete Offer',
-                  style: TextStyle(color: AppColors.error)),
+              leading: Icon(Icons.delete_outline,
+                  color: AppColors.errorText),
+              title: Text('Delete Offer',
+                  style: TextStyle(color: AppColors.errorText)),
               onTap: () async {
                 Navigator.pop(ctx);
                 final confirm = await showDialog<bool>(
@@ -236,9 +236,9 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                           child: const Text('Cancel')),
                       TextButton(
                           onPressed: () => Navigator.pop(ctx, true),
-                          child: const Text('Delete',
+                          child: Text('Delete',
                               style:
-                                  TextStyle(color: AppColors.error))),
+                                  TextStyle(color: AppColors.errorText))),
                     ],
                   ),
                 );

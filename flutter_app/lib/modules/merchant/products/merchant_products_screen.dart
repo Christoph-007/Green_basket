@@ -32,7 +32,7 @@ class MerchantProductsScreen extends StatelessWidget {
               onPressed: () {},
             ),
             IconButton(tooltip: 'Upload', 
-              icon: const Icon(Icons.upload_file, color: AppColors.primary),
+              icon: Icon(Icons.upload_file, color: AppColors.primaryText),
               onPressed: () => Get.to(() => const BulkUploadScreen()),
             ),
           ], bottom: TabBar(
@@ -59,7 +59,7 @@ class MerchantProductsScreen extends StatelessWidget {
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );
             },
-          ), backgroundColor: Colors.white),
+          ), backgroundColor: AppColors.surface),
         drawer: const MerchantDrawer(),
         bottomNavigationBar: _BulkBar(controller: controller),
         body: const TabBarView(
@@ -154,7 +154,7 @@ class _ProductGrid extends StatelessWidget {
 
           return Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppRadius.lg),
               border: selected
                   ? Border.all(color: AppColors.primary, width: 2)
@@ -202,7 +202,7 @@ class _ProductGrid extends StatelessWidget {
                                       memCacheWidth: 400)
                                   : Icon(Icons.local_florist,
                                       size: 50,
-                                      color: AppColors.primary.withValues(alpha: 0.5)),
+                                      color: AppColors.primaryText.withValues(alpha: 0.5)),
                             ),
                           ),
                           if (!inStock)
@@ -237,8 +237,8 @@ class _ProductGrid extends StatelessWidget {
                                         : AppColors.success,
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.full),
-                                boxShadow: const [
-                                  BoxShadow(blurRadius: 4, color: Colors.black12)
+                                boxShadow: [
+                                  BoxShadow(blurRadius: 4, color: AppColors.shadow)
                                 ],
                               ),
                               child: Text(
@@ -274,7 +274,7 @@ class _ProductGrid extends StatelessWidget {
                               children: [
                                 Text(AppHelpers.formatPrice(product.price),
                                     style: AppTextStyles.titleMedium
-                                        .copyWith(color: AppColors.primary)),
+                                        .copyWith(color: AppColors.primaryText)),
                                 Text(' / ${product.unit}',
                                     style: AppTextStyles.bodySmall.copyWith(
                                         color: AppColors.textSecondary)),
@@ -503,9 +503,9 @@ class _BulkBar extends StatelessWidget {
       return SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.sm),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, -2))],
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
           ),
           child: Row(
             children: [

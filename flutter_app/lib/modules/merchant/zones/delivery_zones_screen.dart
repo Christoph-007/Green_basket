@@ -174,8 +174,8 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                                           blurRadius: 8)
                                     ],
                                   ),
-                                  child: const Icon(Icons.location_on,
-                                      color: AppColors.primary, size: 36),
+                                  child: Icon(Icons.location_on,
+                                      color: AppColors.primaryText, size: 36),
                                 ),
                                 const SizedBox(height: AppSpacing.md),
                                 Container(
@@ -373,8 +373,8 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                       ),
                       IconButton(tooltip: 'Delete', 
                         onPressed: () => _deleteZone(index),
-                        icon: const Icon(Icons.delete_outline,
-                            size: 20, color: AppColors.error),
+                        icon: Icon(Icons.delete_outline,
+                            size: 20, color: AppColors.errorText),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),

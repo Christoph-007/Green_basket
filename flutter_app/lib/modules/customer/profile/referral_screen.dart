@@ -95,10 +95,10 @@ class ReferralScreen extends StatelessWidget {
                         color: AppColors.primaryContainer,
                         borderRadius: BorderRadius.circular(AppRadius.xl),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.people_outline,
                         size: 52,
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -132,7 +132,7 @@ class ReferralScreen extends StatelessWidget {
                           Text(
                             code,
                             style: AppTextStyles.headlineLarge.copyWith(
-                              color: AppColors.primary,
+                              color: AppColors.primaryText,
                               letterSpacing: 4,
                             ),
                           ),
@@ -142,9 +142,9 @@ class ReferralScreen extends StatelessWidget {
                               Clipboard.setData(ClipboardData(text: code));
                               GBSnack.plain('Copied', 'Referral code copied!', position: SnackPosition.BOTTOM);
                             },
-                            child: const Icon(
+                            child: Icon(
                               Icons.copy_outlined,
-                              color: AppColors.primary,
+                              color: AppColors.primaryText,
                             ),
                           )),
                         ],
@@ -214,7 +214,7 @@ class _StatTile extends StatelessWidget {
             Text(
               value,
               style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.primary,
+                color: AppColors.primaryText,
               ),
             ),
             const SizedBox(height: 4),

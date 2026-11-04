@@ -351,7 +351,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                         TextSpan(text: 'Refund: ', style: AppTextStyles.bodySmall),
                         TextSpan(
                           text: '₹${refundAmount.toStringAsFixed(0)}',
-                          style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary),
+                          style: AppTextStyles.labelLarge.copyWith(color: AppColors.primaryText),
                         ),
                       ],
                     ),
@@ -362,7 +362,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                     Flexible(
                       child: Text(
                         'Reason: ${ret['rejectionReason']}',
-                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.error),
+                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.errorText),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

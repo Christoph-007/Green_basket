@@ -53,7 +53,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
             icon: Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
-        }), backgroundColor: Colors.white),
+        }), backgroundColor: AppColors.surface),
       drawer: const MerchantDrawer(),
       body: TabBarView(
         controller: _tabController,
@@ -107,7 +107,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
 
           return Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppRadius.lg),
               boxShadow: [
                 BoxShadow(
@@ -170,7 +170,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                             radius: 20,
                             child: Text(customerInitial,
                                 style: AppTextStyles.titleMedium
-                                    .copyWith(color: AppColors.primary)),
+                                    .copyWith(color: AppColors.primaryText)),
                           ),
                           const SizedBox(width: AppSpacing.md),
                           Expanded(
@@ -225,7 +225,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                         ),
                                         child: Center(
                                           child: Text('${item.quantity}x',
-                                              style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary)),
+                                              style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primaryText)),
                                         ),
                                       ),
                                       const SizedBox(width: AppSpacing.sm),
@@ -258,7 +258,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                         .copyWith(color: AppColors.textSecondary)),
                                 Text(AppHelpers.formatCurrency(order.total),
                                     style: AppTextStyles.titleMedium
-                                        .copyWith(color: AppColors.primary)),
+                                        .copyWith(color: AppColors.primaryText)),
                               ],
                             ),
                           ],

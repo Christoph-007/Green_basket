@@ -114,7 +114,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Text(
               'Save',
               style: AppTextStyles.labelLarge
-                  .copyWith(color: AppColors.primary),
+                  .copyWith(color: AppColors.primaryText),
             ),
           ),
         ]),
@@ -138,8 +138,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               color: AppColors.primaryContainer,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.person_rounded,
-                                color: AppColors.primary, size: 50),
+                            child: Icon(Icons.person_rounded,
+                                color: AppColors.primaryText, size: 50),
                           ),
                           Positioned(
                             bottom: 0,
@@ -342,8 +342,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 if (selected) ...[
-                                  const Icon(Icons.warning_amber_rounded,
-                                      color: AppColors.error, size: 14),
+                                  Icon(Icons.warning_amber_rounded,
+                                      color: AppColors.errorText, size: 14),
                                   const SizedBox(width: 4),
                                 ],
                                 Text(

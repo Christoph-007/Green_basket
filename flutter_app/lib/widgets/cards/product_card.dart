@@ -131,8 +131,8 @@ class ProductCard extends StatelessWidget {
                     child: Container(
                       width: 28,
                       height: 28,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -209,7 +209,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         if (product.distanceLabel != null) ...[
-                          const Icon(Icons.near_me_outlined, size: 12, color: AppColors.primary),
+                          Icon(Icons.near_me_outlined, size: 12, color: AppColors.primaryText),
                           const SizedBox(width: 3),
                           Flexible(
                             child: Text(
@@ -217,7 +217,7 @@ class ProductCard extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.labelSmall.copyWith(
-                                color: AppColors.primary,
+                                color: AppColors.primaryText,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -267,7 +267,7 @@ class ProductCard extends StatelessWidget {
                             Text(
                               '₹${product.effectivePrice.toStringAsFixed(0)}/${product.unit}',
                               style: AppTextStyles.titleMedium.copyWith(
-                                color: AppColors.primary,
+                                color: AppColors.primaryText,
                                 fontWeight: FontWeight.w700,
                                 fontSize: responsive.adaptiveFontSize(12),
                               ),
@@ -341,11 +341,11 @@ class ProductCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             ...product.preparationOptions.map((opt) => ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.check_circle_outline, color: AppColors.primary),
+                  leading: Icon(Icons.check_circle_outline, color: AppColors.primaryText),
                   title: Text(opt.name, style: AppTextStyles.titleMedium),
                   trailing: Text(
                     opt.additionalPrice > 0 ? '+₹${opt.additionalPrice.toInt()}' : 'Free',
-                    style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary),
+                    style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -375,7 +375,7 @@ class _PlaceholderImage extends StatelessWidget {
             BorderRadius.vertical(top: Radius.circular(AppRadius.md)),
       ),
       child: Icon(
-          Icons.eco_outlined, size: height * 0.4, color: AppColors.primary),
+          Icons.eco_outlined, size: height * 0.4, color: AppColors.primaryText),
     );
   }
 }

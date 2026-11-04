@@ -72,7 +72,7 @@ class _MerchantOrderDetailScreenState
             Get.back();
             _setStatus('cancelled', note: reasonCtrl.text.trim());
           },
-          child: const Text('Cancel Order', style: TextStyle(color: AppColors.error)),
+          child: Text('Cancel Order', style: TextStyle(color: AppColors.errorText)),
         ),
       ],
     ));
@@ -194,7 +194,7 @@ class _MerchantOrderDetailScreenState
                               ? widget.order.customerName![0].toUpperCase()
                               : 'C',
                           style: AppTextStyles.titleLarge
-                              .copyWith(color: AppColors.primary),
+                              .copyWith(color: AppColors.primaryText),
                         ),
                       ),
                       const SizedBox(width: AppSpacing.md),
@@ -215,14 +215,14 @@ class _MerchantOrderDetailScreenState
                                 },
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.phone_outlined,
-                                        size: 14, color: AppColors.primary),
+                                    Icon(Icons.phone_outlined,
+                                        size: 14, color: AppColors.primaryText),
                                     const SizedBox(width: 4),
                                     Text(
                                       widget.order.customerPhone!,
                                       style: AppTextStyles.bodySmall
                                           .copyWith(
-                                              color: AppColors.primary),
+                                              color: AppColors.primaryText),
                                     ),
                                   ],
                                 ),
@@ -234,14 +234,14 @@ class _MerchantOrderDetailScreenState
                                 },
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.phone_outlined,
-                                        size: 14, color: AppColors.primary),
+                                    Icon(Icons.phone_outlined,
+                                        size: 14, color: AppColors.primaryText),
                                     const SizedBox(width: 4),
                                     Text(
                                       'Contact Customer',
                                       style: AppTextStyles.bodySmall
                                           .copyWith(
-                                              color: AppColors.primary),
+                                              color: AppColors.primaryText),
                                     ),
                                   ],
                                 ),
@@ -303,8 +303,8 @@ class _MerchantOrderDetailScreenState
                                           url: item.productImage,
                                           memCacheWidth: 200),
                                     )
-                                  : const Icon(Icons.eco_outlined,
-                                      color: AppColors.primary, size: 20),
+                                  : Icon(Icons.eco_outlined,
+                                      color: AppColors.primaryText, size: 20),
                             ),
                             const SizedBox(width: AppSpacing.md),
                             Expanded(
@@ -407,7 +407,7 @@ class _MerchantOrderDetailScreenState
               if (_canCancel)
                 SizedBox(
                   width: double.infinity,
-                  child: GBButton(label: 'Cancel Order', onPressed: _isUpdating ? null : _confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
+                  child: GBButton(label: 'Cancel Order', onPressed: _isUpdating ? null : _confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText),
                 ),
             ],
           ),
@@ -443,7 +443,7 @@ class _MerchantOrderDetailScreenState
         Text(
           amount,
           style: isTotal
-              ? AppTextStyles.titleLarge.copyWith(color: AppColors.primary)
+              ? AppTextStyles.titleLarge.copyWith(color: AppColors.primaryText)
               : AppTextStyles.bodyMedium,
         ),
       ],

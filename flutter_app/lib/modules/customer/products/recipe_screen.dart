@@ -268,14 +268,14 @@ class _RecipeCard extends StatelessWidget {
                     errorWidget: (context, url, error) => Container(
                       height: 120,
                       color: AppColors.primaryContainer,
-                      child: const Icon(Icons.restaurant_rounded, color: AppColors.primary),
+                      child: Icon(Icons.restaurant_rounded, color: AppColors.primaryText),
                     ),
                   )
                 : Container(
                     height: 120,
                     color: AppColors.primaryContainer,
-                    child: const Center(
-                      child: Icon(Icons.restaurant_rounded, color: AppColors.primary, size: 40),
+                    child: Center(
+                      child: Icon(Icons.restaurant_rounded, color: AppColors.primaryText, size: 40),
                     ),
                   ),
             
@@ -307,11 +307,11 @@ class _RecipeCard extends StatelessWidget {
                             ),
                             child: Text(
                               recipe.displayMealType.toUpperCase(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontFamily: AppTextStyles.fontFamily,
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.primary,
+                                color: AppColors.primaryText,
                               ),
                             ),
                           ),

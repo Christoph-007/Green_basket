@@ -51,8 +51,8 @@ extension _CommissionSettingsScreenStateSections on _CommissionSettingsScreenSta
           children: [
             Row(
               children: [
-                const Icon(Icons.analytics_outlined,
-                    color: AppColors.primary),
+                Icon(Icons.analytics_outlined,
+                    color: AppColors.primaryText),
                 const SizedBox(width: AppSpacing.sm),
                 Text('This Month', style: AppTextStyles.titleLarge),
               ],
@@ -133,8 +133,8 @@ extension _CommissionSettingsScreenStateSections on _CommissionSettingsScreenSta
           children: [
             Row(
               children: [
-                const Icon(Icons.store_outlined,
-                    color: AppColors.primary),
+                Icon(Icons.store_outlined,
+                    color: AppColors.primaryText),
                 const SizedBox(width: AppSpacing.sm),
                 Text('Top Merchants (This Month)',
                     style: AppTextStyles.titleLarge),
@@ -169,7 +169,7 @@ extension _CommissionSettingsScreenStateSections on _CommissionSettingsScreenSta
                           child: Text(
                             '${i + 1}',
                             style: AppTextStyles.labelLarge
-                                .copyWith(color: AppColors.primary),
+                                .copyWith(color: AppColors.primaryText),
                           ),
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -193,7 +193,7 @@ extension _CommissionSettingsScreenStateSections on _CommissionSettingsScreenSta
                               '₹${revenue.toStringAsFixed(0)}',
                               style: AppTextStyles.titleMedium
                                   .copyWith(
-                                      color: AppColors.primary),
+                                      color: AppColors.primaryText),
                             ),
                             Text(
                               '₹${commission.toStringAsFixed(0)} fee',

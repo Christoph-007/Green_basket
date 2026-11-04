@@ -63,8 +63,8 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.delete_outline, color: AppColors.error),
-              title: const Text('Delete Category', style: TextStyle(color: AppColors.error)),
+              leading: Icon(Icons.delete_outline, color: AppColors.errorText),
+              title: Text('Delete Category', style: TextStyle(color: AppColors.errorText)),
               onTap: () async {
                 final id = category['_id']?.toString() ?? category['id']?.toString();
                 if (id != null) {

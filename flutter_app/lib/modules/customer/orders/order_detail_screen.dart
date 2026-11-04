@@ -97,7 +97,7 @@ class OrderDetailController extends GetxController {
             Get.back();
             cancelOrder(reasonCtrl.text.trim());
           },
-          child: const Text('Cancel Order', style: TextStyle(color: AppColors.error)),
+          child: Text('Cancel Order', style: TextStyle(color: AppColors.errorText)),
         ),
       ],
     ));
@@ -226,8 +226,8 @@ class OrderDetailScreen extends StatelessWidget {
                                   color: AppColors.primaryContainer,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Icon(Icons.eco_outlined,
-                                    color: AppColors.primary),
+                                child: Icon(Icons.eco_outlined,
+                                    color: AppColors.primaryText),
                               ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -249,7 +249,7 @@ class OrderDetailScreen extends StatelessWidget {
                                         child: Text(
                                           'Help / Return',
                                           style: AppTextStyles.labelSmall.copyWith(
-                                            color: AppColors.primary,
+                                            color: AppColors.primaryText,
                                             fontWeight: FontWeight.w600,
                                             decoration: TextDecoration.underline,
                                           ),
@@ -281,8 +281,8 @@ class OrderDetailScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.location_on_outlined,
-                            color: AppColors.primary),
+                        Icon(Icons.location_on_outlined,
+                            color: AppColors.primaryText),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -341,11 +341,11 @@ class OrderDetailScreen extends StatelessWidget {
 
                   // Cancel button for eligible orders
                   if (ctrl.canCancel)
-                    GBButton(label: 'Cancel Order', onPressed: ctrl.isCancelling.value ? null : ctrl.confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.error, height: 48),
+                    GBButton(label: 'Cancel Order', onPressed: ctrl.isCancelling.value ? null : ctrl.confirmCancel, variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText, height: 48),
 
                   // Return items from a delivered / completed order
                   if (ctrl.canReturn)
-                    GBButton(label: 'Return items', onPressed: ctrl.openReturnSheet, leadingIcon: Icons.assignment_return_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary, height: 48),
+                    GBButton(label: 'Return items', onPressed: ctrl.openReturnSheet, leadingIcon: Icons.assignment_return_outlined, variant: GBButtonVariant.outline, foregroundColor: AppColors.primaryText, height: 48),
 
                   const SizedBox(height: 32),
                 ],

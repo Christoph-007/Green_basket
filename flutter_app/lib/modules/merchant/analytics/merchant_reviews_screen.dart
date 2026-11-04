@@ -16,7 +16,7 @@ class MerchantReviewsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: GBAppBar(title: 'Customer Reviews', backgroundColor: Colors.white),
+      appBar: GBAppBar(title: 'Customer Reviews', backgroundColor: AppColors.surface),
       body: Obx(() {
         final reviews = controller.recentReviews;
         
@@ -68,7 +68,7 @@ class _ReviewCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(color: AppColors.border),
       ),
@@ -81,7 +81,7 @@ class _ReviewCard extends StatelessWidget {
                 radius: 18,
                 backgroundColor: AppColors.primaryContainer,
                 child: Text(name.isNotEmpty ? name[0].toUpperCase() : '?',
-                    style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary)),
+                    style: AppTextStyles.labelLarge.copyWith(color: AppColors.primaryText)),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
@@ -120,9 +120,9 @@ class _ReviewCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.reply_all_rounded, size: 14, color: AppColors.primary),
+                      Icon(Icons.reply_all_rounded, size: 14, color: AppColors.primaryText),
                       const SizedBox(width: 4),
-                      Text('Your Reply', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary)),
+                      Text('Your Reply', style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText)),
                     ],
                   ),
                   const SizedBox(height: 4),
@@ -132,7 +132,7 @@ class _ReviewCard extends StatelessWidget {
             ),
           ] else ...[
             const SizedBox(height: AppSpacing.md),
-            GBButton(label: 'Reply to Review', onPressed: () => _showReplyDialog(context), leadingIcon: Icons.reply_rounded, variant: GBButtonVariant.outline, foregroundColor: AppColors.primary),
+            GBButton(label: 'Reply to Review', onPressed: () => _showReplyDialog(context), leadingIcon: Icons.reply_rounded, variant: GBButtonVariant.outline, foregroundColor: AppColors.primaryText),
           ],
         ],
       ),

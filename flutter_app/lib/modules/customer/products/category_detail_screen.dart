@@ -184,7 +184,7 @@ class CategoryDetailScreen extends StatelessWidget {
                       onTap: ctrl.clearFilters,
                       child: Text(
                         'Clear Filters',
-                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
+                        style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText),
                       ),
                     )),
                 ],
@@ -263,7 +263,7 @@ class CategoryDetailScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           ...options.map((opt) => Obx(() => ListTile(
                 title: Text(opt.$2, style: AppTextStyles.bodyMedium),
-                trailing: ctrl.sortBy.value == opt.$1 ? const Icon(Icons.check_rounded, color: AppColors.primary) : null,
+                trailing: ctrl.sortBy.value == opt.$1 ? Icon(Icons.check_rounded, color: AppColors.primaryText) : null,
                 onTap: () {
                   ctrl.sortBy.value = opt.$1;
                   Get.back();

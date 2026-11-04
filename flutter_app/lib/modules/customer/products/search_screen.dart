@@ -301,8 +301,8 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               for (final term in trending)
                 ActionChip(
-                  avatar: const Icon(Icons.trending_up,
-                      size: 16, color: AppColors.primary),
+                  avatar: Icon(Icons.trending_up,
+                      size: 16, color: AppColors.primaryText),
                   label: Text(term, style: AppTextStyles.bodySmall),
                   backgroundColor: AppColors.primaryContainer,
                   side: BorderSide.none,

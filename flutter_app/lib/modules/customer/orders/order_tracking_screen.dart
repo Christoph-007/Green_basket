@@ -254,7 +254,7 @@ class OrderTrackingScreen extends StatelessWidget {
                         children: [
                           Icon(Icons.location_on_rounded,
                               color:
-                                  AppColors.primary.withValues(alpha: 0.7),
+                                  AppColors.primaryText.withValues(alpha: 0.7),
                               size: 40),
                           const SizedBox(height: AppSpacing.xs),
                           Container(
@@ -321,8 +321,8 @@ class OrderTrackingScreen extends StatelessWidget {
                                         url: item.productImage,
                                         memCacheWidth: 200),
                                   )
-                                : const Icon(Icons.eco_outlined,
-                                    color: AppColors.primary,
+                                : Icon(Icons.eco_outlined,
+                                    color: AppColors.primaryText,
                                     size: 22),
                           ),
                           const SizedBox(width: AppSpacing.sm),
@@ -345,7 +345,7 @@ class OrderTrackingScreen extends StatelessWidget {
                                 item.itemTotal),
                             style: AppTextStyles.titleMedium
                                 .copyWith(
-                                    color: AppColors.primary),
+                                    color: AppColors.primaryText),
                           ),
                         ],
                       );
@@ -371,7 +371,7 @@ class OrderTrackingScreen extends StatelessWidget {
                       Text(AppHelpers.formatCurrency(o.total),
                           style: AppTextStyles.titleLarge
                               .copyWith(
-                                  color: AppColors.primary)),
+                                  color: AppColors.primaryText)),
                     ],
                   ),
                 ),

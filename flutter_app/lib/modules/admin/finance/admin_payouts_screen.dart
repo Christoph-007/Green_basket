@@ -68,7 +68,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Recipient: $name', style: AppTextStyles.bodyMedium),
-            Text('Amount: ${AppHelpers.formatCurrencyFlexible(amount)}', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+            Text('Amount: ${AppHelpers.formatCurrencyFlexible(amount)}', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText)),
           ],
         ),
         actions: [
@@ -215,7 +215,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
                   ),
                   child: Icon(
                     type == 'Merchant' ? Icons.store_outlined : Icons.delivery_dining_outlined,
-                    color: AppColors.primary,
+                    color: AppColors.primaryText,
                     size: 20
                   ),
                 ),
@@ -250,7 +250,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Amount', style: AppTextStyles.bodySmall),
-                    Text(AppHelpers.formatCurrencyFlexible(amount), style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primary)),
+                    Text(AppHelpers.formatCurrencyFlexible(amount), style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primaryText)),
                   ],
                 ),
                 Column(

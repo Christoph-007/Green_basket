@@ -123,7 +123,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
           ),
           IconButton(tooltip: 'Decrease', 
             icon: const Icon(Icons.remove_circle_outline),
-            color: AppColors.primary,
+            color: AppColors.primaryText,
             onPressed: quantity > 0
                 ? () => setState(() => _quantities[index] = quantity - 1)
                 : null,
@@ -135,7 +135,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
           ),
           IconButton(tooltip: 'Increase', 
             icon: const Icon(Icons.add_circle_outline),
-            color: AppColors.primary,
+            color: AppColors.primaryText,
             onPressed: quantity < item.quantity
                 ? () => setState(() => _quantities[index] = quantity + 1)
                 : null,
@@ -193,7 +193,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
                   child: Text(
                     'Estimated refund: ${AppHelpers.formatCurrency(_refundEstimate)}',
                     style: AppTextStyles.labelLarge
-                        .copyWith(color: AppColors.primary),
+                        .copyWith(color: AppColors.primaryText),
                   ),
                 ),
               if (_error != null)
@@ -201,7 +201,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(_error!,
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: AppColors.error)),
+                          .copyWith(color: AppColors.errorText)),
                 ),
               SizedBox(
                 width: double.infinity,

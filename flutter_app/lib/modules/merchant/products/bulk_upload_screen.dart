@@ -119,7 +119,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text('Row ${e['row']}: ${e['error']}',
                         style: AppTextStyles.bodySmall
-                            .copyWith(color: AppColors.error)),
+                            .copyWith(color: AppColors.errorText)),
                   )),
             ],
           ],
@@ -186,7 +186,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                       Text(
                         _selectedFileName,
                         style: AppTextStyles.bodySmall
-                            .copyWith(color: AppColors.primary),
+                            .copyWith(color: AppColors.primaryText),
                         textAlign: TextAlign.center,
                       )
                     else
@@ -206,7 +206,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                         child: Text(
                           'Remove file',
                           style: AppTextStyles.bodySmall
-                              .copyWith(color: AppColors.error),
+                              .copyWith(color: AppColors.errorText),
                         ),
                       ),
                     ],
@@ -240,8 +240,8 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
                       padding: const EdgeInsets.all(AppSpacing.md),
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline,
-                              color: AppColors.primary, size: 20),
+                          Icon(Icons.info_outline,
+                              color: AppColors.primaryText, size: 20),
                           const SizedBox(width: AppSpacing.sm),
                           Expanded(
                             child: Text('CSV Format Instructions',
@@ -402,7 +402,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
               child: Center(
                 child: Text(row[0],
                     style: AppTextStyles.labelSmall
-                        .copyWith(color: AppColors.primary)),
+                        .copyWith(color: AppColors.primaryText)),
               ),
             ),
             const SizedBox(width: AppSpacing.sm),

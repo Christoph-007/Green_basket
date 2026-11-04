@@ -60,8 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: AppColors.primaryContainer,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Center(
-                          child: Icon(Icons.eco, size: 40, color: AppColors.primary),
+                        child: Center(
+                          child: Icon(Icons.eco, size: 40, color: AppColors.primaryText),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -96,14 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.error_outline,
-                            color: AppColors.error, size: 18),
+                        Icon(Icons.error_outline,
+                            color: AppColors.errorText, size: 18),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             _authCtrl.errorMessage.value,
                             style: AppTextStyles.bodySmall
-                                .copyWith(color: AppColors.error),
+                                .copyWith(color: AppColors.errorText),
                           ),
                         ),
                       ],
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'Forgot Password?',
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Sign Up',
                           style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.primary,
+                            color: AppColors.primaryText,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

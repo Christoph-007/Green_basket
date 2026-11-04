@@ -57,8 +57,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   color: AppColors.primaryContainer,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Icon(Icons.lock_reset_outlined,
-                    size: 36, color: AppColors.primary),
+                child: Icon(Icons.lock_reset_outlined,
+                    size: 36, color: AppColors.primaryText),
               ),
               const SizedBox(height: 24),
               Text('Forgot Password?', style: AppTextStyles.displayMedium),
@@ -87,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     child: Text(
                       _authCtrl.errorMessage.value,
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: AppColors.error),
+                          .copyWith(color: AppColors.errorText),
                     ),
                   );
                 }
@@ -108,7 +108,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: Text(
                     'Back to Sign In',
                     style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.primary,
+                      color: AppColors.primaryText,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

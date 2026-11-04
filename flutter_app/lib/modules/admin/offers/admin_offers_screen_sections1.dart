@@ -236,7 +236,7 @@ extension _AdminOffersScreenStateSections1 on _AdminOffersScreenState {
                                       BorderRadius.circular(AppRadius.full),
                                 ),
                                 child: Text('⚡ Flash',
-                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.error)),
+                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.errorText)),
                               ),
                             ],
                           ],

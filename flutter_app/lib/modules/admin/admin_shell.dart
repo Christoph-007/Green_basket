@@ -49,7 +49,7 @@ class _AdminShellState extends State<AdminShell> {
       const OfflineBanner(),
       Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           border: Border(top: BorderSide(color: AppColors.divider)),
         ),
         child: BottomNavigationBar(

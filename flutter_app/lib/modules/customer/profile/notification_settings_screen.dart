@@ -175,7 +175,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       child: Text(
         title.toUpperCase(),
         style: AppTextStyles.labelSmall.copyWith(
-          color: AppColors.primary,
+          color: AppColors.primaryText,
           letterSpacing: 1.2,
           fontWeight: FontWeight.bold,
         ),
@@ -188,7 +188,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
     return SwitchListTile(
       title: Text(title, style: AppTextStyles.bodyMedium),
       subtitle: Text(subtitle, style: AppTextStyles.bodySmall),
-      secondary: Icon(icon, color: AppColors.primary, size: 22),
+      secondary: Icon(icon, color: AppColors.primaryText, size: 22),
       value: value,
       onChanged: onChanged,
       activeColor: AppColors.primary,

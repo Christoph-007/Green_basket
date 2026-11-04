@@ -330,14 +330,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
             child: Row(
               children: [
-                const Icon(Icons.info_outline,
-                    color: AppColors.primary, size: 18),
+                Icon(Icons.info_outline,
+                    color: AppColors.primaryText, size: 18),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     'Set MRP higher than selling price to show discount to customers',
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: AppColors.primary),
+                        .copyWith(color: AppColors.primaryText),
                   ),
                 ),
               ],
@@ -402,7 +402,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ..._tags.map((tag) => Chip(
                     label: Text(tag,
                         style: AppTextStyles.labelSmall
-                            .copyWith(color: AppColors.primary)),
+                            .copyWith(color: AppColors.primaryText)),
                     deleteIcon:
                         const Icon(Icons.close, size: 14),
                     onDeleted: () => _removeTag(tag),
@@ -521,7 +521,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       children: [
                         Text('₹${opt['price']}'),
                         IconButton(tooltip: 'Delete', 
-                          icon: const Icon(Icons.delete_outline, color: AppColors.error),
+                          icon: Icon(Icons.delete_outline, color: AppColors.errorText),
                           onPressed: () => setState(() => _preparationOptions.removeAt(index)),
                         ),
                       ],

@@ -338,7 +338,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                         color: AppColors.primaryContainer,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
-                      child: const Icon(Icons.eco_outlined, color: AppColors.primary, size: 20),
+                      child: Icon(Icons.eco_outlined, color: AppColors.primaryText, size: 20),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
@@ -373,7 +373,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: isBold ? AppTextStyles.titleMedium : AppTextStyles.bodyMedium),
-          Text(value, style: isBold ? AppTextStyles.titleMedium.copyWith(color: AppColors.primary) : AppTextStyles.bodyMedium),
+          Text(value, style: isBold ? AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText) : AppTextStyles.bodyMedium),
         ],
       ),
     );
@@ -404,7 +404,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                 children: [
                   if (canCancel)
                     Expanded(
-                      child: GBButton(label: 'Cancel', onPressed: () => _showActionDialog(context, 'Cancel Order'), variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
+                      child: GBButton(label: 'Cancel', onPressed: () => _showActionDialog(context, 'Cancel Order'), variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText),
                     ),
                   if (canCancel && canRefund) const SizedBox(width: AppSpacing.sm),
                   if (canRefund)

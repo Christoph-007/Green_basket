@@ -54,7 +54,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
         ], leading: IconButton(tooltip: 'Back', 
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           onPressed: () => Get.back(),
-        ), backgroundColor: Colors.white, foregroundColor: Colors.black),
+        )),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : orders.isEmpty
@@ -62,10 +62,10 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.receipt_long_outlined, size: 64, color: Colors.grey[300]),
+                      Icon(Icons.receipt_long_outlined, size: 64, color: AppColors.textHint),
                       const SizedBox(height: 16),
                       Text('No completed orders found',
-                          style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey)),
+                          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
                     ],
                   ),
                 )
@@ -99,7 +99,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                     return Container(
                       margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -137,8 +137,8 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                           children: [
                             const SizedBox(height: 4),
                             Text('Order: #${order['orderId'] ?? 'N/A'}',
-                                style: AppTextStyles.labelSmall.copyWith(color: Colors.grey[600])),
-                            Text(date, style: AppTextStyles.bodySmall.copyWith(color: Colors.grey)),
+                                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
+                            Text(date, style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary)),
                           ],
                         ),
                         trailing: Text(

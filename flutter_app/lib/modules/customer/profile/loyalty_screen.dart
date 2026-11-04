@@ -45,7 +45,7 @@ class LoyaltyController extends GetxController {
                 const SizedBox(height: 12),
                 SelectableText(
                   code,
-                  style: AppTextStyles.headlineLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary),
+                  style: AppTextStyles.headlineLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.primaryText),
                 ),
                 const SizedBox(height: 8),
                 const Text('This code is valid for 30 days.'),
@@ -330,11 +330,11 @@ class LoyaltyScreen extends StatelessWidget {
                           ),
                         ),
                         if (tier == (t['name'] as String).toLowerCase())
-                          const Text(
+                          Text(
                             'Current',
                             style: TextStyle(
                               fontFamily: AppTextStyles.fontFamily,
-                              color: AppColors.primary,
+                              color: AppColors.primaryText,
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
                             ),

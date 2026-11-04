@@ -31,10 +31,10 @@ class MerchantDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const CircleAvatar(
-                        backgroundColor: Colors.white,
+                      CircleAvatar(
+                        backgroundColor: AppColors.surface,
                        child: Icon(Icons.store_rounded,
-                          color: AppColors.primary, size: 28),
+                          color: AppColors.primaryText, size: 28),
                       ),
                       const SizedBox(height: 12),
                       Text('Merchant Portal', style: AppTextStyles.titleLarge.copyWith(color: Colors.white)),

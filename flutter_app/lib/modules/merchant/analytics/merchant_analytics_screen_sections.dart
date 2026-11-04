@@ -5,7 +5,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
         border: Border.all(color: AppColors.border),
       ),
@@ -54,7 +54,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
       IconData icon, Color color, VoidCallback onTap) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
@@ -126,7 +126,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
         width: double.infinity,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.lg),
           border: Border.all(color: AppColors.border),
         ),
@@ -138,7 +138,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.bar_chart, size: 18, color: AppColors.primary),
+                    Icon(Icons.bar_chart, size: 18, color: AppColors.primaryText),
                     const SizedBox(width: 6),
                     Text('Revenue Trend', style: AppTextStyles.titleMedium),
                   ],

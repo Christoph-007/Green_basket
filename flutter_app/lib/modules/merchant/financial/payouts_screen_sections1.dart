@@ -74,7 +74,7 @@ extension _PayoutsScreenSections1 on PayoutsScreen {
                         ? null
                         : () => _confirmPayout(Get.context!, controller),
                     backgroundColor: Colors.white,
-                    foregroundColor: AppColors.primary,
+                    foregroundColor: AppColors.primaryText,
                   )),
             ],
           ),
@@ -175,7 +175,7 @@ extension _PayoutsScreenSections1 on PayoutsScreen {
                     child: Text(
                       '${controller.periodStart.value} – ${controller.periodEnd.value}',
                       style: AppTextStyles.labelSmall
-                          .copyWith(color: AppColors.primary),
+                          .copyWith(color: AppColors.primaryText),
                     ),
                   )),
             ],

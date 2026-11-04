@@ -205,7 +205,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 Obx(() => IconButton(
                   icon: Icon(
                     _selectionMode.value ? Icons.check_box : Icons.check_box_outline_blank,
-                    color: AppColors.primary,
+                    color: AppColors.primaryText,
                   ),
                   onPressed: () {
                     _selectionMode.value = !_selectionMode.value;
@@ -317,7 +317,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     : null,
                 ),
                 child: product['primaryImage'] == null || !product['primaryImage'].toString().startsWith('http')
-                  ? const Icon(Icons.eco_outlined, color: AppColors.primary, size: 28)
+                  ? Icon(Icons.eco_outlined, color: AppColors.primaryText, size: 28)
                   : null,
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -330,7 +330,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Text(AppHelpers.formatCurrencyFlexible(price), style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
+                        Text(AppHelpers.formatCurrencyFlexible(price), style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText)),
                         const SizedBox(width: AppSpacing.sm),
                         const Icon(Icons.star, size: 12, color: Colors.orange),
                         const SizedBox(width: 2),

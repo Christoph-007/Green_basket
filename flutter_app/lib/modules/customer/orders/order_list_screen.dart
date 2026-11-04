@@ -377,23 +377,23 @@ class _OrderCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(order.deliveryType == 'pickup' ? Icons.store_outlined : Icons.local_shipping_outlined,
-                        color: AppColors.primary, size: 18),
+                        color: AppColors.primaryText, size: 18),
                     const SizedBox(width: 8),
                     Text(
                       order.deliveryType == 'pickup' && order.status == 'ready' ? 'Ready for Pickup' : AppHelpers.getOrderStatusLabel(order.status),
                       style: AppTextStyles.bodyMedium
-                          .copyWith(color: AppColors.primary),
+                          .copyWith(color: AppColors.primaryText),
                     ),
                     const Spacer(),
-                    const Text('Track',
+                    Text('Track',
                         style: TextStyle(
                           fontFamily: AppTextStyles.fontFamily,
-                          color: AppColors.primary,
+                          color: AppColors.primaryText,
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
                         )),
-                    const Icon(Icons.arrow_forward_ios,
-                        size: 12, color: AppColors.primary),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 12, color: AppColors.primaryText),
                   ],
                 ),
               ),

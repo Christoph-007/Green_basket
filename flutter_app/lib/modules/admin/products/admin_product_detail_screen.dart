@@ -99,7 +99,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: AppColors.primaryContainer,
-                child: const Icon(Icons.eco_outlined, size: 80, color: AppColors.primary),
+                child: Icon(Icons.eco_outlined, size: 80, color: AppColors.primaryText),
               ),
             ),
           ),
@@ -131,7 +131,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  Text('by $merchant', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary)),
+                  Text('by $merchant', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText)),
                   const Divider(height: 32),
                   
                   _buildDetailRow('Price', AppHelpers.formatCurrencyFlexible(price), Icons.payments_outlined),
@@ -153,7 +153,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
-                    child: GBButton(label: 'Delete Product', onPressed: _confirmDelete, leadingIcon: Icons.delete_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
+                    child: GBButton(label: 'Delete Product', onPressed: _confirmDelete, leadingIcon: Icons.delete_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText),
                   ),
                   const SizedBox(height: 32),
                 ],

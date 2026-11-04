@@ -94,14 +94,14 @@ class _OfferTile extends StatelessWidget {
                       color: AppColors.primary.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.local_offer, color: AppColors.primary, size: 28),
+                    child: Icon(Icons.local_offer, color: AppColors.primaryText, size: 28),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(title, style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary)),
+                        Text(title, style: AppTextStyles.titleLarge.copyWith(color: AppColors.primaryText)),
                         const SizedBox(height: 2),
                         Text(subtitle, style: AppTextStyles.bodySmall, maxLines: 2, overflow: TextOverflow.ellipsis),
                       ],
@@ -125,12 +125,12 @@ class _OfferTile extends StatelessWidget {
                       ),
                       child: Text(
                         code,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: AppTextStyles.fontFamily,
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
                           letterSpacing: 1.5,
-                          color: AppColors.primary,
+                          color: AppColors.primaryText,
                         ),
                       ),
                     ),
@@ -142,7 +142,7 @@ class _OfferTile extends StatelessWidget {
                       },
                       icon: const Icon(Icons.copy, size: 16),
                       label: const Text('Copy'),
-                      style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+                      style: TextButton.styleFrom(foregroundColor: AppColors.primaryText),
                     ),
                   ],
                 ),
@@ -160,7 +160,7 @@ class _OfferTile extends StatelessWidget {
                   if (offer['endDate'] != null)
                     Text(
                       'Expires: ${DateTime.tryParse(offer['endDate'].toString())?.toLocal().toString().split(' ')[0] ?? 'Soon'}',
-                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.error),
+                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.errorText),
                     ),
                 ],
               ),

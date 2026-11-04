@@ -494,8 +494,8 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                             'Automatically confirm incoming orders',
                             style: AppTextStyles.bodySmall,
                           ),
-                          secondary: const Icon(Icons.auto_awesome_outlined,
-                              color: AppColors.primary),
+                          secondary: Icon(Icons.auto_awesome_outlined,
+                              color: AppColors.primaryText),
                           value: _autoAccept,
                           onChanged: (v) => setState(() => _autoAccept = v),
                           activeColor: AppColors.primary,
@@ -505,8 +505,8 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                           padding: const EdgeInsets.all(AppSpacing.md),
                           child: Row(
                             children: [
-                              const Icon(Icons.timer_outlined,
-                                  color: AppColors.primary, size: 22),
+                              Icon(Icons.timer_outlined,
+                                  color: AppColors.primaryText, size: 22),
                               const SizedBox(width: AppSpacing.md),
                               Expanded(
                                 child: Column(

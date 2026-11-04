@@ -212,7 +212,7 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
                   Row(
                     children: [
                       Expanded(
-                        child: GBButton(label: 'Remove Stock', onPressed: _isLoading ? null : () => _updateStock(false), leadingIcon: Icons.remove_circle_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
+                        child: GBButton(label: 'Remove Stock', onPressed: _isLoading ? null : () => _updateStock(false), leadingIcon: Icons.remove_circle_outline, variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText),
                       ),
                       const SizedBox(width: AppSpacing.md),
                       Expanded(

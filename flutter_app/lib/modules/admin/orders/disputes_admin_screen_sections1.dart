@@ -314,7 +314,7 @@ extension _DisputesAdminScreenStateSections1 on _DisputesAdminScreenState {
               Row(
                 children: [
                   Icon(_categoryIcon(category),
-                      size: 14, color: AppColors.primary),
+                      size: 14, color: AppColors.primaryText),
                   const SizedBox(width: 4),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -327,7 +327,7 @@ extension _DisputesAdminScreenStateSections1 on _DisputesAdminScreenState {
                     child: Text(
                       _categoryLabel(category),
                       style: AppTextStyles.labelSmall
-                          .copyWith(color: AppColors.primary),
+                          .copyWith(color: AppColors.primaryText),
                     ),
                   ),
                 ],

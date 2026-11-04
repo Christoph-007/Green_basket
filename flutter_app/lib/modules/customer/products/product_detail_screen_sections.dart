@@ -4,7 +4,7 @@ extension _ProductDetailScreenSections on ProductDetailScreen {
   Widget _buildInfoRow(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: AppColors.primary),
+        Icon(icon, size: 18, color: AppColors.primaryText),
         const SizedBox(width: 8),
         Text('$label: ', style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600)),
         Text(value, style: AppTextStyles.bodySmall),

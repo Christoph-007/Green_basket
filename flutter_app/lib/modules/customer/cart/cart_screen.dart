@@ -31,7 +31,7 @@ class CartScreen extends StatelessWidget {
                     child: Text(
                       'Clear',
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.error,
+                        color: AppColors.errorText,
                       ),
                     ),
                   )
@@ -136,9 +136,9 @@ class CartScreen extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.stars_rounded,
-                  color: AppColors.primary,
+                  color: AppColors.primaryText,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
@@ -242,7 +242,7 @@ class CartScreen extends StatelessWidget {
                   child: Text(
                     'Remove',
                     style: AppTextStyles.bodySmall.copyWith(
-                      color: AppColors.error,
+                      color: AppColors.errorText,
                     ),
                   ),
                 )),
@@ -393,9 +393,9 @@ class _CartItemTile extends StatelessWidget {
                     width: 72,
                     height: 72,
                     color: AppColors.primaryContainer,
-                    child: const Icon(
+                    child: Icon(
                       Icons.eco_outlined,
-                      color: AppColors.primary,
+                      color: AppColors.primaryText,
                     ),
                   ),
           ),
@@ -428,7 +428,7 @@ class _CartItemTile extends StatelessWidget {
                         style: AppTextStyles.bodySmall.copyWith(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
+                          color: AppColors.primaryText,
                         ),
                       ),
                     ),
@@ -440,7 +440,7 @@ class _CartItemTile extends StatelessWidget {
                     child: Text(
                       'Prep: ${item.preparationOption!}',
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -451,7 +451,7 @@ class _CartItemTile extends StatelessWidget {
                     Text(
                       AppHelpers.formatCurrency(item.itemTotal),
                       style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                       ),
                     ),
                     const Spacer(),
@@ -523,7 +523,7 @@ class _QtyControl extends StatelessWidget {
               width: 28,
               height: 28,
               alignment: Alignment.center,
-              child: const Icon(Icons.add, size: 16, color: AppColors.primary),
+              child: Icon(Icons.add, size: 16, color: AppColors.primaryText),
             ),
           ),
         ],

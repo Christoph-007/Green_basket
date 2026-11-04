@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
                     width: 96,
                     height: 96,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
@@ -100,8 +100,8 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                       ],
                     ),
-                    child: const Center(
-                      child: Icon(Icons.eco, size: 52, color: AppColors.primary),
+                    child: Center(
+                      child: Icon(Icons.eco, size: 52, color: AppColors.primaryText),
                     ),
                   ),
                   const SizedBox(height: 20),

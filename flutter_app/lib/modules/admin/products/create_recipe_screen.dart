@@ -407,7 +407,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                       ),
                     ),
                     IconButton(tooltip: 'Decrease', 
-                      icon: const Icon(Icons.remove_circle_outline, color: AppColors.error, size: 20),
+                      icon: Icon(Icons.remove_circle_outline, color: AppColors.errorText, size: 20),
                       onPressed: () => _removeIngredient(i),
                     ),
                   ],
@@ -455,7 +455,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                       ),
                       child: Center(
                         child: Text('${i + 1}',
-                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary)),
+                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText)),
                       ),
                     ),
                     Expanded(
@@ -468,7 +468,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                       ),
                     ),
                     IconButton(tooltip: 'Decrease', 
-                      icon: const Icon(Icons.remove_circle_outline, color: AppColors.error, size: 20),
+                      icon: Icon(Icons.remove_circle_outline, color: AppColors.errorText, size: 20),
                       onPressed: () => _removeStep(i),
                     ),
                   ],

@@ -16,7 +16,7 @@ class MerchantBottomNav extends StatelessWidget {
     final nav = MerchantNavController.instance;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
       child: Obx(() => BottomNavigationBar(

@@ -155,7 +155,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
               const Divider(height: AppSpacing.lg),
               Row(
                 children: [
-                  const Icon(Icons.label_outline, size: 16, color: AppColors.primary),
+                  Icon(Icons.label_outline, size: 16, color: AppColors.primaryText),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(

@@ -98,8 +98,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 color: AppColors.primaryContainer,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Icon(Icons.mark_email_read_outlined,
-                  size: 40, color: AppColors.primary),
+              child: Icon(Icons.mark_email_read_outlined,
+                  size: 40, color: AppColors.primaryText),
             ),
             const SizedBox(height: 24),
             Text('Verify Email', style: AppTextStyles.displayMedium),
@@ -114,7 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
             Text(
               _email,
               style: AppTextStyles.titleMedium
-                  .copyWith(color: AppColors.primary),
+                  .copyWith(color: AppColors.primaryText),
             ),
             const SizedBox(height: 40),
 
@@ -152,7 +152,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: Text(
                   _authCtrl.errorMessage.value,
                   style: AppTextStyles.bodySmall
-                      .copyWith(color: AppColors.error),
+                      .copyWith(color: AppColors.errorText),
                   textAlign: TextAlign.center,
                 ),
               );
@@ -188,7 +188,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: Text(
                           'Resend OTP',
                           style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.primary,
+                            color: AppColors.primaryText,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

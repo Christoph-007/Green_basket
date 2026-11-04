@@ -239,7 +239,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text('${item.quantity}',
-                            style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary)),
+                            style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primaryText)),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
@@ -270,7 +270,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                       children: [
                         Text(AppHelpers.formatCurrency(order.total),
                             style: AppTextStyles.titleLarge
-                                .copyWith(color: AppColors.primary)),
+                                .copyWith(color: AppColors.primaryText)),
                         const SizedBox(width: 8),
                         _paymentBadge(order.paymentMethod, order.paymentStatus),
                       ],
@@ -282,7 +282,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                 ),
                 Row(
                   children: [
-                    GBButton(label: 'Decline', onPressed: () => controller.declineOrder(order.id), variant: GBButtonVariant.outline, foregroundColor: AppColors.error, height: 36),
+                    GBButton(label: 'Decline', onPressed: () => controller.declineOrder(order.id), variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText, height: 36),
                     const SizedBox(width: 8),
                     GBButton(label: 'Accept', onPressed: () => controller.acceptOrder(order.id), backgroundColor: AppColors.primary, height: 36),
                   ],

@@ -167,7 +167,7 @@ class _LineChartPainter extends CustomPainter {
     if (values.isNotEmpty) {
       final last = pointAt(values.length - 1, values.length, values.last);
       canvas.drawCircle(last, 4, Paint()..color = color);
-      canvas.drawCircle(last, 2, Paint()..color = Colors.white);
+      canvas.drawCircle(last, 2, Paint()..color = AppColors.surface);
     }
 
     _text(canvas, startLabel, Offset(0, plotHeight + 4));

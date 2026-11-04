@@ -252,8 +252,8 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.settings_outlined,
-                    color: AppColors.primary),
+                Icon(Icons.settings_outlined,
+                    color: AppColors.primaryText),
                 const SizedBox(width: AppSpacing.sm),
                 Text('Global Default Rate',
                     style: AppTextStyles.titleLarge),
@@ -286,7 +286,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                             Text(
                               '${_defaultCtrl.text}%',
                               style: AppTextStyles.headlineLarge
-                                  .copyWith(color: AppColors.primary),
+                                  .copyWith(color: AppColors.primaryText),
                             ),
                             Text('Commission on all transactions',
                                 style: AppTextStyles.bodySmall),
@@ -298,7 +298,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                       _editingDefault
                           ? Icons.check
                           : Icons.edit_outlined,
-                      color: AppColors.primary),
+                      color: AppColors.primaryText),
                   onPressed: () =>
                       setState(() => _editingDefault = !_editingDefault),
                 ),
@@ -414,7 +414,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                           value: s,
                           child: Text(_scheduleLabel(s),
                               style: AppTextStyles.bodyMedium
-                                  .copyWith(color: AppColors.primary))))
+                                  .copyWith(color: AppColors.primaryText))))
                       .toList(),
                   onChanged: (v) {
                     if (v != null) setState(() => _payoutSchedule = v);
@@ -492,8 +492,8 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.category_outlined,
-                    color: AppColors.primary),
+                Icon(Icons.category_outlined,
+                    color: AppColors.primaryText),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                     child: Text('Category-wise Rates',
@@ -570,14 +570,14 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                             Text(
                               '${(cr['rate'] as double).toStringAsFixed(1)}%',
                               style: AppTextStyles.titleMedium
-                                  .copyWith(color: AppColors.primary),
+                                  .copyWith(color: AppColors.primaryText),
                             ),
                           IconButton(tooltip: 'Confirm', 
                             icon: Icon(
                               isEditing
                                   ? Icons.check
                                   : Icons.edit_outlined,
-                              color: AppColors.primary,
+                              color: AppColors.primaryText,
                               size: 18,
                             ),
                             onPressed: () {
@@ -593,8 +593,8 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                             },
                           ),
                           IconButton(tooltip: 'Delete', 
-                            icon: const Icon(Icons.delete_outline,
-                                color: AppColors.error, size: 18),
+                            icon: Icon(Icons.delete_outline,
+                                color: AppColors.errorText, size: 18),
                             onPressed: () {
                               setState(() {
                                 _categoryRates.removeAt(i);

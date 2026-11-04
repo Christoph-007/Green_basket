@@ -70,8 +70,8 @@ class _ReturnsScreenState extends State<ReturnsScreen>
         ),
         TextButton(
           onPressed: () => Get.back(result: true),
-          child: const Text('Cancel request',
-              style: TextStyle(color: AppColors.error)),
+          child: Text('Cancel request',
+              style: TextStyle(color: AppColors.errorText)),
         ),
       ],
     ));
@@ -205,7 +205,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                           ? item.returnId
                           : 'Order ${item.orderNumber}',
                       style: AppTextStyles.titleMedium
-                          .copyWith(color: AppColors.primary),
+                          .copyWith(color: AppColors.primaryText),
                     ),
                     if (item.items.isNotEmpty)
                       Text(item.itemsSummary, style: AppTextStyles.bodyMedium),
@@ -258,7 +258,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
           if (showReason) ...[
             const SizedBox(height: AppSpacing.xs),
             Text('Rejected: ${item.rejectionReason}',
-                style: AppTextStyles.bodySmall.copyWith(color: AppColors.error)),
+                style: AppTextStyles.bodySmall.copyWith(color: AppColors.errorText)),
           ],
           const SizedBox(height: AppSpacing.sm),
 
@@ -275,7 +275,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                 'Refund: ${AppHelpers.formatCurrency(item.refundAmount)}'
                 '${item.refundMethod == 'wallet' ? ' to wallet' : ''}',
                 style: AppTextStyles.labelLarge
-                    .copyWith(color: AppColors.primary),
+                    .copyWith(color: AppColors.primaryText),
               ),
             ),
 
@@ -364,8 +364,8 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                         height: 18,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('Cancel request',
-                        style: TextStyle(color: AppColors.error)),
+                    : Text('Cancel request',
+                        style: TextStyle(color: AppColors.errorText)),
               ),
             ),
           ],

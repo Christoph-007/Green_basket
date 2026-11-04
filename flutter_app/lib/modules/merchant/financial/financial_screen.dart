@@ -304,7 +304,7 @@ class _FinancialScreenState extends State<FinancialScreen>
               flex: 2,
               child: Text('#$orderId',
                   style: AppTextStyles.bodySmall.copyWith(
-                      color: AppColors.primary,
+                      color: AppColors.primaryText,
                       fontWeight: FontWeight.w500))),
           Expanded(
               flex: 2,
@@ -318,7 +318,7 @@ class _FinancialScreenState extends State<FinancialScreen>
           Expanded(
               child: Text('-₹${fee.toStringAsFixed(0)}',
                   style: AppTextStyles.bodySmall
-                      .copyWith(color: AppColors.error),
+                      .copyWith(color: AppColors.errorText),
                   textAlign: TextAlign.right)),
           Expanded(
               child: Text('₹${net.toStringAsFixed(0)}',

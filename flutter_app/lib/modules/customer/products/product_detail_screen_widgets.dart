@@ -103,13 +103,13 @@ class _RecipeCard extends StatelessWidget {
                       ),
                       errorWidget: (context, url, error) => Container(
                         color: AppColors.primaryContainer,
-                        child: const Icon(Icons.restaurant, color: AppColors.primary, size: 32),
+                        child: Icon(Icons.restaurant, color: AppColors.primaryText, size: 32),
                       ),
                     )
                   else
                     Container(
                       color: AppColors.primaryContainer,
-                      child: const Icon(Icons.restaurant, color: AppColors.primary, size: 32),
+                      child: Icon(Icons.restaurant, color: AppColors.primaryText, size: 32),
                     ),
                   Positioned(
                     top: 8,

@@ -53,7 +53,7 @@ extension _PayoutsScreenSections2 on PayoutsScreen {
             Obx(() => Text(
                   '₹${controller.availableBalance.value.toStringAsFixed(2)}',
                   style: AppTextStyles.displayMedium
-                      .copyWith(color: AppColors.primary),
+                      .copyWith(color: AppColors.primaryText),
                 )),
             const SizedBox(height: AppSpacing.md),
             const Divider(),

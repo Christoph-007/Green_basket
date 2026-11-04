@@ -61,7 +61,7 @@ extension _MerchantDashboardScreenStateSections3 on _MerchantDashboardScreenStat
                       Text(AppHelpers.formatCurrency(order.total),
                           style: AppTextStyles.bodyLarge
                               .copyWith(
-                                  color: AppColors.primary,
+                                  color: AppColors.primaryText,
                                   fontWeight: FontWeight.w600)),
                     ],
                   ),

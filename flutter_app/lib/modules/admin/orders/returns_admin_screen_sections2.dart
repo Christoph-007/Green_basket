@@ -98,12 +98,12 @@ extension _ReturnsAdminScreenStateSections2 on _ReturnsAdminScreenState {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.info_outline, size: 16, color: AppColors.error),
+                      Icon(Icons.info_outline, size: 16, color: AppColors.errorText),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           'Rejection: $rejectionReason',
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.error),
+                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.errorText),
                         ),
                       ),
                     ],

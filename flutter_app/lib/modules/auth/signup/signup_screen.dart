@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Text(
                       _authCtrl.errorMessage.value,
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: AppColors.error),
+                          .copyWith(color: AppColors.errorText),
                     ),
                   );
                 }),
@@ -196,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Text(
                           'Sign In',
                           style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.primary,
+                            color: AppColors.primaryText,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -276,7 +276,7 @@ class _RoleTile extends StatelessWidget {
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check_circle, color: AppColors.primary, size: 22),
+              Icon(Icons.check_circle, color: AppColors.primaryText, size: 22),
           ],
         ),
       ),

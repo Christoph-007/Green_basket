@@ -282,7 +282,7 @@ class CategoriesScreen extends StatelessWidget {
                   Icon(
                     isShowAll ? Icons.public : Icons.location_on,
                     size: 16,
-                    color: AppColors.primary,
+                    color: AppColors.primaryText,
                   ),
                   const SizedBox(width: 6),
                   Expanded(
@@ -293,7 +293,7 @@ class CategoriesScreen extends StatelessWidget {
                           ? 'Showing all merchants'
                           : 'Showing products within ${ctrl.actualRadiusKm.value.toStringAsFixed(0)} km',
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

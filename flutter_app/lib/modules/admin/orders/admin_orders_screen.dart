@@ -250,7 +250,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -413,7 +413,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   // Amount
                   Text(
                     '₹${total.toStringAsFixed(total.truncateToDouble() == total ? 0 : 2)}',
-                    style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.w700, color: AppColors.primary),
+                    style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.w700, color: AppColors.primaryText),
                   ),
                 ],
               ),

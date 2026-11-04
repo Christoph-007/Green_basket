@@ -69,8 +69,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.location_on,
-                    size: 40, color: AppColors.primary),
+                Icon(Icons.location_on,
+                    size: 40, color: AppColors.primaryText),
                 const SizedBox(height: AppSpacing.md),
                 Text('Use your location?',
                     style: AppTextStyles.headlineMedium),
@@ -230,8 +230,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.location_on_rounded,
-                                  color: AppColors.primary, size: 48),
+                              Icon(Icons.location_on_rounded,
+                                  color: AppColors.primaryText, size: 48),
                               const SizedBox(height: AppSpacing.xs),
                               Text(
                                 'Tap to set location on map',
@@ -253,7 +253,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         onPressed:
                             _isLocating ? null : _useCurrentLocation,
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.primary,
+                          foregroundColor: AppColors.primaryText,
                           side: const BorderSide(
                               color: AppColors.primary),
                           padding: const EdgeInsets.symmetric(

@@ -98,7 +98,7 @@ class App extends StatelessWidget {
       title: 'GreenBasket',
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeController.to.mode.value,
+      themeMode: Get.isRegistered<ThemeController>() ? ThemeController.to.mode.value : ThemeMode.system,
       initialRoute: Routes.splash,
       initialBinding: AppBindings(),
       debugShowCheckedModeBanner: false,

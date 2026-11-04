@@ -21,9 +21,9 @@ extension _EditProductScreenStateSections on _EditProductScreenState {
               ),
             ),
             child: hasImage
-                ? const Center(
+                ? Center(
                     child: Icon(Icons.image,
-                        color: AppColors.primary, size: 36),
+                        color: AppColors.primaryText, size: 36),
                   )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +76,7 @@ extension _EditProductScreenStateSections on _EditProductScreenState {
                     : Text(
                         'Delete Product',
                         style: AppTextStyles.labelLarge
-                            .copyWith(color: AppColors.error),
+                            .copyWith(color: AppColors.errorText),
                       ),
               ),
             ),

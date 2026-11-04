@@ -189,7 +189,7 @@ class WalletScreen extends StatelessWidget {
                       height: 36,
                       child: GBButton(label: 'Add Money', onPressed: ctrl.isLocked.value
                             ? null
-                            : () => _showAddMoneyDialog(context, ctrl), leadingIcon: Icons.add, backgroundColor: Colors.white, foregroundColor: AppColors.primary),
+                            : () => _showAddMoneyDialog(context, ctrl), leadingIcon: Icons.add, backgroundColor: Colors.white, foregroundColor: AppColors.primaryText),
                     ),
                   ],
                 ),

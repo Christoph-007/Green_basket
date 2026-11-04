@@ -249,7 +249,7 @@ extension _MerchantDashboardScreenStateSections1 on _MerchantDashboardScreenStat
           onTap: () => Get.to(() => const MerchantDisputesScreen()),
           child: Row(
             children: [
-              const Icon(Icons.gavel_outlined, color: AppColors.error),
+              Icon(Icons.gavel_outlined, color: AppColors.errorText),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -257,16 +257,16 @@ extension _MerchantDashboardScreenStateSections1 on _MerchantDashboardScreenStat
                   children: [
                     Text(
                       '${controller.disputeCount.value} Active Dispute${controller.disputeCount.value > 1 ? "s" : ""}',
-                      style: AppTextStyles.titleMedium.copyWith(color: AppColors.error),
+                      style: AppTextStyles.titleMedium.copyWith(color: AppColors.errorText),
                     ),
                     Text(
                       'Customers have raised issues. Please review.',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.error.withValues(alpha: 0.7)),
+                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.errorText.withValues(alpha: 0.7)),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.error),
+              Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.errorText),
             ],
           ),
         ),

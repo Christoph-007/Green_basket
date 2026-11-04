@@ -33,7 +33,7 @@ class EmptyState extends StatelessWidget {
                 color: AppColors.primaryContainer,
                 borderRadius: BorderRadius.circular(AppRadius.xl),
               ),
-              child: Icon(icon, size: 44, color: AppColors.primary),
+              child: Icon(icon, size: 44, color: AppColors.primaryText),
             ),
             const SizedBox(height: 20),
             Text(
@@ -75,7 +75,7 @@ class ErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline, size: 56, color: AppColors.error),
+            Icon(Icons.error_outline, size: 56, color: AppColors.errorText),
             const SizedBox(height: 16),
             Text(
               'Something went wrong',

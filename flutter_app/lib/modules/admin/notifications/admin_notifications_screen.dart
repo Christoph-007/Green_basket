@@ -256,7 +256,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.preview_outlined, color: AppColors.primary, size: 18),
+                Icon(Icons.preview_outlined, color: AppColors.primaryText, size: 18),
                 const SizedBox(width: AppSpacing.sm),
                 Text('Preview', style: AppTextStyles.titleMedium),
               ],
@@ -281,7 +281,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                             color: AppColors.primaryContainer,
                             borderRadius: BorderRadius.circular(AppRadius.sm),
                           ),
-                          child: const Icon(Icons.eco, color: AppColors.primary),
+                          child: Icon(Icons.eco, color: AppColors.primaryText),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Expanded(
@@ -385,7 +385,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.notifications_active_outlined, color: AppColors.primary, size: 16),
+                        Icon(Icons.notifications_active_outlined, color: AppColors.primaryText, size: 16),
                         const SizedBox(width: 6),
                         Expanded(
                           child: Text(notif['title'] ?? 'No Title', style: AppTextStyles.labelLarge),
@@ -411,7 +411,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                           ),
                           child: Text(
                             audience,
-                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
+                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText),
                           ),
                         ),
                         const Spacer(),

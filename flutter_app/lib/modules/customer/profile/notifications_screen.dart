@@ -24,7 +24,7 @@ class NotificationsScreen extends StatelessWidget {
               ? TextButton(
                   onPressed: () => ctrl.markAllAsRead(),
                   child: Text('Mark All as Read',
-                      style: AppTextStyles.bodyCompact.copyWith(color: AppColors.primary)),
+                      style: AppTextStyles.bodyCompact.copyWith(color: AppColors.primaryText)),
                 )
               : const SizedBox()),
         ],

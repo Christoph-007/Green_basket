@@ -64,8 +64,8 @@ class ProductDetailScreen extends StatelessWidget {
                     onTap: () => Get.back(),
                     child: Container(
                       margin: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(Icons.arrow_back_ios,
@@ -80,8 +80,8 @@ class ProductDetailScreen extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -110,15 +110,15 @@ class ProductDetailScreen extends StatelessWidget {
                               ),
                               errorWidget: (context, url, error) => Container(
                                 color: AppColors.primaryContainer,
-                                child: const Icon(Icons.eco_outlined,
-                                    size: 80, color: AppColors.primary),
+                                child: Icon(Icons.eco_outlined,
+                                    size: 80, color: AppColors.primaryText),
                               ),
                             ),
                           )
                         : Container(
                             color: AppColors.primaryContainer,
-                            child: const Icon(Icons.eco_outlined,
-                                size: 80, color: AppColors.primary),
+                            child: Icon(Icons.eco_outlined,
+                                size: 80, color: AppColors.primaryText),
                           ),
                   ),
                 ),
@@ -168,7 +168,7 @@ class ProductDetailScreen extends StatelessWidget {
                                     ),
                                     child: Text('Organic',
                                         style: AppTextStyles.labelSmall.copyWith(
-                                            color: AppColors.primary)),
+                                            color: AppColors.primaryText)),
                                   ),
                               ],
                             ),
@@ -222,7 +222,7 @@ class ProductDetailScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  const Icon(Icons.storefront_outlined, size: 20, color: AppColors.primary),
+                                  Icon(Icons.storefront_outlined, size: 20, color: AppColors.primaryText),
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Column(
@@ -253,7 +253,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   Text(
                                     '₹${totalPrice.toStringAsFixed(0)}/${p.unit}',
                                     style: AppTextStyles.headlineLarge.copyWith(
-                                        color: AppColors.primary),
+                                        color: AppColors.primaryText),
                                   ),
                                   if (p.hasDiscount) ...[
                                     const SizedBox(width: 8),
@@ -276,7 +276,7 @@ class ProductDetailScreen extends StatelessWidget {
                                       child: Text(
                                         '${p.discountPercent}% OFF',
                                         style: AppTextStyles.labelSmall
-                                            .copyWith(color: AppColors.error),
+                                            .copyWith(color: AppColors.errorText),
                                       ),
                                     ),
                                   ],
@@ -543,7 +543,7 @@ class ProductDetailScreen extends StatelessWidget {
                                 IconButton(tooltip: 'Add', 
                                   icon: const Icon(Icons.add, size: 18),
                                   onPressed: ctrl.incrementQty,
-                                  color: AppColors.primary,
+                                  color: AppColors.primaryText,
                                 ),
                               ],
                             ),

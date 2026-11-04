@@ -63,7 +63,7 @@ class _ExportCsvButtonState extends State<ExportCsvButton> {
             )
           : const Icon(Icons.file_download_outlined, size: 18),
       label: const Text('Export CSV'),
-      style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+      style: TextButton.styleFrom(foregroundColor: AppColors.primaryText),
     );
   }
 }

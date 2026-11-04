@@ -298,7 +298,7 @@ class _DisputesScreenState extends State<DisputesScreen>
         appBar: GBAppBar(title: 'My Disputes & Returns', actions: [
             IconButton(
               icon:
-                  const Icon(Icons.add_rounded, color: AppColors.primary),
+                  Icon(Icons.add_rounded, color: AppColors.primaryText),
               onPressed: _showRaiseDisputeDialog,
               tooltip: 'Raise a Dispute',
             ),

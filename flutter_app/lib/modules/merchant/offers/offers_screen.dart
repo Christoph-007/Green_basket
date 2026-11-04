@@ -354,14 +354,14 @@ class _OffersScreenState extends State<OffersScreen>
                 IconButton(
                   onPressed: () => Get.toNamed('/merchant/offers/analytics',
                       arguments: offer),
-                  icon: const Icon(Icons.bar_chart_outlined,
-                      color: AppColors.primary, size: 20),
+                  icon: Icon(Icons.bar_chart_outlined,
+                      color: AppColors.primaryText, size: 20),
                   tooltip: 'Analytics',
                 ),
                 IconButton(
                   onPressed: () => _confirmDelete(id, title),
-                  icon: const Icon(Icons.delete_outline,
-                      color: AppColors.error, size: 20),
+                  icon: Icon(Icons.delete_outline,
+                      color: AppColors.errorText, size: 20),
                   tooltip: 'Delete',
                 ),
                 const Spacer(),

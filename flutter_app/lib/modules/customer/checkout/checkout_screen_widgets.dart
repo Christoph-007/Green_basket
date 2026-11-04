@@ -307,11 +307,11 @@ class _Summary extends StatelessWidget {
       } else if (ctrl.quoteError.value.isNotEmpty) {
         child = Row(
           children: [
-            const Icon(Icons.info_outline, color: AppColors.error),
+            Icon(Icons.info_outline, color: AppColors.errorText),
             const SizedBox(width: 8),
             Expanded(
               child: Text(ctrl.quoteError.value,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.error)),
+                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.errorText)),
             ),
           ],
         );
@@ -396,7 +396,7 @@ class _ChoiceTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, color: AppColors.primary),
+              Icon(icon, color: AppColors.primaryText),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -411,7 +411,7 @@ class _ChoiceTile extends StatelessWidget {
                   ],
                 ),
               ),
-              if (selected) const Icon(Icons.check_circle, color: AppColors.primary),
+              if (selected) Icon(Icons.check_circle, color: AppColors.primaryText),
             ],
           ),
         ),

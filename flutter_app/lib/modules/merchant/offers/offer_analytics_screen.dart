@@ -97,8 +97,8 @@ class OfferAnalyticsScreen extends StatelessWidget {
                         color: AppColors.primaryContainer,
                         borderRadius: BorderRadius.circular(AppRadius.md),
                       ),
-                      child: const Icon(Icons.percent,
-                          color: AppColors.primary, size: 28),
+                      child: Icon(Icons.percent,
+                          color: AppColors.primaryText, size: 28),
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -239,7 +239,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
               Row(
                 children: [
                   Icon(stat['icon'] as IconData,
-                      size: 16, color: AppColors.primary),
+                      size: 16, color: AppColors.primaryText),
                   const SizedBox(width: AppSpacing.xs),
                   Expanded(
                     child: Text(stat['label'] as String,
@@ -251,7 +251,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.xs),
               Text(stat['value'] as String,
                   style: AppTextStyles.headlineMedium
-                      .copyWith(color: AppColors.primary)),
+                      .copyWith(color: AppColors.primaryText)),
             ],
           ),
         );
@@ -288,7 +288,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
                       children: [
                         Text('$count',
                             style: AppTextStyles.labelSmall
-                                .copyWith(color: AppColors.primary)),
+                                .copyWith(color: AppColors.primaryText)),
                         const SizedBox(height: 2),
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 600),
@@ -344,7 +344,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
             child: Text(
               (customer as String).isNotEmpty ? customer[0].toUpperCase() : 'C',
               style:
-                  AppTextStyles.titleMedium.copyWith(color: AppColors.primary),
+                  AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText),
             ),
           ),
           const SizedBox(width: AppSpacing.md),
@@ -366,7 +366,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
                   style: AppTextStyles.titleMedium),
               Text('-₹${discount.toStringAsFixed(0)} off',
                   style: AppTextStyles.bodySmall
-                      .copyWith(color: AppColors.error)),
+                      .copyWith(color: AppColors.errorText)),
             ],
           ),
         ],

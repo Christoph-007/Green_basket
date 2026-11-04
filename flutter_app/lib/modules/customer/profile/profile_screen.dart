@@ -34,11 +34,11 @@ class ProfileScreen extends StatelessWidget {
                       backgroundColor: AppColors.primaryContainer,
                       child: Text(
                         user?.name.substring(0, 1).toUpperCase() ?? 'G',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: AppTextStyles.fontFamily,
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.primary,
+                          color: AppColors.primaryText,
                         ),
                       ),
                     ),
@@ -65,9 +65,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     IconButton(tooltip: 'Edit', 
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.edit_outlined,
-                        color: AppColors.primary,
+                        color: AppColors.primaryText,
                       ),
                       onPressed: () => Get.toNamed(Routes.editProfile),
                     ),
@@ -187,11 +187,11 @@ class ProfileScreen extends StatelessWidget {
               color: AppColors.surface,
               child: ListTile(
                 onTap: () => _confirmLogout(authCtrl),
-                leading: const Icon(Icons.logout, color: AppColors.error),
+                leading: Icon(Icons.logout, color: AppColors.errorText),
                 title: Text(
                   'Logout',
                   style: AppTextStyles.titleMedium.copyWith(
-                    color: AppColors.error,
+                    color: AppColors.errorText,
                   ),
                 ),
               ),
@@ -284,7 +284,7 @@ class _StatItem extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: [
-            Icon(icon, color: AppColors.primary, size: 22),
+            Icon(icon, color: AppColors.primaryText, size: 22),
             const SizedBox(height: 4),
             Text(value, style: AppTextStyles.titleMedium),
             Text(
@@ -359,7 +359,7 @@ class _MenuItem extends StatelessWidget {
           color: AppColors.primaryContainer,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Icon(icon, color: AppColors.primary, size: 18),
+        child: Icon(icon, color: AppColors.primaryText, size: 18),
       ),
       title: Text(label, style: AppTextStyles.titleMedium),
       trailing: Icon(

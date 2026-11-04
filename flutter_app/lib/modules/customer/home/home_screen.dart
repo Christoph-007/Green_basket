@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                         Icon(
                           isShowAll ? Icons.public : Icons.location_on,
                           size: 18,
-                          color: AppColors.primary,
+                          color: AppColors.primaryText,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 isShowAll ? 'GLOBAL MODE' : 'NEARBY MODE',
                                 style: AppTextStyles.labelSmall.copyWith(
-                                  color: AppColors.primary,
+                                  color: AppColors.primaryText,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 0.5,
                                 ),
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.surface,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: AppColors.divider),
                               ),

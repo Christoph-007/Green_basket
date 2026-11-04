@@ -37,8 +37,8 @@ extension _StoreSettingsScreenStateSections on _StoreSettingsScreenState {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.access_time_outlined,
-                size: 14, color: AppColors.primary),
+            Icon(Icons.access_time_outlined,
+                size: 14, color: AppColors.primaryText),
             const SizedBox(width: 4),
             Expanded(
               child: Column(
@@ -46,7 +46,7 @@ extension _StoreSettingsScreenStateSections on _StoreSettingsScreenState {
                 children: [
                   Text(label,
                       style: AppTextStyles.labelSmall
-                          .copyWith(color: AppColors.primary)),
+                          .copyWith(color: AppColors.primaryText)),
                   Text(time,
                       style: AppTextStyles.bodySmall.copyWith(
                           color: AppColors.primaryDark,
@@ -66,7 +66,7 @@ extension _StoreSettingsScreenStateSections on _StoreSettingsScreenState {
       child: Text(
         title.toUpperCase(),
         style: AppTextStyles.labelSmall.copyWith(
-          color: AppColors.primary,
+          color: AppColors.primaryText,
           letterSpacing: 1.2,
           fontWeight: FontWeight.bold,
         ),
@@ -79,7 +79,7 @@ extension _StoreSettingsScreenStateSections on _StoreSettingsScreenState {
     return SwitchListTile(
       title: Text(title, style: AppTextStyles.bodyMedium),
       subtitle: Text(subtitle, style: AppTextStyles.bodySmall),
-      secondary: Icon(icon, color: AppColors.primary, size: 22),
+      secondary: Icon(icon, color: AppColors.primaryText, size: 22),
       value: value,
       onChanged: onChanged,
       activeColor: AppColors.primary,

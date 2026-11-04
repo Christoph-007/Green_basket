@@ -70,7 +70,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
         ),
         TextButton(
           onPressed: () => Get.back(result: true),
-          child: const Text('Delete', style: TextStyle(color: AppColors.error)),
+          child: Text('Delete', style: TextStyle(color: AppColors.errorText)),
         ),
       ],
     ));
@@ -124,8 +124,8 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.delete_outline, color: AppColors.error),
-              title: const Text('Delete Recipe', style: TextStyle(color: AppColors.error)),
+              leading: Icon(Icons.delete_outline, color: AppColors.errorText),
+              title: Text('Delete Recipe', style: TextStyle(color: AppColors.errorText)),
               onTap: () {
                 Navigator.pop(ctx);
                 _confirmDelete(recipe);
@@ -238,7 +238,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                     : null,
                 ),
                 child: imageUrl == null || !imageUrl.startsWith('http')
-                  ? const Icon(Icons.restaurant_menu, color: AppColors.primary, size: 32)
+                  ? Icon(Icons.restaurant_menu, color: AppColors.primaryText, size: 32)
                   : null,
               ),
               const SizedBox(width: AppSpacing.md),
@@ -278,7 +278,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                           ),
                           child: Text(
                             categoryDisplay,
-                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primary),
+                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.primaryText),
                           ),
                         ),
                         Row(

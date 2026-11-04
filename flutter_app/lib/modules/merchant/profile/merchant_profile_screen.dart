@@ -25,7 +25,7 @@ class MerchantProfileScreen extends StatelessWidget {
               onPressed: () => Scaffold.of(context).openDrawer(),
             );
           },
-        ), backgroundColor: Colors.white),
+        ), backgroundColor: AppColors.surface),
       drawer: const MerchantDrawer(),
       body: SingleChildScrollView(
         child: Column(
@@ -47,7 +47,7 @@ class MerchantProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: AppSpacing.xl, horizontal: AppSpacing.lg),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   border: Border(bottom: BorderSide(color: AppColors.border)),
                 ),
                 child: Row(
@@ -64,7 +64,7 @@ class MerchantProfileScreen extends StatelessWidget {
                       child: Center(
                         child: Text(
                           initials,
-                          style: AppTextStyles.displayMedium.copyWith(color: AppColors.primary),
+                          style: AppTextStyles.displayMedium.copyWith(color: AppColors.primaryText),
                         ),
                       ),
                     ),
@@ -155,7 +155,7 @@ class MerchantProfileScreen extends StatelessWidget {
       IconData icon, Color color, VoidCallback onTap) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
@@ -225,7 +225,7 @@ class _AlertSoundCardState extends State<_AlertSoundCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
@@ -238,8 +238,8 @@ class _AlertSoundCardState extends State<_AlertSoundCard> {
       child: SwitchListTile(
         contentPadding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-        secondary: const Icon(Icons.notifications_active_outlined,
-            color: AppColors.primary),
+        secondary: Icon(Icons.notifications_active_outlined,
+            color: AppColors.primaryText),
         title: Text('New order alert sound',
             style: AppTextStyles.titleLarge),
         subtitle: Text(

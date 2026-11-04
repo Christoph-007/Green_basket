@@ -52,7 +52,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(color: AppColors.border),
       ),
@@ -74,7 +74,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
             children: [
               Text('Total Inventory Value', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
               Text(AppHelpers.formatCurrency(controller.inventoryValue.value),
-                  style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary)),
+                  style: AppTextStyles.titleLarge.copyWith(color: AppColors.primaryText)),
             ],
           ),
         ],
@@ -105,7 +105,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.md),
         border: Border.all(color: AppColors.border),
       ),
@@ -177,7 +177,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         border: Border.all(color: AppColors.border),
       ),

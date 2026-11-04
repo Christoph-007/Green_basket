@@ -106,7 +106,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.borderLight),
       ),
@@ -201,7 +201,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
       children: [
         if (status == 'Pending') ...[
           Expanded(
-            child: GBButton(label: 'Reject', onPressed: () => _reject(merchant), variant: GBButtonVariant.outline, foregroundColor: AppColors.error),
+            child: GBButton(label: 'Reject', onPressed: () => _reject(merchant), variant: GBButtonVariant.outline, foregroundColor: AppColors.errorText),
           ),
           const SizedBox(width: 12),
         ],
@@ -244,7 +244,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
           ),
@@ -282,11 +282,11 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: AppColors.border,
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text('CLOSED',
-                          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.grey)),
+                          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
                     ),
                   ],
                 ],
@@ -342,7 +342,7 @@ class _RejectReasonDialogState extends State<_RejectReasonDialog> {
             if (reason.isEmpty) return;
             Navigator.pop(context, reason);
           },
-          child: const Text('Reject', style: TextStyle(color: AppColors.error)),
+          child: Text('Reject', style: TextStyle(color: AppColors.errorText)),
         ),
       ],
     );

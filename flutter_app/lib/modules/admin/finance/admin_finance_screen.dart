@@ -181,7 +181,7 @@ class AdminFinanceScreen extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -221,7 +221,7 @@ class AdminFinanceScreen extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -330,7 +330,7 @@ class AdminFinanceScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            Icon(Icons.error_outline, size: 48, color: AppColors.errorText),
             const SizedBox(height: 12),
             const Text('Could not load financial data',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
@@ -354,7 +354,7 @@ class AdminFinanceScreen extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Icon(Icons.history_toggle_off, size: 48, color: Colors.grey[300]),
+            Icon(Icons.history_toggle_off, size: 48, color: AppColors.textHint),
             const SizedBox(height: 8),
             Text('No payout history available.', style: AppTextStyles.bodySmall),
           ],
@@ -365,7 +365,7 @@ class AdminFinanceScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

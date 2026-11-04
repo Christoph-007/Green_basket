@@ -56,7 +56,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) => Container(
                             color: AppColors.primaryContainer,
-                            child: const Icon(Icons.restaurant_menu, size: 64, color: AppColors.primary),
+                            child: Icon(Icons.restaurant_menu, size: 64, color: AppColors.primaryText),
                           ),
                         ),
                         // Gradient overlay
@@ -229,7 +229,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                                     ),
                                     Text(
                                       '$quantity $unit',
-                                      style: AppTextStyles.labelLarge.copyWith(color: AppColors.primary),
+                                      style: AppTextStyles.labelLarge.copyWith(color: AppColors.primaryText),
                                     ),
                                   ],
                                 ),
@@ -332,7 +332,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppColors.primary),
+          Icon(icon, size: 14, color: AppColors.primaryText),
           const SizedBox(width: 4),
           Text(label, style: AppTextStyles.labelSmall),
         ],
@@ -343,7 +343,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
   Widget _sectionHeader(String title, IconData icon, String? subtitle) {
     return Row(
       children: [
-        Icon(icon, size: 20, color: AppColors.primary),
+        Icon(icon, size: 20, color: AppColors.primaryText),
         const SizedBox(width: AppSpacing.sm),
         Text(title, style: AppTextStyles.titleLarge),
         if (subtitle != null) ...[

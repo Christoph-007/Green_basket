@@ -27,7 +27,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
             icon: Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
-        }), backgroundColor: Colors.white),
+        }), backgroundColor: AppColors.surface),
       drawer: const MerchantDrawer(),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -46,7 +46,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSpacing.lg),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.surface,
                     border: Border(bottom: BorderSide(color: AppColors.border)),
                   ),
                   child: Column(
@@ -63,7 +63,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                               AppHelpers.formatCurrency(
                                   controller.totalRevenue.value),
                               style: AppTextStyles.headlineLarge
-                                  .copyWith(color: AppColors.primary, fontSize: 32)),
+                                  .copyWith(color: AppColors.primaryText, fontSize: 32)),
                           const SizedBox(width: 8),
                           if (controller.revenueGrowth.value != 0)
                             Container(
@@ -177,7 +177,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(AppSpacing.md),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(AppRadius.lg),
                         border: Border.all(color: AppColors.border),
                       ),
@@ -201,7 +201,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                                     () => const MerchantProductAnalyticsScreen()),
                                 child: Text('See All',
                                     style: AppTextStyles.bodySmall
-                                        .copyWith(color: AppColors.primary)),
+                                        .copyWith(color: AppColors.primaryText)),
                               )),
                             ],
                           ),
@@ -277,7 +277,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(AppSpacing.md),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(AppRadius.lg),
                         border: Border.all(color: AppColors.border),
                       ),
@@ -289,8 +289,8 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.rate_review_outlined,
-                                      size: 18, color: AppColors.primary),
+                                  Icon(Icons.rate_review_outlined,
+                                      size: 18, color: AppColors.primaryText),
                                   const SizedBox(width: 6),
                                   Text('Recent Reviews',
                                       style: AppTextStyles.titleMedium),
