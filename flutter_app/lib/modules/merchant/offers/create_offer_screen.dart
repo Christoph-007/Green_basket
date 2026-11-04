@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
 
-enum OfferType { percentage, fixed, buyXGetY, flashSale }
+part 'create_offer_screen_widgets.dart';
+part 'create_offer_screen_sections.dart';
 
 class CreateOfferScreen extends StatefulWidget {
   const CreateOfferScreen({super.key});
@@ -111,11 +112,6 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
         }
       });
     }
-  }
-
-  String _formatDate(DateTime? date) {
-    if (date == null) return 'Select date';
-    return '${date.day}/${date.month}/${date.year}';
   }
 
   Future<void> _createOffer() async {
@@ -557,77 +553,4 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
     );
   }
 
-  Widget _buildDatePicker(
-      String label, DateTime? date, VoidCallback onTap) {
-    return Semantics(button: true, child: GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          border: Border.all(
-            color: date != null ? AppColors.primary : AppColors.border,
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label,
-                style: AppTextStyles.bodySmall
-                    .copyWith(color: AppColors.textSecondary)),
-            const SizedBox(height: AppSpacing.xs),
-            Row(
-              children: [
-                Icon(
-                  Icons.calendar_today_outlined,
-                  size: 16,
-                  color: date != null
-                      ? AppColors.primary
-                      : AppColors.textHint,
-                ),
-                const SizedBox(width: AppSpacing.xs),
-                Expanded(
-                  child: Text(
-                    _formatDate(date),
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: date != null
-                          ? AppColors.textPrimary
-                          : AppColors.textSecondary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    ));
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    String? hint,
-    TextInputType? keyboardType,
-    String? prefixText,
-    String? suffixText,
-    int maxLines = 1,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      maxLines: maxLines,
-      textCapitalization: textCapitalization,
-      style: AppTextStyles.bodyMedium,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        prefixText: prefixText,
-        suffixText: suffixText,
-        alignLabelWithHint: maxLines > 1,
-      ),
-    );
-  }
 }
