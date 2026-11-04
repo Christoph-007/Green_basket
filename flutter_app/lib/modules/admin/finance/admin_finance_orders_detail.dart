@@ -143,11 +143,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                         ),
                         trailing: Text(
                           '$amountPrefix${displayAmount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: amountColor,
-                          ),
+                          style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.bold, color: amountColor),
                         ),
                       ),
                     );

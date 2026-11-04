@@ -98,7 +98,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
       title: 'All Merchants',
       trailingIcon: Icons.storefront,
       subtitle: Text('Admin › Merchants',
-          style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
+          style: AppTextStyles.bodyCompact.copyWith(color: Colors.white.withValues(alpha: 0.9))),
     );
   }
 
@@ -118,9 +118,9 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
           Expanded(
             child: TextField(
               onChanged: (val) => setState(() => _searchQuery = val),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Search merchants...',
-                hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 14),
+                hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
                 border: InputBorder.none,
                 isDense: true,
               ),
@@ -258,7 +258,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                     decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
                     alignment: Alignment.center,
                     child: Text(businessName.isNotEmpty ? businessName[0] : 'M',
-                        style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 18)),
+                        style: AppTextStyles.headlineMedium.copyWith(fontWeight: FontWeight.bold, color: statusColor)),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -267,7 +267,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                       children: [
                         Text(businessName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
                         const SizedBox(height: 2),
-                        Text(email, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                        Text(email, style: AppTextStyles.bodyCompact.copyWith(color: AppColors.textSecondary)),
                       ],
                     ),
                   ),
@@ -275,7 +275,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(999)),
                     child: Text(status,
-                        style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.w500)),
+                        style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w500, color: statusColor)),
                   ),
                   if (merchant['isStoreOpen'] == false) ...[
                     const SizedBox(width: 8),
@@ -285,8 +285,8 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(999),
                       ),
-                      child: const Text('CLOSED',
-                          style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.bold)),
+                      child: Text('CLOSED',
+                          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.grey)),
                     ),
                   ],
                 ],

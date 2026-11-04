@@ -151,8 +151,7 @@ extension _MerchantDashboardScreenStateSections1 on _MerchantDashboardScreenStat
             ),
             const SizedBox(height: 4),
             Text(label,
-                style: const TextStyle(
-                    fontSize: 11, color: AppColors.textSecondary),
+                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                 textAlign: TextAlign.center),
           ],
         ),

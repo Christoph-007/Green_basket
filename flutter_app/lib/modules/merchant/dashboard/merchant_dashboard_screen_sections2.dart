@@ -17,7 +17,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                 style: AppTextStyles.titleMedium.copyWith(
                     color: color, fontWeight: FontWeight.w700)),
             Text(label,
-                style: TextStyle(fontSize: 11, color: color),
+                style: AppTextStyles.labelSmall.copyWith(color: color),
                 textAlign: TextAlign.center),
           ],
         ),
@@ -76,10 +76,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                               BorderRadius.circular(AppRadius.full),
                         ),
                         child: Text('${controller.newOrders.length}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
+                            style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
                       ),
                   ],
                 ),
@@ -152,10 +149,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                     borderRadius: BorderRadius.circular(AppRadius.full),
                   ),
                   child: Text('${controller.activeOrders.length}',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold)),
+                      style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
               ],
             ),
@@ -226,10 +220,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                     borderRadius: BorderRadius.circular(AppRadius.full),
                   ),
                   child: Text(_timeAgo(order.createdAt),
-                      style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.orange.shade700,
-                          fontWeight: FontWeight.w500)),
+                      style: AppTextStyles.labelSmall.copyWith(color: Colors.orange.shade700)),
                 ),
               ],
             ),
@@ -248,10 +239,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text('${item.quantity}',
-                            style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary)),
+                            style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary)),
                       ),
                       const SizedBox(width: 8),
                       Expanded(

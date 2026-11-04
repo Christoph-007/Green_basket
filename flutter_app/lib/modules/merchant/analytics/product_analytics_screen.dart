@@ -90,7 +90,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text(value, style: AppTextStyles.titleLarge),
           const SizedBox(height: 4),
-          Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary), textAlign: TextAlign.center),
+          Text(label, style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
         ],
       ),
     );
@@ -120,7 +120,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
               color: rank <= 3 ? AppColors.primary : AppColors.divider,
               shape: BoxShape.circle,
             ),
-            child: Text('$rank', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+            child: Text('$rank', style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
           ),
           const SizedBox(width: AppSpacing.md),
           // Product Image

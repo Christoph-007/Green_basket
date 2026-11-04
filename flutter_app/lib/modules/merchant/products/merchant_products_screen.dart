@@ -247,12 +247,9 @@ class _ProductGrid extends StatelessWidget {
                                     : lowStock
                                         ? 'Low stock'
                                         : 'In Stock',
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    color: lowStock
+                                style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: lowStock
                                         ? AppColors.textPrimary
-                                        : Colors.white,
-                                    fontWeight: FontWeight.bold),
+                                        : Colors.white),
                               ),
                             ),
                           ),

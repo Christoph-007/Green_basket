@@ -90,13 +90,9 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                                   const SizedBox(width: 2),
                                   Text(
                                     '${controller.revenueGrowth.value.abs().toStringAsFixed(1)}%',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      color: controller.revenueGrowth.value > 0
+                                    style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: controller.revenueGrowth.value > 0
                                           ? AppColors.success
-                                          : AppColors.error,
-                                    ),
+                                          : AppColors.error),
                                   ),
                                 ],
                               ),
@@ -237,10 +233,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Text('${i + 1}',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold)),
+                                        style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                   const SizedBox(width: AppSpacing.sm),
                                   Expanded(

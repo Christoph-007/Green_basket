@@ -148,7 +148,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(color: AppColors.info),
                                     ),
-                                    child: const Text('PICKUP', style: TextStyle(fontSize: 11, color: AppColors.info, fontWeight: FontWeight.bold)),
+                                    child: Text('PICKUP', style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.info)),
                                   ),
                                 ],
                               ],
@@ -225,10 +225,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                                         ),
                                         child: Center(
                                           child: Text('${item.quantity}x',
-                                              style: const TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: AppColors.primary)),
+                                              style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary)),
                                         ),
                                       ),
                                       const SizedBox(width: AppSpacing.sm),
@@ -378,8 +375,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
         borderRadius: BorderRadius.circular(AppRadius.full),
       ),
       child: Text(text,
-          style: TextStyle(
-              fontSize: 11, color: textColor, fontWeight: FontWeight.w600)),
+          style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: textColor)),
     );
   }
 }

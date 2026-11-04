@@ -393,20 +393,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             children: [
                               Text(
                                 '#${orderId.toString().length > 12 ? orderId.toString().substring(orderId.toString().length - 8) : orderId}',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                  color: AppColors.textPrimary,
-                                ),
+                                style: AppTextStyles.bodyCompact.copyWith(fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                                 overflow: TextOverflow.ellipsis,
                               ),
                               if (timeAgo.isNotEmpty)
                                 Text(
                                   timeAgo,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    color: AppColors.textSecondary,
-                                  ),
+                                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                                 ),
                             ],
                           ),
@@ -433,11 +426,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             Flexible(
                               child: Text(
                                 customerName,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textPrimary,
-                                ),
+                                style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w500, color: AppColors.textPrimary),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -451,10 +440,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             Flexible(
                               child: Text(
                                 merchantName.isNotEmpty ? merchantName : 'N/A',
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  color: AppColors.textSecondary,
-                                ),
+                                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -467,7 +453,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                               ),
                               child: Text(
                                 '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
-                                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                                style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                               ),
                             ),
                           ],
@@ -480,11 +466,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     children: [
                       Text(
                         '₹${amount.toStringAsFixed(amount.truncateToDouble() == amount ? 0 : 2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                          color: AppColors.primary,
-                        ),
+                        style: AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.w700, color: AppColors.primary),
                       ),
                       const SizedBox(height: 2),
                       Row(
@@ -498,13 +480,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           const SizedBox(width: 3),
                           Text(
                             paymentMethod == 'COD' ? 'COD' : paymentMethod,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: paymentStatus == 'completed' || paymentStatus == 'paid'
+                            style: AppTextStyles.labelSmall.copyWith(color: paymentStatus == 'completed' || paymentStatus == 'paid'
                                   ? AppColors.success
-                                  : AppColors.textSecondary,
-                              fontWeight: FontWeight.w500,
-                            ),
+                                  : AppColors.textSecondary),
                           ),
                         ],
                       ),
@@ -584,11 +562,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       ),
       child: Text(
         statusInfo['label'] as String,
-        style: TextStyle(
-          color: statusInfo['color'] as Color,
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-        ),
+        style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: statusInfo['color'] as Color),
       ),
     );
   }

@@ -164,13 +164,9 @@ class ProductCard extends StatelessWidget {
                           color: AppColors.error,
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: const Text(
+                        child: Text(
                           'STORE CLOSED',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
+                          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                       ),
                     ),

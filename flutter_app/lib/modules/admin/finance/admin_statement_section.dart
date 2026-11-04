@@ -35,9 +35,9 @@ class AdminStatementSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text('Financial Statement',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                    style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
               ),
               if (loading)
                 const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
@@ -93,14 +93,14 @@ class AdminStatementSection extends StatelessWidget {
               ],
             )),
             const SizedBox(height: 16),
-            const Text('Month by month',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+            Text('Month by month',
+                style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
             const SizedBox(height: 8),
             ...months.map((m) => _monthTile(context, m)),
             if (years.length > 1) ...[
               const SizedBox(height: 16),
-              const Text('Year by year',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+              Text('Year by year',
+                  style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
               const SizedBox(height: 8),
               _box(Column(
                 children: years.map((y) {
@@ -177,11 +177,7 @@ class AdminStatementSection extends StatelessWidget {
       label: Text(text),
       selected: selected,
       selectedColor: AppColors.primary.withValues(alpha: 0.15),
-      labelStyle: TextStyle(
-        color: selected ? AppColors.primary : AppColors.textSecondary,
-        fontWeight: FontWeight.w600,
-        fontSize: 12,
-      ),
+      labelStyle: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: selected ? AppColors.primary : AppColors.textSecondary),
       onSelected: (_) => onTap(),
     );
   }

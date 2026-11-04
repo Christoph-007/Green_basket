@@ -122,7 +122,7 @@ class _RecipeCard extends StatelessWidget {
                       ),
                       child: Text(
                         '${recipe.totalTime}m',
-                        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                        style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),

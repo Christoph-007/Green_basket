@@ -45,11 +45,7 @@ class LoyaltyController extends GetxController {
                 const SizedBox(height: 12),
                 SelectableText(
                   code,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
+                  style: AppTextStyles.headlineLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary),
                 ),
                 const SizedBox(height: 8),
                 const Text('This code is valid for 30 days.'),
@@ -185,18 +181,12 @@ class LoyaltyScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Earned: ${model.totalEarned}',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
-                              ),
+                              style: AppTextStyles.bodySmall.copyWith(color: Colors.white70),
                             ),
                             const SizedBox(width: 16),
                             Text(
                               'Redeemed: ${model.totalRedeemed}',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
-                              ),
+                              style: AppTextStyles.bodySmall.copyWith(color: Colors.white70),
                             ),
                           ],
                         ),

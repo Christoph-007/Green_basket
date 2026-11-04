@@ -50,10 +50,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
             trailingIcon: Icons.list_alt,
             subtitle: Obx(() => Text(
                   'Admin › Orders  (${controller.orders.length})',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    fontSize: 13,
-                  ),
+                  style: AppTextStyles.bodyCompact.copyWith(color: Colors.white.withValues(alpha: 0.9)),
                 )),
           ),
           
@@ -110,7 +107,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                                 _selectedFilter.value == 'All'
                                     ? 'No orders found'
                                     : 'No ${_selectedFilter.value.toLowerCase()} orders',
-                                style: const TextStyle(color: AppColors.textSecondary, fontSize: 15),
+                                style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary),
                               ),
                             ],
                           ),
@@ -173,11 +170,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   ),
                   child: Text(
                     '$count',
-                    style: TextStyle(
-                      color: isActive ? Colors.white : AppColors.primary,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: isActive ? Colors.white : AppColors.primary),
                   ),
                 ),
               ],
@@ -294,19 +287,12 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                       children: [
                         Text(
                           '#${orderId.toString().length > 14 ? orderId.toString().substring(orderId.toString().length - 10) : orderId}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: AppColors.textPrimary,
-                          ),
+                          style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.w700, color: AppColors.textPrimary),
                         ),
                         if (timeDisplay.isNotEmpty)
                           Text(
                             timeDisplay,
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: AppColors.textSecondary,
-                            ),
+                            style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                           ),
                       ],
                     ),
@@ -319,11 +305,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                     ),
                     child: Text(
                       statusInfo['label'] as String,
-                      style: TextStyle(
-                        color: statusInfo['color'] as Color,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: statusInfo['color'] as Color),
                     ),
                   ),
                 ],
@@ -344,11 +326,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                         Flexible(
                           child: Text(
                             customerName.toString(),
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textPrimary,
-                            ),
+                            style: AppTextStyles.bodyCompact.copyWith(fontWeight: FontWeight.w500, color: AppColors.textPrimary),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -364,10 +342,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                         Flexible(
                           child: Text(
                             merchantName.toString().isNotEmpty ? merchantName.toString() : 'N/A',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: AppColors.textSecondary,
-                            ),
+                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -396,7 +371,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                         const SizedBox(width: 4),
                         Text(
                           '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
-                          style: const TextStyle(fontSize: 11, color: AppColors.textSecondary, fontWeight: FontWeight.w500),
+                          style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),
@@ -420,13 +395,9 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                         const SizedBox(width: 4),
                         Text(
                           paymentMethod == 'COD' ? 'COD' : paymentMethod,
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                            color: paymentStatus == 'completed' || paymentStatus == 'paid'
+                          style: AppTextStyles.labelSmall.copyWith(color: paymentStatus == 'completed' || paymentStatus == 'paid'
                                 ? AppColors.success
-                                : AppColors.textSecondary,
-                          ),
+                                : AppColors.textSecondary),
                         ),
                       ],
                     ),
@@ -436,17 +407,13 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   if (dateDisplay.isNotEmpty)
                     Text(
                       dateDisplay,
-                      style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                      style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
                     ),
                   const SizedBox(width: 12),
                   // Amount
                   Text(
                     '₹${total.toStringAsFixed(total.truncateToDouble() == total ? 0 : 2)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                      color: AppColors.primary,
-                    ),
+                    style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.w700, color: AppColors.primary),
                   ),
                 ],
               ),

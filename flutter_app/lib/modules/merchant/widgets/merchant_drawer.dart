@@ -82,7 +82,7 @@ class MerchantDrawer extends StatelessWidget {
   Widget _drawerGroup(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, bottom: 8),
-      child: Text(title, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+      child: Text(title, style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
     );
   }
 

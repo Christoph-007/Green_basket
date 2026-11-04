@@ -52,13 +52,9 @@ class AdminFinanceScreen extends StatelessWidget {
               child: const Icon(Icons.account_balance_wallet,
                   color: Colors.white, size: 22),
             ),
-            subtitle: const Text(
+            subtitle: Text(
               'Overview of total revenue, fees, and payouts',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
+              style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
             ),
           ),
           
@@ -158,13 +154,9 @@ class AdminFinanceScreen extends StatelessWidget {
                   AdminStatementSection(controller: controller),
                   const SizedBox(height: 24),
                   // Transaction History
-                  const Text(
+                  Text(
                     'Recent Payout History',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
+                    style: AppTextStyles.titleLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary),
                   ),
                   const SizedBox(height: 12),
                   _buildPayoutHistory(controller),
@@ -267,11 +259,7 @@ class AdminFinanceScreen extends StatelessWidget {
                         const SizedBox(width: 2),
                         Text(
                           '${change.abs()}%',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: change >= 0 ? AppColors.primary : AppColors.errorStrong,
-                          ),
+                          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: change >= 0 ? AppColors.primary : AppColors.errorStrong),
                         ),
                       ],
                     ),
@@ -326,11 +314,7 @@ class AdminFinanceScreen extends StatelessWidget {
               label: Text(e.value),
               selected: selected == e.key,
               selectedColor: AppColors.primary.withValues(alpha: 0.15),
-              labelStyle: TextStyle(
-                color: selected == e.key ? AppColors.primary : AppColors.textSecondary,
-                fontWeight: FontWeight.w600,
-                fontSize: 12,
-              ),
+              labelStyle: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: selected == e.key ? AppColors.primary : AppColors.textSecondary),
               onSelected: (_) => controller.fetchFinancialReport(period: e.key),
             ),
           );
@@ -427,20 +411,16 @@ class AdminFinanceScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.textPrimary)),
+                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: AppTextStyles.bodyCompact.copyWith(fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
                     const SizedBox(height: 4),
-                    Text(date, style: const TextStyle(fontSize: 12, color: AppColors.textMuted)),
+                    Text(date, style: AppTextStyles.bodySmall.copyWith(color: AppColors.textMuted)),
                   ],
                 ),
               ),
               const SizedBox(width: 12),
               Text(
                 amount,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: isCredit ? AppColors.brandForest : AppColors.errorStrong,
-                ),
+                style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold, color: isCredit ? AppColors.brandForest : AppColors.errorStrong),
               ),
             ],
           ),

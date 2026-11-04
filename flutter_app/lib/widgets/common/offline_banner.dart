@@ -19,14 +19,14 @@ class OfflineBanner extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: const Row(
+            child: Row(
               children: [
                 Icon(Icons.wifi_off, color: Colors.white, size: 16),
                 SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     "You're offline. Information may be out of date.",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    style: AppTextStyles.bodySmall.copyWith(color: Colors.white),
                   ),
                 ),
               ],

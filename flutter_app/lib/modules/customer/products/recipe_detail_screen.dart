@@ -335,7 +335,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                                           ),
                                                           if (product['distance'] != null) ...[
                                                             const SizedBox(width: 4),
-                                                            const Text('•', style: TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+                                                            Text('•', style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary)),
                                                             const SizedBox(width: 4),
                                                             Text(
                                                               '${product['distance']}km away',

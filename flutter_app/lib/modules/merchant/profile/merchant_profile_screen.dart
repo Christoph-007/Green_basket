@@ -63,10 +63,7 @@ class MerchantProfileScreen extends StatelessWidget {
                       child: Center(
                         child: Text(
                           initials,
-                          style: const TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
+                          style: AppTextStyles.displayMedium.copyWith(color: AppColors.primary),
                         ),
                       ),
                     ),
@@ -102,11 +99,8 @@ class MerchantProfileScreen extends StatelessWidget {
                                         AppColors.success.withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
-                                  child: const Text('Verified',
-                                      style: TextStyle(
-                                          color: AppColors.success,
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.bold)),
+                                  child: Text('Verified',
+                                      style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold, color: AppColors.success)),
                                 ),
                             ],
                           ),

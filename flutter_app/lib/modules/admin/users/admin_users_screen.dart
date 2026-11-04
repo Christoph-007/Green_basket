@@ -91,7 +91,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       title: 'All Users',
       trailingIcon: Icons.person,
       subtitle: Text('Admin › Users',
-          style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
+          style: AppTextStyles.bodyCompact.copyWith(color: Colors.white.withValues(alpha: 0.9))),
     );
   }
 
@@ -111,9 +111,9 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           Expanded(
             child: TextField(
               onChanged: (val) => setState(() => _searchQuery = val),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Search users...',
-                hintStyle: TextStyle(color: AppColors.textMuted, fontSize: 14),
+                hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
                 border: InputBorder.none,
                 isDense: true,
               ),
@@ -175,7 +175,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                 decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(22)),
                 alignment: Alignment.center,
                 child: Text(name.isNotEmpty ? name[0] : 'U',
-                    style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 18)),
+                    style: AppTextStyles.headlineMedium.copyWith(fontWeight: FontWeight.bold, color: statusColor)),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -184,7 +184,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   children: [
                     Text(name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
                     const SizedBox(height: 2),
-                    Text(email, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                    Text(email, style: AppTextStyles.bodyCompact.copyWith(color: AppColors.textSecondary)),
                   ],
                 ),
               ),

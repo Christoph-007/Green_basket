@@ -73,7 +73,7 @@ class _LineChartPainter extends CustomPainter {
     final painter = TextPainter(
       text: TextSpan(
         text: text,
-        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+        style: AppTextStyles.labelSmall.copyWith(color: AppColors.textSecondary),
       ),
       textDirection: TextDirection.ltr,
     )..layout();

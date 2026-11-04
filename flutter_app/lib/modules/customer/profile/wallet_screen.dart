@@ -162,14 +162,13 @@ class WalletScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(AppRadius.full),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(Icons.lock, color: Colors.white, size: 12),
                                 SizedBox(width: 4),
                                 Text('Locked',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 11)),
+                                    style: AppTextStyles.labelSmall.copyWith(color: Colors.white)),
                               ],
                             ),
                           ),

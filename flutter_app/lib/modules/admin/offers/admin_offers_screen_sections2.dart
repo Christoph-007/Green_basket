@@ -93,10 +93,8 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                                   borderRadius:
                                       BorderRadius.circular(AppRadius.full),
                                 ),
-                                child: const Text('⚡ Flash Sale',
-                                    style: TextStyle(
-                                        fontSize: 11,
-                                        color: AppColors.error)),
+                                child: Text('⚡ Flash Sale',
+                                    style: AppTextStyles.labelSmall.copyWith(color: AppColors.error)),
                               ),
                             ],
                           ],

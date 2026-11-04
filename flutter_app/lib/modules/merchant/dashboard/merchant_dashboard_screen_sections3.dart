@@ -45,10 +45,7 @@ extension _MerchantDashboardScreenStateSections3 on _MerchantDashboardScreenStat
                               BorderRadius.circular(AppRadius.full),
                         ),
                         child: Text(statusInfo.$1,
-                            style: TextStyle(
-                                fontSize: 11,
-                                color: statusInfo.$2,
-                                fontWeight: FontWeight.w600)),
+                            style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w600, color: statusInfo.$2)),
                       ),
                     ],
                   ),
@@ -89,11 +86,7 @@ extension _MerchantDashboardScreenStateSections3 on _MerchantDashboardScreenStat
       ),
       child: Text(
         isPaid ? 'PAID' : method.toUpperCase(),
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w700,
-          color: isPaid ? AppColors.success : Colors.orange.shade700,
-        ),
+        style: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.w700, color: isPaid ? AppColors.success : Colors.orange.shade700),
       ),
     );
   }

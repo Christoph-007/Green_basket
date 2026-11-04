@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/config/status_style.dart';
 
 /// A pill showing an order status with its icon and label, so meaning is
@@ -30,11 +31,7 @@ class GBStatusChip extends StatelessWidget {
               style.label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: style.fg,
-              ),
+              style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w600, color: style.fg),
             ),
           ),
         ],

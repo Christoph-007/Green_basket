@@ -62,11 +62,7 @@ class GBStatCard extends StatelessWidget {
                   child: Text(
                     value,
                     maxLines: 1,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: AppColors.textPrimary,
-                    ),
+                    style: AppTextStyles.headlineLarge.copyWith(fontWeight: FontWeight.bold, color: AppColors.textPrimary),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -74,11 +70,7 @@ class GBStatCard extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textMuted,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w500, color: AppColors.textMuted),
                 ),
               ],
             ),
