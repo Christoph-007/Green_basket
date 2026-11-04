@@ -179,6 +179,13 @@ class AdminRepository {
     return data['data'] as Map<String, dynamic>? ?? {};
   }
 
+  // Backend: GET /api/admin/analytics/revenue-trend
+  Future<Map<String, dynamic>> getRevenueTrend({String period = 'month'}) async {
+    final response = await _api.get('/admin/analytics/revenue-trend', params: {'period': period});
+    final data = response.data as Map<String, dynamic>;
+    return data['data'] as Map<String, dynamic>? ?? {};
+  }
+
   // Backend: GET /api/financial/admin/reports/statement
   Future<Map<String, dynamic>> getFinancialStatement({String basis = 'calendar', int? year}) async {
     final params = <String, dynamic>{'basis': basis};

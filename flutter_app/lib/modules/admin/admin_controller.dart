@@ -59,8 +59,25 @@ class AdminController extends GetxController {
     ]);
   }
 
+  /// Revenue per day (or month) for the chart on the Finance tab.
+  final revenueTrend = <String, dynamic>{}.obs;
+  final trendError = ''.obs;
+
+  Future<void> fetchRevenueTrend() async {
+    // The trend has no "all time" view; it follows the closest period.
+    final period = financialPeriod.value == 'all' ? 'month' : financialPeriod.value;
+    try {
+      revenueTrend.value = await _repo.getRevenueTrend(period: period);
+      trendError.value = '';
+    } catch (e) {
+      debugPrint('fetchRevenueTrend error: $e');
+      trendError.value = _errorMessage(e);
+    }
+  }
+
   Future<void> fetchFinancialReport({String? period}) async {
     if (period != null) financialPeriod.value = period;
+    fetchRevenueTrend(); // runs alongside; the chart fills in when it arrives
     isFinanceLoading.value = true;
     try {
       final data = await _repo.getFinancialReports(period: financialPeriod.value);
