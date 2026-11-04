@@ -80,3 +80,35 @@ flutter test test/api_integration_test.dart --dart-define=API_URL=http://127.0.0
 
 The backend also checks that every API call in this app matches a backend
 route: `cd ../backend && npm run check:api`.
+
+## UI conventions
+
+These keep the three roles (customer, merchant, admin) looking and behaving alike.
+
+**Design tokens.** Colours, spacing, radius and text styles live in `lib/config/theme.dart`
+(`AppColors`, `AppSpacing`, `AppRadius`, `AppTextStyles`). Do not write `Color(0x...)` in a
+screen; add a named token instead. Order statuses get their colour, icon and label from
+`OrderStatusStyle` (`lib/config/status_style.dart`).
+
+**Shared widgets** (`lib/widgets/common/`): `GBButton`, `GBCard`, `GBAppBar`, `GBTextField`,
+`GBGradientHeader`, `GBStatCard`, `GBStatusChip`, `GBSnack`, `LazyIndexedStack`.
+Extend one of these with an optional parameter before hand-building a new variant.
+
+**Money.** Format amounts with `AppHelpers.formatCurrency`, `formatCurrencyFlexible` (API
+values that may be text or null) or `formatPrice` (product prices). Do not build `'₹$x'` by hand.
+
+**Messages.** Use `GBSnack.success / error / info / warning / plain`, not `Get.snackbar`.
+
+**Accessibility.** Every `IconButton` has a `tooltip`. Text and fills must keep 4.5:1 contrast;
+`test/contrast_test.dart` checks the palette. Use `AppColors.textHint` for placeholders only.
+Do not use 9 or 10 px text.
+
+**State management (one rule).**
+- Server data, lists, loading and error state live in a GetX controller and are shown with `Obx`.
+- `setState` is fine for small local UI state: a password visibility toggle, a selected chip,
+  an animation, a text controller.
+- If a `StatefulWidget` stores data that came from an API, move it to the screen's controller.
+- Do not migrate screens in bulk; apply the rule when you touch a screen for another reason.
+
+**Fonts.** Poppins is bundled in `assets/fonts/`. After changing `pubspec.yaml` do a full
+restart, not a hot reload.

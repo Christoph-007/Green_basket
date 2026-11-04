@@ -99,10 +99,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ],
                     ),
                     child: const Center(
-                      child: Text(
-                        '🌿',
-                        style: TextStyle(fontSize: 48),
-                      ),
+                      child: Icon(Icons.eco, size: 52, color: AppColors.primary),
                     ),
                   ),
                   const SizedBox(height: 20),

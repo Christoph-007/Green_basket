@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/utils/responsive_helper.dart';
 import 'package:greenbasket_app/widgets/common/lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
@@ -42,9 +43,16 @@ class _CustomerShellState extends State<CustomerShell> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-      body: LazyIndexedStack(
-        index: _nav.currentIndex.value,
-        children: _screens,
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+              maxWidth: ResponsiveHelper(context).maxContentWidth),
+          child: LazyIndexedStack(
+            index: _nav.currentIndex.value,
+            children: _screens,
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
