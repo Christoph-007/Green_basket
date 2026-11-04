@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -93,18 +94,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       await Get.find<AuthController>().fetchProfile();
 
       Get.back();
-      Get.snackbar(
-        'Profile Updated',
-        'Your profile has been saved successfully',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+      GBSnack.success('Profile Updated', 'Your profile has been saved successfully', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update profile: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.error,
-          colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to update profile: $e', position: SnackPosition.BOTTOM);
     } finally {
       if (mounted) setState(() => _isSaving = false);
     }
@@ -167,9 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             bottom: 0,
                             right: 0,
                             child: GestureDetector(
-                              onTap: () => Get.snackbar('Not available yet',
-                                  'Changing your profile photo is coming soon.',
-                                  snackPosition: SnackPosition.BOTTOM),
+                              onTap: () => GBSnack.plain('Not available yet', 'Changing your profile photo is coming soon.', position: SnackPosition.BOTTOM),
                               child: Container(
                                 width: 28,
                                 height: 28,

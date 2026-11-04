@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 
@@ -56,18 +57,14 @@ class LoyaltyController extends GetxController {
             onConfirm: () => Get.back(),
           );
         } else {
-          Get.snackbar(
-            'Success',
-            'Points redeemed successfully',
-            snackPosition: SnackPosition.BOTTOM,
-          );
+          GBSnack.plain('Success', 'Points redeemed successfully', position: SnackPosition.BOTTOM);
         }
         await fetchLoyalty();
       } else {
-        Get.snackbar('Error', result['message'] ?? 'Failed to redeem');
+        GBSnack.plain('Error', result['message'] ?? 'Failed to redeem');
       }
     } catch (_) {
-      Get.snackbar('Error', 'Failed to redeem points');
+      GBSnack.plain('Error', 'Failed to redeem points');
     }
   }
 }

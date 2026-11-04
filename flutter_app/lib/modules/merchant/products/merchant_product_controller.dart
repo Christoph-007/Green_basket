@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../data/models/product_model.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -30,10 +31,10 @@ class MerchantProductController extends GetxController {
     try {
       await _repo.deleteProduct(id);
       fetchProducts();
-      Get.snackbar('Success', 'Product deleted successfully');
+      GBSnack.plain('Success', 'Product deleted successfully');
     } catch (e) {
       debugPrint('[MerchantProductController] deleteProduct error: $e');
-      Get.snackbar('Error', 'Failed to delete product');
+      GBSnack.plain('Error', 'Failed to delete product');
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -40,7 +41,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
       await _repo.toggleZone(id, active);
       setState(() => _zones[index]['active'] = active);
     } catch (_) {
-      Get.snackbar('Error', 'Could not update zone status');
+      GBSnack.plain('Error', 'Could not update zone status');
     }
   }
 
@@ -79,10 +80,9 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
           await _repo.deleteZone(id);
         }
         setState(() => _zones.removeAt(index));
-        Get.snackbar('Deleted', 'Zone removed',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Deleted', 'Zone removed', position: SnackPosition.BOTTOM);
       } catch (_) {
-        Get.snackbar('Error', 'Could not delete zone');
+        GBSnack.plain('Error', 'Could not delete zone');
       }
     }
   }
@@ -106,17 +106,14 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
         permission = await Geolocator.requestPermission();
       }
       if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-        Get.snackbar('Location needed', 'Allow location access to set the store location');
+        GBSnack.plain('Location needed', 'Allow location access to set the store location');
         return;
       }
       final pos = await Geolocator.getCurrentPosition();
       await _repo.setStoreLocation(latitude: pos.latitude, longitude: pos.longitude);
-      Get.snackbar('Store location saved',
-          '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Store location saved', '${pos.latitude.toStringAsFixed(5)}, ${pos.longitude.toStringAsFixed(5)}', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Could not set the store location',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not set the store location', position: SnackPosition.BOTTOM);
     }
   }
 

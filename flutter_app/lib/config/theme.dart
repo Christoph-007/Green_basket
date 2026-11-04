@@ -84,6 +84,12 @@ class AppColors {
   static const Color orange = Color(0xFFFF9800);
   static const Color deepOrange = Color(0xFFFF5722);
 
+  // Fills that carry white text and meet WCAG 4.5:1 (used by the shared snackbar helper).
+  // The plain success/error/info tokens stay for icons and borders.
+  static const Color successFill = Color(0xFF2E7D32);
+  static const Color errorFill = Color(0xFFC62828);
+  static const Color infoFill = Color(0xFF1565C0);
+
   // Purples, blues and others (charts, badges)
   static const Color purple = Color(0xFF9C27B0);
   static const Color chartPurple = Color(0xFF7B1FA2);

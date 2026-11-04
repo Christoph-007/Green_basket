@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../data/repositories/merchant_repository.dart';
 import '../../data/models/order_model.dart';
@@ -60,9 +61,7 @@ class MerchantController extends GetxController {
       if (data == null) return;
       fetchNewOrders();
       final order = data['order'] is Map ? data['order'] as Map : data;
-      Get.snackbar('Payment received',
-          'Order ${order['orderId'] ?? ''} has been paid online',
-          snackPosition: SnackPosition.TOP);
+      GBSnack.plain('Payment received', 'Order ${order['orderId'] ?? ''} has been paid online', position: SnackPosition.TOP);
     });
 
     // Update dashboard order counts in real time
@@ -81,7 +80,7 @@ class MerchantController extends GetxController {
       final msg = type == 'OUT_OF_STOCK'
           ? '$productName is out of stock!'
           : '$productName is running low (${data['currentStock']} left)';
-      Get.snackbar('Inventory Alert', msg, snackPosition: SnackPosition.TOP);
+      GBSnack.plain('Inventory Alert', msg, position: SnackPosition.TOP);
     });
   }
 
@@ -173,10 +172,10 @@ class MerchantController extends GetxController {
     try {
       await _repo.updateOrderStatus(orderId, 'confirmed');
       fetchNewOrders();
-      Get.snackbar('Success', 'Order accepted successfully');
+      GBSnack.plain('Success', 'Order accepted successfully');
     } catch (e) {
       debugPrint('[MerchantController] acceptOrder error: $e');
-      Get.snackbar('Error', 'Failed to accept order');
+      GBSnack.plain('Error', 'Failed to accept order');
     }
   }
 
@@ -184,10 +183,10 @@ class MerchantController extends GetxController {
     try {
       await _repo.updateOrderStatus(orderId, 'cancelled');
       fetchNewOrders();
-      Get.snackbar('Order Declined', 'Order has been cancelled');
+      GBSnack.plain('Order Declined', 'Order has been cancelled');
     } catch (e) {
       debugPrint('[MerchantController] declineOrder error: $e');
-      Get.snackbar('Error', 'Failed to decline order');
+      GBSnack.plain('Error', 'Failed to decline order');
     }
   }
 }

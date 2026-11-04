@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -139,11 +140,7 @@ class ReferralScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               Clipboard.setData(ClipboardData(text: code));
-                              Get.snackbar(
-                                'Copied',
-                                'Referral code copied!',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
+                              GBSnack.plain('Copied', 'Referral code copied!', position: SnackPosition.BOTTOM);
                             },
                             child: const Icon(
                               Icons.copy_outlined,
@@ -161,11 +158,7 @@ class ReferralScreen extends StatelessWidget {
                         Clipboard.setData(
                           ClipboardData(text: ctrl.shareText.value),
                         );
-                        Get.snackbar(
-                          'Copied',
-                          'Invite message copied — paste it to share',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
+                        GBSnack.plain('Copied', 'Invite message copied — paste it to share', position: SnackPosition.BOTTOM);
                       },
                       isFullWidth: true,
                       leadingIcon: Icons.share_outlined,

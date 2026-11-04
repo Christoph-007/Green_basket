@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:socket_io_client/socket_io_client.dart' as sio;
 import '../../config/constants.dart';
 import 'storage_service.dart';
@@ -179,9 +180,7 @@ class SocketService extends GetxService {
   void _showInAppNotification(Map<String, dynamic> payload) {
     final title = payload['title']?.toString() ?? 'Notification';
     final message = payload['message']?.toString() ?? '';
-    Get.snackbar(title, message,
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 4));
+    GBSnack.plain(title, message, position: SnackPosition.TOP, duration: const Duration(seconds: 4));
   }
 
   void _log(String msg) {

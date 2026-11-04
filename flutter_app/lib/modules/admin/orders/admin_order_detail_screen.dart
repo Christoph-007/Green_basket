@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/utils/order_status.dart';
@@ -37,7 +38,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
       final data = await controller.getOrderDetail(id);
       _order.value = data;
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load order details');
+      GBSnack.plain('Error', 'Failed to load order details');
     } finally {
       _isLoading.value = false;
     }
@@ -94,8 +95,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
                   final body = e.response!.data as Map;
                   msg = (body['error'] ?? body['message'] ?? msg).toString();
                 }
-                Get.snackbar('Error', msg,
-                    backgroundColor: AppColors.error, colorText: Colors.white);
+                GBSnack.error('Error', msg);
               }
             },
             child: const Text('Confirm'),

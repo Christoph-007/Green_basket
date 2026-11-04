@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -34,10 +35,9 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
     try {
       await _repo.updateProduct(_product['_id'] ?? _product['id'], {'status': newStatus.toLowerCase()});
       setState(() => _product['status'] = newStatus.toLowerCase());
-      Get.snackbar('Success', 'Product status updated to $newStatus',
-          backgroundColor: AppColors.success, colorText: Colors.white);
+      GBSnack.success('Success', 'Product status updated to $newStatus');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update status');
+      GBSnack.plain('Error', 'Failed to update status');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -61,10 +61,9 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                 await _repo.deleteProduct(_product['_id'] ?? _product['id']);
                 await controller.fetchAll();
                 Get.back();
-                Get.snackbar('Deleted', 'Product removed successfully',
-                    backgroundColor: AppColors.success, colorText: Colors.white);
+                GBSnack.success('Deleted', 'Product removed successfully');
               } catch (e) {
-                Get.snackbar('Error', 'Failed to delete product');
+                GBSnack.plain('Error', 'Failed to delete product');
               }
             },
             child: const Text('Delete'),

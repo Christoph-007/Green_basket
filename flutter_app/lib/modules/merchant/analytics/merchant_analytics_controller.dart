@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -145,17 +146,14 @@ class MerchantAnalyticsController extends GetxController {
     try {
       final success = await _repo.replyToReview(reviewId, reply);
       if (success) {
-        Get.snackbar('Success', 'Reply posted successfully',
-            backgroundColor: AppColors.success, colorText: Colors.white);
+        GBSnack.success('Success', 'Reply posted successfully');
         // Refresh to show the new reply
         fetchAnalytics();
       } else {
-        Get.snackbar('Error', 'Failed to post reply',
-            backgroundColor: AppColors.error, colorText: Colors.white);
+        GBSnack.error('Error', 'Failed to post reply');
       }
     } catch (e) {
-      Get.snackbar('Error', 'An unexpected error occurred',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'An unexpected error occurred');
     }
   }
 }

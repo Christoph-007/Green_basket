@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -142,13 +143,7 @@ class _OfferTile extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: code));
-                        Get.snackbar(
-                          'Code Copied!',
-                          'Coupon code "$code" copied to clipboard',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: AppColors.success,
-                          colorText: Colors.white,
-                        );
+                        GBSnack.success('Code Copied!', 'Coupon code "$code" copied to clipboard', position: SnackPosition.BOTTOM);
                       },
                       icon: const Icon(Icons.copy, size: 16),
                       label: const Text('Copy'),

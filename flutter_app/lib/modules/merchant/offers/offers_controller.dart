@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../data/repositories/merchant_repository.dart';
 
@@ -43,7 +44,7 @@ class OffersController extends GetxController {
       fetchOffers();
     } catch (e) {
       debugPrint('[OffersController] toggleOffer error: $e');
-      Get.snackbar('Error', 'Could not update offer status');
+      GBSnack.plain('Error', 'Could not update offer status');
     }
   }
 
@@ -51,11 +52,10 @@ class OffersController extends GetxController {
     try {
       await _repo.deleteOffer(id);
       fetchOffers();
-      Get.snackbar('Deleted', 'Offer removed successfully',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Deleted', 'Offer removed successfully', position: SnackPosition.BOTTOM);
     } catch (e) {
       debugPrint('[OffersController] deleteOffer error: $e');
-      Get.snackbar('Error', 'Could not delete offer');
+      GBSnack.plain('Error', 'Could not delete offer');
     }
   }
 }

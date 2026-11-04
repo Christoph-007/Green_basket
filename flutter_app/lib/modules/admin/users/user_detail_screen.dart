@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,25 +63,21 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   Future<void> _sendPasswordReset() async {
     final email = _user['email']?.toString() ?? '';
     if (email.isEmpty) {
-      Get.snackbar('No email', 'This user has no email address on file.',
-          backgroundColor: AppColors.warning, colorText: Colors.white);
+      GBSnack.warning('No email', 'This user has no email address on file.');
       return;
     }
     try {
       await AuthRepository().forgotPassword(email);
-      Get.snackbar('Reset code sent', 'A password reset code was emailed to $email.',
-          backgroundColor: AppColors.info, colorText: Colors.white);
+      GBSnack.info('Reset code sent', 'A password reset code was emailed to $email.');
     } catch (e) {
-      Get.snackbar('Could not send', _errorMessage(e, 'Please try again.'),
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Could not send', _errorMessage(e, 'Please try again.'));
     }
   }
 
   Future<void> _showSendNotificationDialog() async {
     final userId = (_user['_id'] ?? _user['id'] ?? '').toString();
     if (userId.isEmpty) {
-      Get.snackbar('Error', 'This user has no id, so a notification cannot be sent.',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'This user has no id, so a notification cannot be sent.');
       return;
     }
     final titleCtrl = TextEditingController();
@@ -127,11 +124,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         'message': messageCtrl.text.trim(),
         'channels': ['inApp', 'push'],
       });
-      Get.snackbar('Notification sent', 'Sent to ${_user['name'] ?? 'the user'}.',
-          backgroundColor: AppColors.success, colorText: Colors.white);
+      GBSnack.success('Notification sent', 'Sent to ${_user['name'] ?? 'the user'}.');
     } catch (e) {
-      Get.snackbar('Could not send', _errorMessage(e, 'Please try again.'),
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Could not send', _errorMessage(e, 'Please try again.'));
     }
   }
 
@@ -175,7 +170,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   colorText: Colors.white,
                 );
               } catch (e) {
-                Get.snackbar('Error', 'Failed to update user status');
+                GBSnack.plain('Error', 'Failed to update user status');
               }
             },
             child: Text(_isBlocked ? 'Unblock' : 'Block'),

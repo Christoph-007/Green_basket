@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import '../../../data/models/notification_model.dart';
 import '../../../data/repositories/notification_repository.dart';
 
@@ -20,7 +21,7 @@ class NotificationController extends GetxController {
     try {
       notifications.value = await _repo.getNotifications();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load notifications');
+      GBSnack.plain('Error', 'Failed to load notifications');
     } finally {
       isLoading.value = false;
     }

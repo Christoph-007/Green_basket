@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../data/models/order_model.dart';
@@ -88,11 +89,11 @@ class _DisputesScreenState extends State<DisputesScreen>
 
   Future<void> _submitDispute() async {
     if (_selectedOrder == null) {
-      Get.snackbar('Error', 'Please select an order', snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Please select an order', position: SnackPosition.BOTTOM);
       return;
     }
     if (_dialogDescCtrl.text.trim().isEmpty) {
-      Get.snackbar('Error', 'Please enter a description', snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Please enter a description', position: SnackPosition.BOTTOM);
       return;
     }
 
@@ -112,15 +113,9 @@ class _DisputesScreenState extends State<DisputesScreen>
       Get.back(); // close dialog
       _fetchDisputes(); // refresh list
       
-      Get.snackbar(
-        reason == 'Return Item' ? 'Return Requested' : 'Dispute Raised',
-        'Our team will review your request regarding ${_selectedProduct?.productName ?? "Order ${_selectedOrder!.orderNumber}"}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+      GBSnack.success(reason == 'Return Item' ? 'Return Requested' : 'Dispute Raised', 'Our team will review your request regarding ${_selectedProduct?.productName ?? "Order ${_selectedOrder!.orderNumber}"}', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to raise dispute: $e', snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to raise dispute: $e', position: SnackPosition.BOTTOM);
     }
   }
 

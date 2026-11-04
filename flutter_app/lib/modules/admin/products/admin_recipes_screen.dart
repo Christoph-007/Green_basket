@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/admin_repository.dart';
@@ -47,17 +48,11 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
     try {
       await _repo.updateRecipe(id, {'status': publishing ? 'published' : 'draft'});
       await controller.fetchRecipes();
-      Get.snackbar(
-        publishing ? 'Published' : 'Unpublished',
-        publishing
+      GBSnack.success(publishing ? 'Published' : 'Unpublished', publishing
             ? '${recipe['name']} is now visible to customers.'
-            : '${recipe['name']} is now hidden from customers.',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+            : '${recipe['name']} is now hidden from customers.');
     } catch (_) {
-      Get.snackbar('Error', 'Could not update the recipe. Please try again.',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Could not update the recipe. Please try again.');
     }
   }
 
@@ -82,11 +77,9 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
     try {
       await _repo.deleteRecipe(id);
       await controller.fetchRecipes();
-      Get.snackbar('Deleted', '${recipe['name']} was deleted.',
-          backgroundColor: AppColors.success, colorText: Colors.white);
+      GBSnack.success('Deleted', '${recipe['name']} was deleted.');
     } catch (_) {
-      Get.snackbar('Error', 'Could not delete the recipe. Please try again.',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Could not delete the recipe. Please try again.');
     }
   }
 

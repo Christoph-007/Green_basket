@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,8 +56,7 @@ class OrderDetailController extends GetxController {
       backgroundColor: AppColors.surface,
     );
     if (submitted == true) {
-      Get.snackbar('Return requested', 'We will review it within 24 hours.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Return requested', 'We will review it within 24 hours.', position: SnackPosition.BOTTOM);
       Get.toNamed(Routes.returns);
     }
   }
@@ -67,14 +67,11 @@ class OrderDetailController extends GetxController {
     isCancelling.value = true;
     try {
       final res = await _repo.cancelOrder(current.id, reason);
-      Get.snackbar('Order Cancelled', res['message']?.toString() ?? 'Your order has been cancelled',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Order Cancelled', res['message']?.toString() ?? 'Your order has been cancelled', position: SnackPosition.BOTTOM);
       await fetchOrder(current.id);
     } on DioException catch (e) {
       final body = e.response?.data;
-      Get.snackbar('Could not cancel',
-          (body is Map ? body['message'] : null)?.toString() ?? 'Please try again',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Could not cancel', (body is Map ? body['message'] : null)?.toString() ?? 'Please try again', position: SnackPosition.BOTTOM);
       await fetchOrder(current.id);
     } finally {
       isCancelling.value = false;

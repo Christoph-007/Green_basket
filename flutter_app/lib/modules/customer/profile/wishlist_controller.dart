@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import '../../../data/repositories/product_repository.dart';
 
 
@@ -31,8 +32,7 @@ class WishlistController extends GetxController {
       if (wishlistIds.contains(productId)) {
         await _repo.removeFromWishlist(productId);
         wishlistIds.remove(productId);
-        Get.snackbar('Removed', 'Removed from wishlist',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Removed', 'Removed from wishlist', position: SnackPosition.BOTTOM);
       } else {
         await _repo.addToWishlist(productId);
         wishlistIds.add(productId);
@@ -42,8 +42,7 @@ class WishlistController extends GetxController {
             colorText: AppColors.primary);
       }
     } catch (_) {
-      Get.snackbar('Error', 'Failed to update wishlist',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to update wishlist', position: SnackPosition.BOTTOM);
     }
   }
 }

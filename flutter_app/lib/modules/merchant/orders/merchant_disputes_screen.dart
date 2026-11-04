@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -36,7 +37,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
     try {
       _disputes = await _repo.getDisputes();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load disputes');
+      GBSnack.plain('Error', 'Failed to load disputes');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -318,7 +319,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
               final amt = double.tryParse(amtController.text) ?? 0;
               final desc = descController.text.trim();
               if (desc.isEmpty) {
-                Get.snackbar('Error', 'Please provide a description');
+                GBSnack.plain('Error', 'Please provide a description');
                 return;
               }
               Get.back();
@@ -329,10 +330,10 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
                   'amount': amt,
                   'description': desc,
                 });
-                Get.snackbar('Success', 'Dispute resolved');
+                GBSnack.plain('Success', 'Dispute resolved');
                 _fetchDisputes();
               } catch (e) {
-                Get.snackbar('Error', 'Failed to resolve dispute');
+                GBSnack.plain('Error', 'Failed to resolve dispute');
                 setState(() => _isLoading = false);
               }
             },

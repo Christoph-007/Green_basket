@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -130,8 +131,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
       _allCategories =
           categories.map((e) => e as Map<String, dynamic>).toList();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load commission settings',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to load commission settings');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -185,12 +185,10 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
       _maximumPayout = maxPayout;
 
 
-      Get.snackbar('Saved', 'Commission settings updated.',
-          backgroundColor: AppColors.success, colorText: Colors.white);
+      GBSnack.success('Saved', 'Commission settings updated.');
       setState(() {});
     } catch (e) {
-      Get.snackbar('Error', 'Failed to save commission settings',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to save commission settings');
     } finally {
       setState(() => _isSaving = false);
     }
@@ -770,8 +768,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
         .toList();
 
     if (available.isEmpty) {
-      Get.snackbar('Info', 'All categories already have overrides.',
-          backgroundColor: AppColors.info, colorText: Colors.white);
+      GBSnack.info('Info', 'All categories already have overrides.');
       return;
     }
 

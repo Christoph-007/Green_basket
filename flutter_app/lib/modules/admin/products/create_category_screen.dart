@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/providers/api_provider.dart';
@@ -100,19 +101,13 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         await adminController.fetchCategories();
 
         Get.back();
-        Get.snackbar(
-          widget.category != null ? 'Category Updated' : 'Category Created',
-          '${_nameController.text} has been saved successfully.',
-          backgroundColor: AppColors.success,
-          colorText: Colors.white,
-        );
+        GBSnack.success(widget.category != null ? 'Category Updated' : 'Category Created', '${_nameController.text} has been saved successfully.');
       } catch (e) {
         String msg = 'Failed to create category';
         if (e.toString().contains('409') || e.toString().contains('already exists')) {
           msg = 'A category with this name already exists';
         }
-        Get.snackbar('Error', msg,
-            backgroundColor: AppColors.error, colorText: Colors.white);
+        GBSnack.error('Error', msg);
       } finally {
         if (mounted) setState(() => _isSubmitting = false);
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/providers/api_provider.dart';
@@ -78,12 +79,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
         });
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to load settings',
-        backgroundColor: AppColors.error,
-        colorText: Colors.white,
-      );
+      GBSnack.error('Error', 'Failed to load settings');
     }
   }
 
@@ -126,19 +122,9 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
         '/admin/settings',
         data: {'section': section.toLowerCase(), ...data},
       );
-      Get.snackbar(
-        'Saved',
-        '$section settings have been updated.',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+      GBSnack.success('Saved', '$section settings have been updated.');
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to save $section settings',
-        backgroundColor: AppColors.error,
-        colorText: Colors.white,
-      );
+      GBSnack.error('Error', 'Failed to save $section settings');
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -78,17 +79,13 @@ class _ReturnsScreenState extends State<ReturnsScreen>
     setState(() => _cancellingId = item.id);
     try {
       await _repo.cancelReturn(item.id);
-      Get.snackbar('Request cancelled', 'Your return request was withdrawn.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Request cancelled', 'Your return request was withdrawn.', position: SnackPosition.BOTTOM);
     } on DioException catch (e) {
       final body = e.response?.data;
       final message = body is Map ? (body['error'] ?? body['message']) : null;
-      Get.snackbar('Could not cancel',
-          message?.toString() ?? 'Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Could not cancel', message?.toString() ?? 'Please try again.', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Could not cancel', 'Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Could not cancel', 'Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       if (mounted) setState(() => _cancellingId = null);
     }

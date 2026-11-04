@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -35,8 +36,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
       _returns = data.map((e) => e as Map<String, dynamic>).toList();
     } catch (e) {
       debugPrint('fetchReturns error: $e');
-      Get.snackbar('Error', 'Failed to load returns',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to load returns');
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -236,8 +236,7 @@ class _ReturnsAdminScreenState extends State<ReturnsAdminScreen>
                     colorText: Colors.white,
                   );
                 } catch (e) {
-                  Get.snackbar('Error', 'Failed to process return',
-                      backgroundColor: AppColors.error, colorText: Colors.white);
+                  GBSnack.error('Error', 'Failed to process return');
                 }
               },
               child: Text(_approving ? 'Approve & Refund' : 'Reject'),

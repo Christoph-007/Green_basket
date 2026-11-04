@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../../data/models/order_model.dart';
@@ -49,14 +50,14 @@ class MerchantOrderController extends GetxController {
     try {
       await _repo.updateOrderStatus(orderId, status);
       fetchAllOrders();
-      Get.snackbar('Success', 'Order status updated to $status');
+      GBSnack.plain('Success', 'Order status updated to $status');
     } catch (e) {
       debugPrint('[MerchantOrderController] updateStatus error: $e');
       String msg = 'Failed to update order status';
       if (e is DioException && e.response?.data is Map) {
         msg = ((e.response!.data as Map)['message'] ?? msg).toString();
       }
-      Get.snackbar('Error', msg);
+      GBSnack.plain('Error', msg);
     }
   }
 }

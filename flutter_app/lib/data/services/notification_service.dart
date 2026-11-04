@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/data/providers/api_provider.dart';
@@ -48,12 +49,7 @@ class NotificationService extends GetxService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('[NotificationService] Foreground message: ${message.notification?.title}');
       if (message.notification != null) {
-        Get.snackbar(
-          message.notification!.title ?? 'Notification',
-          message.notification!.body ?? '',
-          snackPosition: SnackPosition.TOP,
-          duration: const Duration(seconds: 4),
-        );
+        GBSnack.plain(message.notification!.title ?? 'Notification', message.notification!.body ?? '', position: SnackPosition.TOP, duration: const Duration(seconds: 4));
       }
     });
 

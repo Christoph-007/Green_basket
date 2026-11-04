@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/config/routes.dart';
@@ -28,9 +29,9 @@ class AddressController extends GetxController {
     try {
       await _userRepo.deleteAddress(id);
       addresses.removeWhere((a) => (a['_id'] ?? a['id']) == id);
-      Get.snackbar('Success', 'Address deleted successfully', snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Success', 'Address deleted successfully', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to delete address', snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to delete address', position: SnackPosition.BOTTOM);
     }
   }
 

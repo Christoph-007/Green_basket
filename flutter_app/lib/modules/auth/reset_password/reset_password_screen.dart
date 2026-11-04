@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import '../../../config/theme.dart';
@@ -42,8 +43,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   void _submit() {
     if (_otpCtrl.text.length != 6) {
-      Get.snackbar('Invalid OTP', 'Please enter the complete 6-digit OTP',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Invalid OTP', 'Please enter the complete 6-digit OTP', position: SnackPosition.BOTTOM);
       return;
     }
     if (!(_formKey.currentState?.validate() ?? false)) return;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -150,12 +151,9 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
         final adminController = Get.find<AdminController>();
         await adminController.fetchRecipes();
         Get.back();
-        Get.snackbar(widget.recipe != null ? 'Recipe Updated' : 'Recipe Published', 
-            '${_nameController.text} has been successfully saved.',
-            backgroundColor: AppColors.success, colorText: Colors.white);
+        GBSnack.success(widget.recipe != null ? 'Recipe Updated' : 'Recipe Published', '${_nameController.text} has been successfully saved.');
       } catch (e) {
-        Get.snackbar('Error', 'Failed to save recipe: $e',
-            backgroundColor: AppColors.error, colorText: Colors.white);
+        GBSnack.error('Error', 'Failed to save recipe: $e');
       } finally {
         if (mounted) setState(() => _isPublishing = false);
       }
@@ -287,9 +285,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   Widget _buildImageUpload() {
     return Card(
       child: InkWell(
-        onTap: () => Get.snackbar('Not available yet',
-            'Recipe photo upload is coming soon. The recipe is saved without a photo.',
-            snackPosition: SnackPosition.BOTTOM),
+        onTap: () => GBSnack.plain('Not available yet', 'Recipe photo upload is coming soon. The recipe is saved without a photo.', position: SnackPosition.BOTTOM),
         borderRadius: BorderRadius.circular(AppRadius.md),
         child: Container(
           height: 160,

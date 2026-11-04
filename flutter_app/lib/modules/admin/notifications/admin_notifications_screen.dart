@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -60,8 +61,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
 
   void _sendNow() async {
     if (_titleController.text.isEmpty || _bodyController.text.isEmpty) {
-      Get.snackbar('Required Fields', 'Please fill in the notification title and body.',
-          backgroundColor: AppColors.warning, colorText: Colors.white);
+      GBSnack.warning('Required Fields', 'Please fill in the notification title and body.');
       return;
     }
     setState(() => _isSending = true);
@@ -73,19 +73,13 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         'types': _selectedTypes,
         if (_imageUrlController.text.isNotEmpty) 'imageUrl': _imageUrlController.text,
       });
-      Get.snackbar(
-        'Notification Sent',
-        '"${_titleController.text}" sent to $_selectedAudience via ${_selectedTypes.join(', ')}.',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+      GBSnack.success('Notification Sent', '"${_titleController.text}" sent to $_selectedAudience via ${_selectedTypes.join(', ')}.');
       _titleController.clear();
       _bodyController.clear();
       _imageUrlController.clear();
       _fetchNotifications(); // Refresh list
     } catch (e) {
-      Get.snackbar('Error', 'Failed to send notification',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to send notification');
     } finally {
       setState(() => _isSending = false);
     }
@@ -93,13 +87,11 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
 
   void _scheduleNotification() {
     if (_titleController.text.isEmpty) {
-      Get.snackbar('Required', 'Please fill in the notification title.',
-          backgroundColor: AppColors.warning, colorText: Colors.white);
+      GBSnack.warning('Required', 'Please fill in the notification title.');
       return;
     }
     // Scheduling is not implemented on the backend yet; be clear that nothing was scheduled.
-    Get.snackbar('Not available yet', 'Scheduling is coming soon. Nothing was scheduled; use "Send now" to send it immediately.',
-        backgroundColor: AppColors.info, colorText: Colors.white);
+    GBSnack.info('Not available yet', 'Scheduling is coming soon. Nothing was scheduled; use "Send now" to send it immediately.');
   }
 
   @override

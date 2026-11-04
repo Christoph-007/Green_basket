@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -53,7 +54,7 @@ class WalletController extends GetxController {
       final result = await _repo.addMoney(amount);
       if (result['success'] != true) {
         isAddingMoney.value = false;
-        Get.snackbar('Error', result['error'] ?? result['message'] ?? 'Failed to start top-up');
+        GBSnack.plain('Error', result['error'] ?? result['message'] ?? 'Failed to start top-up');
         return;
       }
       final data = Map<String, dynamic>.from(result['data'] ?? {});
@@ -72,11 +73,10 @@ class WalletController extends GetxController {
     } on DioException catch (e) {
       isAddingMoney.value = false;
       final body = e.response?.data;
-      Get.snackbar('Error',
-          (body is Map ? (body['error'] ?? body['message']) : null) ?? 'Failed to start top-up');
+      GBSnack.plain('Error', (body is Map ? (body['error'] ?? body['message']) : null) ?? 'Failed to start top-up');
     } catch (_) {
       isAddingMoney.value = false;
-      Get.snackbar('Error', 'Failed to open payment');
+      GBSnack.plain('Error', 'Failed to open payment');
     }
   }
 
@@ -88,15 +88,13 @@ class WalletController extends GetxController {
         razorpaySignature: response.signature ?? '',
       );
       if (result['success'] == true) {
-        Get.snackbar('Success', 'Money added to wallet',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Success', 'Money added to wallet', position: SnackPosition.BOTTOM);
       } else {
-        Get.snackbar('Error', result['error'] ?? 'Could not verify payment');
+        GBSnack.plain('Error', result['error'] ?? 'Could not verify payment');
       }
     } on DioException catch (e) {
       final body = e.response?.data;
-      Get.snackbar('Payment Verification Failed',
-          (body is Map ? (body['error'] ?? body['message']) : null) ?? 'Please contact support if money was deducted.');
+      GBSnack.plain('Payment Verification Failed', (body is Map ? (body['error'] ?? body['message']) : null) ?? 'Please contact support if money was deducted.');
     } finally {
       isAddingMoney.value = false;
       await fetchWallet();
@@ -105,7 +103,7 @@ class WalletController extends GetxController {
 
   void _onPaymentError(PaymentFailureResponse response) {
     isAddingMoney.value = false;
-    Get.snackbar('Payment Failed', response.message ?? 'Payment was not completed');
+    GBSnack.plain('Payment Failed', response.message ?? 'Payment was not completed');
   }
 }
 
@@ -320,8 +318,7 @@ class WalletScreen extends StatelessWidget {
                   double.tryParse(amountCtrl.text.trim()) ?? 0;
               // Same limits the backend enforces in POST /wallet/add-money
               if (amount < 10 || amount > 10000) {
-                Get.snackbar('Invalid amount',
-                    'Enter an amount between ₹10 and ₹10,000');
+                GBSnack.plain('Invalid amount', 'Enter an amount between ₹10 and ₹10,000');
                 return;
               }
               Get.back();

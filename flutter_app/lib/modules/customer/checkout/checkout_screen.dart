@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:dio/dio.dart';
@@ -110,7 +111,7 @@ class CheckoutController extends GetxController {
             addresses.firstWhereOrNull((a) => a.isDefault) ?? addresses.firstOrNull;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load addresses', snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to load addresses', position: SnackPosition.BOTTOM);
     }
   }
 
@@ -166,7 +167,7 @@ class CheckoutController extends GetxController {
       quoteError.value = '';
       final couponError = q['couponError'];
       if (couponError != null && cartCtrl.appliedCoupon.value.isNotEmpty) {
-        Get.snackbar('Coupon removed', couponError.toString(), snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Coupon removed', couponError.toString(), position: SnackPosition.BOTTOM);
       }
     } catch (e) {
       if (seq != _quoteSeq) return;
@@ -182,7 +183,7 @@ class CheckoutController extends GetxController {
 
     final cartCtrl = Get.find<CartController>();
     if (cartCtrl.items.isEmpty) {
-      Get.snackbar('Cart Empty', 'Your cart is empty. Please add items to place an order.');
+      GBSnack.plain('Cart Empty', 'Your cart is empty. Please add items to place an order.');
       return;
     }
 
@@ -199,8 +200,7 @@ class CheckoutController extends GetxController {
       );
 
       if (result['success'] != true) {
-        Get.snackbar('Error', result['message'] ?? 'Failed to place order',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Error', result['message'] ?? 'Failed to place order', position: SnackPosition.BOTTOM);
         _finish();
         return;
       }
@@ -214,13 +214,7 @@ class CheckoutController extends GetxController {
         await cartCtrl.fetchCart();
         if (selectedPayment.value == 'wallet') fetchWallet();
         Get.offAllNamed(Routes.orderList);
-        Get.snackbar(
-          'Order Placed!',
-          'Your order has been placed successfully',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.success,
-          colorText: Colors.white,
-        );
+        GBSnack.success('Order Placed!', 'Your order has been placed successfully', position: SnackPosition.BOTTOM);
         _finish();
         return;
       }
@@ -233,13 +227,13 @@ class CheckoutController extends GetxController {
         provider: 'razorpay',
       );
       if (payRes['success'] != true) {
-        Get.snackbar('Error', payRes['message'] ?? payRes['error'] ?? 'Failed to create payment order');
+        GBSnack.plain('Error', payRes['message'] ?? payRes['error'] ?? 'Failed to create payment order');
         _finish();
         return;
       }
       final data = payRes['data'];
       if (data['key'] == null || data['orderId'] == null) {
-        Get.snackbar('Error', 'Invalid payment configuration from server');
+        GBSnack.plain('Error', 'Invalid payment configuration from server');
         _finish();
         return;
       }
@@ -261,8 +255,7 @@ class CheckoutController extends GetxController {
       Future.delayed(const Duration(seconds: 15), () {
         if (isLoading.value && _isProcessing) {
           _finish();
-          Get.snackbar('Payment', 'Payment window did not respond. You can retry from your orders.',
-              snackPosition: SnackPosition.BOTTOM);
+          GBSnack.plain('Payment', 'Payment window did not respond. You can retry from your orders.', position: SnackPosition.BOTTOM);
         }
       });
     } catch (e) {
@@ -270,10 +263,9 @@ class CheckoutController extends GetxController {
       if (msg.contains('empty cart')) {
         await cartCtrl.fetchCart();
         Get.offAllNamed(Routes.orderList);
-        Get.snackbar('Check Your Orders', 'Your cart is empty. Your order may have already been placed.',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Check Your Orders', 'Your cart is empty. Your order may have already been placed.', position: SnackPosition.BOTTOM);
       } else {
-        Get.snackbar('Error', msg, snackPosition: SnackPosition.BOTTOM, duration: const Duration(seconds: 5));
+        GBSnack.plain('Error', msg, position: SnackPosition.BOTTOM, duration: const Duration(seconds: 5));
         refreshQuote(); // e.g. stock or delivery changed
       }
       _finish();
@@ -299,18 +291,10 @@ class CheckoutController extends GetxController {
       final cartCtrl = Get.find<CartController>();
       await cartCtrl.fetchCart();
       Get.offAllNamed(Routes.orderList);
-      Get.snackbar(
-        'Order Placed!',
-        'Payment successful and order placed',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-      );
+      GBSnack.success('Order Placed!', 'Payment successful and order placed', position: SnackPosition.BOTTOM);
     } catch (e) {
       // e.g. 409 when the order expired before payment: the backend refunds it
-      Get.snackbar('Payment Verification Failed',
-          _apiError(e, 'If money was deducted, it will be refunded automatically.'),
-          duration: const Duration(seconds: 6));
+      GBSnack.plain('Payment Verification Failed', _apiError(e, 'If money was deducted, it will be refunded automatically.'), duration: const Duration(seconds: 6));
     } finally {
       _finish();
     }
@@ -318,11 +302,11 @@ class CheckoutController extends GetxController {
 
   void _handlePaymentError(PaymentFailureResponse response) {
     _finish();
-    Get.snackbar('Payment Failed', 'Error: ${response.message}');
+    GBSnack.plain('Payment Failed', 'Error: ${response.message}');
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    Get.snackbar('External Wallet', 'Selected wallet: ${response.walletName}');
+    GBSnack.plain('External Wallet', 'Selected wallet: ${response.walletName}');
   }
 
   bool get isProcessing => _isProcessing;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'financial_controller.dart';
@@ -59,8 +60,7 @@ class _FinancialScreenState extends State<FinancialScreen>
           IconButton(
             icon: const Icon(Icons.download_outlined),
             onPressed: () {
-              Get.snackbar('Downloading', 'Report is being generated...',
-                  snackPosition: SnackPosition.BOTTOM);
+              GBSnack.plain('Downloading', 'Report is being generated...', position: SnackPosition.BOTTOM);
             },
             tooltip: 'Download Report',
           ),

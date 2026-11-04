@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -38,8 +39,7 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
       _merchantOffers =
           allMaps.where((o) => o['createdBy'] != 'admin').toList();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load offers',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to load offers');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -671,16 +671,10 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                       status == 'active' ? 'inactive' : 'active';
                   await _repo.updateOffer(
                       offerId, {'status': newStatus});
-                  Get.snackbar('Success',
-                      'Offer ${newStatus == 'active' ? 'activated' : 'deactivated'}',
-                      backgroundColor: AppColors.success,
-                      colorText: Colors.white);
+                  GBSnack.success('Success', 'Offer ${newStatus == 'active' ? 'activated' : 'deactivated'}');
                   _fetchOffers();
                 } catch (e) {
-                  Get.snackbar(
-                      'Error', 'Failed to update offer status',
-                      backgroundColor: AppColors.error,
-                      colorText: Colors.white);
+                  GBSnack.error('Error', 'Failed to update offer status');
                 }
               },
             ),
@@ -714,14 +708,10 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
                     final offerId =
                         (offer['_id'] ?? offer['id'] ?? '').toString();
                     await _repo.deleteOffer(offerId);
-                    Get.snackbar('Deleted', 'Offer removed',
-                        backgroundColor: AppColors.success,
-                        colorText: Colors.white);
+                    GBSnack.success('Deleted', 'Offer removed');
                     _fetchOffers();
                   } catch (e) {
-                    Get.snackbar('Error', 'Failed to delete offer',
-                        backgroundColor: AppColors.error,
-                        colorText: Colors.white);
+                    GBSnack.error('Error', 'Failed to delete offer');
                   }
                 }
               },
@@ -1073,25 +1063,21 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
   }) async {
     // Validation
     if (titleCtrl.text.trim().isEmpty) {
-      Get.snackbar('Error', 'Title is required',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Title is required');
       return;
     }
     if (type == 'percentage' &&
         discountPctCtrl.text.trim().isEmpty) {
-      Get.snackbar('Error', 'Discount percentage is required',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Discount percentage is required');
       return;
     }
     if ((type == 'flat' || type == 'bundle') &&
         discountAmtCtrl.text.trim().isEmpty) {
-      Get.snackbar('Error', 'Discount amount is required',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Discount amount is required');
       return;
     }
     if (endDate.isBefore(startDate)) {
-      Get.snackbar('Error', 'End date must be after start date',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'End date must be after start date');
       return;
     }
 
@@ -1125,15 +1111,13 @@ class _AdminOffersScreenState extends State<AdminOffersScreen>
     try {
       await _repo.createOffer(body);
       Navigator.pop(context);
-      Get.snackbar('Success', 'Offer created successfully',
-          backgroundColor: AppColors.success, colorText: Colors.white);
+      GBSnack.success('Success', 'Offer created successfully');
       _fetchOffers();
     } catch (e) {
       final msg = e.toString().contains('coupon')
           ? 'Coupon code already exists'
           : 'Failed to create offer';
-      Get.snackbar('Error', msg,
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', msg);
     }
   }
 }

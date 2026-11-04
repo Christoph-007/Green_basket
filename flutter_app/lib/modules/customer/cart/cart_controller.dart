@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import '../../../data/models/order_model.dart';
@@ -60,12 +61,7 @@ class CartController extends GetxController {
         preparationOption: preparationOption,
       );
       await fetchCart();
-      Get.snackbar(
-        'Added to Cart',
-        'Item has been added to your cart',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 2),
-      );
+      GBSnack.plain('Added to Cart', 'Item has been added to your cart', position: SnackPosition.BOTTOM, duration: const Duration(seconds: 2));
     } on DioException catch (e) {
       final body = e.response?.data;
       // One store per cart: offer to start a new cart with this item
@@ -73,12 +69,9 @@ class CartController extends GetxController {
         _askToReplaceCart(productId, quantity, preparationOption, body['message']?.toString());
         return;
       }
-      Get.snackbar('Error',
-          (body is Map ? body['message'] : null)?.toString() ?? 'Failed to add item to cart',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', (body is Map ? body['message'] : null)?.toString() ?? 'Failed to add item to cart', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Failed to add item to cart',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to add item to cart', position: SnackPosition.BOTTOM);
     }
   }
 
@@ -102,7 +95,7 @@ class CartController extends GetxController {
                 preparationOption: preparationOption,
               );
             } catch (_) {
-              Get.snackbar('Error', 'Could not clear the cart');
+              GBSnack.plain('Error', 'Could not clear the cart');
             }
           },
           child: const Text('Clear Cart & Add'),
@@ -123,9 +116,7 @@ class CartController extends GetxController {
       await fetchCart();
     } on DioException catch (e) {
       final body = e.response?.data;
-      Get.snackbar('Cart',
-          (body is Map ? body['message'] : null)?.toString() ?? 'Could not update the cart',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Cart', (body is Map ? body['message'] : null)?.toString() ?? 'Could not update the cart', position: SnackPosition.BOTTOM);
       await fetchCart();
     } catch (_) {}
   }
@@ -143,10 +134,9 @@ class CartController extends GetxController {
       if (result['success'] == true) {
         appliedCoupon.value = code;
         discount.value = (result['data']?['discount'] ?? 0).toDouble();
-        Get.snackbar(
-            'Coupon Applied', 'Discount of ₹${discount.value.toInt()} applied');
+        GBSnack.plain('Coupon Applied', 'Discount of ₹${discount.value.toInt()} applied');
       } else {
-        Get.snackbar('Invalid Coupon', result['message'] ?? 'Coupon not valid');
+        GBSnack.plain('Invalid Coupon', result['message'] ?? 'Coupon not valid');
       }
     } catch (e) {
       String message = 'Failed to apply coupon';
@@ -170,10 +160,10 @@ class CartController extends GetxController {
           await fetchLoyaltyPoints();
         }
       } else {
-        Get.snackbar('Error', result['message'] ?? 'Failed to redeem points');
+        GBSnack.plain('Error', result['message'] ?? 'Failed to redeem points');
       }
     } catch (_) {
-      Get.snackbar('Error', 'Failed to redeem loyalty points');
+      GBSnack.plain('Error', 'Failed to redeem loyalty points');
     }
   }
 
@@ -183,7 +173,7 @@ class CartController extends GetxController {
       appliedCoupon.value = '';
       discount.value = 0;
     } catch (_) {
-      Get.snackbar('Error', 'Failed to remove coupon');
+      GBSnack.plain('Error', 'Failed to remove coupon');
     }
   }
 
@@ -193,7 +183,7 @@ class CartController extends GetxController {
       items.clear();
       await clearCoupon();
     } catch (_) {
-      Get.snackbar('Error', 'Failed to clear cart');
+      GBSnack.plain('Error', 'Failed to clear cart');
     }
   }
 }

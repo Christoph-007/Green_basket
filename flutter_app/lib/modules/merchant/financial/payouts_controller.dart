@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../config/theme.dart';
@@ -109,15 +110,12 @@ class PayoutsController extends GetxController {
 
   Future<void> requestPayout() async {
     if (availableBalance.value <= 0) {
-      Get.snackbar('No Balance', 'No available balance to withdraw',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('No Balance', 'No available balance to withdraw', position: SnackPosition.BOTTOM);
       return;
     }
     if (availableBalance.value < minimumPayoutAmount.value &&
         minimumPayoutAmount.value > 0) {
-      Get.snackbar('Below Minimum',
-          'Minimum payout amount is ₹${minimumPayoutAmount.value.toStringAsFixed(0)}',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Below Minimum', 'Minimum payout amount is ₹${minimumPayoutAmount.value.toStringAsFixed(0)}', position: SnackPosition.BOTTOM);
       return;
     }
     try {
@@ -125,23 +123,14 @@ class PayoutsController extends GetxController {
       final result =
           await _repo.requestPayout(amount: availableBalance.value);
       if (result['success'] == true) {
-        Get.snackbar(
-          'Payout Requested',
-          result['message'] ??
-              'Your payout will be credited in 2–3 business days',
-          backgroundColor: AppColors.success,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        GBSnack.success('Payout Requested', result['message'] ??
+              'Your payout will be credited in 2–3 business days', position: SnackPosition.BOTTOM);
         fetchPayouts();
       } else {
-        Get.snackbar(
-            'Error', result['error'] ?? 'Payout request failed',
-            snackPosition: SnackPosition.BOTTOM);
+        GBSnack.plain('Error', result['error'] ?? 'Payout request failed', position: SnackPosition.BOTTOM);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Could not process payout request',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not process payout request', position: SnackPosition.BOTTOM);
     } finally {
       isRequesting.value = false;
     }

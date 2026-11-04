@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/models/product_model.dart';
@@ -142,16 +143,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
         'keywords': _keywordsController.text.trim(),
       });
       Get.back(result: true);
-      Get.snackbar(
-        'Updated',
-        'Product updated successfully!',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Updated', 'Product updated successfully!', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Could not update product. Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not update product. Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSaving = false);
     }
@@ -181,16 +175,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
               try {
                 await _repo.deleteProduct(widget.product.id);
                 Get.back(result: true);
-                Get.snackbar(
-                  'Deleted',
-                  'Product removed successfully',
-                  backgroundColor: AppColors.success,
-                  colorText: Colors.white,
-                  snackPosition: SnackPosition.BOTTOM,
-                );
+                GBSnack.success('Deleted', 'Product removed successfully', position: SnackPosition.BOTTOM);
               } catch (_) {
-                Get.snackbar('Error', 'Could not delete product.',
-                    snackPosition: SnackPosition.BOTTOM);
+                GBSnack.plain('Error', 'Could not delete product.', position: SnackPosition.BOTTOM);
               } finally {
                 if (mounted) setState(() => _isDeleting = false);
               }
@@ -532,9 +519,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         padding: EdgeInsets.only(right: index < 2 ? AppSpacing.sm : 0),
         child: GestureDetector(
           // Photos already on the product are shown; adding or removing them is not built yet.
-          onTap: () => Get.snackbar('Photos not available yet',
-                'Photo upload is coming soon. For now, products are saved without photos.',
-                snackPosition: SnackPosition.BOTTOM),
+          onTap: () => GBSnack.plain('Photos not available yet', 'Photo upload is coming soon. For now, products are saved without photos.', position: SnackPosition.BOTTOM),
           child: Container(
             height: 100,
             decoration: BoxDecoration(

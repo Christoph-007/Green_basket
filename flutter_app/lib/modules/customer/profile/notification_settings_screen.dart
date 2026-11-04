@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../data/repositories/auth_repository.dart';
@@ -66,16 +67,9 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         }
       });
       Get.back();
-      Get.snackbar(
-        'Success',
-        'Notification preferences updated',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Success', 'Notification preferences updated', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to save settings',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to save settings', position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSaving = false);
     }

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -110,16 +111,9 @@ class _MerchantOrderDetailScreenState
     try {
       await _repo.updateOrderStatus(widget.order.id, next, note: note);
       setState(() => _currentStatus = next);
-      Get.snackbar(
-        'Status Updated',
-        'Order is now ${AppHelpers.getOrderStatusLabel(next)}',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Status Updated', 'Order is now ${AppHelpers.getOrderStatusLabel(next)}', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', _errorMessage(e, 'Could not update order status'),
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', _errorMessage(e, 'Could not update order status'), position: SnackPosition.BOTTOM);
     } finally {
       if (mounted) setState(() => _isUpdating = false);
     }

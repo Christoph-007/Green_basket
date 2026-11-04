@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -46,10 +47,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   }
 
   void _showLocationError(String message) {
-    Get.snackbar('Location unavailable', message,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.error,
-        colorText: Colors.white);
+    GBSnack.error('Location unavailable', message, position: SnackPosition.BOTTOM);
   }
 
   /// Reads the phone's real GPS position and turns it into an address.
@@ -99,14 +97,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         _longitude = position.longitude;
         _detectedText = _currentText;
       });
-      Get.snackbar(
-          'Location Detected',
-          places.isEmpty
+      GBSnack.success('Location Detected', places.isEmpty
               ? 'We found where you are but not the street address. Please type it in.'
-              : 'Check the details and edit them if needed',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.success,
-          colorText: Colors.white);
+              : 'Check the details and edit them if needed', position: SnackPosition.BOTTOM);
     } catch (_) {
       _showLocationError(
           'Could not get your location. Please enter the address yourself.');
@@ -135,16 +128,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       await _repo.addAddress(address);
       if (mounted) setState(() => _isSaving = false);
       Get.back(result: true);
-      Get.snackbar('Address Saved', 'New address has been added',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.success,
-          colorText: Colors.white);
+      GBSnack.success('Address Saved', 'New address has been added', position: SnackPosition.BOTTOM);
     } catch (e) {
       if (mounted) setState(() => _isSaving = false);
-      Get.snackbar('Error', 'Failed to save address. Please try again.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.error,
-          colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to save address. Please try again.', position: SnackPosition.BOTTOM);
     }
   }
 

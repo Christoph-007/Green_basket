@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:intl/intl.dart';
@@ -116,7 +117,7 @@ class _AdminFinanceOrdersDetailScreenState extends State<AdminFinanceOrdersDetai
                       ),
                       child: ListTile(
                         onTap: () {
-                           Get.snackbar('Order #${order['orderId']}', 'Total: ₹$amount | Status: Delivered');
+                           GBSnack.plain('Order #${order['orderId']}', 'Total: ₹$amount | Status: Delivered');
                         },
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         leading: Container(

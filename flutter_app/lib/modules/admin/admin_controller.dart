@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../data/repositories/admin_repository.dart';
@@ -242,7 +243,7 @@ class AdminController extends GetxController {
       fetchAll();
     } catch (e) {
       debugPrint('verifyMerchant error: $e');
-      Get.snackbar('Error', 'Failed to verify merchant');
+      GBSnack.plain('Error', 'Failed to verify merchant');
     }
   }
 
@@ -261,7 +262,7 @@ class AdminController extends GetxController {
       await fetchProducts(); // Refresh the list
     } catch (e) {
       debugPrint('toggleProductStatus error: $e');
-      Get.snackbar('Error', 'Failed to update product status');
+      GBSnack.plain('Error', 'Failed to update product status');
     }
   }
 
@@ -272,7 +273,7 @@ class AdminController extends GetxController {
       await fetchStats(); // Update stats if needed
     } catch (e) {
       debugPrint('deleteProductById error: $e');
-      Get.snackbar('Error', 'Failed to delete product');
+      GBSnack.plain('Error', 'Failed to delete product');
     }
   }
 
@@ -282,7 +283,7 @@ class AdminController extends GetxController {
       await fetchMerchants(); // Re-fetch to update state
     } catch (e) {
       debugPrint('toggleMerchantBlock error: $e');
-      Get.snackbar('Error', 'Failed to update merchant status');
+      GBSnack.plain('Error', 'Failed to update merchant status');
     }
   }
 
@@ -292,10 +293,10 @@ class AdminController extends GetxController {
       await _repo.processPayout(id);
       fetchPayouts();
       fetchStats();
-      Get.snackbar('Success', 'Payout Processed');
+      GBSnack.plain('Success', 'Payout Processed');
     } catch (e) {
       debugPrint('processPayout error: $e');
-      Get.snackbar('Error', 'Failed to process payout');
+      GBSnack.plain('Error', 'Failed to process payout');
     }
   }
 
@@ -304,10 +305,10 @@ class AdminController extends GetxController {
       await _repo.bulkProcessPayouts();
       fetchPayouts();
       fetchStats();
-      Get.snackbar('Success', 'Bulk Payouts Processed');
+      GBSnack.plain('Success', 'Bulk Payouts Processed');
     } catch (e) {
       debugPrint('bulkProcessPayouts error: $e');
-      Get.snackbar('Error', 'Failed to process bulk payouts');
+      GBSnack.plain('Error', 'Failed to process bulk payouts');
     }
   }
 

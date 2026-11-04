@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -209,16 +210,9 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
         'isStoreOpen': _isManualOpen,
       });
       Get.back();
-      Get.snackbar(
-        'Settings Saved',
-        'Store settings updated successfully',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Settings Saved', 'Store settings updated successfully', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Failed to save settings. Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Failed to save settings. Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSaving = false);
     }

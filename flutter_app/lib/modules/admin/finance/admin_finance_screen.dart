@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
@@ -173,7 +174,7 @@ class AdminFinanceScreen extends StatelessWidget {
                           icon: Icons.account_balance_outlined,
                           color: Colors.purple,
                           onTap: () {
-                            Get.snackbar('Profit Analysis', 'Net profit is total commission earned from delivered orders.');
+                            GBSnack.plain('Profit Analysis', 'Net profit is total commission earned from delivered orders.');
                           },
                         ),
                       ),

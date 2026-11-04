@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -771,9 +772,7 @@ class _RecipeCard extends StatelessWidget {
                             }
                             final added = (result['data']?['stats']?['added'] ?? 0) as num;
                             if (added == 0) {
-                              Get.snackbar('Not added',
-                                  (result['message'] ?? 'No ingredients could be added').toString(),
-                                  snackPosition: SnackPosition.BOTTOM);
+                              GBSnack.plain('Not added', (result['message'] ?? 'No ingredients could be added').toString(), position: SnackPosition.BOTTOM);
                               return;
                             }
                             Get.snackbar(

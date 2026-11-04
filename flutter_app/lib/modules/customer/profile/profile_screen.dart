@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
@@ -180,7 +181,7 @@ class ProfileScreen extends StatelessWidget {
                   icon: Icons.help_outline,
                   label: 'Help & FAQ',
                   onTap: () =>
-                      Get.snackbar('Help & FAQ', 'Help center coming soon'),
+                      GBSnack.plain('Help & FAQ', 'Help center coming soon'),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:dio/dio.dart';
 import '../../config/constants.dart';
 import '../../config/routes.dart';
@@ -162,7 +163,7 @@ class AuthController extends GetxController {
         user.value = updatedUser;
         SocketService.to.connect();
         NotificationService.to.syncToken();
-        Get.snackbar('Success', 'Email verified successfully');
+        GBSnack.plain('Success', 'Email verified successfully');
         _navigateByRole(finalRole);
       } else {
         errorMessage.value = result['message'] ?? 'Invalid OTP';
@@ -178,7 +179,7 @@ class AuthController extends GetxController {
   Future<void> resendOtp(String email) async {
     try {
       await _repo.resendOtp(email);
-      Get.snackbar('OTP Sent', 'A new OTP has been sent to your email.');
+      GBSnack.plain('OTP Sent', 'A new OTP has been sent to your email.');
     } on DioException catch (e) {
       errorMessage.value =
           e.response?.data?['message'] ?? 'Failed to resend OTP';
@@ -193,11 +194,7 @@ class AuthController extends GetxController {
       errorMessage.value = '';
       final result = await _repo.forgotPassword(email);
       if (result['success'] == true) {
-        Get.snackbar(
-          'OTP Sent',
-          'A 6-digit code has been sent to $email',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        GBSnack.plain('OTP Sent', 'A 6-digit code has been sent to $email', position: SnackPosition.BOTTOM);
         if (openResetScreen) {
           Get.toNamed(Routes.resetPassword, arguments: {'email': email});
         }
@@ -227,11 +224,7 @@ class AuthController extends GetxController {
         newPassword: newPassword,
       );
       if (result['success'] == true) {
-        Get.snackbar(
-          'Password Reset',
-          'Your password has been changed. Please log in.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        GBSnack.plain('Password Reset', 'Your password has been changed. Please log in.', position: SnackPosition.BOTTOM);
         Get.offAllNamed(Routes.login);
         return true;
       }

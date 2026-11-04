@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/merchant_repository.dart';
@@ -56,15 +57,9 @@ class _ProductStockScreenState extends State<ProductStockScreen> {
       setState(() {
         _currentStock = newStock;
       });
-      Get.snackbar(
-        'Stock Updated',
-        'Stock set to $_currentStock ${widget.product.unit}',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Stock Updated', 'Stock set to $_currentStock ${widget.product.unit}', position: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update stock: $e', backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to update stock: $e');
     } finally {
       setState(() => _isLoading = false);
     }

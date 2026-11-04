@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -92,17 +93,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void _nextStep() {
     if (_currentStep == 0) {
       if (_nameController.text.isEmpty) {
-        Get.snackbar('Required', 'Please enter a product name');
+        GBSnack.plain('Required', 'Please enter a product name');
         return;
       }
       if (_selectedCategoryId == null) {
-        Get.snackbar('Required', 'Please select a category');
+        GBSnack.plain('Required', 'Please select a category');
         return;
       }
     }
     if (_currentStep == 1) {
       if (_priceController.text.isEmpty || _stockController.text.isEmpty) {
-        Get.snackbar('Required', 'Please fill in price and stock');
+        GBSnack.plain('Required', 'Please fill in price and stock');
         return;
       }
     }
@@ -140,13 +141,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             .toList(),
       });
       Get.back(result: true);
-      Get.snackbar(
-        'Success',
-        'Product added successfully!',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Success', 'Product added successfully!', position: SnackPosition.BOTTOM);
     } catch (e) {
       Get.snackbar('Error', 'Failed to add product: ${e.toString().split(':').last.trim()}',
           snackPosition: SnackPosition.BOTTOM,
@@ -534,9 +529,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         padding: EdgeInsets.only(right: index < 2 ? AppSpacing.sm : 0),
         child: GestureDetector(
           // Photo upload is not built yet; say so instead of pretending a photo was added.
-          onTap: () => Get.snackbar('Photos not available yet',
-                'Photo upload is coming soon. For now, products are saved without photos.',
-                snackPosition: SnackPosition.BOTTOM),
+          onTap: () => GBSnack.plain('Photos not available yet', 'Photo upload is coming soon. For now, products are saved without photos.', position: SnackPosition.BOTTOM),
           child: Container(
             height: 100,
             decoration: BoxDecoration(

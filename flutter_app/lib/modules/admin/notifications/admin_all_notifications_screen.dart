@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -49,8 +50,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
         }
       });
     } catch (e) {
-      Get.snackbar('Error', 'Failed to fetch notifications',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to fetch notifications');
     } finally {
       setState(() => _isLoading = false);
     }

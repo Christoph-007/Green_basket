@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -118,8 +119,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
 
   Future<void> _createOffer() async {
     if (_titleController.text.trim().isEmpty) {
-      Get.snackbar('Validation Error', 'Please enter an offer title',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Validation Error', 'Please enter an offer title', position: SnackPosition.BOTTOM);
       return;
     }
 
@@ -184,16 +184,9 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
 
       await _repo.createOffer(payload);
       Get.back(result: true);
-      Get.snackbar(
-        'Offer Created',
-        'Your offer is now live!',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.success('Offer Created', 'Your offer is now live!', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Could not create offer. Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not create offer. Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSubmitting = false);
     }

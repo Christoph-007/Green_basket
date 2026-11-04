@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -61,8 +62,7 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
 
   Future<void> _saveZone() async {
     if (_nameController.text.trim().isEmpty) {
-      Get.snackbar('Validation', 'Please enter a zone name',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Validation', 'Please enter a zone name', position: SnackPosition.BOTTOM);
       return;
     }
     setState(() => _isSaving = true);
@@ -84,18 +84,11 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
         await _repo.createZone(payload);
       }
       Get.back(result: true);
-      Get.snackbar(
-        _isEditing ? 'Zone Updated' : 'Zone Created',
-        _isEditing
+      GBSnack.success(_isEditing ? 'Zone Updated' : 'Zone Created', _isEditing
             ? 'Delivery zone saved successfully'
-            : 'New delivery zone added',
-        backgroundColor: AppColors.success,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+            : 'New delivery zone added', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Could not save zone. Please try again.',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not save zone. Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       setState(() => _isSaving = false);
     }

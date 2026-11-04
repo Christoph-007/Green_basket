@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,20 +67,13 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
         snackPosition: SnackPosition.BOTTOM,
       );
     } catch (_) {
-      Get.snackbar('Error', 'Could not load the CSV template',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Error', 'Could not load the CSV template', position: SnackPosition.BOTTOM);
     }
   }
 
   Future<void> _uploadFile() async {
     if (!_fileSelected || _pickedFile == null) {
-      Get.snackbar(
-        'No File Selected',
-        'Please select a CSV file to upload',
-        backgroundColor: AppColors.warning,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.warning('No File Selected', 'Please select a CSV file to upload', position: SnackPosition.BOTTOM);
       return;
     }
     setState(() => _isUploading = true);
@@ -101,22 +95,10 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
       _showUploadResult(ok, failed, errors);
     } on DioException catch (e) {
       final body = e.response?.data;
-      Get.snackbar(
-        'Upload Failed',
-        (body is Map ? (body['error'] ?? body['message']) : null)?.toString() ??
-            'Could not upload file. Please try again.',
-        backgroundColor: AppColors.error,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.error('Upload Failed', (body is Map ? (body['error'] ?? body['message']) : null)?.toString() ??
+            'Could not upload file. Please try again.', position: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar(
-        'Upload Failed',
-        'Could not read or upload the file. Please try again.',
-        backgroundColor: AppColors.error,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      GBSnack.error('Upload Failed', 'Could not read or upload the file. Please try again.', position: SnackPosition.BOTTOM);
     } finally {
       if (mounted) setState(() => _isUploading = false);
     }

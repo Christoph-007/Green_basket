@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
@@ -52,8 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (_otpCtrl.text.length == 6) {
       _authCtrl.verifyOtp(email: _email, otp: _otpCtrl.text);
     } else {
-      Get.snackbar('Invalid OTP', 'Please enter the complete 6-digit OTP',
-          snackPosition: SnackPosition.BOTTOM);
+      GBSnack.plain('Invalid OTP', 'Please enter the complete 6-digit OTP', position: SnackPosition.BOTTOM);
     }
   }
 

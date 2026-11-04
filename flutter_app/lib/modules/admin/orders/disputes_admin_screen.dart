@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/data/repositories/admin_repository.dart';
@@ -43,8 +44,7 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
       final data = await _repo.getDisputes();
       _disputes = data.map((e) => e as Map<String, dynamic>).toList();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load disputes',
-          backgroundColor: AppColors.error, colorText: Colors.white);
+      GBSnack.error('Error', 'Failed to load disputes');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -813,14 +813,10 @@ class _DisputesAdminScreenState extends State<DisputesAdminScreen>
                   }
                   await _repo.resolveDispute(
                       d['_id']?.toString() ?? '', body);
-                  Get.snackbar('Success', 'Dispute resolved',
-                      backgroundColor: AppColors.success,
-                      colorText: Colors.white);
+                  GBSnack.success('Success', 'Dispute resolved');
                   _fetchDisputes();
                 } catch (e) {
-                  Get.snackbar('Error', 'Failed to resolve dispute',
-                      backgroundColor: AppColors.error,
-                      colorText: Colors.white);
+                  GBSnack.error('Error', 'Failed to resolve dispute');
                 }
               },
               style: ElevatedButton.styleFrom(
