@@ -7,3 +7,21 @@ node_modules/
 # Logs
 *.log
 server_log*.txt
+
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+**/google-services.json
+**/key.properties
+*.jks
+*.keystore
+*.pem
+serviceAccount*.json
+
+# Build output / tooling
+build/
+.dart_tool/
+coverage/
+.idea/
+.vscode/
