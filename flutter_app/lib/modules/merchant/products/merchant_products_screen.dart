@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
+import 'package:greenbasket_app/data/repositories/merchant_repository.dart';
+import 'package:greenbasket_app/data/models/product_model.dart';
+import 'dart:async';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -103,9 +107,9 @@ class _ProductGrid extends StatelessWidget {
 
       var items = controller.products;
       if (onlyInStock) {
-        items = items.where((p) => p.stock > 0).toList().obs;
+        items = items.where((p) => controller.stockOf(p) > 0).toList().obs;
       } else if (onlyOutOfStock) {
-        items = items.where((p) => p.stock == 0).toList().obs;
+        items = items.where((p) => controller.stockOf(p) == 0).toList().obs;
       }
 
       if (items.isEmpty) {
@@ -146,7 +150,10 @@ class _ProductGrid extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final product = items[index];
-          final inStock = product.stock > 0;
+          return Obx(() {
+          final stock = controller.stockOf(product);
+          final inStock = stock > 0;
+          final lowStock = inStock && stock <= 5;
 
           return Container(
             decoration: BoxDecoration(
@@ -205,9 +212,11 @@ class _ProductGrid extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: inStock
-                                    ? AppColors.success
-                                    : AppColors.error,
+                                color: !inStock
+                                    ? AppColors.error
+                                    : lowStock
+                                        ? AppColors.warning
+                                        : AppColors.success,
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.full),
                                 boxShadow: const [
@@ -215,10 +224,16 @@ class _ProductGrid extends StatelessWidget {
                                 ],
                               ),
                               child: Text(
-                                inStock ? 'In Stock' : 'Out of Stock',
-                                style: const TextStyle(
+                                !inStock
+                                    ? 'Out of Stock'
+                                    : lowStock
+                                        ? 'Low stock'
+                                        : 'In Stock',
+                                style: TextStyle(
                                     fontSize: 11,
-                                    color: Colors.white,
+                                    color: lowStock
+                                        ? AppColors.textPrimary
+                                        : Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -251,24 +266,7 @@ class _ProductGrid extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 8),
-                            SizedBox(
-                              width: double.infinity,
-                              child: OutlinedButton(
-                                  onPressed: () async {
-                                    final result = await Get.to(() => ProductStockScreen(product: product));
-                                    if (result == true) controller.fetchProducts();
-                                  },
-                                style: OutlinedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  minimumSize: const Size(0, 32),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(6)),
-                                ),
-                                child: const Text('Update Stock',
-                                    style: TextStyle(fontSize: 12)),
-                              ),
-                            ),
+                            _StockStepper(product: product, controller: controller),
                           ],
                         ),
                       ),
@@ -278,8 +276,119 @@ class _ProductGrid extends StatelessWidget {
               ),
             ),
           );
+          });
         },
       ),
+      );
+    });
+  }
+}
+
+/// Change a product's stock from the list: minus, the number, plus. Taps are
+/// shown at once and sent as one request after a short pause. Tapping the
+/// number opens the full stock screen.
+class _StockStepper extends StatefulWidget {
+  final ProductModel product;
+  final MerchantProductController controller;
+
+  const _StockStepper({required this.product, required this.controller});
+
+  @override
+  State<_StockStepper> createState() => _StockStepperState();
+}
+
+class _StockStepperState extends State<_StockStepper> {
+  final _repo = MerchantRepository();
+  Timer? _timer;
+  late int _saved; // the last stock the server confirmed
+
+  @override
+  void initState() {
+    super.initState();
+    _saved = widget.controller.stockOf(widget.product);
+  }
+
+  @override
+  void dispose() {
+    // Leaving the screen with a change waiting: send it now.
+    if (_timer?.isActive ?? false) {
+      _timer!.cancel();
+      _send();
+    }
+    super.dispose();
+  }
+
+  void _change(int delta) {
+    final current = widget.controller.stockOf(widget.product);
+    final next = (current + delta).clamp(0, 999999);
+    if (next == current) return;
+    widget.controller.setStockLocally(widget.product.id, next);
+    _timer?.cancel();
+    _timer = Timer(const Duration(milliseconds: 400), _send);
+  }
+
+  Future<void> _send() async {
+    // Copy what is needed first: this can finish after the card is gone.
+    final controller = widget.controller;
+    final id = widget.product.id;
+    final value = controller.stockOf(widget.product);
+    if (value == _saved) return;
+    try {
+      await _repo.updateStock(id, value);
+      _saved = value;
+    } catch (e) {
+      controller.setStockLocally(id, _saved);
+      GBSnack.fromError(e, title: 'Stock not updated');
+    }
+  }
+
+  Widget _button(IconData icon, String tooltip, VoidCallback? onPressed) {
+    return SizedBox(
+      width: 36,
+      height: 36,
+      child: IconButton(
+        tooltip: tooltip,
+        padding: EdgeInsets.zero,
+        icon: Icon(icon, size: 18),
+        onPressed: onPressed,
+        style: IconButton.styleFrom(
+          foregroundColor: AppColors.primary,
+          side: const BorderSide(color: AppColors.border),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final stock = widget.controller.stockOf(widget.product);
+      return Row(
+        children: [
+          _button(Icons.remove, 'Decrease stock', stock > 0 ? () => _change(-1) : null),
+          Expanded(
+            child: InkWell(
+              onTap: () async {
+                final result = await Get.to(
+                    () => ProductStockScreen(product: widget.product));
+                if (result == true) widget.controller.fetchProducts();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  '$stock ${widget.product.unit}',
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.bodyMedium
+                      .copyWith(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ),
+          _button(Icons.add, 'Increase stock', () => _change(1)),
+        ],
       );
     });
   }
