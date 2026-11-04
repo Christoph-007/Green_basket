@@ -25,6 +25,35 @@ class GBSnack {
           {SnackPosition? position, Duration? duration}) =>
       _show(title, message, AppColors.warning, AppColors.textPrimary, position, duration);
 
+  /// A message with one action button, for example Undo. The button closes the
+  /// message and then runs [onAction].
+  static void withAction(
+    String title,
+    String message, {
+    required String actionLabel,
+    required VoidCallback onAction,
+    SnackPosition? position,
+    Duration duration = const Duration(seconds: 5),
+  }) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: position,
+      duration: duration,
+      mainButton: TextButton(
+        style: TextButton.styleFrom(foregroundColor: Colors.white),
+        onPressed: () {
+          Get.closeCurrentSnackbar();
+          onAction();
+        },
+        child: Text(
+          actionLabel,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
   /// Default GetX look (neutral), for messages that are neither good nor bad.
   static void plain(String title, String message,
           {SnackPosition? position, Duration? duration}) =>

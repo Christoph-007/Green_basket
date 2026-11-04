@@ -104,8 +104,43 @@ class CartController extends GetxController {
     ));
   }
 
+  /// The cart line with this product and preparation, if it is in the cart.
+  CartItemModel? _findLine(String productId, String? preparation) {
+    for (final line in items) {
+      if (line.productId == productId && line.preparationOption == preparation) {
+        return line;
+      }
+    }
+    return null;
+  }
+
+  /// After a removal, offer to put the item back for a few seconds.
+  void _offerUndo(CartItemModel line) {
+    GBSnack.withAction(
+      'Removed from cart',
+      '${line.productName} was removed',
+      actionLabel: 'Undo',
+      position: SnackPosition.BOTTOM,
+      onAction: () async {
+        try {
+          await _repo.addToCart(
+            productId: line.productId,
+            quantity: line.quantity,
+            preparationOption: line.preparationOption,
+          );
+          await fetchCart();
+        } catch (_) {
+          GBSnack.error('Cart', 'Could not restore the item',
+              position: SnackPosition.BOTTOM);
+        }
+      },
+    );
+  }
+
   Future<void> updateQuantity(String productId, int quantity,
       {String? preparation}) async {
+    // Remember the line first, so a removal can be undone.
+    final removedLine = quantity <= 0 ? _findLine(productId, preparation) : null;
     try {
       if (quantity <= 0) {
         await _repo.removeFromCart(productId, preparation: preparation);
@@ -114,6 +149,7 @@ class CartController extends GetxController {
             productId: productId, quantity: quantity, preparation: preparation);
       }
       await fetchCart();
+      if (removedLine != null) _offerUndo(removedLine);
     } on DioException catch (e) {
       final body = e.response?.data;
       GBSnack.plain('Cart', (body is Map ? body['message'] : null)?.toString() ?? 'Could not update the cart', position: SnackPosition.BOTTOM);
@@ -122,10 +158,16 @@ class CartController extends GetxController {
   }
 
   Future<void> removeItem(String productId, {String? preparation}) async {
+    final removedLine = _findLine(productId, preparation);
     try {
       await _repo.removeFromCart(productId, preparation: preparation);
       await fetchCart();
-    } catch (_) {}
+      if (removedLine != null) _offerUndo(removedLine);
+    } catch (_) {
+      GBSnack.error('Cart', 'Could not remove the item',
+          position: SnackPosition.BOTTOM);
+      await fetchCart();
+    }
   }
 
   Future<void> applyCoupon(String code) async {
