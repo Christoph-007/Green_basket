@@ -186,14 +186,16 @@ class AdminFinanceScreen extends StatelessWidget {
       final error = controller.trendError.value;
       final current = (data['current'] as List?) ?? const [];
       if (current.isEmpty) {
-        if (error.isEmpty) return const SizedBox.shrink();
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Text("Couldn't load the revenue trend.",
+          child: Text(
+              error.isEmpty
+                  ? 'Revenue trend: no revenue in this period yet.'
+                  : "Couldn't load the revenue trend. Make sure the server is updated and restarted.",
               style: AppTextStyles.bodySmall),
         );
       }
