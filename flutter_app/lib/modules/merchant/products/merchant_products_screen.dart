@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:greenbasket_app/data/repositories/merchant_repository.dart';
 import 'package:greenbasket_app/data/models/product_model.dart';
@@ -190,8 +191,11 @@ class _ProductGrid extends StatelessWidget {
                             ),
                             child: Center(
                               child: product.primaryImage.isNotEmpty
-                                  ? Image.network(product.primaryImage,
-                                      fit: BoxFit.cover)
+                                  ? GBNetworkImage(
+                                      url: product.primaryImage,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      memCacheWidth: 400)
                                   : Icon(Icons.local_florist,
                                       size: 50,
                                       color: AppColors.primary.withValues(alpha: 0.5)),

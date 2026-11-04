@@ -1,7 +1,7 @@
 import '../nav_controller.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
 import '../../../config/routes.dart';
@@ -383,11 +383,11 @@ class _CartItemTile extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.sm),
             child: item.productImage != null
-                ? CachedNetworkImage(
-                    imageUrl: item.productImage!,
+                ? GBNetworkImage(
+                    url: item.productImage,
                     width: 72,
                     height: 72,
-                    fit: BoxFit.cover,
+                    memCacheWidth: 200,
                   )
                 : Container(
                     width: 72,

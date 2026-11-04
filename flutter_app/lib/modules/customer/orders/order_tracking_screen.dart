@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_network_image.dart';
 import 'package:get/get.dart';
 import '../../../utils/order_status.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -316,9 +317,9 @@ class OrderTrackingScreen extends StatelessWidget {
                                     borderRadius:
                                         BorderRadius.circular(
                                             AppRadius.sm),
-                                    child: Image.network(
-                                        item.productImage!,
-                                        fit: BoxFit.cover),
+                                    child: GBNetworkImage(
+                                        url: item.productImage,
+                                        memCacheWidth: 200),
                                   )
                                 : const Icon(Icons.eco_outlined,
                                     color: AppColors.primary,
