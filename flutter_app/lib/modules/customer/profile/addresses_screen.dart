@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -54,27 +55,12 @@ class AddressesScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
-          onPressed: () => Get.back(),
-        ),
-        title: const Text('My Addresses', style: AppTextStyles.titleLarge),
-        actions: [
+      appBar: GBAppBar(title: 'My Addresses', backIcon: Icons.arrow_back_ios_new_rounded, actions: [
           IconButton(
             icon: const Icon(Icons.add_rounded, color: AppColors.primary),
             onPressed: () => Get.toNamed('${Routes.addresses}/add')?.then((_) => ctrl.fetchAddresses()),
           ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+        ]),
       body: Obx(() {
         if (ctrl.isLoading.value) return const GBLoader();
         

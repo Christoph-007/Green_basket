@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -196,13 +197,7 @@ class _CreateOfferScreenState extends State<CreateOfferScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Create Offer'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Create Offer', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

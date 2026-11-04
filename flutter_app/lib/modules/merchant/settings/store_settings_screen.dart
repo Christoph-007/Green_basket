@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -222,13 +223,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Store Settings'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Store Settings', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -133,13 +134,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Bulk Upload Products'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Bulk Upload Products', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

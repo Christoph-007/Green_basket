@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -15,17 +16,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: const Text('Profile', style: AppTextStyles.titleLarge),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Profile', showBack: false),
       body: SingleChildScrollView(
         child: Column(
           children: [

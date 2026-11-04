@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -79,22 +80,7 @@ class RecipeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
-          onPressed: () => Get.back(),
-        ),
-        title: const Text('Recipes & Meal Ideas',
-            style: AppTextStyles.titleLarge),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Recipes & Meal Ideas', backIcon: Icons.arrow_back_ios_new_rounded),
       body: Column(
         children: [
           // Search bar

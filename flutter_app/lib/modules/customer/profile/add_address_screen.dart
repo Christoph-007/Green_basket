@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
@@ -139,22 +140,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
-          onPressed: () => Get.back(),
-        ),
-        title: const Text('Add New Address',
-            style: AppTextStyles.titleLarge),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Add New Address', backIcon: Icons.arrow_back_ios_new_rounded),
       body: Form(
         key: _formKey,
         child: Column(

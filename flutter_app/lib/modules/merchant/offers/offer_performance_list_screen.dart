@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../../../data/repositories/merchant_repository.dart';
@@ -38,13 +39,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Offer Performance'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Offer Performance', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _offers.isEmpty

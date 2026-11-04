@@ -10,6 +10,16 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? foregroundColor;
   final Widget? leading;
 
+  /// Something under the title, usually a [TabBar]. When set, the thin
+  /// divider line is not drawn.
+  final PreferredSizeWidget? bottom;
+
+  /// Draws a 1 px divider under the bar (when there is no [bottom]).
+  final bool showDivider;
+
+  /// Icon for the default back button.
+  final IconData backIcon;
+
   const GBAppBar({
     super.key,
     required this.title,
@@ -18,10 +28,23 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.leading,
+    this.bottom,
+    this.showDivider = true,
+    this.backIcon = Icons.arrow_back_ios,
   });
 
+  PreferredSizeWidget? get _bottom {
+    if (bottom != null) return bottom;
+    if (!showDivider) return null;
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(1),
+      child: Container(height: 1, color: AppColors.divider),
+    );
+  }
+
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (_bottom?.preferredSize.height ?? 0));
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +57,14 @@ class GBAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBack
           ? (leading ??
               IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 20),
+                tooltip: 'Back',
+                icon: Icon(backIcon, size: 20),
                 onPressed: () => Get.back(),
               ))
           : leading,
       title: Text(title, style: AppTextStyles.titleLarge),
       actions: actions,
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1),
-        child: Container(height: 1, color: AppColors.divider),
-      ),
+      bottom: _bottom,
     );
   }
 }

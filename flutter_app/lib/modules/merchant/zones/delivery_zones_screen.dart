@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -121,13 +122,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Delivery Zones'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-        actions: [
+      appBar: GBAppBar(title: 'Delivery Zones', backIcon: Icons.arrow_back_ios_new, actions: [
           IconButton(
             tooltip: 'Set store location',
             icon: const Icon(Icons.my_location),
@@ -140,8 +135,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
               _fetchZones();
             },
           ),
-        ],
-      ),
+        ], showDivider: false),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(

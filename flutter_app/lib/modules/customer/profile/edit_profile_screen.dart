@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -106,18 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
-          onPressed: () => Get.back(),
-        ),
-        title: const Text('Edit Profile',
-            style: AppTextStyles.titleLarge),
-        actions: [
+      appBar: GBAppBar(title: 'Edit Profile', backIcon: Icons.arrow_back_ios_new_rounded, actions: [
           TextButton(
             onPressed: _isSaving ? null : _save,
             child: Text(
@@ -126,12 +116,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   .copyWith(color: AppColors.primary),
             ),
           ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.divider),
-        ),
-      ),
+        ]),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Form(

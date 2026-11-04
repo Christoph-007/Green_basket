@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -15,13 +16,7 @@ class PayoutsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const MerchantBottomNav(highlight: false),
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Payouts'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Get.back(),
-        ),
-      ),
+      appBar: GBAppBar(title: 'Payouts', backIcon: Icons.arrow_back_ios_new, showDivider: false),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
