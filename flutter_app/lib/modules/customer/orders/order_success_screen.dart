@@ -63,7 +63,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                 scale: _scaleAnim,
                 child: Container(
                   width: 120, height: 120,
-                  decoration: const BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
                   child: const Icon(Icons.check_circle_rounded, color: AppColors.primary, size: 72),
                 ),
               ),
@@ -73,7 +73,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                 opacity: _fadeAnim,
                 child: Column(
                   children: [
-                    const Text('Order Placed\nSuccessfully!', textAlign: TextAlign.center, style: AppTextStyles.displayMedium),
+                    Text('Order Placed\nSuccessfully!', textAlign: TextAlign.center, style: AppTextStyles.displayMedium),
                     const SizedBox(height: AppSpacing.md),
 
                     Container(
@@ -102,7 +102,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Estimated Delivery', style: AppTextStyles.bodySmall),
+                                Text('Estimated Delivery', style: AppTextStyles.bodySmall),
                                 const SizedBox(height: 2),
                                 Text(_estimatedDelivery, style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
                               ],

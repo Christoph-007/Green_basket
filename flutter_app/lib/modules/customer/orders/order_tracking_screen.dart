@@ -146,7 +146,7 @@ class OrderTrackingScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
@@ -231,7 +231,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
 
                 // Map placeholder
-                const Text('Live Location',
+                Text('Live Location',
                     style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 Container(
@@ -282,7 +282,7 @@ class OrderTrackingScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.md),
 
                 // Order items
-                const Text('Order Items',
+                Text('Order Items',
                     style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 Container(

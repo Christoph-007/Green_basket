@@ -50,7 +50,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
           ],
         ), leading: Builder(builder: (context) {
           return IconButton(tooltip: 'Open menu', 
-            icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+            icon: Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
         }), backgroundColor: Colors.white),
@@ -270,7 +270,7 @@ class _MerchantOrdersScreenState extends State<MerchantOrdersScreen>
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.access_time,
+                              Icon(Icons.access_time,
                                   size: 14, color: AppColors.textHint),
                               const SizedBox(width: 4),
                               Text(AppHelpers.formatDateTime(order.createdAt),

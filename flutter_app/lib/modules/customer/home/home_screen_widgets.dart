@@ -25,7 +25,7 @@ class _Header extends StatelessWidget {
               Text(_greeting,
                   style: AppTextStyles.bodySmall),
               const SizedBox(height: 2),
-              const Text('What are you looking for?',
+              Text('What are you looking for?',
                   style: AppTextStyles.headlineMedium),
             ],
           ),
@@ -418,7 +418,7 @@ class _HomeRecipeCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               color: AppColors.shadowFaint,
               blurRadius: 6,
@@ -513,7 +513,7 @@ class _HomeRecipeCard extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        const Icon(Icons.access_time_rounded,
+                        Icon(Icons.access_time_rounded,
                             size: 10, color: AppColors.textSecondary),
                         const SizedBox(width: 2),
                         Text(

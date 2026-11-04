@@ -83,7 +83,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
       body: _notifications.isEmpty && _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _notifications.isEmpty
-              ? const Center(
+              ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -174,7 +174,7 @@ class _AdminAllNotificationsScreenState extends State<AdminAllNotificationsScree
                 ),
                 const Spacer(),
                 if (notif['type'] != null) ...[
-                  const Icon(Icons.label_outline, size: 12, color: AppColors.textSecondary),
+                  Icon(Icons.label_outline, size: 12, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     (notif['type'] as String),

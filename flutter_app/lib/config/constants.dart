@@ -39,6 +39,7 @@ class AppConstants {
   static const String cartCacheKey = 'cart_cache';
   static const String recentSearchesKey = 'recent_searches';
   static const String orderAlertSoundKey = 'order_alert_sound';
+  static const String themeModeKey = 'theme_mode';
   static const String locationExplainedKey = 'location_explained';
 
   // ── User roles ─────────────────────────────────────────────────────

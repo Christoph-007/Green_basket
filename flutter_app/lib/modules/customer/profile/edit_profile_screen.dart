@@ -134,7 +134,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Container(
                             width: 90,
                             height: 90,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: AppColors.primaryContainer,
                               shape: BoxShape.circle,
                             ),
@@ -404,7 +404,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             enabled ? AppColors.surface : AppColors.surfaceVariant,
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: BorderSide(color: AppColors.border),
         ),
       ),
     );

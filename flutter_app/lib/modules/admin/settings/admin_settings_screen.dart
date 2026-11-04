@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -142,6 +143,8 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(
           children: [
+            const ThemeModeSelector(),
+            const SizedBox(height: AppSpacing.md),
             _buildGeneralSection(),
             const SizedBox(height: AppSpacing.md),
             _buildPaymentSection(),

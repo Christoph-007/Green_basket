@@ -170,7 +170,7 @@ class OfferAnalyticsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(AppRadius.md),
                     border: Border.all(color: AppColors.border),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text('No redemptions yet',
                         style: AppTextStyles.bodyMedium),
                   ),

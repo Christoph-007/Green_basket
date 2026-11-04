@@ -25,14 +25,14 @@ class OrderStatusStyle {
   static OrderStatusInfo of(String status) {
     switch (status.toLowerCase()) {
       case 'delivered':
-        return const OrderStatusInfo(
+        return OrderStatusInfo(
           fg: AppColors.brandForest,
           bg: AppColors.primaryContainer,
           icon: Icons.check_circle_outline,
           label: 'Delivered',
         );
       case 'completed':
-        return const OrderStatusInfo(
+        return OrderStatusInfo(
           fg: AppColors.brandForest,
           bg: AppColors.primaryContainer,
           icon: Icons.task_alt,
@@ -53,7 +53,7 @@ class OrderStatusStyle {
           label: 'Preparing',
         );
       case 'ready':
-        return const OrderStatusInfo(
+        return OrderStatusInfo(
           fg: AppColors.purpleDeep,
           bg: AppColors.purpleContainer,
           icon: Icons.inventory_2_outlined,
@@ -83,7 +83,7 @@ class OrderStatusStyle {
           label: 'Refunded',
         );
       case 'payment_pending':
-        return const OrderStatusInfo(
+        return OrderStatusInfo(
           fg: AppColors.textSecondary,
           bg: AppColors.neutralSoft,
           icon: Icons.hourglass_empty,

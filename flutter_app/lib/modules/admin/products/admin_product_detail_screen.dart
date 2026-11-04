@@ -49,7 +49,7 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-        title: const Text('Delete Product?', style: AppTextStyles.titleLarge),
+        title: Text('Delete Product?', style: AppTextStyles.titleLarge),
         content: Text('Are you sure you want to delete "${_product['name']}"? This cannot be undone.',
             style: AppTextStyles.bodyMedium),
         actions: [
@@ -139,12 +139,12 @@ class _AdminProductDetailScreenState extends State<AdminProductDetailScreen> {
                   _buildDetailRow('Category', category, Icons.category_outlined),
                   
                   const Divider(height: 32),
-                  const Text('Description', style: AppTextStyles.titleLarge),
+                  Text('Description', style: AppTextStyles.titleLarge),
                   const SizedBox(height: 8),
                   Text(description, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
                   
                   const SizedBox(height: 40),
-                  const Text('Admin Controls', style: AppTextStyles.titleLarge),
+                  Text('Admin Controls', style: AppTextStyles.titleLarge),
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,

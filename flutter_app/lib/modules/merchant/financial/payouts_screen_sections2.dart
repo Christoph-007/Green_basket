@@ -49,7 +49,7 @@ extension _PayoutsScreenSections2 on PayoutsScreen {
             const SizedBox(height: AppSpacing.lg),
             Text('Request Payout', style: AppTextStyles.headlineMedium),
             const SizedBox(height: AppSpacing.sm),
-            const Text('Available Balance', style: AppTextStyles.bodySmall),
+            Text('Available Balance', style: AppTextStyles.bodySmall),
             Obx(() => Text(
                   '₹${controller.availableBalance.value.toStringAsFixed(2)}',
                   style: AppTextStyles.displayMedium

@@ -69,7 +69,7 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
             const SizedBox(height: AppSpacing.md),
             if (id == 'export_orders' || id == 'update_prices') ...[
               if (id == 'export_orders') ...[
-                const Text('Date Range', style: AppTextStyles.labelLarge),
+                Text('Date Range', style: AppTextStyles.labelLarge),
                 const SizedBox(height: AppSpacing.sm),
                 Row(
                   children: [
@@ -84,7 +84,7 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
                 ),
               ],
               if (id == 'update_prices') ...[
-                const Text('Price Change', style: AppTextStyles.labelLarge),
+                Text('Price Change', style: AppTextStyles.labelLarge),
                 const SizedBox(height: AppSpacing.sm),
                 const TextField(
                   keyboardType: TextInputType.number,

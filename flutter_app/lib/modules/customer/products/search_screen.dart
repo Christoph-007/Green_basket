@@ -208,10 +208,10 @@ class _SearchScreenState extends State<SearchScreen> {
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
-            prefixIcon: const Icon(Icons.search, color: AppColors.textHint),
+            prefixIcon: Icon(Icons.search, color: AppColors.textHint),
             suffixIcon: IconButton(
               tooltip: 'Clear search',
-              icon: const Icon(Icons.close, color: AppColors.textSecondary),
+              icon: Icon(Icons.close, color: AppColors.textSecondary),
               onPressed: _clearAll,
             ),
           ),
@@ -250,7 +250,7 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.search, size: 64, color: AppColors.border),
+            Icon(Icons.search, size: 64, color: AppColors.border),
             const SizedBox(height: 16),
             Text(
               'Search for fresh produce',
@@ -268,7 +268,7 @@ class _SearchScreenState extends State<SearchScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Recent searches', style: AppTextStyles.titleLarge),
+              Text('Recent searches', style: AppTextStyles.titleLarge),
               TextButton(
                 onPressed: _ctrl.clearRecent,
                 child: const Text('Clear'),
@@ -281,11 +281,11 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               for (final term in recent)
                 ActionChip(
-                  avatar: const Icon(Icons.history,
+                  avatar: Icon(Icons.history,
                       size: 16, color: AppColors.textSecondary),
                   label: Text(term, style: AppTextStyles.bodySmall),
                   backgroundColor: AppColors.surface,
-                  side: const BorderSide(color: AppColors.border),
+                  side: BorderSide(color: AppColors.border),
                   onPressed: () => _useTerm(term),
                 ),
             ],
@@ -293,7 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
           const SizedBox(height: 24),
         ],
         if (trending.isNotEmpty) ...[
-          const Text('Popular right now', style: AppTextStyles.titleLarge),
+          Text('Popular right now', style: AppTextStyles.titleLarge),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -328,7 +328,7 @@ class _SearchScreenState extends State<SearchScreen> {
         itemBuilder: (context, i) => ActionChip(
           label: Text(list[i], style: AppTextStyles.bodySmall),
           backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.border),
+          side: BorderSide(color: AppColors.border),
           onPressed: () => _useTerm(list[i]),
         ),
       ),

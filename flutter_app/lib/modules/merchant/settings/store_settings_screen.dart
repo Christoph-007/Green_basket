@@ -343,7 +343,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
                                             () => _pickTime(i, true),
                                           ),
                                         ),
-                                        const Padding(
+                                        Padding(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: AppSpacing.sm),
                                           child: Icon(Icons.arrow_forward,
@@ -558,7 +558,7 @@ class _StoreSettingsScreenState extends State<StoreSettingsScreen> {
             ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           boxShadow: [
             BoxShadow(

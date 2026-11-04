@@ -142,7 +142,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Target Audience', style: AppTextStyles.titleLarge),
+            Text('Target Audience', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             Wrap(
               spacing: AppSpacing.sm,
@@ -176,7 +176,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Notification Type', style: AppTextStyles.titleLarge),
+            Text('Notification Type', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             Row(
               children: _notifTypes.map((type) {
@@ -211,7 +211,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Notification Content', style: AppTextStyles.titleLarge),
+            Text('Notification Content', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             TextField(
               controller: _titleController,
@@ -258,7 +258,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
               children: [
                 const Icon(Icons.preview_outlined, color: AppColors.primary, size: 18),
                 const SizedBox(width: AppSpacing.sm),
-                const Text('Preview', style: AppTextStyles.titleMedium),
+                Text('Preview', style: AppTextStyles.titleMedium),
               ],
             ),
             const SizedBox(height: AppSpacing.sm),
@@ -349,7 +349,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Recent Notifications', style: AppTextStyles.titleLarge),
+            Text('Recent Notifications', style: AppTextStyles.titleLarge),
             if (_recentNotifications.isNotEmpty)
               TextButton(
                 onPressed: () => Get.toNamed(Routes.adminAllNotifications),
@@ -361,7 +361,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
         if (_isLoading && _recentNotifications.isEmpty)
           const Center(child: CircularProgressIndicator())
         else if (_recentNotifications.isEmpty)
-          const Center(
+          Center(
             child: Padding(
               padding: EdgeInsets.all(AppSpacing.lg),
               child: Text('No notifications sent recently', style: AppTextStyles.bodyMedium),
@@ -416,7 +416,7 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
                         ),
                         const Spacer(),
                         if (notif['type'] != null) ...[
-                          const Icon(Icons.label_outline, size: 12, color: AppColors.textSecondary),
+                          Icon(Icons.label_outline, size: 12, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
                           Text(
                             (notif['type'] as String),

@@ -73,7 +73,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
                   ),
                   const SizedBox(height: 16),
                   if (filteredMerchants.isEmpty)
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Center(
                         child: Text('No merchants found', style: TextStyle(color: AppColors.textSecondary)),
@@ -113,7 +113,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          const Icon(Icons.search, color: AppColors.textMuted, size: 18),
+          Icon(Icons.search, color: AppColors.textMuted, size: 18),
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
@@ -246,7 +246,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
+            boxShadow: [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
           ),
           child: Column(
             children: [

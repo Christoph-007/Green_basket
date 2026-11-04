@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
@@ -109,6 +110,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             }),
+            const SizedBox(height: 8),
+
+            const ThemeModeSelector(),
             const SizedBox(height: 8),
 
             _MenuSection(
@@ -358,7 +362,7 @@ class _MenuItem extends StatelessWidget {
         child: Icon(icon, color: AppColors.primary, size: 18),
       ),
       title: Text(label, style: AppTextStyles.titleMedium),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.arrow_forward_ios,
         size: 14,
         color: AppColors.textHint,

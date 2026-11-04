@@ -479,13 +479,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                       borderSide:
-                          const BorderSide(color: AppColors.border),
+                          BorderSide(color: AppColors.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                       borderSide:
-                          const BorderSide(color: AppColors.border),
+                          BorderSide(color: AppColors.border),
                     ),
                     isDense: true,
                   ),

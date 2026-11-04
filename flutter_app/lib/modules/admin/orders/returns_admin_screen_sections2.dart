@@ -82,7 +82,7 @@ extension _ReturnsAdminScreenStateSections2 on _ReturnsAdminScreenState {
               if (processedAt.isNotEmpty) _detailRow('Processed', processedAt),
 
               const SizedBox(height: AppSpacing.md),
-              const Text('Reason', style: AppTextStyles.titleLarge),
+              Text('Reason', style: AppTextStyles.titleLarge),
               const SizedBox(height: 4),
               Text(reason, style: AppTextStyles.bodyMedium),
 
@@ -114,7 +114,7 @@ extension _ReturnsAdminScreenStateSections2 on _ReturnsAdminScreenState {
               // Items
               if (items.isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.md),
-                const Text('Items', style: AppTextStyles.titleLarge),
+                Text('Items', style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 ...items.map((item) {
                   final it = item as Map<String, dynamic>;

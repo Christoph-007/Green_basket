@@ -425,13 +425,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                       borderSide:
-                          const BorderSide(color: AppColors.border),
+                          BorderSide(color: AppColors.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(AppRadius.full),
                       borderSide:
-                          const BorderSide(color: AppColors.border),
+                          BorderSide(color: AppColors.border),
                     ),
                     isDense: true,
                   ),

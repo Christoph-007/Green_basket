@@ -267,7 +267,7 @@ extension _DisputesAdminScreenStateSections1 on _DisputesAdminScreenState {
               // Row 2 – order + status badge
               Row(
                 children: [
-                  const Icon(Icons.receipt_long_outlined,
+                  Icon(Icons.receipt_long_outlined,
                       size: 14, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(
@@ -298,7 +298,7 @@ extension _DisputesAdminScreenStateSections1 on _DisputesAdminScreenState {
               // Row 3 – customer name
               Row(
                 children: [
-                  const Icon(Icons.person_outline,
+                  Icon(Icons.person_outline,
                       size: 14, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(

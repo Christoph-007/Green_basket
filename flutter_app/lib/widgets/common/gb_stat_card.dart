@@ -36,7 +36,7 @@ class GBStatCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: AppColors.shadowTint,
                   blurRadius: 18,

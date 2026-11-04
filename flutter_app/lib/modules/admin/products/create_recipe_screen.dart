@@ -224,7 +224,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Basic Info', style: AppTextStyles.titleLarge),
+            Text('Basic Info', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             TextFormField(
               controller: _nameController,
@@ -250,7 +250,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Meal Type', style: AppTextStyles.titleLarge),
+            Text('Meal Type', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             Wrap(
               spacing: AppSpacing.sm,
@@ -286,7 +286,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
             borderRadius: BorderRadius.circular(AppRadius.md),
             border: Border.all(color: AppColors.border, style: BorderStyle.solid),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.add_photo_alternate_outlined, size: 48, color: AppColors.textHint),
@@ -306,7 +306,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Details', style: AppTextStyles.titleLarge),
+            Text('Details', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             Row(
               children: [
@@ -360,7 +360,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Ingredients', style: AppTextStyles.titleLarge),
+                Text('Ingredients', style: AppTextStyles.titleLarge),
                 TextButton.icon(
                   onPressed: _addIngredient,
                   icon: const Icon(Icons.add, size: 16),
@@ -430,7 +430,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Instructions', style: AppTextStyles.titleLarge),
+                Text('Instructions', style: AppTextStyles.titleLarge),
                 TextButton.icon(
                   onPressed: _addStep,
                   icon: const Icon(Icons.add, size: 16),

@@ -102,7 +102,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
     return ListView(
       children: [
         SizedBox(height: Get.height * 0.2),
-        const Icon(Icons.gavel_outlined, size: 80, color: AppColors.textSecondary),
+        Icon(Icons.gavel_outlined, size: 80, color: AppColors.textSecondary),
         const SizedBox(height: AppSpacing.md),
         Center(
           child: Text(
@@ -110,7 +110,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
             style: AppTextStyles.titleMedium,
           ),
         ),
-        const Center(
+        Center(
           child: Text(
             'Keep up the good work!',
             style: AppTextStyles.bodySmall,
@@ -197,7 +197,7 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
         ),

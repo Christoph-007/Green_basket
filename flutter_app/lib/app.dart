@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/data/services/theme_controller.dart';
 import 'package:greenbasket_app/modules/auth/onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 import 'bindings/app_bindings.dart';
@@ -96,6 +97,8 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       title: 'GreenBasket',
       theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeController.to.mode.value,
       initialRoute: Routes.splash,
       initialBinding: AppBindings(),
       debugShowCheckedModeBanner: false,

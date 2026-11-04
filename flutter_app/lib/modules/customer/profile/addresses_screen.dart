@@ -198,8 +198,8 @@ class _AddressCard extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-        title: const Text('Delete Address', style: AppTextStyles.titleLarge),
-        content: const Text('Are you sure you want to delete this address?', style: AppTextStyles.bodyMedium),
+        title: Text('Delete Address', style: AppTextStyles.titleLarge),
+        content: Text('Are you sure you want to delete this address?', style: AppTextStyles.bodyMedium),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text('Cancel')),
           TextButton(
@@ -226,11 +226,11 @@ class _EmptyAddresses extends StatelessWidget {
         children: [
           Container(
             width: 80, height: 80,
-            decoration: const BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
+            decoration: BoxDecoration(color: AppColors.primaryContainer, shape: BoxShape.circle),
             child: const Icon(Icons.location_off_rounded, color: AppColors.primary, size: 40),
           ),
           const SizedBox(height: AppSpacing.md),
-          const Text('No addresses saved', style: AppTextStyles.headlineMedium),
+          Text('No addresses saved', style: AppTextStyles.headlineMedium),
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Add your delivery addresses for faster checkout',

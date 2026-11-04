@@ -243,7 +243,7 @@ class _EditZoneScreenState extends State<EditZoneScreen> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           boxShadow: [
             BoxShadow(

@@ -88,7 +88,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       );
                     },
                   ),
-                  const Text(
+                  Text(
                     'Admin Dashboard',
                     style: AppTextStyles.displayMedium,
                   ),
@@ -188,7 +188,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Pending Actions', style: AppTextStyles.titleLarge),
+          Text('Pending Actions', style: AppTextStyles.titleLarge),
           const SizedBox(height: 12),
           Obx(() => Row(
             children: [
@@ -255,7 +255,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Recent Orders', style: AppTextStyles.titleLarge),
+              Text('Recent Orders', style: AppTextStyles.titleLarge),
               TextButton(onPressed: () {
                 Get.to(() => const AdminOrdersScreen());
               }, child: const Text('View All')),
@@ -421,7 +421,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.person_outline, size: 14, color: AppColors.textSecondary),
+                            Icon(Icons.person_outline, size: 14, color: AppColors.textSecondary),
                             const SizedBox(width: 4),
                             Flexible(
                               child: Text(
@@ -435,7 +435,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            const Icon(Icons.storefront_outlined, size: 14, color: AppColors.textSecondary),
+                            Icon(Icons.storefront_outlined, size: 14, color: AppColors.textSecondary),
                             const SizedBox(width: 4),
                             Flexible(
                               child: Text(

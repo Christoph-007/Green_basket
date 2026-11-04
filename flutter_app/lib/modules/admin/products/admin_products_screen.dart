@@ -43,7 +43,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
         ),
@@ -59,9 +59,9 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
               ),
             ),
             const SizedBox(height: AppSpacing.md),
-            const Text('Sort & Filter', style: AppTextStyles.titleLarge),
+            Text('Sort & Filter', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
-            const Text('Category', style: AppTextStyles.labelLarge),
+            Text('Category', style: AppTextStyles.labelLarge),
             const SizedBox(height: AppSpacing.sm),
             Obx(() {
               final cats = ['All', ...controller.categories.map((c) => c['name'].toString())];
@@ -75,7 +75,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
               );
             }),
             const SizedBox(height: AppSpacing.md),
-            const Text('Status', style: AppTextStyles.labelLarge),
+            Text('Status', style: AppTextStyles.labelLarge),
             const SizedBox(height: AppSpacing.sm),
             Obx(() => Wrap(
               spacing: AppSpacing.sm,
@@ -116,7 +116,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
         ),
@@ -195,7 +195,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   child: TextField(
                     controller: _searchController,
                     onChanged: (v) => _searchQuery.value = v,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Search products or merchants...',
                       prefixIcon: Icon(Icons.search, color: AppColors.textHint),
                     ),

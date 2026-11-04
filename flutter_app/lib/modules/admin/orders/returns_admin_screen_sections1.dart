@@ -107,7 +107,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
               // Customer
               Row(
                 children: [
-                  const Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
+                  Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Flexible(
                     child: Text(
@@ -301,7 +301,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(Icons.person_outline, size: 13, color: AppColors.textSecondary),
+                    Icon(Icons.person_outline, size: 13, color: AppColors.textSecondary),
                     const SizedBox(width: 3),
                     Text(userName, style: AppTextStyles.bodySmall),
                     if (userEmail != null) ...[

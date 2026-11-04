@@ -48,7 +48,7 @@ class _AdminShellState extends State<AdminShell> {
         children: [
       const OfflineBanner(),
       Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           border: Border(top: BorderSide(color: AppColors.divider)),
         ),

@@ -134,7 +134,7 @@ class _FinancialScreenState extends State<FinancialScreen>
                     borderRadius: BorderRadius.circular(AppRadius.lg),
                     border: Border.all(color: AppColors.border),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text('No chart data available',
                         style: AppTextStyles.bodyMedium),
                   ),
@@ -161,7 +161,7 @@ class _FinancialScreenState extends State<FinancialScreen>
                     borderRadius: BorderRadius.circular(AppRadius.md),
                     border: Border.all(color: AppColors.border),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text('No transactions found',
                         style: AppTextStyles.bodyMedium),
                   ),

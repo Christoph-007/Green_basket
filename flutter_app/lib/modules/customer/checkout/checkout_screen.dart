@@ -137,7 +137,7 @@ class CheckoutScreen extends StatelessWidget {
               // ── Place order ───────────────────────────────────────────
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.surface,
                   boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
                 ),

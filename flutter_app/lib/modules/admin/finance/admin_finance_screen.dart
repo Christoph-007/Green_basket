@@ -223,7 +223,7 @@ class AdminFinanceScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               color: AppColors.shadowTint,
               blurRadius: 18,
@@ -367,7 +367,7 @@ class AdminFinanceScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             color: AppColors.shadowTint,
             blurRadius: 18,
@@ -386,7 +386,7 @@ class AdminFinanceScreen extends StatelessWidget {
                 Get.to(() => const AdminPayoutsScreen());
               }),
               if (p != completedPayouts.last)
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   child: Divider(color: AppColors.borderLight, height: 1),
                 ),

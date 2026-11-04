@@ -72,7 +72,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 const Icon(Icons.location_on,
                     size: 40, color: AppColors.primary),
                 const SizedBox(height: AppSpacing.md),
-                const Text('Use your location?',
+                Text('Use your location?',
                     style: AppTextStyles.headlineMedium),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
@@ -282,7 +282,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     const SizedBox(height: AppSpacing.xl),
 
                     // Address label
-                    const Text('Address Label',
+                    Text('Address Label',
                         style: AppTextStyles.titleMedium),
                     const SizedBox(height: AppSpacing.sm),
                     Wrap(
@@ -428,7 +428,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             Container(
               padding: const EdgeInsets.fromLTRB(
                   AppSpacing.md, AppSpacing.sm, AppSpacing.md, 28),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: AppColors.surface,
                 boxShadow: [
                   BoxShadow(

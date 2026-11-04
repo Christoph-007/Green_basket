@@ -93,11 +93,11 @@ class RecipeScreen extends StatelessWidget {
               onChanged: (v) => ctrl.searchQuery.value = v,
               decoration: InputDecoration(
                 hintText: 'Search recipes...',
-                prefixIcon: const Icon(Icons.search_rounded,
+                prefixIcon: Icon(Icons.search_rounded,
                     color: AppColors.textHint),
                 suffixIcon: Obx(() => ctrl.searchQuery.value.isNotEmpty
                     ? IconButton(tooltip: 'Clear', 
-                        icon: const Icon(Icons.clear_rounded,
+                        icon: Icon(Icons.clear_rounded,
                             color: AppColors.textHint, size: 18),
                         onPressed: () {
                           searchCtrl.clear();
@@ -184,7 +184,7 @@ class RecipeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.restaurant_menu_rounded,
+                      Icon(Icons.restaurant_menu_rounded,
                           color: AppColors.textHint, size: 64),
                       const SizedBox(height: AppSpacing.md),
                       Text('No recipes found',
@@ -243,7 +243,7 @@ class _RecipeCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
                 color: AppColors.shadowFaint,
                 blurRadius: 6,
@@ -354,7 +354,7 @@ class _RecipeCard extends StatelessWidget {
                           const SizedBox(width: 8),
                         ],
                         // Time
-                        const Icon(Icons.access_time_rounded,
+                        Icon(Icons.access_time_rounded,
                             size: 10, color: AppColors.textSecondary),
                         const SizedBox(width: 2),
                         Text(

@@ -28,7 +28,7 @@ class MerchantProductsScreen extends StatelessWidget {
         backgroundColor: AppColors.background,
         appBar: GBAppBar(title: 'Inventory Management', actions: [
             IconButton(tooltip: 'Search', 
-              icon: const Icon(Icons.search, color: AppColors.textPrimary),
+              icon: Icon(Icons.search, color: AppColors.textPrimary),
               onPressed: () {},
             ),
             IconButton(tooltip: 'Upload', 
@@ -55,7 +55,7 @@ class MerchantProductsScreen extends StatelessWidget {
           ), leading: Builder(
             builder: (context) {
               return IconButton(tooltip: 'Open menu', 
-                icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+                icon: Icon(Icons.menu, color: AppColors.textPrimary),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );
             },
@@ -116,7 +116,7 @@ class _ProductGrid extends StatelessWidget {
               Icon(Icons.inventory_2_outlined,
                   size: 64, color: AppColors.textHint.withValues(alpha: 0.5)),
               const SizedBox(height: AppSpacing.md),
-              const Text('No products found',
+              Text('No products found',
                   style: AppTextStyles.bodyLarge),
               const SizedBox(height: AppSpacing.sm),
               Text(
@@ -368,7 +368,7 @@ class _StockStepperState extends State<_StockStepper> {
         onPressed: onPressed,
         style: IconButton.styleFrom(
           foregroundColor: AppColors.primary,
-          side: const BorderSide(color: AppColors.border),
+          side: BorderSide(color: AppColors.border),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),

@@ -255,7 +255,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                 const Icon(Icons.settings_outlined,
                     color: AppColors.primary),
                 const SizedBox(width: AppSpacing.sm),
-                const Text('Global Default Rate',
+                Text('Global Default Rate',
                     style: AppTextStyles.titleLarge),
               ],
             ),
@@ -324,7 +324,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                 const Icon(Icons.workspace_premium,
                     color: AppColors.amberDark),
                 const SizedBox(width: AppSpacing.sm),
-                const Text('Premium Merchant Rate',
+                Text('Premium Merchant Rate',
                     style: AppTextStyles.titleLarge),
               ],
             ),
@@ -394,7 +394,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                 const Icon(Icons.account_balance_wallet_outlined,
                     color: AppColors.info),
                 const SizedBox(width: AppSpacing.sm),
-                const Text('Payout Settings',
+                Text('Payout Settings',
                     style: AppTextStyles.titleLarge),
               ],
             ),
@@ -495,7 +495,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                 const Icon(Icons.category_outlined,
                     color: AppColors.primary),
                 const SizedBox(width: AppSpacing.sm),
-                const Expanded(
+                Expanded(
                     child: Text('Category-wise Rates',
                         style: AppTextStyles.titleLarge)),
                 TextButton.icon(
@@ -647,7 +647,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
               bottom: MediaQuery.of(ctx).viewInsets.bottom),
           child: Container(
             padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.vertical(
                   top: Radius.circular(AppRadius.xl)),
@@ -667,7 +667,7 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                const Text('Add Category Rate Override',
+                Text('Add Category Rate Override',
                     style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.md),
                 DropdownButtonFormField<String>(

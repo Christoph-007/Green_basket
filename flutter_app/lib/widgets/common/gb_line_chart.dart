@@ -58,6 +58,10 @@ class _LineChartPainter extends CustomPainter {
   final String endLabel;
   final Color color;
 
+  /// The grid and label colours come from the palette, so a palette change
+  /// must repaint even when the data is the same.
+  final bool dark = AppColors.isDark;
+
   _LineChartPainter({
     required this.values,
     required this.comparison,
@@ -176,5 +180,6 @@ class _LineChartPainter extends CustomPainter {
       old.comparison != comparison ||
       old.startLabel != startLabel ||
       old.endLabel != endLabel ||
-      old.color != color;
+      old.color != color ||
+      old.dark != dark;
 }

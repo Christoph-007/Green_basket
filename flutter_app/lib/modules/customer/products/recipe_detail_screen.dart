@@ -181,7 +181,7 @@ class RecipeDetailScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.error_outline_rounded, size: 64, color: AppColors.error),
                 const SizedBox(height: 16),
-                const Text('Recipe not found', style: AppTextStyles.titleLarge),
+                Text('Recipe not found', style: AppTextStyles.titleLarge),
                 TextButton(onPressed: () => Get.back(), child: const Text('Go Back')),
               ],
             ),
@@ -259,7 +259,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         // Servings control
                         Row(
                           children: [
-                            const Expanded(child: Text('Ingredients', style: AppTextStyles.titleLarge)),
+                            Expanded(child: Text('Ingredients', style: AppTextStyles.titleLarge)),
                             Container(
                               decoration: BoxDecoration(
                                 color: AppColors.surface,
@@ -428,7 +428,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         ],
                         const SizedBox(height: AppSpacing.xl),
 
-                        const Text('Instructions', style: AppTextStyles.titleLarge),
+                        Text('Instructions', style: AppTextStyles.titleLarge),
                         const SizedBox(height: AppSpacing.sm),
                         ...List.generate(recipe.steps.length, (i) {
                           return Padding(
@@ -468,7 +468,7 @@ class RecipeDetailScreen extends StatelessWidget {
               bottom: 0, left: 0, right: 0,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 28),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.surface,
                   boxShadow: [BoxShadow(color: AppColors.shadow, blurRadius: 8, offset: Offset(0, -2))],
                 ),

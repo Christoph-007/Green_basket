@@ -87,7 +87,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.add_photo_alternate_outlined,
+                Icon(Icons.add_photo_alternate_outlined,
                     color: AppColors.textHint, size: 28),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
@@ -105,7 +105,7 @@ extension _AddProductScreenStateSections on _AddProductScreenState {
   Widget _buildBottomNav() {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(

@@ -68,7 +68,7 @@ class ProductDetailScreen extends StatelessWidget {
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.arrow_back_ios,
+                      child: Icon(Icons.arrow_back_ios,
                           size: 18, color: AppColors.textPrimary),
                     ),
                   )),
@@ -507,7 +507,7 @@ class ProductDetailScreen extends StatelessWidget {
               right: 0,
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.surface,
                   boxShadow: [
                     BoxShadow(

@@ -24,7 +24,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
       backgroundColor: AppColors.background,
       appBar: GBAppBar(title: 'Performance Analytics', leading: Builder(builder: (context) {
           return IconButton(tooltip: 'Open menu', 
-            icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+            icon: Icon(Icons.menu, color: AppColors.textPrimary),
             onPressed: () => Scaffold.of(context).openDrawer(),
           );
         }), backgroundColor: Colors.white),
@@ -45,7 +45,7 @@ class MerchantAnalyticsScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(AppSpacing.lg),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border(bottom: BorderSide(color: AppColors.border)),
                   ),

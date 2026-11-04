@@ -47,7 +47,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.bar_chart_outlined, size: 64, color: AppColors.textHint),
+                      Icon(Icons.bar_chart_outlined, size: 64, color: AppColors.textHint),
                       const SizedBox(height: AppSpacing.md),
                       Text('No offers found', style: AppTextStyles.titleMedium),
                     ],
@@ -116,7 +116,7 @@ class _OfferPerformanceListScreenState extends State<OfferPerformanceListScreen>
                                     ),
                                   ),
                                   const SizedBox(height: 4),
-                                  const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.textHint),
+                                  Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.textHint),
                                 ],
                               ),
                             ],

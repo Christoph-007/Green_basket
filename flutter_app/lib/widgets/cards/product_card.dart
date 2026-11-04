@@ -226,7 +226,7 @@ class ProductCard extends StatelessWidget {
                         if (product.distanceLabel != null && product.etaMins != null)
                           const SizedBox(width: 8),
                         if (product.etaMins != null) ...[
-                          const Icon(Icons.delivery_dining_outlined, size: 12, color: AppColors.textSecondary),
+                          Icon(Icons.delivery_dining_outlined, size: 12, color: AppColors.textSecondary),
                           const SizedBox(width: 3),
                           Flexible(
                             child: Text(
@@ -369,7 +369,7 @@ class _PlaceholderImage extends StatelessWidget {
     return Container(
       height: height,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.primaryContainer,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(AppRadius.md)),

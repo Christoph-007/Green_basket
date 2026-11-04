@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/data/services/storage_service.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class MerchantProfileScreen extends StatelessWidget {
       appBar: GBAppBar(title: 'Store Profile', leading: Builder(
           builder: (context) {
             return IconButton(tooltip: 'Open menu', 
-              icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+              icon: Icon(Icons.menu, color: AppColors.textPrimary),
               onPressed: () => Scaffold.of(context).openDrawer(),
             );
           },
@@ -45,7 +46,7 @@ class MerchantProfileScreen extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.symmetric(
                     vertical: AppSpacing.xl, horizontal: AppSpacing.lg),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(bottom: BorderSide(color: AppColors.border)),
                 ),
@@ -139,6 +140,8 @@ class MerchantProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   const _AlertSoundCard(),
+                  const SizedBox(height: AppSpacing.md),
+                  const ThemeModeSelector(),
                 ],
               ),
             ),
@@ -192,7 +195,7 @@ class MerchantProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Icon(Icons.arrow_forward_ios,
                       color: AppColors.textHint, size: 16),
@@ -237,7 +240,7 @@ class _AlertSoundCardState extends State<_AlertSoundCard> {
             horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
         secondary: const Icon(Icons.notifications_active_outlined,
             color: AppColors.primary),
-        title: const Text('New order alert sound',
+        title: Text('New order alert sound',
             style: AppTextStyles.titleLarge),
         subtitle: Text(
           'Play a sound and vibrate when an order arrives',

@@ -416,9 +416,9 @@ class CategoriesScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Select Search Radius', style: AppTextStyles.titleLarge),
+            Text('Select Search Radius', style: AppTextStyles.titleLarge),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Only showing merchants within this distance from your location.',
               style: AppTextStyles.bodySmall,
             ),

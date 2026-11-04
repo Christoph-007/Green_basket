@@ -157,7 +157,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.search,
+                          Icon(Icons.search,
                               color: AppColors.textHint, size: 20),
                           const SizedBox(width: 8),
                           Text(
@@ -287,12 +287,12 @@ class HomeScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Select Search Radius',
               style: AppTextStyles.titleLarge,
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               'Only showing merchants within this distance from your location.',
               style: AppTextStyles.bodySmall,
             ),

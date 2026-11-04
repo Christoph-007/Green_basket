@@ -90,7 +90,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
         ),
@@ -159,7 +159,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
             child: TextField(
               controller: _searchController,
               onChanged: (v) => _searchQuery.value = v,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Search recipes or authors...',
                 prefixIcon: Icon(Icons.search, color: AppColors.textHint),
               ),
@@ -284,7 +284,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.local_grocery_store_outlined, size: 12, color: AppColors.textSecondary),
+                            Icon(Icons.local_grocery_store_outlined, size: 12, color: AppColors.textSecondary),
                             const SizedBox(width: 2),
                             Text('$ingredientsCount items', style: AppTextStyles.bodySmall),
                           ],
@@ -293,7 +293,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.timer_outlined, size: 12, color: AppColors.textSecondary),
+                              Icon(Icons.timer_outlined, size: 12, color: AppColors.textSecondary),
                               const SizedBox(width: 2),
                               Text('${totalTime}min', style: AppTextStyles.bodySmall),
                             ],
@@ -304,7 +304,7 @@ class _AdminRecipesScreenState extends State<AdminRecipesScreen> {
                 ),
               ),
               IconButton(tooltip: 'More options', 
-                icon: const Icon(Icons.more_vert, color: AppColors.textSecondary),
+                icon: Icon(Icons.more_vert, color: AppColors.textSecondary),
                 onPressed: () => _showRecipeOptions(recipe),
               ),
             ],

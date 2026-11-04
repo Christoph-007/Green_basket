@@ -94,7 +94,7 @@ class _OffersScreenState extends State<OffersScreen>
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
-        label: const Text('Create Offer', style: AppTextStyles.labelLarge),
+        label: Text('Create Offer', style: AppTextStyles.labelLarge),
       ),
     );
   }
@@ -286,7 +286,7 @@ class _OffersScreenState extends State<OffersScreen>
                     ),
                     child: Text(
                       'Code: ${offer['couponCode']}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: AppTextStyles.fontFamily,
                         fontWeight: FontWeight.w700,
                         fontSize: 12,
@@ -300,7 +300,7 @@ class _OffersScreenState extends State<OffersScreen>
                   const SizedBox(height: AppSpacing.md),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today_outlined,
+                      Icon(Icons.calendar_today_outlined,
                           size: 14, color: AppColors.textSecondary),
                       const SizedBox(width: AppSpacing.xs),
                       Text(
@@ -347,7 +347,7 @@ class _OffersScreenState extends State<OffersScreen>
                   IconButton(
                     onPressed: () => Get.toNamed('/merchant/offers/edit',
                         arguments: offer),
-                    icon: const Icon(Icons.edit_outlined,
+                    icon: Icon(Icons.edit_outlined,
                         color: AppColors.textSecondary, size: 20),
                     tooltip: 'Edit',
                   ),

@@ -60,7 +60,7 @@ class _CustomerShellState extends State<CustomerShell> {
         children: [
       const OfflineBanner(),
       Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(top: BorderSide(color: AppColors.divider)),
         ),
         child: BottomNavigationBar(

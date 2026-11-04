@@ -178,7 +178,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Order Status', style: AppTextStyles.titleLarge),
+            Text('Order Status', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             Row(
               children: List.generate(_statuses.length * 2 - 1, (i) {
@@ -323,7 +323,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Order Items', style: AppTextStyles.titleLarge),
+            Text('Order Items', style: AppTextStyles.titleLarge),
             const Divider(),
             ...items.map((item) {
               final product = item['product'] as Map<String, dynamic>? ?? {};
@@ -386,7 +386,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Admin Actions', style: AppTextStyles.titleLarge),
+            Text('Admin Actions', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             Builder(builder: (_) {
               final status = (_order['status'] ?? '').toString();
@@ -430,7 +430,7 @@ class _AdminOrderDetailScreenState extends State<AdminOrderDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Activity Log', style: AppTextStyles.titleLarge),
+            Text('Activity Log', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             ...logs.asMap().entries.map((e) {
               final i = e.key;

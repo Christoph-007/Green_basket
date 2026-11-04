@@ -356,7 +356,7 @@ class _BulkUploadScreenState extends State<BulkUploadScreen> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           boxShadow: [
             BoxShadow(

@@ -103,7 +103,7 @@ class OrderListScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: GBAppBar(title: 'My Orders', bottom: const TabBar(
+        appBar: GBAppBar(title: 'My Orders', bottom: TabBar(
             labelColor: AppColors.primary,
             unselectedLabelColor: AppColors.textSecondary,
             indicatorColor: AppColors.primary,
@@ -112,7 +112,7 @@ class OrderListScreen extends StatelessWidget {
               Tab(text: 'Past Orders'),
             ],
           ), leading: IconButton(tooltip: 'Back', 
-            icon: const Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
+            icon: Icon(Icons.arrow_back_ios, size: 20, color: AppColors.textPrimary),
             onPressed: () {
               if (Navigator.canPop(context)) {
                 Get.back();
@@ -197,7 +197,7 @@ class _OrderCard extends StatelessWidget {
           padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
           child: Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
@@ -262,7 +262,7 @@ class _OrderCard extends StatelessWidget {
                         .copyWith(color: AppColors.textHint),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppRadius.md),
-                      borderSide: const BorderSide(color: AppColors.border),
+                      borderSide: BorderSide(color: AppColors.border),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppRadius.md),
@@ -336,7 +336,7 @@ class _OrderCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
                 color: AppColors.shadow, blurRadius: 4, offset: Offset(0, 2))
           ],

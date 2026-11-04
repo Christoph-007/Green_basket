@@ -62,7 +62,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-        title: const Text('Process Payout?', style: AppTextStyles.titleLarge),
+        title: Text('Process Payout?', style: AppTextStyles.titleLarge),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,7 @@ class _AdminPayoutsScreenState extends State<AdminPayoutsScreen>
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-        title: const Text('Bulk Process Payouts?', style: AppTextStyles.titleLarge),
+        title: Text('Bulk Process Payouts?', style: AppTextStyles.titleLarge),
         content: Text(
           'Process all ${pending.length} pending payouts (Total: ${AppHelpers.formatCurrency(totalAmount)})?',
           style: AppTextStyles.bodyMedium,

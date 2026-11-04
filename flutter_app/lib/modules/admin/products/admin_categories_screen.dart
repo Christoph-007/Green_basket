@@ -21,7 +21,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
         ),
@@ -156,7 +156,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                           activeColor: AppColors.primary,
                         ),
                         IconButton(tooltip: 'More options', 
-                          icon: const Icon(Icons.more_vert, color: AppColors.textSecondary, size: 20),
+                          icon: Icon(Icons.more_vert, color: AppColors.textSecondary, size: 20),
                           onPressed: () => _showOptionsMenu(context, cat),
                         ),
                       ],

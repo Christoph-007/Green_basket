@@ -100,14 +100,14 @@ class CategoryDetailScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ),
         title: Obx(() => Text(ctrl.category.value?.name ?? 'Category', style: AppTextStyles.titleLarge)),
         actions: [
           IconButton(tooltip: 'Search', 
-            icon: const Icon(Icons.search_rounded, color: AppColors.textPrimary),
+            icon: Icon(Icons.search_rounded, color: AppColors.textPrimary),
             onPressed: () => Get.toNamed(Routes.search),
           ),
         ],
@@ -204,9 +204,9 @@ class CategoryDetailScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.search_off_rounded, color: AppColors.textHint, size: 64),
+                      Icon(Icons.search_off_rounded, color: AppColors.textHint, size: 64),
                       const SizedBox(height: AppSpacing.md),
-                      const Text('No products found', style: AppTextStyles.headlineMedium),
+                      Text('No products found', style: AppTextStyles.headlineMedium),
                       const SizedBox(height: AppSpacing.sm),
                       TextButton(
                         onPressed: ctrl.clearFilters,
@@ -259,7 +259,7 @@ class CategoryDetailScreen extends StatelessWidget {
             decoration: BoxDecoration(color: AppColors.border, borderRadius: BorderRadius.circular(AppRadius.full)),
           ),
           const SizedBox(height: AppSpacing.md),
-          const Text('Sort By', style: AppTextStyles.titleLarge),
+          Text('Sort By', style: AppTextStyles.titleLarge),
           const SizedBox(height: AppSpacing.sm),
           ...options.map((opt) => Obx(() => ListTile(
                 title: Text(opt.$2, style: AppTextStyles.bodyMedium),

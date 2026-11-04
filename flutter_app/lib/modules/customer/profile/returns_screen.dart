@@ -111,7 +111,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
             Tab(text: 'Completed (${completed.length})'),
           ],
         ), leading: IconButton(tooltip: 'Back', 
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Get.back(),
         ), backgroundColor: AppColors.surface),
@@ -245,7 +245,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.info_outline,
+              Icon(Icons.info_outline,
                   size: 14, color: AppColors.textSecondary),
               const SizedBox(width: 4),
               Expanded(
@@ -284,7 +284,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
             const SizedBox(height: AppSpacing.md),
             const Divider(height: 1),
             const SizedBox(height: AppSpacing.sm),
-            const Text('Return Status', style: AppTextStyles.labelLarge),
+            Text('Return Status', style: AppTextStyles.labelLarge),
             const SizedBox(height: AppSpacing.sm),
             SizedBox(
               height: 50,

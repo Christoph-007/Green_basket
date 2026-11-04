@@ -94,7 +94,7 @@ extension _PayoutsScreenSections1 on PayoutsScreen {
       ),
       child: Row(
         children: [
-          const Icon(Icons.info_outline,
+          Icon(Icons.info_outline,
               size: 16, color: AppColors.textSecondary),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
@@ -248,7 +248,7 @@ extension _PayoutsScreenSections1 on PayoutsScreen {
           Icon(Icons.receipt_long_outlined,
               size: 48, color: AppColors.textHint),
           const SizedBox(height: AppSpacing.md),
-          const Text('No payout history yet',
+          Text('No payout history yet',
               style: AppTextStyles.bodyMedium),
           const SizedBox(height: AppSpacing.xs),
           Text(

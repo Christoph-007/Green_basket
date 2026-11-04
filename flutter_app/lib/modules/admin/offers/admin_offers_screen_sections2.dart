@@ -173,7 +173,7 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius:
               BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),

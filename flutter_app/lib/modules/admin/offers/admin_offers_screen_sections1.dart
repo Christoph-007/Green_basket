@@ -268,7 +268,7 @@ extension _AdminOffersScreenStateSections1 on _AdminOffersScreenState {
 
                   // Options
                   IconButton(tooltip: 'More options', 
-                    icon: const Icon(Icons.more_vert,
+                    icon: Icon(Icons.more_vert,
                         size: 18, color: AppColors.textSecondary),
                     onPressed: () => _showOfferOptions(offer),
                     padding: EdgeInsets.zero,
@@ -282,7 +282,7 @@ extension _AdminOffersScreenStateSections1 on _AdminOffersScreenState {
               // Row 2 – date range
               Row(
                 children: [
-                  const Icon(Icons.calendar_today_outlined,
+                  Icon(Icons.calendar_today_outlined,
                       size: 12, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(

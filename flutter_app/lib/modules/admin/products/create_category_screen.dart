@@ -157,7 +157,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Category Icon', style: AppTextStyles.titleMedium),
+            Text('Category Icon', style: AppTextStyles.titleMedium),
             const SizedBox(height: AppSpacing.sm),
             Row(
               children: [
@@ -226,7 +226,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Category Name', style: AppTextStyles.titleMedium),
+            Text('Category Name', style: AppTextStyles.titleMedium),
             const SizedBox(height: AppSpacing.sm),
             TextFormField(
               controller: _nameController,
@@ -246,7 +246,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Parent Category', style: AppTextStyles.titleMedium),
+            Text('Parent Category', style: AppTextStyles.titleMedium),
             const SizedBox(height: AppSpacing.sm),
             if (_loadingParents)
               const Center(child: CircularProgressIndicator())
@@ -279,7 +279,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Description', style: AppTextStyles.titleMedium),
+            Text('Description', style: AppTextStyles.titleMedium),
             const SizedBox(height: AppSpacing.sm),
             TextFormField(
               controller: _descController,
@@ -300,7 +300,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
         child: Row(
           children: [
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

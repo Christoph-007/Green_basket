@@ -64,7 +64,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
               children: [
                 Row(
                   children: [
-                    const Text('New Orders', style: AppTextStyles.headlineLarge),
+                    Text('New Orders', style: AppTextStyles.headlineLarge),
                     const SizedBox(width: AppSpacing.sm),
                     if (controller.newOrders.isNotEmpty)
                       Container(
@@ -97,7 +97,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.receipt_long_outlined,
+                    Icon(Icons.receipt_long_outlined,
                         size: 48, color: AppColors.divider),
                     const SizedBox(height: AppSpacing.sm),
                     Text('No pending orders',
@@ -139,7 +139,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
           children: [
             Row(
               children: [
-                const Text('Active Orders', style: AppTextStyles.headlineLarge),
+                Text('Active Orders', style: AppTextStyles.headlineLarge),
                 const SizedBox(width: AppSpacing.sm),
                 Container(
                   padding:
@@ -196,7 +196,7 @@ extension _MerchantDashboardScreenStateSections2 on _MerchantDashboardScreenStat
                       const SizedBox(height: 2),
                       Row(
                         children: [
-                          const Icon(Icons.person_outline,
+                          Icon(Icons.person_outline,
                               size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
                           Flexible(

@@ -252,7 +252,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
                 color: AppColors.shadowTintFaint,
                 blurRadius: 12,
@@ -312,7 +312,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
               ),
               
               const SizedBox(height: 12),
-              const Divider(height: 1, color: AppColors.divider),
+              Divider(height: 1, color: AppColors.divider),
               const SizedBox(height: 12),
 
               // Row 2: Customer + Merchant
@@ -321,7 +321,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   Expanded(
                     child: Row(
                       children: [
-                        const Icon(Icons.person_outline, size: 15, color: AppColors.textSecondary),
+                        Icon(Icons.person_outline, size: 15, color: AppColors.textSecondary),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
@@ -337,7 +337,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   Expanded(
                     child: Row(
                       children: [
-                        const Icon(Icons.storefront_outlined, size: 15, color: AppColors.textSecondary),
+                        Icon(Icons.storefront_outlined, size: 15, color: AppColors.textSecondary),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
@@ -367,7 +367,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.shopping_bag_outlined, size: 12, color: AppColors.textSecondary),
+                        Icon(Icons.shopping_bag_outlined, size: 12, color: AppColors.textSecondary),
                         const SizedBox(width: 4),
                         Text(
                           '$itemCount ${itemCount == 1 ? 'item' : 'items'}',

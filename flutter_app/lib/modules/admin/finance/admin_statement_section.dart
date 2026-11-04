@@ -144,7 +144,7 @@ class AdminStatementSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: AppColors.shadowTintLight, blurRadius: 10, offset: Offset(0, 3))],
+        boxShadow: [BoxShadow(color: AppColors.shadowTintLight, blurRadius: 10, offset: Offset(0, 3))],
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -189,7 +189,7 @@ class AdminStatementSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
+        boxShadow: [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
       ),
       child: child,
     );

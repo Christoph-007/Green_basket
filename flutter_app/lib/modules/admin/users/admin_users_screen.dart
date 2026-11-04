@@ -66,7 +66,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ),
                   const SizedBox(height: 16),
                   if (filteredUsers.isEmpty)
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Center(
                         child: Text('No users found', style: TextStyle(color: AppColors.textSecondary)),
@@ -106,7 +106,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          const Icon(Icons.search, color: AppColors.textMuted, size: 18),
+          Icon(Icons.search, color: AppColors.textMuted, size: 18),
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
@@ -165,7 +165,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
+            boxShadow: [BoxShadow(color: AppColors.shadowTint, blurRadius: 18, offset: Offset(0, 6))],
           ),
           child: Row(
             children: [

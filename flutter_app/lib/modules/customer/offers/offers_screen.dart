@@ -70,7 +70,7 @@ class _OfferTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(color: AppColors.shadow, blurRadius: 10, offset: Offset(0, 4))
         ],
       ),
@@ -149,7 +149,7 @@ class _OfferTile extends StatelessWidget {
               ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(top: BorderSide(color: AppColors.divider)),
               ),
               child: Row(

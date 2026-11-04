@@ -183,7 +183,7 @@ class MerchantProductAnalyticsScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Icon(Icons.bar_chart, size: 48, color: AppColors.divider),
+          Icon(Icons.bar_chart, size: 48, color: AppColors.divider),
           const SizedBox(height: AppSpacing.md),
           Text(message, style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary)),
         ],

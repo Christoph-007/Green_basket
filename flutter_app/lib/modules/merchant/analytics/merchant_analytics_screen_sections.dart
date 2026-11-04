@@ -94,7 +94,7 @@ extension _MerchantAnalyticsScreenSections on MerchantAnalyticsScreen {
                     ],
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Icon(Icons.arrow_forward_ios,
                       color: AppColors.textHint, size: 16),

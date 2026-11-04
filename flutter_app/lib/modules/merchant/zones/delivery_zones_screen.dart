@@ -241,7 +241,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                               BorderRadius.circular(AppRadius.lg),
                           border: Border.all(color: AppColors.border),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             'No delivery zones configured.\nTap + Add Zone to get started.',
                             textAlign: TextAlign.center,
@@ -365,7 +365,7 @@ class _DeliveryZonesScreenState extends State<DeliveryZonesScreen> {
                                   arguments: zone);
                           if (result == true) _fetchZones();
                         },
-                        icon: const Icon(Icons.edit_outlined,
+                        icon: Icon(Icons.edit_outlined,
                             size: 20,
                             color: AppColors.textSecondary),
                         padding: EdgeInsets.zero,

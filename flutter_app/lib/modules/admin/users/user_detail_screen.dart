@@ -387,9 +387,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Recent Orders', style: AppTextStyles.titleLarge),
+            Text('Recent Orders', style: AppTextStyles.titleLarge),
             if (_recentOrders.isEmpty)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
                 child: Text(
                   'No recent orders found',
@@ -466,7 +466,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Admin Actions', style: AppTextStyles.titleLarge),
+            Text('Admin Actions', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             _actionButton(
               icon: Icons.block,

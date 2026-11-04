@@ -224,7 +224,7 @@ extension _MerchantDashboardScreenStateSections1 on _MerchantDashboardScreenStat
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios,
+              Icon(Icons.arrow_forward_ios,
                   size: 14, color: AppColors.textSecondary),
             ],
           ),

@@ -140,7 +140,7 @@ class _DisputesScreenState extends State<DisputesScreen>
         builder: (ctx, setDlgState) => AlertDialog(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.md)),
-          title: const Text('Raise a Dispute / Return',
+          title: Text('Raise a Dispute / Return',
               style: AppTextStyles.titleLarge),
           content: SingleChildScrollView(
             child: Column(
@@ -148,14 +148,14 @@ class _DisputesScreenState extends State<DisputesScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Order Dropdown
-                const Text('Select Order', style: AppTextStyles.labelLarge),
+                Text('Select Order', style: AppTextStyles.labelLarge),
                 const SizedBox(height: AppSpacing.xs),
                 Obx(() {
                   if (_isLoadingOrders.value) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (_orders.isEmpty) {
-                    return const Text('No orders found to dispute.', style: TextStyle(color: AppColors.textSecondary));
+                    return Text('No orders found to dispute.', style: TextStyle(color: AppColors.textSecondary));
                   }
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
@@ -191,7 +191,7 @@ class _DisputesScreenState extends State<DisputesScreen>
 
                 if (_selectedOrder != null) ...[
                   const SizedBox(height: AppSpacing.sm),
-                  const Text('Select Product (Optional)', style: AppTextStyles.labelLarge),
+                  Text('Select Product (Optional)', style: AppTextStyles.labelLarge),
                   const SizedBox(height: AppSpacing.xs),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
@@ -229,7 +229,7 @@ class _DisputesScreenState extends State<DisputesScreen>
                 ],
 
                 const SizedBox(height: AppSpacing.sm),
-                const Text('Issue Type', style: AppTextStyles.labelLarge),
+                Text('Issue Type', style: AppTextStyles.labelLarge),
                 const SizedBox(height: AppSpacing.xs),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -313,7 +313,7 @@ class _DisputesScreenState extends State<DisputesScreen>
               Tab(text: 'Resolved (${resolvedDisputes.length})'),
             ],
           ), leading: IconButton(tooltip: 'Back', 
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+            icon: Icon(Icons.arrow_back_ios_new_rounded,
                 size: 20, color: AppColors.textPrimary),
             onPressed: () => Get.back(),
           ), backgroundColor: AppColors.surface),
@@ -349,7 +349,7 @@ class _DisputesScreenState extends State<DisputesScreen>
             const Icon(Icons.check_circle_outline_rounded,
                 color: AppColors.success, size: 64),
             const SizedBox(height: AppSpacing.md),
-            const Text('No disputes here',
+            Text('No disputes here',
                 style: AppTextStyles.headlineMedium),
             const SizedBox(height: AppSpacing.xs),
             Text('All disputes have been resolved',

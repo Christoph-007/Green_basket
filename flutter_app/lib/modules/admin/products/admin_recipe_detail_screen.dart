@@ -149,7 +149,7 @@ class AdminRecipeDetailScreen extends StatelessWidget {
                           const SizedBox(width: AppSpacing.md),
                         ],
                         if (timesCooked > 0) ...[
-                          const Icon(Icons.restaurant_outlined, size: 14, color: AppColors.textSecondary),
+                          Icon(Icons.restaurant_outlined, size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
                           Text('Cooked $timesCooked times', style: AppTextStyles.bodySmall),
                         ],

@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:greenbasket_app/data/services/theme_controller.dart';
 import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,8 @@ Future<void> main() async {
   // Initialize storage first
   await GetStorage.init();
   Get.put(StorageService());
+  // Reads the saved appearance and sets the palette before the first screen is built.
+  Get.put(ThemeController());
 
   // Global error handler
   FlutterError.onError = (FlutterErrorDetails details) {

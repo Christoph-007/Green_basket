@@ -323,7 +323,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Revenue', style: AppTextStyles.titleLarge),
+                Text('Revenue', style: AppTextStyles.titleLarge),
                 Text(
                   ['This Week', 'This Month', 'This Year'][_selectedPeriod],
                   style: AppTextStyles.bodySmall,
@@ -375,7 +375,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Top Products', style: AppTextStyles.titleLarge),
+            Text('Top Products', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.sm),
             ..._topProducts.asMap().entries.map((e) {
               final i = e.key;
@@ -432,7 +432,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Customer Reviews', style: AppTextStyles.titleLarge),
+                Text('Customer Reviews', style: AppTextStyles.titleLarge),
                 Row(
                   children: [
                     const Icon(Icons.star, color: AppColors.secondary, size: 16),
@@ -472,7 +472,7 @@ class _MerchantAnalyticsScreenState extends State<MerchantAnalyticsScreen>
                         children: [
                           Row(
                             children: [
-                              const CircleAvatar(
+                              CircleAvatar(
                                 radius: 14,
                                 backgroundColor: AppColors.primaryContainer,
                                 child: Icon(Icons.person_outline,

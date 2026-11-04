@@ -156,7 +156,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Return items', style: AppTextStyles.titleLarge),
+              Text('Return items', style: AppTextStyles.titleLarge),
               const SizedBox(height: 4),
               Text(
                 'Order ${widget.order.orderNumber} • refunds go to your wallet once approved',
@@ -165,7 +165,7 @@ class _ReturnRequestSheetState extends State<ReturnRequestSheet> {
               const SizedBox(height: 12),
               for (var i = 0; i < widget.order.items.length; i++) _itemRow(i),
               const Divider(height: 24),
-              const Text('Why are you returning them?',
+              Text('Why are you returning them?',
                   style: AppTextStyles.titleMedium),
               const SizedBox(height: 8),
               Wrap(
