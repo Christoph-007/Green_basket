@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import 'package:greenbasket_app/widgets/common/gb_stat_card.dart';
 import 'package:greenbasket_app/utils/helpers.dart';
 import 'admin_payouts_screen.dart';
 import '../widgets/admin_drawer.dart';
@@ -124,7 +125,7 @@ class AdminFinanceScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _buildKpiCard(
+                        child: GBStatCard(
                           title: 'Total Revenue',
                           value: _money(totalRevenue),
                           icon: Icons.trending_up,
@@ -139,7 +140,7 @@ class AdminFinanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _buildKpiCard(
+                        child: GBStatCard(
                           title: 'Platform Fee',
                           value: _money(platformFee),
                           icon: Icons.pie_chart_outline,
@@ -158,7 +159,7 @@ class AdminFinanceScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _buildKpiCard(
+                        child: GBStatCard(
                           title: 'Payouts',
                           value: _money(totalPayouts),
                           icon: Icons.payments_outlined,
@@ -168,7 +169,7 @@ class AdminFinanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _buildKpiCard(
+                        child: GBStatCard(
                           title: 'Net Profit',
                           value: _money(netProfit),
                           icon: Icons.account_balance_outlined,
@@ -310,66 +311,6 @@ class AdminFinanceScreen extends StatelessWidget {
             ],
           );
         }).toList(),
-      ),
-    );
-  }
-
-  Widget _buildKpiCard({
-    required String title,
-    required String value,
-    required IconData icon,
-    required Color color,
-    VoidCallback? onTap,
-  }) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: AppColors.shadowTint,
-                blurRadius: 18,
-                offset: Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(icon, color: color, size: 24),
-              ),
-              const SizedBox(height: 16),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  value,
-                  maxLines: 1,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.textPrimary),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: AppColors.textMuted, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
