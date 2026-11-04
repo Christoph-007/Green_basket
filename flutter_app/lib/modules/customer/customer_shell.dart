@@ -64,7 +64,7 @@ class _CustomerShellState extends State<CustomerShell> {
             }
           },
           selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.textHint,
+          unselectedItemColor: AppColors.textSecondary,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,

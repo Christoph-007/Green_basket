@@ -21,8 +21,8 @@ class MerchantBottomNav extends StatelessWidget {
       child: Obx(() => BottomNavigationBar(
             currentIndex: nav.index.value,
             onTap: MerchantNavController.goTo,
-            selectedItemColor: highlight ? AppColors.primary : AppColors.textHint,
-            unselectedItemColor: AppColors.textHint,
+            selectedItemColor: highlight ? AppColors.primary : AppColors.textSecondary,
+            unselectedItemColor: AppColors.textSecondary,
             showSelectedLabels: true,
             showUnselectedLabels: true,
             type: BottomNavigationBarType.fixed,

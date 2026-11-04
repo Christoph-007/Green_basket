@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
+import 'package:greenbasket_app/utils/helpers.dart';
 import 'admin_payouts_screen.dart';
 import '../widgets/admin_drawer.dart';
 import '../admin_controller.dart';
@@ -9,6 +10,13 @@ import 'admin_statement_section.dart';
 
 class AdminFinanceScreen extends StatelessWidget {
   const AdminFinanceScreen({super.key});
+
+  /// Display-only: formats a rupee amount with thousands separators and two
+  /// decimals. Falls back to the raw value if it is not a number.
+  static String _money(String raw) {
+    final n = num.tryParse(raw);
+    return n == null ? '₹$raw' : AppHelpers.formatCurrency(n.toDouble());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +129,8 @@ class AdminFinanceScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: _buildKpiCard(
-                          title: 'Total Rev',
-                          value: '₹$totalRevenue',
+                          title: 'Total Revenue',
+                          value: _money(totalRevenue),
                           icon: Icons.trending_up,
                           color: const Color(0xFF1F5C35),
                           onTap: () {
@@ -137,7 +145,7 @@ class AdminFinanceScreen extends StatelessWidget {
                       Expanded(
                         child: _buildKpiCard(
                           title: 'Platform Fee',
-                          value: '₹$platformFee',
+                          value: _money(platformFee),
                           icon: Icons.pie_chart_outline,
                           color: Colors.blue,
                           onTap: () {
@@ -156,7 +164,7 @@ class AdminFinanceScreen extends StatelessWidget {
                       Expanded(
                         child: _buildKpiCard(
                           title: 'Payouts',
-                          value: '₹$totalPayouts',
+                          value: _money(totalPayouts),
                           icon: Icons.payments_outlined,
                           color: Colors.orange,
                           onTap: () => Get.to(() => const AdminPayoutsScreen()),
@@ -166,7 +174,7 @@ class AdminFinanceScreen extends StatelessWidget {
                       Expanded(
                         child: _buildKpiCard(
                           title: 'Net Profit',
-                          value: '₹$netProfit',
+                          value: _money(netProfit),
                           icon: Icons.account_balance_outlined,
                           color: Colors.purple,
                           onTap: () {
@@ -240,7 +248,7 @@ class AdminFinanceScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
+            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
             const SizedBox(height: 12),
             const Text('Could not load financial data',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
@@ -295,7 +303,7 @@ class AdminFinanceScreen extends StatelessWidget {
           final date = p['updatedAt']?.toString().split('T')[0] ?? 'N/A';
           return Column(
             children: [
-              _buildTransactionRow('Payout to $name', '-₹$amount', date, isCredit: false, onTap: () {
+              _buildTransactionRow('Payout to $name', '-${_money(amount)}', date, isCredit: false, onTap: () {
                 Get.to(() => const AdminPayoutsScreen());
               }),
               if (p != completedPayouts.last)
@@ -347,13 +355,20 @@ class AdminFinanceScreen extends StatelessWidget {
                 child: Icon(icon, color: color, size: 24),
               ),
               const SizedBox(height: 16),
-              Text(
-                value,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF1A1A1A)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  value,
+                  maxLines: 1,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF1A1A1A)),
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 12, color: Color(0xFF9C9B99), fontWeight: FontWeight.w500),
               ),
             ],
@@ -373,14 +388,17 @@ class AdminFinanceScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF1A1A1A))),
-                  const SizedBox(height: 4),
-                  Text(date, style: const TextStyle(fontSize: 12, color: Color(0xFF9C9B99))),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF1A1A1A))),
+                    const SizedBox(height: 4),
+                    Text(date, style: const TextStyle(fontSize: 12, color: Color(0xFF9C9B99))),
+                  ],
+                ),
               ),
+              const SizedBox(width: 12),
               Text(
                 amount,
                 style: TextStyle(

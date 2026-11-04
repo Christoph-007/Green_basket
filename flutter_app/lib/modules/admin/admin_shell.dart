@@ -48,7 +48,7 @@ class _AdminShellState extends State<AdminShell> {
             }
           },
           selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.textHint,
+          unselectedItemColor: AppColors.textSecondary,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
