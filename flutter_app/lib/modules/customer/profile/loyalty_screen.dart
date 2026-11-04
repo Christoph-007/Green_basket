@@ -25,7 +25,9 @@ class LoyaltyController extends GetxController {
     isLoading.value = true;
     try {
       loyalty.value = await _repo.getLoyaltyInfo();
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Loyalty');
+    }
     isLoading.value = false;
   }
 

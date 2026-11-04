@@ -42,7 +42,9 @@ class WalletController extends GetxController {
       isLocked.value = wallet.isLocked;
       final txList = await _repo.getTransactions();
       transactions.value = txList;
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Wallet');
+    }
     isLoading.value = false;
   }
 

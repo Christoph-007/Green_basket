@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/config/routes.dart';
@@ -40,7 +41,9 @@ class CategoryDetailController extends GetxController {
         isFeatured: null, // all products in this category
       );
       products.assignAll(res);
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Products');
+    }
     isLoading.value = false;
   }
 

@@ -22,7 +22,9 @@ class AddressController extends GetxController {
     isLoading.value = true;
     try {
       addresses.value = await _userRepo.getAddresses();
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Addresses');
+    }
     isLoading.value = false;
   }
 
@@ -42,7 +44,9 @@ class AddressController extends GetxController {
     try {
       await _userRepo.updateAddress(id, {'isDefault': true});
       fetchAddresses(); // Refresh list to see updated default
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Addresses');
+    }
   }
 }
 

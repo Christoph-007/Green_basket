@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:greenbasket_app/config/copy.dart';
 import 'package:greenbasket_app/config/theme.dart';
 
 /// One place for in-app messages. Each method shows a GetX snackbar with the
@@ -24,6 +25,25 @@ class GBSnack {
   static void warning(String title, String message,
           {SnackPosition? position, Duration? duration}) =>
       _show(title, message, AppColors.warning, AppColors.textPrimary, position, duration);
+
+  static String? _lastErrorText;
+  static DateTime? _lastErrorAt;
+
+  /// Shows what went wrong in plain words ([friendlyError]). The same text is
+  /// not repeated within four seconds, so several failing calls do not stack
+  /// up identical messages.
+  static void fromError(Object error, {String title = 'Something went wrong'}) {
+    final text = friendlyError(error);
+    final now = DateTime.now();
+    if (_lastErrorText == text &&
+        _lastErrorAt != null &&
+        now.difference(_lastErrorAt!) < const Duration(seconds: 4)) {
+      return;
+    }
+    _lastErrorText = text;
+    _lastErrorAt = now;
+    GBSnack.error(title, text, position: SnackPosition.BOTTOM);
+  }
 
   /// A message with one action button, for example Undo. The button closes the
   /// message and then runs [onAction].

@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:get_storage/get_storage.dart';
 import '../../config/constants.dart';
 import '../../utils/single_flight.dart';
+import '../services/network_status.dart';
 
 class ApiProvider {
   late final Dio _dio;
@@ -29,7 +30,19 @@ class ApiProvider {
         }
         handler.next(options);
       },
+      onResponse: (response, handler) {
+        NetworkStatus.isOffline.value = false;
+        handler.next(response);
+      },
       onError: (error, handler) async {
+        // No answer at all means the server cannot be reached; any answer
+        // (even an error page) means it can.
+        if (error.response != null) {
+          NetworkStatus.isOffline.value = false;
+        } else if (error.type == DioExceptionType.connectionError ||
+            error.type == DioExceptionType.connectionTimeout) {
+          NetworkStatus.isOffline.value = true;
+        }
         final request = error.requestOptions;
         final isAuthCall = request.path.contains('/auth/');
         if (error.response?.statusCode != 401 || isAuthCall) {

@@ -1,4 +1,5 @@
 import '../nav_controller.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../config/theme.dart';
@@ -51,7 +52,9 @@ class _WishlistGridState extends State<_WishlistGrid> {
   Future<void> _fetch() async {
     try {
       _items.value = await _repo.getWishlist();
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Wishlist');
+    }
     _isLoading.value = false;
   }
 

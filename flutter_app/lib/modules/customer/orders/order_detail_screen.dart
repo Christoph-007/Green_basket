@@ -34,7 +34,9 @@ class OrderDetailController extends GetxController {
     isLoading.value = true;
     try {
       order.value = await _repo.getOrder(id);
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Order');
+    }
     isLoading.value = false;
   }
 

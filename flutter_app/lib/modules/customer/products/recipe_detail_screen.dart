@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -38,7 +39,9 @@ class RecipeDetailController extends GetxController {
         servings.value = recipe.value!.servings;
         await _fetchIngredientDetails(id);
       }
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Recipe');
+    }
     isLoading.value = false;
   }
 

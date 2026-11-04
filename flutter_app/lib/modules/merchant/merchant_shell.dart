@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/offline_banner.dart';
 import 'package:greenbasket_app/utils/responsive_helper.dart';
 import 'package:greenbasket_app/widgets/common/lazy_indexed_stack.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,10 @@ class _MerchantShellState extends State<MerchantShell> {
               )),
         ),
       ),
-      bottomNavigationBar: const MerchantBottomNav(),
+      bottomNavigationBar: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [OfflineBanner(), MerchantBottomNav()],
+      ),
     );
   }
 }

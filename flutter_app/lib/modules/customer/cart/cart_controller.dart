@@ -38,7 +38,9 @@ class CartController extends GetxController {
       // The server re-validates the coupon whenever the cart changes
       appliedCoupon.value = cart.couponCode ?? '';
       discount.value = cart.couponDiscount;
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Cart');
+    }
     isLoading.value = false;
   }
 

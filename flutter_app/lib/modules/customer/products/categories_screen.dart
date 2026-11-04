@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:get/get.dart';
 // import 'package:cached_network_image/cached_network_image.dart'; // No longer used in this file
 import '../../../config/theme.dart';
@@ -167,7 +168,9 @@ class CategoriesController extends GetxController {
     searchQuery.value = query;
     try {
       products.value = await _repo.search(query);
-    } catch (_) {}
+    } catch (e) {
+      GBSnack.fromError(e, title: 'Search');
+    }
     isLoading.value = false;
   }
 }
