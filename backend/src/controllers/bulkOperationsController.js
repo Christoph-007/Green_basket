@@ -168,7 +168,10 @@ exports.bulkUpdatePrice = async (req, res) => {
                     throw new Error('productId and price are required');
                 }
 
-                if (isNaN(update.price) || update.price <= 0) {
+                const price = (typeof update.price === 'number' || (typeof update.price === 'string' && update.price.trim() !== ''))
+                    ? Number(update.price)
+                    : NaN;
+                if (!Number.isFinite(price) || price <= 0) {
                     throw new Error('Price must be a positive number');
                 }
 
@@ -181,7 +184,7 @@ exports.bulkUpdatePrice = async (req, res) => {
                     throw new Error('Product not found or access denied');
                 }
 
-                product.price = update.price;
+                product.price = price;
                 await product.save();
 
                 results.successCount++;
@@ -244,8 +247,11 @@ exports.bulkUpdateStock = async (req, res) => {
                     throw new Error('productId and stock are required');
                 }
 
-                if (isNaN(update.stock) || update.stock < 0) {
-                    throw new Error('Stock must be a non-negative number');
+                const stock = (typeof update.stock === 'number' || (typeof update.stock === 'string' && update.stock.trim() !== ''))
+                    ? Number(update.stock)
+                    : NaN;
+                if (!Number.isInteger(stock) || stock < 0) {
+                    throw new Error('Stock must be a whole number, zero or more');
                 }
 
                 const product = await Product.findOne({
@@ -257,8 +263,13 @@ exports.bulkUpdateStock = async (req, res) => {
                     throw new Error('Product not found or access denied');
                 }
 
-                product.stock = update.stock;
-                product.isActive = update.stock > 0;
+                // Same rules as PATCH /products/:id/stock
+                product.stock = stock;
+                if (stock === 0) {
+                    product.status = 'out-of-stock';
+                } else if (product.status === 'out-of-stock') {
+                    product.status = 'active';
+                }
                 await product.save();
 
                 results.successCount++;
