@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
 import 'home/home_screen.dart';
@@ -41,7 +42,7 @@ class _CustomerShellState extends State<CustomerShell> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-      body: IndexedStack(
+      body: LazyIndexedStack(
         index: _nav.currentIndex.value,
         children: _screens,
       ),

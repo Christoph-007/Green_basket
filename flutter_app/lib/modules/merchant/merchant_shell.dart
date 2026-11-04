@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 import 'dashboard/merchant_dashboard_screen.dart';
 import 'orders/merchant_orders_screen.dart';
@@ -35,7 +36,7 @@ class _MerchantShellState extends State<MerchantShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => IndexedStack(
+      body: Obx(() => LazyIndexedStack(
             index: _nav.index.value,
             children: _screens,
           )),

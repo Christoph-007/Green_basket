@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 import 'admin_controller.dart';
 import 'package:greenbasket_app/config/theme.dart';
@@ -29,7 +30,7 @@ class _AdminShellState extends State<AdminShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
+      body: LazyIndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
