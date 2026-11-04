@@ -69,8 +69,8 @@ class StorageService {
   void setOrderAlertSound(bool on) =>
       _box.write(AppConstants.orderAlertSoundKey, on);
 
-  // Appearance: 'system' (default), 'light' or 'dark'
-  String get themeMode => _box.read(AppConstants.themeModeKey) ?? 'system';
+  // Appearance: 'light' (default, until the person picks otherwise), 'system' or 'dark'
+  String get themeMode => _box.read(AppConstants.themeModeKey) ?? 'light';
   void setThemeMode(String mode) => _box.write(AppConstants.themeModeKey, mode);
 
   // The explanation before the first location permission prompt was shown
