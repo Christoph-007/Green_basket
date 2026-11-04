@@ -256,7 +256,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             });
                           },
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 150),
+                            duration: AppMotion.fast,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.md,
                                 vertical: AppSpacing.sm),
@@ -321,7 +321,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             });
                           },
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 150),
+                            duration: AppMotion.fast,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: AppSpacing.md,
                                 vertical: AppSpacing.sm),

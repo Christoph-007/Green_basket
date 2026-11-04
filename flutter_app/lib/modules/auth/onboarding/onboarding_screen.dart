@@ -91,7 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   for (var i = 0; i < _pages.length; i++)
                     AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: AppMotion.normal,
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       height: 8,
                       width: i == _index ? 24 : 8,

@@ -307,7 +307,7 @@ class _ReturnsScreenState extends State<ReturnsScreen>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
+                                duration: AppMotion.normal,
                                 width: isCurrent ? 24 : 18,
                                 height: isCurrent ? 24 : 18,
                                 decoration: BoxDecoration(

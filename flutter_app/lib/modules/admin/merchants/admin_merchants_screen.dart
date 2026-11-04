@@ -136,7 +136,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
     return Semantics(button: true, child: GestureDetector(
       onTap: () => setState(() => _selectedFilter = title),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: AppMotion.normal,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
           color: isActive ? AppColors.primary : Colors.white,

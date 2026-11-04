@@ -113,6 +113,24 @@ class AppSpacing {
   static const double screenPadding = 16.0;
 }
 
+/// Animation lengths and curves, so movement feels the same everywhere.
+class AppMotion {
+  AppMotion._();
+
+  static const Duration fast = Duration(milliseconds: 150);
+  static const Duration normal = Duration(milliseconds: 200);
+  static const Duration slow = Duration(milliseconds: 300);
+  static const Curve curve = Curves.easeOutCubic;
+
+  /// True when the person has asked the system to reduce animation.
+  static bool reduced(BuildContext context) =>
+      MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+
+  /// [normal] normally, instant when animations are reduced.
+  static Duration of(BuildContext context, [Duration d = normal]) =>
+      reduced(context) ? Duration.zero : d;
+}
+
 class AppRadius {
   static const double sm = 8.0;
   static const double md = 12.0;

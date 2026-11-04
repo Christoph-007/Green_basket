@@ -394,7 +394,7 @@ class OrderTrackingScreen extends StatelessWidget {
         Column(
           children: [
             AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: AppMotion.normal,
               width: 28,
               height: 28,
               decoration: BoxDecoration(

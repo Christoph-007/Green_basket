@@ -143,7 +143,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
       return Semantics(button: true, child: GestureDetector(
         onTap: () => _selectedFilter.value = title,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: AppMotion.normal,
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
             color: isActive ? AppColors.primary : Colors.white,

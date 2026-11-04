@@ -570,7 +570,7 @@ class _ChoiceTile extends StatelessWidget {
       child: Semantics(button: true, child: GestureDetector(
         onTap: enabled ? onTap : null,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
+          duration: AppMotion.fast,
           margin: margin,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(

@@ -236,7 +236,7 @@ class _RoleTile extends StatelessWidget {
     return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: AppMotion.normal,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryContainer : AppColors.surface,

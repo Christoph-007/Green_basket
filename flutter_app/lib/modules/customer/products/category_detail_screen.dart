@@ -289,7 +289,7 @@ class _FilterChip extends StatelessWidget {
     return Semantics(button: true, child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: AppMotion.fast,
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
         decoration: BoxDecoration(
           color: isActive ? AppColors.primary : AppColors.surfaceVariant,

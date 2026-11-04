@@ -145,7 +145,7 @@ class RecipeScreen extends StatelessWidget {
                   return Semantics(button: true, child: GestureDetector(
                     onTap: () => ctrl.selectedCategory.value = cat,
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 150),
+                      duration: AppMotion.fast,
                       padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.md),
                       decoration: BoxDecoration(

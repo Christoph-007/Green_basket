@@ -576,7 +576,7 @@ class _BannerSectionState extends State<_BannerSection> {
           children: List.generate(
             itemsCount,
             (i) => AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: AppMotion.normal,
               margin: const EdgeInsets.symmetric(horizontal: 3),
               width: i == _currentPage ? 20 : 6,
               height: 6,
