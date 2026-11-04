@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -226,17 +227,9 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
           children: [
             Text('Basic Info', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
-            TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Recipe Name'),
-              validator: (v) => v == null || v.isEmpty ? 'Recipe name is required' : null,
-            ),
+            GBTextField(label: 'Recipe Name', controller: _nameController, validator: (v) => v == null || v.isEmpty ? 'Recipe name is required' : null),
             const SizedBox(height: AppSpacing.md),
-            TextFormField(
-              controller: _descController,
-              maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Description'),
-            ),
+            GBTextField(label: 'Description', controller: _descController, maxLines: 3),
           ],
         ),
       ),
@@ -311,36 +304,15 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
-                    controller: _servingsController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Servings',
-                      suffixText: 'ppl',
-                    ),
-                  ),
+                  child: GBTextField(label: 'Servings', controller: _servingsController, keyboardType: TextInputType.number, suffixText: 'ppl'),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: TextFormField(
-                    controller: _prepTimeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Prep Time',
-                      suffixText: 'min',
-                    ),
-                  ),
+                  child: GBTextField(label: 'Prep Time', controller: _prepTimeController, keyboardType: TextInputType.number, suffixText: 'min'),
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: TextFormField(
-                    controller: _cookTimeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Cook Time',
-                      suffixText: 'min',
-                    ),
-                  ),
+                  child: GBTextField(label: 'Cook Time', controller: _cookTimeController, keyboardType: TextInputType.number, suffixText: 'min'),
                 ),
               ],
             ),
@@ -377,19 +349,12 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                   children: [
                     Expanded(
                       flex: 4,
-                      child: TextField(
-                        controller: ing['name'],
-                        decoration: InputDecoration(labelText: 'Ingredient ${i + 1}'),
-                      ),
+                      child: GBTextField(label: 'Ingredient ${i + 1}', controller: ing['name']),
                     ),
                     const SizedBox(width: AppSpacing.xs),
                     Expanded(
                       flex: 2,
-                      child: TextField(
-                        controller: ing['qty'],
-                        decoration: const InputDecoration(labelText: 'Qty'),
-                        keyboardType: TextInputType.number,
-                      ),
+                      child: GBTextField(label: 'Qty', controller: ing['qty'], keyboardType: TextInputType.number),
                     ),
                     const SizedBox(width: AppSpacing.xs),
                     Expanded(

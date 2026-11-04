@@ -25,7 +25,7 @@ class AdminFinanceScreen extends StatelessWidget {
     final AdminController controller = Get.find<AdminController>();
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundAlt,
+      backgroundColor: AppColors.background,
       drawer: const AdminDrawer(),
       body: Column(
         children: [

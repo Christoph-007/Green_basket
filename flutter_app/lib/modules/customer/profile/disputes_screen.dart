@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -255,15 +256,7 @@ class _DisputesScreenState extends State<DisputesScreen>
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                TextFormField(
-                  controller: _dialogDescCtrl,
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    labelText: 'Description',
-                    alignLabelWithHint: true,
-                    hintText: 'Describe the issue or reason for return...',
-                  ),
-                ),
+                GBTextField(label: 'Description', hint: 'Describe the issue or reason for return...', controller: _dialogDescCtrl, maxLines: 3),
               ],
             ),
           ),

@@ -42,7 +42,7 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWarm,
+      backgroundColor: AppColors.background,
       drawer: const AdminDrawer(),
       body: Column(
         children: [

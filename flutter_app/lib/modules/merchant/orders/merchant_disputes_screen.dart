@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -283,17 +284,9 @@ class _MerchantDisputesScreenState extends State<MerchantDisputesScreen> with Si
                 decoration: const InputDecoration(labelText: 'Resolution Type'),
               ),
               const SizedBox(height: AppSpacing.md),
-              TextField(
-                controller: amtController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Amount (optional)', prefixText: '₹'),
-              ),
+              GBTextField(label: 'Amount (optional)', controller: amtController, keyboardType: TextInputType.number, prefixText: '₹'),
               const SizedBox(height: AppSpacing.md),
-              TextField(
-                controller: descController,
-                maxLines: 2,
-                decoration: const InputDecoration(labelText: 'Description'),
-              ),
+              GBTextField(label: 'Description', controller: descController, maxLines: 2),
             ],
           ),
         ),

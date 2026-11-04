@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:get/get.dart';
@@ -86,14 +87,7 @@ class _BulkOpsScreenState extends State<BulkOpsScreen> {
               if (id == 'update_prices') ...[
                 Text('Price Change', style: AppTextStyles.labelLarge),
                 const SizedBox(height: AppSpacing.sm),
-                const TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Percentage change',
-                    suffixText: '%',
-                    hintText: 'e.g. 5 for +5%, -5 for -5%',
-                  ),
-                ),
+                GBTextField(label: 'Percentage change', hint: 'e.g. 5 for +5%, -5 for -5%', keyboardType: TextInputType.number, suffixText: '%'),
               ],
             ],
             const SizedBox(height: AppSpacing.sm),

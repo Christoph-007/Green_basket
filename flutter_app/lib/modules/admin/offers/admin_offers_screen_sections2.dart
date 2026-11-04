@@ -315,26 +315,11 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                 const SizedBox(height: AppSpacing.lg),
 
                 // Title
-                TextField(
-                  controller: titleCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'Offer Title *',
-                    hintText: 'e.g. Summer Sale — 20% Off',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                GBTextField(label: 'Offer Title *', hint: 'e.g. Summer Sale — 20% Off', controller: titleCtrl),
                 const SizedBox(height: AppSpacing.md),
 
                 // Description
-                TextField(
-                  controller: descCtrl,
-                  maxLines: 2,
-                  decoration: const InputDecoration(
-                    labelText: 'Description',
-                    hintText: 'Brief description of the offer',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                GBTextField(label: 'Description', hint: 'Brief description of the offer', controller: descCtrl, maxLines: 2),
                 const SizedBox(height: AppSpacing.md),
 
                 // Type
@@ -368,44 +353,17 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
 
                 // Discount amount / percentage (conditional)
                 if (selectedType == 'percentage') ...[
-                  TextField(
-                    controller: discountPctCtrl,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Discount Percentage *',
-                      hintText: 'e.g. 20',
-                      suffixText: '%',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  GBTextField(label: 'Discount Percentage *', hint: 'e.g. 20', controller: discountPctCtrl, keyboardType: TextInputType.number, suffixText: '%'),
                   const SizedBox(height: AppSpacing.md),
                 ],
                 if (selectedType == 'flat' ||
                     selectedType == 'bundle') ...[
-                  TextField(
-                    controller: discountAmtCtrl,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Discount Amount *',
-                      hintText: 'e.g. 50',
-                      prefixText: '₹ ',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  GBTextField(label: 'Discount Amount *', hint: 'e.g. 50', controller: discountAmtCtrl, keyboardType: TextInputType.number, prefixText: '₹ '),
                   const SizedBox(height: AppSpacing.md),
                 ],
 
                 // Minimum order value
-                TextField(
-                  controller: minOrderCtrl,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Minimum Order Value',
-                    hintText: '0 for no minimum',
-                    prefixText: '₹ ',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                GBTextField(label: 'Minimum Order Value', hint: '0 for no minimum', controller: minOrderCtrl, keyboardType: TextInputType.number, prefixText: '₹ '),
                 const SizedBox(height: AppSpacing.md),
 
                 // Applicable on
@@ -431,27 +389,11 @@ extension _AdminOffersScreenStateSections2 on _AdminOffersScreenState {
                 const SizedBox(height: AppSpacing.md),
 
                 // Coupon code
-                TextField(
-                  controller: couponCtrl,
-                  textCapitalization: TextCapitalization.characters,
-                  decoration: const InputDecoration(
-                    labelText: 'Coupon Code (optional)',
-                    hintText: 'e.g. SAVE20',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                GBTextField(label: 'Coupon Code (optional)', hint: 'e.g. SAVE20', controller: couponCtrl, textCapitalization: TextCapitalization.characters),
                 const SizedBox(height: AppSpacing.md),
 
                 // Usage per user
-                TextField(
-                  controller: usagePerUserCtrl,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Usage Per User',
-                    hintText: '1',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                GBTextField(label: 'Usage Per User', hint: '1', controller: usagePerUserCtrl, keyboardType: TextInputType.number),
                 const SizedBox(height: AppSpacing.md),
 
                 // Date pickers

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -687,16 +688,8 @@ class _CommissionSettingsScreenState extends State<CommissionSettingsScreen> {
                       setSheetState(() => selectedCatId = v),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                TextField(
-                  controller: rateCtrl,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(
-                          decimal: true),
-                  decoration: const InputDecoration(
-                    labelText: 'Commission Rate',
-                    suffixText: '%',
-                  ),
-                ),
+                GBTextField(label: 'Commission Rate', controller: rateCtrl, keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true), suffixText: '%'),
                 const SizedBox(height: AppSpacing.lg),
                 SizedBox(
                   width: double.infinity,

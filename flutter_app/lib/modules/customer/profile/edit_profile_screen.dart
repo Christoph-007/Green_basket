@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -385,29 +386,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     TextInputType? keyboardType,
     String? Function(String?)? validator,
   }) {
-    return TextFormField(
-      controller: controller,
-      enabled: enabled,
-      keyboardType: keyboardType,
-      validator: validator,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon,
-            color: enabled ? AppColors.primary : AppColors.textHint,
-            size: 20),
-        suffixIcon: suffixIcon != null
+    return GBTextField(label: label, controller: controller, keyboardType: keyboardType ?? TextInputType.text, validator: validator, enabled: enabled, prefixIcon: icon, suffix: suffixIcon != null
             ? Icon(suffixIcon,
                 color: AppColors.textSecondary, size: 18)
-            : null,
-        filled: true,
-        fillColor:
-            enabled ? AppColors.surface : AppColors.surfaceVariant,
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: BorderSide(color: AppColors.border),
-        ),
-      ),
-    );
+            : null);
   }
 }
 

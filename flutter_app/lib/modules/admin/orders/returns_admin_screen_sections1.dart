@@ -153,14 +153,7 @@ extension _ReturnsAdminScreenStateSections1 on _ReturnsAdminScreenState {
               ),
               if (_approving) ...[
                 const SizedBox(height: AppSpacing.md),
-                TextField(
-                  controller: _refundController,
-                  decoration: const InputDecoration(
-                    labelText: 'Refund Amount',
-                    prefixText: '₹',
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
+                GBTextField(label: 'Refund Amount', controller: _refundController, keyboardType: TextInputType.number, prefixText: '₹'),
               ],
             ],
           ),

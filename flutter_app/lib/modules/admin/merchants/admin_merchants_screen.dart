@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_filter_chip.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -38,7 +39,7 @@ String _getMerchantStatus(Map<String, dynamic> merchant) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWarm,
+      backgroundColor: AppColors.background,
       drawer: const AdminDrawer(),
       body: Column(
         children: [
@@ -300,13 +301,7 @@ class _RejectReasonDialogState extends State<_RejectReasonDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('Reject ${widget.businessName}?'),
-      content: TextField(
-        controller: _reasonCtrl,
-        maxLines: 3,
-        decoration: const InputDecoration(
-          labelText: 'Reason (shown to the merchant)',
-        ),
-      ),
+      content: GBTextField(label: 'Reason (shown to the merchant)', controller: _reasonCtrl, maxLines: 3),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),

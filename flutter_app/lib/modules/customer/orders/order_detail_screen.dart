@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -87,10 +88,7 @@ class OrderDetailController extends GetxController {
     final reasonCtrl = TextEditingController();
     Get.dialog(AlertDialog(
       title: const Text('Cancel this order?'),
-      content: TextField(
-        controller: reasonCtrl,
-        decoration: const InputDecoration(labelText: 'Reason (optional)'),
-      ),
+      content: GBTextField(label: 'Reason (optional)', controller: reasonCtrl),
       actions: [
         TextButton(onPressed: () => Get.back(), child: const Text('Keep Order')),
         TextButton(

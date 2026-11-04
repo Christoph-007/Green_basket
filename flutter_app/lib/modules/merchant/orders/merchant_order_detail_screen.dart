@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -60,10 +61,7 @@ class _MerchantOrderDetailScreenState
         children: [
           const Text('Stock is returned and the customer is refunded if they prepaid.'),
           const SizedBox(height: 12),
-          TextField(
-            controller: reasonCtrl,
-            decoration: const InputDecoration(labelText: 'Reason (shown to the customer)'),
-          ),
+          GBTextField(label: 'Reason (shown to the customer)', controller: reasonCtrl),
         ],
       ),
       actions: [

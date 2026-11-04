@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/theme_mode_selector.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
@@ -306,14 +307,7 @@ class _AdminSettingsScreenState extends State<AdminSettingsScreen> {
     IconData icon, {
     TextInputType inputType = TextInputType.text,
   }) {
-    return TextField(
-      controller: controller,
-      keyboardType: inputType,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: AppColors.textSecondary, size: 18),
-      ),
-    );
+    return GBTextField(label: label, controller: controller, keyboardType: inputType, prefixIcon: icon);
   }
 
   Widget _toggleRow(String label, bool value, Function(bool) onChanged) {

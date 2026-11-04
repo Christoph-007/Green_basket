@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_card.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/data/services/storage_service.dart';
@@ -365,57 +366,30 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     const SizedBox(height: AppSpacing.sm),
 
                     // Landmark
-                    TextFormField(
-                      controller: _landmarkCtrl,
-                      decoration: const InputDecoration(
-                        labelText: 'Landmark (Optional)',
-                        prefixIcon: Icon(Icons.flag_outlined, size: 20),
-                        hintText: 'Near school, mall, etc.',
-                      ),
-                    ),
+                    GBTextField(label: 'Landmark (Optional)', hint: 'Near school, mall, etc.', controller: _landmarkCtrl, prefixIcon: Icons.flag_outlined),
                     const SizedBox(height: AppSpacing.sm),
 
                     // City & Pincode row
                     Row(
                       children: [
                         Expanded(
-                          child: TextFormField(
-                            controller: _cityCtrl,
-                            decoration: const InputDecoration(
-                              labelText: 'City',
-                              prefixIcon:
-                                  Icon(Icons.location_city_outlined,
-                                      size: 20),
-                            ),
-                            validator: (v) =>
+                          child: GBTextField(label: 'City', controller: _cityCtrl, validator: (v) =>
                                 (v == null || v.trim().isEmpty)
                                     ? 'Required'
-                                    : null,
-                          ),
+                                    : null, prefixIcon: Icons.location_city_outlined),
                         ),
                         const SizedBox(width: AppSpacing.sm),
                         Expanded(
-                          child: TextFormField(
-                            controller: _pincodeCtrl,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(6),
-                            ],
-                            decoration: const InputDecoration(
-                              labelText: 'Pincode',
-                              prefixIcon:
-                                  Icon(Icons.pin_drop_outlined,
-                                      size: 20),
-                            ),
-                            validator: (v) {
+                          child: GBTextField(label: 'Pincode', controller: _pincodeCtrl, keyboardType: TextInputType.number, validator: (v) {
                               if (v == null || v.trim().isEmpty) {
                                 return 'Required';
                               }
                               if (v.length != 6) return '6 digits';
                               return null;
-                            },
-                          ),
+                            }, inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(6),
+                            ], prefixIcon: Icons.pin_drop_outlined),
                         ),
                       ],
                     ),

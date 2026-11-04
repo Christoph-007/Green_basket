@@ -24,7 +24,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWarm,
+      backgroundColor: AppColors.background,
       drawer: const AdminDrawer(),
       body: Column(
         children: [

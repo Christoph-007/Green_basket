@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
 import 'package:flutter/material.dart';
@@ -275,15 +276,7 @@ class WalletScreen extends StatelessWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
-              controller: amountCtrl,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Amount (₹)',
-                hintText: 'Enter amount',
-                prefixText: '₹ ',
-              ),
-            ),
+            GBTextField(label: 'Amount (₹)', hint: 'Enter amount', controller: amountCtrl, keyboardType: TextInputType.number, prefixText: '₹ '),
             const SizedBox(height: 12),
             Wrap(
               spacing: 8,

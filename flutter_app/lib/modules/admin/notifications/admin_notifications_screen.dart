@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -213,33 +214,11 @@ class _AdminNotificationsScreenState extends State<AdminNotificationsScreen> {
           children: [
             Text('Notification Content', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
-            TextField(
-              controller: _titleController,
-              onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                hintText: 'Weekend Sale is Live!',
-              ),
-            ),
+            GBTextField(label: 'Title', hint: 'Weekend Sale is Live!', controller: _titleController, onChanged: (_) => setState(() {})),
             const SizedBox(height: AppSpacing.md),
-            TextField(
-              controller: _bodyController,
-              maxLines: 4,
-              onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
-                labelText: 'Body Message',
-                hintText: 'Shop now and get up to 20% off on all orders...',
-              ),
-            ),
+            GBTextField(label: 'Body Message', hint: 'Shop now and get up to 20% off on all orders...', controller: _bodyController, maxLines: 4, onChanged: (_) => setState(() {})),
             const SizedBox(height: AppSpacing.md),
-            TextField(
-              controller: _imageUrlController,
-              decoration: const InputDecoration(
-                labelText: 'Image URL (Optional)',
-                hintText: 'https://...',
-                prefixIcon: Icon(Icons.image_outlined),
-              ),
-            ),
+            GBTextField(label: 'Image URL (Optional)', hint: 'https://...', controller: _imageUrlController, prefixIcon: Icons.image_outlined),
           ],
         ),
       ),

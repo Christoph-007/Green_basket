@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:greenbasket_app/widgets/common/gb_text_field.dart';
 import 'package:greenbasket_app/widgets/common/gb_app_bar.dart';
 import 'package:greenbasket_app/widgets/common/gb_button.dart';
 import 'package:greenbasket_app/widgets/common/gb_snack.dart';
@@ -91,16 +92,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
-              controller: titleCtrl,
-              decoration: const InputDecoration(labelText: 'Title'),
-            ),
+            GBTextField(label: 'Title', controller: titleCtrl),
             const SizedBox(height: AppSpacing.sm),
-            TextField(
-              controller: messageCtrl,
-              maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Message'),
-            ),
+            GBTextField(label: 'Message', controller: messageCtrl, maxLines: 3),
           ],
         ),
         actions: [

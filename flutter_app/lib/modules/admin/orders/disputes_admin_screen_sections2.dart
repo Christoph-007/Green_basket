@@ -228,19 +228,9 @@ extension _DisputesAdminScreenStateSections2 on _DisputesAdminScreenState {
                 const SizedBox(height: AppSpacing.md),
                 if (resolutionType == 'refund' ||
                     resolutionType == 'compensation')
-                  TextField(
-                    controller: amountController,
-                    keyboardType: TextInputType.number,
-                    decoration:
-                        const InputDecoration(labelText: 'Amount (₹)'),
-                  ),
+                  GBTextField(label: 'Amount (₹)', controller: amountController, keyboardType: TextInputType.number),
                 const SizedBox(height: AppSpacing.md),
-                TextField(
-                  controller: descController,
-                  maxLines: 3,
-                  decoration:
-                      const InputDecoration(labelText: 'Description'),
-                ),
+                GBTextField(label: 'Description', controller: descController, maxLines: 3),
               ],
             ),
           ),
