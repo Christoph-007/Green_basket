@@ -64,6 +64,11 @@ class StorageService {
 
   void clearRecentSearches() => _box.remove(AppConstants.recentSearchesKey);
 
+  // Merchant: play a sound and vibrate when a new order arrives (on by default)
+  bool get orderAlertSound => _box.read(AppConstants.orderAlertSoundKey) ?? true;
+  void setOrderAlertSound(bool on) =>
+      _box.write(AppConstants.orderAlertSoundKey, on);
+
   // FCM Token
   String? get fcmToken => _box.read(AppConstants.fcmTokenKey);
   void saveFcmToken(String token) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../merchant_controller.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import '../merchant_nav_controller.dart';
@@ -34,8 +35,8 @@ class MerchantBottomNav extends StatelessWidget {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_bag_outlined),
-                activeIcon: Icon(Icons.shopping_bag),
+                icon: _OrdersIcon(active: false),
+                activeIcon: _OrdersIcon(active: true),
                 label: 'Orders',
               ),
               BottomNavigationBarItem(
@@ -56,5 +57,57 @@ class MerchantBottomNav extends StatelessWidget {
             ],
           )),
     );
+  }
+}
+
+/// The Orders tab icon with a count of orders waiting for the seller.
+class _OrdersIcon extends StatelessWidget {
+  final bool active;
+  const _OrdersIcon({required this.active});
+
+  @override
+  Widget build(BuildContext context) {
+    final icon = Icon(active ? Icons.shopping_bag : Icons.shopping_bag_outlined);
+    // Pages opened before the merchant controller exists just show the icon.
+    if (!Get.isRegistered<MerchantController>()) return icon;
+    final controller = Get.find<MerchantController>();
+    return Obx(() {
+      final count = controller.pendingCount.value;
+      return Semantics(
+        label: count > 0 ? 'Orders, $count waiting' : 'Orders',
+        excludeSemantics: true,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            icon,
+            if (count > 0)
+              Positioned(
+                top: -4,
+                right: -8,
+                child: Container(
+                  constraints:
+                      const BoxConstraints(minWidth: 16, minHeight: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.error,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      count > 9 ? '9+' : '$count',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        height: 1.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
+    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greenbasket_app/data/services/storage_service.dart';
 import 'package:get/get.dart';
 import 'package:greenbasket_app/config/theme.dart';
 import 'package:greenbasket_app/modules/merchant/merchant_controller.dart';
@@ -146,6 +147,8 @@ class MerchantProfileScreen extends StatelessWidget {
                     Colors.teal,
                     () => Get.to(() => const DeliveryZonesScreen()),
                   ),
+                  const SizedBox(height: AppSpacing.md),
+                  const _AlertSoundCard(),
                 ],
               ),
             ),
@@ -208,6 +211,54 @@ class MerchantProfileScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Switch for the sound and vibration played when a new order arrives.
+class _AlertSoundCard extends StatefulWidget {
+  const _AlertSoundCard();
+
+  @override
+  State<_AlertSoundCard> createState() => _AlertSoundCardState();
+}
+
+class _AlertSoundCardState extends State<_AlertSoundCard> {
+  final _storage = StorageService();
+  late bool _on = _storage.orderAlertSound;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: SwitchListTile(
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+        secondary: const Icon(Icons.notifications_active_outlined,
+            color: AppColors.primary),
+        title: const Text('New order alert sound',
+            style: AppTextStyles.titleLarge),
+        subtitle: Text(
+          'Play a sound and vibrate when an order arrives',
+          style: AppTextStyles.bodyMedium
+              .copyWith(color: AppColors.textSecondary, height: 1.3),
+        ),
+        value: _on,
+        onChanged: (value) {
+          setState(() => _on = value);
+          _storage.setOrderAlertSound(value);
+        },
       ),
     );
   }

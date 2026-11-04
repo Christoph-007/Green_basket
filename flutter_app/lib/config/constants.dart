@@ -38,6 +38,7 @@ class AppConstants {
   static const String fcmTokenKey = 'fcm_token';
   static const String cartCacheKey = 'cart_cache';
   static const String recentSearchesKey = 'recent_searches';
+  static const String orderAlertSoundKey = 'order_alert_sound';
 
   // ── User roles ─────────────────────────────────────────────────────
   static const String roleCustomer = 'customer';
