@@ -103,6 +103,38 @@ class ProductRepository {
     return items.map((e) => ProductModel.fromJson(e)).toList();
   }
 
+  /// Text suggestions for a partly typed search (products and categories).
+  Future<List<String>> getSearchSuggestions(String query) async {
+    final response =
+        await _api.get('/search/suggestions', params: {'q': query});
+    final data = response.data;
+    final inner = data is Map ? data['data'] : null;
+    final list = inner is Map ? inner['suggestions'] : null;
+    if (list is! List) return <String>[];
+    return list
+        .whereType<Map>()
+        .map((e) => (e['text'] ?? '').toString())
+        .where((t) => t.isNotEmpty)
+        .toList();
+  }
+
+  /// Names of the products people are buying most right now.
+  Future<List<String>> getTrendingSearches() async {
+    final response = await _api.get('/search/trending');
+    final data = response.data;
+    final inner = data is Map ? data['data'] : null;
+    final list = inner is Map ? inner['trendingProducts'] : null;
+    if (list is! List) return <String>[];
+    final names = <String>[];
+    for (final entry in list) {
+      if (entry is! Map) continue;
+      final product = entry['product'] is Map ? entry['product'] as Map : entry;
+      final name = (product['name'] ?? '').toString();
+      if (name.isNotEmpty && !names.contains(name)) names.add(name);
+    }
+    return names;
+  }
+
   Future<void> addToWishlist(String productId) async {
     await _api.post('/wishlist/add', data: {'productId': productId});
   }

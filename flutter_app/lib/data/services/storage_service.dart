@@ -46,6 +46,24 @@ class StorageService {
   bool get isOnboarded => _box.read(AppConstants.onboardedKey) ?? false;
   void setOnboarded() => _box.write(AppConstants.onboardedKey, true);
 
+  // Recent searches (newest first, at most 8)
+  List<String> get recentSearches {
+    final raw = _box.read(AppConstants.recentSearchesKey);
+    if (raw is List) return raw.map((e) => e.toString()).toList();
+    return <String>[];
+  }
+
+  void addRecentSearch(String term) {
+    final text = term.trim();
+    if (text.isEmpty) return;
+    final list = recentSearches
+      ..removeWhere((e) => e.toLowerCase() == text.toLowerCase());
+    list.insert(0, text);
+    _box.write(AppConstants.recentSearchesKey, list.take(8).toList());
+  }
+
+  void clearRecentSearches() => _box.remove(AppConstants.recentSearchesKey);
+
   // FCM Token
   String? get fcmToken => _box.read(AppConstants.fcmTokenKey);
   void saveFcmToken(String token) =>
